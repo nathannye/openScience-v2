@@ -15,6 +15,5 @@
     "dev": "parcel src/index.html",
     "lint": "eslint \"src/**/*.{js}\" --quiet",
     "format": "prettier --write \"src/**/*.{js,html}\""
-  },
-  "browserslist": "> 0.5%, last 2 versions, not dead"
+  }
 }

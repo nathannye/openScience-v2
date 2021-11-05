@@ -1,16 +1,34 @@
+@mixin fontIvy
+	font-family: ivypresto-headline, serif 
+
 *
-    box-sizing: border-box
 	--color-blue: #001F4E
 	--color-dark: #00112A
 	--color-yellow: #FFE65C
 	--color-teal:#22CBBE
 	--color-white: white
 	--shadow-color: #77B4E7
-	transition: all .36s ease-in-out
-	color: white
 	-webkit-font-smoothing: antialiased
     -moz-osx-font-smoothing: grayscale
     text-rendering: optimizeLegibility
+	box-sizing: border-box
+
+@font-face
+	font-family: telegraf
+	src: url(../fonts/telegraf_400.ttf) format ("treutype")
+	font-style: normal
+	font-weight: 400
+
+html
+	background-color: var(--color-dark)
+	scroll-behavior: smooth
+	font-size: 62.5%
+	color: white
+
 
 h1
-    font-size: 10rem
+	font-size: 6rem
+
+::selection
+	color: var(--color-blue)
+	background-color: #E3E3E3
