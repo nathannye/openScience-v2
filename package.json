@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "gsap": "npm:@gsap/shockingly@^3.8.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.1.0",
+    "eslint-config-gsap": "^3.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-recommended": "^4.1.0",
+    "eslint-plugin-import": "^2.25.2",
+    "parcel": "^2.0.0",
+    "prettier": "^2.4.1"
+  },
+  "scripts": {
+    "dev": "parcel src/index.html",
+    "lint": "eslint \"src/**/*.{js}\" --quiet",
+    "format": "prettier --write \"src/**/*.{js,html}\""
+  },
+  "browserslist": "> 0.5%, last 2 versions, not dead"
+}
