@@ -1,8 +1,11 @@
 {
   "dependencies": {
-    "gsap": "npm:@gsap/shockingly@^3.8.0"
+    "aframe-glmol-component": "^1.0.1",
+    "gsap": "npm:@gsap/shockingly@^3.8.0",
+    "three": "^0.134.0"
   },
   "devDependencies": {
+    "@parcel/babel-preset-env": "^2.0.0",
     "eslint": "^8.1.0",
     "eslint-config-gsap": "^3.0.0",
     "eslint-config-prettier": "^8.3.0",
@@ -14,6 +17,8 @@
   "scripts": {
     "dev": "parcel src/index.html",
     "lint": "eslint \"src/**/*.{js}\" --quiet",
-    "format": "prettier --write \"src/**/*.{js,html}\""
-  }
+    "format": "prettier --write \"src/**/*.{js,html}\"",
+    "start": "parcel src/index.html --open"
+  },
+  "browserslist": "> 0.25%, not dead"
 }
