@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://use.typekit.net/jih6lvv.css" />
   </head>
   <body>
+    <audio src="audio/ambientSoundtrack.mp3" type="audio/mpeg"></audio>
     <div id="scrollIndicator">
       <div></div>
       <h4>scroll</h4>
@@ -21,30 +22,47 @@
       <div></div>
     </nav>
     <main>
-      <section class="panel lefty">
+      <section id="soundAsk">
         <div>
-          <h3>distributed computing</h3>
-          <h1>Open <em>source.</em> Open <em>science.</em></h1>
-          <p>
-            Distributed computing has paved the way for patent-free drug
-            discovery over the past three decades. By utilizing a network of
-            unused home computers, protein folding simulations can be completed
-            with incredible speed and help develop life-saving drugs for
-            diseases like Alzheimer's and cancer at much lower costs.
-          </p>
+          <h2>This experience has sound. Would you like to turn it on?</h2>
+          <div>
+            <div id="soundButtons">
+              <div id="yesSoundContainer">
+                <button><h3>yes</h3></button>
+              </div>
+              <div id="noSoundContainer">
+                <button><h3>no thanks</h3></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="panel lefty" id="introPanel">
+        <div id="introHeadingContainer">
+          <h1>Open source</h1>
+          <div>
+            <h1><em>Open science</em></h1>
+            <p>
+              Distributed computing has paved the way for patent-free drug
+              discovery. Millions of home computers contribute to the fight
+              against Cancer, COVID-19, and Parkinson's every day.
+            </p>
+          </div>
         </div>
       </section>
       <section class="panel">
-        <h3>what do proteins have to do with computers?</h3>
+        <h3 class="interstitial">
+          what do proteins have to do with computers?
+        </h3>
       </section>
       <section class="panel">
         <div>
           <h3>what is protein folding?</h3>
-          <h1>
+          <h2>
             Proteins are the basis for cellular function. But to do their work,
             they must
             <em>assemble themselves into a specific shape, or ‘fold’.</em>
-          </h1>
+          </h2>
         </div>
         <p>
           Proteins are tiny chains of molecules that, at a micro level, perform
@@ -57,10 +75,10 @@
       <section class="panel">
         <div>
           <div>
-            <h1>
+            <h2>
               Terminal diseases, like Alzheimer’s, cancer, and cystic fibrosis
               are believed to be caused by protein misfolds.
-            </h1>
+            </h2>
             <a href="">Courtesy: Harvard.edu</a>
           </div>
           <div>
@@ -77,10 +95,10 @@
         <div>
           <div>
             <h3>why do we need computers?</h3>
-            <h1>
+            <h2>
               Proteins with only 20 amino acids have 10<sup>130</sup>equally
               possible folded formations.
-            </h1>
+            </h2>
           </div>
           <div>
             <p>
@@ -99,14 +117,14 @@
         <div>
           <div>
             <div>
-              <h1>
+              <h2>
                 <em
                   >Folding@Home amassed over 1.2 million users during
                   COVID-19.</em
                 >
                 Together, all of these machines were faster than the world's
                 nine fastest supercomputers. Combined.
-              </h1>
+              </h2>
             </div>
             <p>
               These 1.2 million users were the first to cross the exascale
@@ -119,31 +137,31 @@
         <div>
           <div>
             <h3>so what the hell does that mean?</h3>
-            <h1>
+            <h2>
               Let's put that in perspective shall we? You'd need a little over
               70 billion iPhone 12s to top that.
-            </h1>
+            </h2>
           </div>
         </div>
       </section>
       <section class="panel">
         <div>
           <div>
-            <h1>
+            <h2>
               With all of that power in the public domain, data be processed
               extraordinarily fast, and provided at no cost to drug development
               firms
-            </h1>
+            </h2>
           </div>
           <p>Firms have to make up less of the cost of research.</p>
         </div>
       </section>
       <section class="panel">
         <div>
-          <h1>
+          <h2>
             Cancer drugs can cost up to $10,000 per month. Exceeding the average
             salary in the US by almost twofold.
-          </h1>
+          </h2>
           <div>
             <h3>helping reduce costs</h3>
             <p>
@@ -158,7 +176,7 @@
       <section class="panel">
         <div>
           <h3>get involved</h3>
-          <h1>Where can you help?</h1>
+          <h2>Where can you help?</h2>
         </div>
         <div>
           <h2>Rosetta@Home</h2>
