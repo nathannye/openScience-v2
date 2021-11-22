@@ -2,8 +2,10 @@
   "dependencies": {
     "aframe-glmol-component": "^1.0.1",
     "babel-loader": "^8.2.3",
+    "examples": "^0.1.0",
     "gsap": "npm:@gsap/shockingly@^3.8.0",
     "howler": "^2.2.3",
+    "jsm": "^0.0.1",
     "parcel-bundler": "^1.12.5",
     "three": "^0.134.0"
   },

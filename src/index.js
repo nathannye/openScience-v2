@@ -1,17 +1,17 @@
 import gsap from "gsap";
-
 import splitText from "gsap/SplitText";
 import scrollTrigger from "gsap/ScrollTrigger";
 import { random } from "gsap/gsap-core";
 // import { GLTFLoader } from "three/examples/js/loaders/GLTFLoader";
 
 gsap.registerPlugin(scrollTrigger);
+gsap.registerPlugin(splitText);
 
-scrollTrigger.defaults({
-  start: "top bottom-=15%",
-  end: "top top+=20%",
-  toggleActions: "play reverse play reverse",
-});
+// scrollTrigger.defaults({
+//   start: "top bottom-=15%",
+//   end: "top top+=20%",
+//   toggleActions: "play reverse play reverse",
+// });
 
 let h3 = gsap.utils.toArray("h3.interstitial");
 
@@ -42,61 +42,118 @@ h3.forEach((e) => {
     duration: 0.65,
     ease: "power1.inOut",
     stagger: 0.014,
-    scrollTrigger: {
-      trigger: e,
-      onEnter: sorth3(),
-      onLeave: sorth3reverse(),
-      onEnterBack: sorth3(),
-      onLeaveBack: sorth3reverse(),
-    },
+    // scrollTrigger: {
+    //   trigger: e,
+    //   onEnter: sorth3(),
+    //   onLeave: sorth3reverse(),
+    //   onEnterBack: sorth3(),
+    //   onLeaveBack: sorth3reverse(),
+    // },
   });
 });
+// Sidenav controls
+let nav = document.querySelector("nav");
+let panelsToNav = document.querySelectorAll(".panel");
+let navElements = [];
+
+function createNavEntry(panel) {
+  document.createElement("div").setAttribute("class", "navEntry");
+}
 
 // Audio Control
-
 let soundOn = document.querySelector("#yesSoundContainer > button");
 let soundOff = document.querySelector("#noSoundContainer > button");
+let soundtrack = document.querySelector("audio");
 
-function audioVolumeIn() {
-  const audio = document.querySelector("audio");
-  if (audio.volume) {
-    var InT = 0;
-    var setVolume = 0.2; // Target volume level for new song
-    var speed = 0.005; // Rate of increase
-    audio.volume = InT;
-    var eAudio = setInterval(function () {
-      InT += speed;
-      audio.volume = InT.toFixed(1);
-      if (InT.toFixed(1) >= setVolume) {
-        clearInterval(eAudio);
-      }
-    }, 50);
-  }
-}
+soundtrack.currentTime = 0;
 
-function audioVolumeOut(q) {
-  if (q.volume) {
-    var InT = 0.4;
-    var setVolume = 0; // Target volume level for old song
-    var speed = 0.005; // Rate of volume decrease
-    q.volume = InT;
-    var fAudio = setInterval(function () {
-      InT -= speed;
-      q.volume = InT.toFixed(1);
-      if (InT.toFixed(1) <= setVolume) {
-        clearInterval(fAudio);
-        //alert('clearInterval fAudio'+ InT.toFixed(1));
-      }
-    }, 50);
-  }
-}
+soundOn.addEventListener("click", (event) => {
+  soundtrack.play();
+});
+
 let soundButtons = gsap.utils.toArray("#soundButtons button");
-console.log(soundButtons);
-
+let audioAskSection = document.querySelector("#soundAsk");
 let soundAskHeader = document.querySelector("#soundAsk h2");
+const body = document.querySelector("body");
+
+let titles = document.querySelectorAll("#introHeadingContainer h1");
+
+let openSource = titles[0];
+let openScience = titles[1];
+
+openSource.split = new splitText(openSource, {
+  type: "chars",
+});
+openScience.split = new splitText(openScience, {
+  type: "chars",
+});
+
+const titleHeadingTL = gsap.timeline({
+  paused: true,
+});
+
+titleHeadingTL
+  .from(
+    openSource.split.chars,
+    {
+      color: "var(--blue)",
+      y: 65,
+      opacity: 0,
+      color: "teal",
+      stagger: 0.01,
+      duration: 1.3,
+      ease: "power4.inOut",
+    },
+    "start"
+  )
+  .from(
+    openScience.split.chars,
+    {
+      color: "var(--blue)",
+      y: -40,
+      opacity: 0,
+      color: "teal",
+      stagger: 0.01,
+      duration: 1.3,
+      ease: "power4.inOut",
+    },
+    "start+=.167"
+  );
+
+gsap.to(
+  openSource,
+  {
+    scrollTrigger: {
+      scrub: 0.5,
+      trigger: "#introHeadingContainer",
+      start: "top center+=10%",
+      ease: "power4",
+      end: "bottom top+=10%",
+    },
+    x: -23,
+  },
+  "scrolling"
+);
+gsap.to(
+  openScience,
+  {
+    scrollTrigger: {
+      scrub: 0.5,
+      ease: "power4",
+      trigger: "#introHeadingContainer",
+      start: "top center",
+      end: "bottom top+=10%",
+    },
+    x: 23,
+  },
+  "scrolling"
+);
 
 let audioAskTL = gsap.timeline({
   paused: true,
+  onComplete: function () {
+    titleHeadingTL.play();
+  },
 });
 
 audioAskTL
@@ -122,47 +179,15 @@ audioAskTL
       delay: 0.148,
     },
     "start"
-  );
-
-soundOn.addEventListener("click", (event) => {
-  audioAskTL.play();
-});
-
-let title = gsap.utils.toArray("#introHeadingContainer h1");
-
-let openSource = title[0];
-let openScience = title[1];
-
-var introHeadingsTL = gsap.timeline({
-  paused: true,
-});
-
-introHeadingsTL
-  .to(
-    openSource,
-    {
-      scrollTrigger: {
-        scrub: 0.5,
-        trigger: "#introHeadingContainer",
-        start: "top center+=10%",
-        ease: "power4",
-        end: "bottom top+=10%",
-      },
-      x: -23,
-    },
-    "scrolling"
   )
-  .to(
-    openScience,
-    {
-      scrollTrigger: {
-        scrub: 0.5,
-        ease: "power4",
-        trigger: "#introHeadingContainer",
-        start: "top center",
-        end: "bottom top+=10%",
-      },
-      x: 23,
-    },
-    "scrolling"
-  );
+  .to(soundAsk, {
+    autoAlpha: 0,
+    duration: 0.7,
+    ease: "power2.inOut",
+  });
+
+soundButtons.forEach((button) => {
+  button.addEventListener("click", (event) => {
+    audioAskTL.play();
+  });
+});
