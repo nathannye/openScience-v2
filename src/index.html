@@ -41,7 +41,7 @@
             <h1><em>Open science</em></h1>
             <p>
               Distributed computing has paved the way for patent-free drug
-              discovery. Millions of home computers contribute to the fight
+              discovery. Mil lions of home computers contribute to the fight
               against Cancer, COVID-19, and Parkinson's every day.
             </p>
           </div>
@@ -110,25 +110,43 @@
           <em>10000000000000000000000000</em>
         </div>
       </section>
-      <section class="panel">
+      <section class="panel" id="numberOfUsersPanel">
         <div>
           <div>
-            <div>
-              <h2>
-                <em
-                  >Folding@Home amassed over 1.2 million users during
-                  COVID-19.</em
-                >
-                Together, all of these machines were faster than the world's
-                nine fastest supercomputers. Combined.
-              </h2>
-            </div>
+            <h2>
+              <em
+                >Folding@Home amassed over 1.2 million users during
+                COVID-19.</em
+              >
+              Together, all of these machines were faster than the world's nine
+              fastest supercomputers. Combined.
+            </h2>
             <p>
               These 1.2 million users were the first to cross the exascale
               barrier, 10<sup>18</sup> operations per second.
             </p>
           </div>
         </div>
+        <img
+          class="parallaxImage"
+          src="img/gpuRig.webp"
+          alt="Computer with graphics cards"
+        />
+        <img
+          class="parallaxImage"
+          src="img/manInChair.webp"
+          alt="Man smiling with computer"
+        />
+        <img
+          class="parallaxImage"
+          src="img/rowsOfComputers.webp"
+          alt="Room of red computers"
+        />
+        <img
+          class="parallaxImage"
+          src="img/pointingAtComputer.webp"
+          alt="Man pointing at computer"
+        />
       </section>
       <section class="panel">
         <div>
@@ -205,6 +223,7 @@
     </main>
     <canvas class="webgl"></canvas>
     <script src="./index.js" type="module"></script>
+    <script type="module" src="../src/barGraph.js"></script>
     <script src="./threeScenes.js" type="module"></script>
   </body>
 </html>

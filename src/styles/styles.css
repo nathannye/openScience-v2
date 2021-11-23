@@ -209,6 +209,7 @@ section#soundAsk {
   perspective: 50em;
   z-index: 3;
   top: 0;
+  display: none;
   left: 0;
   filter: inherit;
   width: 100%;
@@ -230,4 +231,39 @@ section#soundAsk h2 {
   filter: blur(0);
   text-align: center;
   color: var(--color-teal);
+}
+
+#numberOfUsersPanel {
+  position: relative;
+}
+
+#numberOfUsersPanel h2, #numberOfUsersPanel p {
+  z-index: 10;
+}
+
+#numberOfUsersPanel img.parallaxImage {
+  position: absolute;
+  width: 50%;
+  max-width: 430px;
+  box-shadow: 0px 0px 60px rgba(0, 0, 0, 0.1);
+}
+
+#numberOfUsersPanel img:nth-child(1) {
+  top: 2%;
+  left: 5%;
+}
+
+#numberOfUsersPanel img:nth-child(2) {
+  bottom: 6%;
+  right: 10%;
+}
+
+#numberOfUsersPanel img:nth-child(3) {
+  top: 2%;
+  left: 1%;
+}
+
+#numberOfUsersPanel img:nth-child(4) {
+  top: 2%;
+  right: .4%;
 }

@@ -51,14 +51,14 @@ h3.forEach((e) => {
     // },
   });
 });
-// Sidenav controls
-let nav = document.querySelector("nav");
-let panelsToNav = document.querySelectorAll(".panel");
-let navElements = [];
 
-function createNavEntry(panel) {
-  document.createElement("div").setAttribute("class", "navEntry");
-}
+let introPara = gsap.utils.toArray("#introPanel p");
+
+introPara.split = new splitText(introPara, {
+  type: "lines,chars,words",
+});
+
+let d = introPara.split.chars[0];
 
 // Audio Control
 let soundOn = document.querySelector("#yesSoundContainer > button");
@@ -88,11 +88,11 @@ openScience.split = new splitText(openScience, {
   type: "chars",
 });
 
-const titleHeadingTL = gsap.timeline({
+const titleTL = gsap.timeline({
   paused: true,
 });
 
-titleHeadingTL
+titleTL
   .from(
     openSource.split.chars,
     {
@@ -118,7 +118,43 @@ titleHeadingTL
       ease: "power4.inOut",
     },
     "start+=.167"
+  )
+  .from(
+    introPara.split.words,
+    {
+      // x: 5,
+      y: 9,
+      autoAlpha: 0,
+      duration: 0.88,
+      ease: "power2.inOut",
+      stagger: 0.1,
+      color: "#13f1df",
+    },
+    ">-=.55"
   );
+// .from(
+//   introPara.split.lines,
+//   {
+//     autoAlpha: 0,
+//     y: 15,
+//     color: "var(--teal)",
+//     transformOrigin: "left",
+//     ease: "power2.out",
+//     stagger: 0.22,
+//     duration: 0.95,
+//   },
+//   "para"
+// )
+// .from(
+//   introPara.split.chars,
+//   {
+//     x: 20,
+//     stagger: 0.01,
+//     duration: 0.01,
+//     color: "#13f1df",
+//   },
+//   "para"
+// );
 
 gsap.to(
   openSource,
@@ -152,7 +188,7 @@ gsap.to(
 let audioAskTL = gsap.timeline({
   paused: true,
   onComplete: function () {
-    titleHeadingTL.play();
+    titleTL.play();
   },
 });
 
@@ -190,4 +226,48 @@ soundButtons.forEach((button) => {
   button.addEventListener("click", (event) => {
     audioAskTL.play();
   });
+});
+
+// Image section
+
+let images = gsap.utils.toArray(".parallaxImage");
+
+gsap.from(images[0], {
+  scrollTrigger: {
+    scrub: true,
+    start: "top bottom",
+    end: "bottom top",
+    trigger: "#numberOfUsersPanel",
+  },
+  yPercent: -40,
+});
+
+gsap.from(images[1], {
+  scrollTrigger: {
+    scrub: true,
+    start: "top bottom",
+    end: "bottom top",
+    trigger: "#numberOfUsersPanel",
+  },
+  yPercent: -12,
+});
+
+gsap.to(images[2], {
+  scrollTrigger: {
+    scrub: true,
+    start: "top bottom",
+    end: "bottom top",
+    trigger: "#numberOfUsersPanel",
+  },
+  yPercent: 40,
+});
+
+gsap.from(images[3], {
+  scrollTrigger: {
+    scrub: true,
+    start: "top bottom",
+    end: "bottom top",
+    trigger: "#numberOfUsersPanel",
+  },
+  yPercent: 60,
 });
