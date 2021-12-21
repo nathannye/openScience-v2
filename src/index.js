@@ -19,10 +19,6 @@ let h3Split = new splitText(h3, {
   type: "chars",
 });
 
-gsap.set(h3Split.chars, {
-  autoAlpha: 0,
-});
-
 function sorth3() {
   h3Split.chars.sort(function () {
     return 0.5 - Math.random();
@@ -36,26 +32,28 @@ function sorth3reverse() {
 }
 
 h3.forEach((e) => {
-  gsap.to(h3Split.chars, {
-    y: 0,
-    autoAlpha: 1,
-    duration: 0.65,
-    ease: "power1.inOut",
-    stagger: 0.014,
-    // scrollTrigger: {
-    //   trigger: e,
-    //   onEnter: sorth3(),
-    //   onLeave: sorth3reverse(),
-    //   onEnterBack: sorth3(),
-    //   onLeaveBack: sorth3reverse(),
-    // },
+  gsap.from(h3Split.chars, {
+    transformOrigin: "center center",
+    autoAlpha: 0,
+    duration: 0.45,
+    z: -5,
+    color: "#13f1df",
+    ease: "power2.out",
+    stagger: 0.022,
+    scrollTrigger: {
+      trigger: e,
+      onEnter: sorth3(),
+      onLeave: sorth3reverse(),
+      onEnterBack: sorth3(),
+      onLeaveBack: sorth3reverse(),
+    },
   });
 });
 
 let introPara = gsap.utils.toArray("#introPanel p");
 
 introPara.split = new splitText(introPara, {
-  type: "lines,chars,words",
+  type: "lines,chars",
 });
 
 let d = introPara.split.chars[0];
@@ -122,45 +120,43 @@ titleTL
   .from(
     introPara.split.words,
     {
-      // x: 5,
-      y: 9,
+      y: 12,
+      scale: 0.4,
       autoAlpha: 0,
-      duration: 0.88,
+      duration: 0.68,
       ease: "power2.inOut",
       stagger: 0.1,
       color: "#13f1df",
     },
-    ">-=.55"
+    ">"
+  )
+  .from(
+    introPara.split.lines,
+    {
+      autoAlpha: 0,
+      y: 20,
+      rotationY: -20,
+      color: "var(--teal)",
+      ease: "power1.out",
+      stagger: 0.22,
+      duration: 0.95,
+    },
+    ">"
   );
-// .from(
-//   introPara.split.lines,
-//   {
-//     autoAlpha: 0,
-//     y: 15,
-//     color: "var(--teal)",
-//     transformOrigin: "left",
-//     ease: "power2.out",
-//     stagger: 0.22,
-//     duration: 0.95,
-//   },
-//   "para"
-// )
 // .from(
 //   introPara.split.chars,
 //   {
-//     x: 20,
 //     stagger: 0.01,
-//     duration: 0.01,
+//     duration: 0.06,
 //     color: "#13f1df",
 //   },
-//   "para"
+//   "<"
 // );
 
 gsap.to(
   openSource,
   {
     scrollTrigger: {
-      scrub: 0.5,
       trigger: "#introHeadingContainer",
       start: "top center+=10%",
       ease: "power4",
@@ -239,7 +235,7 @@ gsap.from(images[0], {
     end: "bottom top",
     trigger: "#numberOfUsersPanel",
   },
-  yPercent: -40,
+  yPercent: -60,
 });
 
 gsap.from(images[1], {
@@ -249,7 +245,7 @@ gsap.from(images[1], {
     end: "bottom top",
     trigger: "#numberOfUsersPanel",
   },
-  yPercent: -12,
+  yPercent: -22,
 });
 
 gsap.to(images[2], {
@@ -259,7 +255,7 @@ gsap.to(images[2], {
     end: "bottom top",
     trigger: "#numberOfUsersPanel",
   },
-  yPercent: 40,
+  yPercent: -19,
 });
 
 gsap.from(images[3], {
@@ -269,5 +265,13 @@ gsap.from(images[3], {
     end: "bottom top",
     trigger: "#numberOfUsersPanel",
   },
-  yPercent: 60,
+  yPercent: 87,
+});
+
+// Paragraphs anim
+
+let paras = gsap.utils.toArray("p:not(#introPanel p)");
+
+paras.split = new splitText(paras, {
+  type: "lines",
 });

@@ -7,11 +7,15 @@
     "gsap": "npm:@gsap/shockingly@^3.8.0",
     "howler": "^2.2.3",
     "jsm": "^0.0.1",
+    "ngl": "^0.10.4",
     "parcel-bundler": "^1.12.5",
+    "regenerator-runtime": "^0.13.9",
     "three": "^0.134.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.16.0",
     "@parcel/babel-preset-env": "^2.0.0",
+    "babel": "^6.23.0",
     "eslint": "^8.1.0",
     "eslint-config-gsap": "^3.0.0",
     "eslint-config-prettier": "^8.3.0",
@@ -26,5 +30,5 @@
     "format": "prettier --write \"src/**/*.{js,html}\"",
     "start": "parcel src/index.html --open"
   },
-  "browserslist": "> 0.25%, not dead"
+  "browserslist": "last 3 Chrome versions"
 }

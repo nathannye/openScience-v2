@@ -26,9 +26,13 @@
 @mixin defaultTransition
 	transition: all .29s ease-in-out
 
+@mixin maxWidthXS
+	width: 90.2%
+	max-width: 320px
+
 @mixin maxWidthS
 	width: 90.2%
-	max-width: 550px
+	max-width: 500px
 
 @mixin maxWidthM
 	width: 90.2%
@@ -44,7 +48,7 @@
 
 *
 	--color-blue: #001F4E
-	--color-dark: #051936
+	--color-dark: #030b18
 	--color-yellow: #ebd664
 	--color-teal:#13f1df
 	--color-white: white
@@ -83,7 +87,7 @@ h1
 
 h2
 	@include fontTel
-	font-size: clamp(2.4em, calc(2.4rem + (4 - 2.4) * ((100vw - 48rem) / (120 - 48))), 4em)
+	font-size: clamp(2.4em, calc(2.4rem + (5 - 2.4) * ((100vw - 48rem) / (120 - 48))), 5em)
 	font-weight: 400
 
 	em
@@ -98,6 +102,11 @@ h3
 	letter-spacing: .3em
 	margin-bottom: 2em
 
+h3.interstitial
+	perspective: 200px
+	transform: perspective(200px)
+	perspective-origin: center center
+
 h4
 	@include fontIvyNormal
 
@@ -107,6 +116,11 @@ p, ul, li, a, ol
 	letter-spacing: .03em
 	font-weight: 200
 	line-height: 1.57em
+
+p
+	perspective: 200px
+	transform: perspective(200px)
+	transform-origin: left
 
 ::selection
 	color: var(--color-blue)
@@ -203,6 +217,9 @@ canvas#soundIndicator
 	width: 100px
 	height: 40px
 
+#viewport canvas
+	height: 900px !important
+
 section#soundAsk
 	position: fixed
 	background: var(--color-dark)
@@ -218,7 +235,7 @@ section#soundAsk
 	transform-style: preserve-3d
 	
 	#soundButtons
-		margin-top: 3%
+		margin-top: 2rem
 		display: flex
 		justify-content: center
 		transform:  translateZ(90px)
@@ -230,7 +247,22 @@ section#soundAsk
 		text-align: center
 		color: var(--color-teal)
 
-#numberOfUsersPanel
+.panelInnerLeft
+	align-self: flex-start
+	display: flex
+
+section#whatIsFolding
+	flex-direction: column
+
+	& > div > div
+		@include maxWidthXS
+		
+	& > div > p
+		@include maxWidthXS
+		margin-top: 30%
+		
+
+section#numberOfUsersPanel
 	position: relative
 
 	h2, p
@@ -239,12 +271,12 @@ section#soundAsk
 	img.parallaxImage
 		position: absolute
 		width: 50%
-		filter: 
 		max-width: 430px
-		box-shadow: 0px 0px 60px rgba(0,0 ,0 ,.1 )
+		box-shadow: 0px 0px 40px rgba(0,0 ,0 ,.3 )
 
-	img:nth-child(1)
+	img:first-child
 		top: 2%
+		
 		left: 5%
 
 	img:nth-child(2)
@@ -255,6 +287,7 @@ section#soundAsk
 		top: 2%
 		left: 1%
 
-	img:nth-child(4)
+	img:last-child
 		top: 2%
+		scale: 1.1
 		right: .4%
