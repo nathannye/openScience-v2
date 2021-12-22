@@ -19,6 +19,7 @@
       <!-- Children get appended for nav here -->
     </nav>
     <main>
+      <div id="grain"></div>
       <div id="viewport"></div>
       <section id="soundAsk">
         <div>
@@ -48,10 +49,10 @@
           </div>
         </div>
       </section>
-      <section class="panel">
-        <h3 class="interstitial">
-          what do proteins have to do with computers?
-        </h3>
+      <section class="panel interstitial" id="whatDoProteins">
+        <div>
+          <h3>what do proteins have to do with computers?</h3>
+        </div>
       </section>
       <section class="panel" id="whatIsFolding">
         <div class="panelInnerLeft">
@@ -227,11 +228,14 @@
         </div>
       </section>
     </main>
-
-    <canvas class="webgl"></canvas>
     <script src="./index.js" type="module"></script>
     <script type="module" src="./js/barGraph.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngl/2.0.0-dev.39/ngl.js"></script>
-    <script src="./js/nglScene.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/ngl/2.0.0-dev.39/ngl.js"
+      integrity="sha512-L4e1Z9pbAAsBXDzbcitJzkcRIHq6PUF/6GSR5UbA38XiaQ3TAS3422wJ5DllYOlwkpKUXInFt1b+C06NDvtmTg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script type="module" src="./js/nglScene.js"></script>
   </body>
 </html>

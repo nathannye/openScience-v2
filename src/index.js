@@ -13,50 +13,46 @@ gsap.registerPlugin(splitText);
 //   toggleActions: "play reverse play reverse",
 // });
 
-let h3 = gsap.utils.toArray("h3.interstitial");
+const teal = "#13f1df";
+const ylw = "#ebd664";
+const blue = "#001f4e";
+const white = "white";
 
-let h3Split = new splitText(h3, {
-  type: "chars",
+let h3 = gsap.utils.toArray("section.interstitial h3");
+
+h3.split = new splitText(h3, {
+  type: "words",
 });
 
-function sorth3() {
-  h3Split.chars.sort(function () {
-    return 0.5 - Math.random();
-  });
-}
+let whatDoProteins = h3[1];
 
-function sorth3reverse() {
-  h3Split.chars.sort(function () {
-    return h3Split.chars;
-  });
-}
+// h3.forEach((e) => {
+//   gsap.from(h3.split.words, {
+//     scrollTrigger: {
+//       trigger: h3,
+//       pin: true,
+//       start: "top center",
+//       markers: true,
+//     },
+//     transformOrigin: "center center",
+//     autoAlpha: 0,
+//     duration: 1.5,
+//     z: -28,
+//     color: ylw,
+//     ease: "power4.out",
+//     stagger: {
+//       each: 0.052,
 
-h3.forEach((e) => {
-  gsap.from(h3Split.chars, {
-    transformOrigin: "center center",
-    autoAlpha: 0,
-    duration: 0.45,
-    z: -5,
-    color: "#13f1df",
-    ease: "power2.out",
-    stagger: 0.022,
-    scrollTrigger: {
-      trigger: e,
-      onEnter: sorth3(),
-      onLeave: sorth3reverse(),
-      onEnterBack: sorth3(),
-      onLeaveBack: sorth3reverse(),
-    },
-  });
-});
+//       from: "edges",
+//     },
+//   });
+// });
 
-let introPara = gsap.utils.toArray("#introPanel p");
+let introPara = document.querySelector("#introPanel p");
 
 introPara.split = new splitText(introPara, {
   type: "lines,chars",
 });
-
-let d = introPara.split.chars[0];
 
 // Audio Control
 let soundOn = document.querySelector("#yesSoundContainer > button");
@@ -70,14 +66,19 @@ soundOn.addEventListener("click", (event) => {
 });
 
 let soundButtons = gsap.utils.toArray("#soundButtons button");
-let audioAskSection = document.querySelector("#soundAsk");
 let soundAskHeader = document.querySelector("#soundAsk h2");
 const body = document.querySelector("body");
 
 let titles = document.querySelectorAll("#introHeadingContainer h1");
 
+let introPanel = document.querySelector("#introPanel");
+
 let openSource = titles[0];
 let openScience = titles[1];
+
+gsap.set(body, {
+  overflowY: "hidden",
+});
 
 openSource.split = new splitText(openSource, {
   type: "chars",
@@ -87,48 +88,62 @@ openScience.split = new splitText(openScience, {
 });
 
 const titleTL = gsap.timeline({
-  paused: true,
+  // paused: true,
+  onComplete: function () {
+    createIntroOutTL();
+  },
+});
+
+gsap.set(openSource.split.chars, {
+  opacity: 0,
+  y: 50,
+  color: teal,
+});
+gsap.set(openScience.split.chars, {
+  opacity: 0,
+  y: -25,
+  color: teal,
 });
 
 titleTL
-  .from(
+  .to(introPanel, {
+    autoAlpha: 1,
+    duration: 0.01,
+  })
+  .to(body, {
+    overflowY: "scroll",
+  })
+  .to(
     openSource.split.chars,
     {
-      color: "var(--blue)",
-      y: 65,
-      opacity: 0,
-      color: "teal",
-      stagger: 0.01,
+      y: 0,
+      opacity: 1,
+      color: white,
+      stagger: {
+        each: 0.01,
+        ease: "power2.inOut",
+        from: "start",
+      },
       duration: 1.3,
       ease: "power4.inOut",
     },
     "start"
   )
-  .from(
+  .to(
     openScience.split.chars,
     {
-      color: "var(--blue)",
-      y: -40,
-      opacity: 0,
-      color: "teal",
-      stagger: 0.01,
+      y: 0,
+      opacity: 1,
+      color: ylw,
+      stagger: {
+        each: 0.01,
+        ease: "power2.inOut",
+        from: "start",
+      },
       duration: 1.3,
       ease: "power4.inOut",
     },
     "start+=.167"
-  )
-  .from(
-    introPara.split.words,
-    {
-      y: 12,
-      scale: 0.4,
-      autoAlpha: 0,
-      duration: 0.68,
-      ease: "power2.inOut",
-      stagger: 0.1,
-      color: "#13f1df",
-    },
-    ">"
   )
   .from(
     introPara.split.lines,
@@ -136,55 +151,19 @@ titleTL
       autoAlpha: 0,
       y: 20,
       rotationY: -20,
-      color: "var(--teal)",
-      ease: "power1.out",
-      stagger: 0.22,
-      duration: 0.95,
+      color: ylw,
+      ease: "power2.out",
+      stagger: 0.09,
+      duration: 1.25,
     },
-    ">"
+    "start+=.3"
   );
-// .from(
-//   introPara.split.chars,
-//   {
-//     stagger: 0.01,
-//     duration: 0.06,
-//     color: "#13f1df",
-//   },
-//   "<"
-// );
-
-gsap.to(
-  openSource,
-  {
-    scrollTrigger: {
-      trigger: "#introHeadingContainer",
-      start: "top center+=10%",
-      ease: "power4",
-      end: "bottom top+=10%",
-    },
-    x: -23,
-  },
-  "scrolling"
-);
-gsap.to(
-  openScience,
-  {
-    scrollTrigger: {
-      scrub: 0.5,
-      ease: "power4",
-      trigger: "#introHeadingContainer",
-      start: "top center",
-      end: "bottom top+=10%",
-    },
-    x: 23,
-  },
-  "scrolling"
-);
-
+audioAskTL = null;
 let audioAskTL = gsap.timeline({
   paused: true,
   onComplete: function () {
-    titleTL.play();
+    // titleTL.play();
+    audioAskTL.kill();
   },
 });
 
@@ -217,6 +196,9 @@ audioAskTL
     duration: 0.7,
     ease: "power2.inOut",
   });
+// .to(soundAsk, {
+//   display: none,
+// });
 
 soundButtons.forEach((button) => {
   button.addEventListener("click", (event) => {
@@ -268,6 +250,10 @@ gsap.from(images[3], {
   yPercent: 87,
 });
 
+let whatDoProteinsTL = gsap.timeline({
+  paused: true,
+});
+
 // Paragraphs anim
 
 let paras = gsap.utils.toArray("p:not(#introPanel p)");
@@ -275,3 +261,97 @@ let paras = gsap.utils.toArray("p:not(#introPanel p)");
 paras.split = new splitText(paras, {
   type: "lines",
 });
+
+function createIntroOutTL() {
+  let introOutTL = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#introPanel",
+      start: "top top",
+      scrub: 1,
+      pin: true,
+      paused: true,
+    },
+    onComplete: function () {
+      createWhatDoProteins();
+      whatDoProteinsTL.play();
+    },
+  });
+  introOutTL
+    .to(
+      openSource.split.chars,
+      {
+        z: 22,
+        y: -6,
+        autoAlpha: 0,
+        filter: "blur(3px)",
+        rotateY: -4,
+        duration: 1.8,
+        ease: "power3.inOut",
+        stagger: {
+          each: 0.07,
+          ease: "power2.inOut",
+          from: "edges",
+        },
+      },
+      "scrollingOut"
+    )
+    .to(
+      openScience.split.chars,
+      {
+        z: -22,
+        y: 12,
+        autoAlpha: 0,
+        ease: "power3.inOut",
+        filter: "blur(6.6px)",
+        rotateY: 5,
+        stagger: {
+          each: 0.07,
+          ease: "power3.inOut",
+          from: "edges",
+        },
+        duration: 1.8,
+      },
+      "scrollingOut"
+    )
+    .to(
+      introPara.split.lines,
+      {
+        z: -2,
+        y: 9,
+        opacity: 0,
+        color: teal,
+        rotateX: -9,
+        ease: "power2.out",
+        duration: 0.7,
+        filter: "blur(1px)",
+        stagger: {
+          each: 0.04,
+          ease: "power1.inOut",
+          from: "random",
+        },
+      },
+      "scrollingOut+=98%"
+    );
+}
+
+function createWhatDoProteins(){
+    gsap.from(h3.split.words, {
+    scrollTrigger: {
+      trigger: h3,
+      pin: true,
+      start: "top center",
+      markers: true,
+    },
+    transformOrigin: "center center",
+    autoAlpha: 0,
+    duration: 1.5,
+    z: -28,
+    color: ylw,
+    ease: "power4.out",
+    stagger: {
+      each: 0.052,
+
+      from: "edges",
+    },
+  });
+}
