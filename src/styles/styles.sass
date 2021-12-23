@@ -50,13 +50,14 @@
 	--color-blue: #001F4E
 	--color-dark: #030b18
 	--color-yellow: #ebd664
+	--color-gry: #EEEEEE
 	--color-teal:#13f1df
 	--color-white: white
 	--shadow-color: #77B4E7
 	box-sizing: border-box
 	
 html, body
-	// background-color: var(--color-dark)
+	background-color: var(--color-dark)
 	scroll-behavior: smooth
 	font-size: 62.5%
 	margin: 0
@@ -103,7 +104,7 @@ h3
 	margin-bottom: 2em
 
 .interstitial 
-	display: flex
+	display: flex !important
 	justify-content: center
 	align-items: center
 
@@ -249,7 +250,7 @@ section#introPanel
 	&::after
 		content: ""
 		position: fixed
-		opacity: .4
+		opacity: .65
 		width: 300%
 		overflow: hidden
 		top: -250%
@@ -327,7 +328,6 @@ section#soundAsk
 	display: flex
 
 section#whatIsFolding
-	flex-direction: column
 
 	& > div > div
 		@include maxWidthXS
@@ -335,7 +335,36 @@ section#whatIsFolding
 	& > div > p
 		@include maxWidthXS
 		margin-top: 30%
-		
+	
+	#foldUnfoldSliderContainer
+		background: red
+		overflow: hidden
+		height: 100vh
+		width: 60%
+		display: flex
+		justify-content: space-between
+		align-items: center
+
+		#foldedContainer
+			width: 40%
+			height: 40%
+			max-height: 400px
+			background: green
+
+		#unfoldedContainer
+			height: calc(100% + 400px)
+			background: blue
+			overflow: hidden
+
+			& > div
+				max-height: calc(100% - 400px)
+				display: grid  
+
+				.unfoldedProtein
+					width: 100%
+					height: 200px
+					border: teal solid 6px
+					background: lightblue
 
 section#numberOfUsersPanel
 	position: relative
@@ -366,3 +395,7 @@ section#numberOfUsersPanel
 		top: 2%
 		scale: 1.1
 		right: .4%
+
+// GSAP Classes
+.splitLine
+	overflow: hidden

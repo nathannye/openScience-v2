@@ -1,11 +1,15 @@
 import gsap from "gsap";
-import splitText from "gsap/SplitText";
+import SplitText from "gsap/SplitText";
 import scrollTrigger from "gsap/ScrollTrigger";
+import Draggable from "gsap/Draggable";
+import InertiaPlugin from "gsap/InertiaPlugin";
 import { random } from "gsap/gsap-core";
+import { create } from "combined-stream";
 // import { GLTFLoader } from "three/examples/js/loaders/GLTFLoader";
 
 gsap.registerPlugin(scrollTrigger);
-gsap.registerPlugin(splitText);
+gsap.registerPlugin(SplitText);
+gsap.registerPlugin(Draggable);
 
 // scrollTrigger.defaults({
 //   start: "top bottom-=15%",
@@ -17,41 +21,10 @@ const teal = "#13f1df";
 const ylw = "#ebd664";
 const blue = "#001f4e";
 const white = "white";
-
-let h3 = gsap.utils.toArray("section.interstitial h3");
-
-h3.split = new splitText(h3, {
-  type: "words",
-});
-
-let whatDoProteins = h3[1];
-
-// h3.forEach((e) => {
-//   gsap.from(h3.split.words, {
-//     scrollTrigger: {
-//       trigger: h3,
-//       pin: true,
-//       start: "top center",
-//       markers: true,
-//     },
-//     transformOrigin: "center center",
-//     autoAlpha: 0,
-//     duration: 1.5,
-//     z: -28,
-//     color: ylw,
-//     ease: "power4.out",
-//     stagger: {
-//       each: 0.052,
-
-//       from: "edges",
-//     },
-//   });
-// });
-
 let introPara = document.querySelector("#introPanel p");
 
-introPara.split = new splitText(introPara, {
-  type: "lines,chars",
+introPara.split = new SplitText(introPara, {
+  type: "lines, chars",
 });
 
 // Audio Control
@@ -66,8 +39,7 @@ soundOn.addEventListener("click", (event) => {
 });
 
 let soundButtons = gsap.utils.toArray("#soundButtons button");
-let soundAskHeader = document.querySelector("#soundAsk h2");
-const body = document.querySelector("body");
+let body = document.querySelector("body");
 
 let titles = document.querySelectorAll("#introHeadingContainer h1");
 
@@ -76,20 +48,33 @@ let introPanel = document.querySelector("#introPanel");
 let openSource = titles[0];
 let openScience = titles[1];
 
-gsap.set(body, {
-  overflowY: "hidden",
+let nglStage = document.querySelector("#viewport");
+let grain = document.querySelector("#grain");
+
+gsap.set(grain, {
+  opacity: 0,
 });
 
-openSource.split = new splitText(openSource, {
+gsap.set(nglStage, {
+  opacity: 0,
+});
+
+gsap.set(body, {
+  overflow: "hidden",
+});
+
+openSource.split = new SplitText(openSource, {
   type: "chars",
 });
-openScience.split = new splitText(openScience, {
+openScience.split = new SplitText(openScience, {
   type: "chars",
 });
 
 const titleTL = gsap.timeline({
-  // paused: true,
   onComplete: function () {
+    gsap.to(body, {
+      overflowY: "scroll",
+    });
     createIntroOutTL();
   },
 });
@@ -109,9 +94,6 @@ titleTL
   .to(introPanel, {
     autoAlpha: 1,
     duration: 0.01,
-  })
-  .to(body, {
-    overflowY: "scroll",
   })
   .to(
     openSource.split.chars,
@@ -145,6 +127,23 @@ titleTL
     },
     "start+=.167"
   )
+  .to(
+    grain,
+    {
+      opacity: 1,
+      duration: 1.2,
+    },
+    "stageIn"
+  )
+  .to(
+    nglStage,
+    {
+      opacity: 1,
+      duration: 3,
+    },
+    "start+=18%",
+    "stageIn"
+  )
   .from(
     introPara.split.lines,
     {
@@ -158,44 +157,45 @@ titleTL
     },
     "start+=.3"
   );
-audioAskTL = null;
-let audioAskTL = gsap.timeline({
-  paused: true,
-  onComplete: function () {
-    // titleTL.play();
-    audioAskTL.kill();
-  },
-});
 
-audioAskTL
-  .to(
-    soundAskHeader,
-    {
-      duration: 1.28,
-      autoAlpha: 0,
-      z: 30,
-      ease: "power4.inOut",
-      filter: "blur(4px)",
-    },
-    "start"
-  )
-  .to(
-    soundButtons,
-    {
-      z: 40,
-      autoAlpha: 0,
-      ease: "power4.inOut",
-      filter: "blur(2px)",
-      stagger: 0.05,
-      delay: 0.148,
-    },
-    "start"
-  )
-  .to(soundAsk, {
-    autoAlpha: 0,
-    duration: 0.7,
-    ease: "power2.inOut",
-  });
+// let audioAskTL = gsap.timeline({
+//   paused: true,
+//   onComplete: function () {
+//     // titleTL.play();
+//     audioAskTL.kill();
+//   },
+// });
+// audioAskTL = null;
+
+// audioAskTL
+//   .to(
+//     soundAskHeader,
+//     {
+//       duration: 1.28,
+//       autoAlpha: 0,
+//       z: 30,
+//       ease: "power4.inOut",
+//       filter: "blur(4px)",
+//     },
+//     "start"
+//   )
+//   .to(
+//     soundButtons,
+//     {
+//       z: 40,
+//       autoAlpha: 0,
+//       ease: "power4.inOut",
+//       filter: "blur(2px)",
+//       stagger: 0.05,
+//       delay: 0.148,
+//     },
+//     "start"
+//   )
+//   .to(soundAsk, {
+//     autoAlpha: 0,
+//     duration: 0.7,
+//     ease: "power2.inOut",
+//   });
 // .to(soundAsk, {
 //   display: none,
 // });
@@ -208,57 +208,11 @@ soundButtons.forEach((button) => {
 
 // Image section
 
-let images = gsap.utils.toArray(".parallaxImage");
-
-gsap.from(images[0], {
-  scrollTrigger: {
-    scrub: true,
-    start: "top bottom",
-    end: "bottom top",
-    trigger: "#numberOfUsersPanel",
-  },
-  yPercent: -60,
-});
-
-gsap.from(images[1], {
-  scrollTrigger: {
-    scrub: true,
-    start: "top bottom",
-    end: "bottom top",
-    trigger: "#numberOfUsersPanel",
-  },
-  yPercent: -22,
-});
-
-gsap.to(images[2], {
-  scrollTrigger: {
-    scrub: true,
-    start: "top bottom",
-    end: "bottom top",
-    trigger: "#numberOfUsersPanel",
-  },
-  yPercent: -19,
-});
-
-gsap.from(images[3], {
-  scrollTrigger: {
-    scrub: true,
-    start: "top bottom",
-    end: "bottom top",
-    trigger: "#numberOfUsersPanel",
-  },
-  yPercent: 87,
-});
-
-let whatDoProteinsTL = gsap.timeline({
-  paused: true,
-});
-
 // Paragraphs anim
 
 let paras = gsap.utils.toArray("p:not(#introPanel p)");
 
-paras.split = new splitText(paras, {
+paras.split = new SplitText(paras, {
   type: "lines",
 });
 
@@ -267,13 +221,13 @@ function createIntroOutTL() {
     scrollTrigger: {
       trigger: "#introPanel",
       start: "top top",
+      end: "bottom top",
       scrub: 1,
       pin: true,
       paused: true,
-    },
-    onComplete: function () {
-      createWhatDoProteins();
-      whatDoProteinsTL.play();
+      onComplete: function () {
+        createFirstInterstitial();
+      },
     },
   });
   introOutTL
@@ -334,24 +288,129 @@ function createIntroOutTL() {
     );
 }
 
-function createWhatDoProteins(){
-    gsap.from(h3.split.words, {
-    scrollTrigger: {
-      trigger: h3,
-      pin: true,
-      start: "top center",
-      markers: true,
-    },
-    transformOrigin: "center center",
-    autoAlpha: 0,
-    duration: 1.5,
-    z: -28,
-    color: ylw,
-    ease: "power4.out",
-    stagger: {
-      each: 0.052,
+let h3 = gsap.utils.toArray("section.interstitial h3");
+let interstitialOne = document.querySelector("#whatDoProteins");
 
-      from: "edges",
-    },
+h3.split = new SplitText(h3, {
+  type: "words",
+});
+
+let firstInterstitial = gsap.timeline({
+  scrollTrigger: {
+    start: "top top",
+    end: "bottom top",
+    trigger: interstitialOne,
+    pin: true,
+    scrub: 0.3,
+  },
+});
+
+firstInterstitial.from(h3.split.words, {
+  duration: 1.5,
+  z: -33,
+  autoAlpha: 0,
+  ease: "power4.out",
+  stagger: {
+    from: "edges",
+    each: 0.052,
+  },
+});
+firstInterstitial.to(h3.split.words, {
+  duration: 1.5,
+  z: -33,
+  autoAlpha: 0,
+  stagger: {
+    from: "edges",
+    each: 0.052,
+  },
+});
+
+let h2 = document.querySelectorAll("h2.fromFarAndAway");
+function setupFarAndAway() {
+  h2.forEach((e) => {
+    if (e.anim) {
+      e.anim.progress(1).kill();
+      e.split.revert();
+    }
+    e.split = new SplitText(e, {
+      type: "chars, lines",
+      linesClass: "splitLine",
+    });
+    e.anim = gsap.from(e.split.chars, {
+      scrollTrigger: {
+        trigger: e,
+        start: "top bottom-=24%",
+        markers: true,
+        toggleActions: "restart none none reverse",
+      },
+      yPercent: 100,
+      color: teal,
+      duration: 0.65,
+      ease: "power34.inOut",
+      stagger: {
+        each: 0.005,
+        ease: "power2.inOut",
+      },
+    });
   });
 }
+
+scrollTrigger.addEventListener("refresh", setupFarAndAway);
+setupFarAndAway();
+
+let images = gsap.utils.toArray(".parallaxImage");
+
+gsap.from(images[0], {
+  scrollTrigger: {
+    scrub: true,
+    start: "top bottom",
+    end: "bottom top",
+    trigger: "#numberOfUsersPanel",
+  },
+  yPercent: -60,
+});
+
+gsap.from(images[1], {
+  scrollTrigger: {
+    scrub: true,
+    start: "top bottom",
+    end: "bottom top",
+    trigger: "#numberOfUsersPanel",
+  },
+  yPercent: -22,
+});
+
+gsap.to(images[2], {
+  scrollTrigger: {
+    scrub: true,
+    start: "top bottom",
+    end: "bottom top",
+    trigger: "#numberOfUsersPanel",
+  },
+  yPercent: -19,
+});
+
+gsap.from(images[3], {
+  scrollTrigger: {
+    scrub: true,
+    start: "top bottom",
+    end: "bottom top",
+    trigger: "#numberOfUsersPanel",
+  },
+  yPercent: 87,
+});
+
+let container = document.querySelector("#unfoldedContainer > div");
+
+
+
+Draggable.create(container, {
+  bounds: "#unfoldedContainer",
+  inertia: true,
+  type: "y",
+  cursor: "drag",
+});
+
+// let foldedUnfoldedTL = gsap.timeline({
+//   scrollTrigger: {},
+// });
