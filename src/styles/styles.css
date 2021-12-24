@@ -28,6 +28,7 @@ html, body {
   scroll-behavior: smooth;
   font-size: 62.5%;
   margin: 0;
+  overflow-x: hidden;
   padding: 0;
   color: white;
 }
@@ -60,10 +61,12 @@ h1 em {
 }
 
 h2 {
-  font-family: telegraf;
-  font-style: normal;
-  font-size: clamp(2.4em, calc(2.4rem + (5 - 2.4) * ((100vw - 48rem) / (120 - 48))), 5em);
+  font-family: ivypresto-headline, serif;
   font-weight: 400;
+  font-size: clamp(2.9em, calc(2.9rem + (6.8 - 2.9) * ((100vw - 48rem) / (120 - 48))), 6.8em);
+  line-height: 1.12;
+  letter-spacing: .01em;
+  font-weight: 300;
 }
 
 h2 em {
@@ -78,8 +81,10 @@ h3 {
   font-family: telegraf;
   font-style: normal;
   text-transform: uppercase;
-  font-size: clamp(1.7em, calc(1.7rem + (2 - 1.7) * ((100vw - 48em) / (120 - 48))), 2em);
+  font-size: clamp(1.6em, calc(1.6rem + (1.8 - 1.6) * ((100vw - 48em) / (120 - 48))), 1.8em);
   line-height: 1.57;
+  font-weight: 400;
+  color: var(--color-gry);
   letter-spacing: .3em;
   margin-bottom: 2em;
 }
@@ -103,12 +108,12 @@ h4 {
 }
 
 p, ul, li, a, ol {
-  font-size: clamp(1.55em, calc(1.55rem + (2.7 - 1.55) * ((100vw - 48em) / (120 - 48))), 2.7em);
+  font-size: clamp(1.33em, calc(1.33rem + (2.7 - 1.33) * ((100vw - 48em) / (120 - 48))), 2.7em);
   font-family: telegraf;
   font-style: normal;
-  letter-spacing: .03em;
-  font-weight: 200;
-  line-height: 1.57em;
+  letter-spacing: 0.003em;
+  font-weight: 100;
+  line-height: 1.41em;
 }
 
 p {
@@ -153,7 +158,6 @@ nav {
 }
 
 main {
-  width: 95%;
   margin: auto;
 }
 
@@ -278,6 +282,7 @@ canvas#soundIndicator {
   position: fixed;
   z-index: 1;
   top: 370px;
+  filter: blur(0.45px);
   left: 0;
   transform: scale(2);
 }
@@ -325,6 +330,9 @@ section#soundAsk h2 {
   position: relative;
   display: block;
   width: 100%;
+  width: 90.2%;
+  max-width: 1050px;
+  margin: 0 auto;
   height: 100vh;
 }
 
@@ -411,12 +419,21 @@ section#numberOfUsersPanel img:nth-child(3) {
 
 section#numberOfUsersPanel img:last-child {
   top: 2%;
-  scale: 1.1;
+  transform: scale(1.1);
   right: .4%;
 }
 
 section#whyDoWeNeed {
   position: relative;
+  padding-top: 12%;
+  width: 100% !important;
+  background: var(--color-gry);
+  align-items: flex-start;
+  overflow: hidden;
+}
+
+section#whyDoWeNeed h2, section#whyDoWeNeed p, section#whyDoWeNeed h3 {
+  color: var(--color-dark);
 }
 
 section#whyDoWeNeed > div {
@@ -433,8 +450,13 @@ section#whyDoWeNeed > div > div {
 
 section#whyDoWeNeed h1#aminoNumbers {
   position: absolute;
-  bottom: 0;
+  bottom: -9%;
   left: 5%;
+  color: var(--color-yellow);
+  font-size: clamp(38em, calc(38rem + (86.8 - 38) * ((100vw - 48em) / (120 - 48))), 86.8em);
+  line-height: 1;
+  margin: 0;
+  z-index: -1;
 }
 
 .splitLine {
