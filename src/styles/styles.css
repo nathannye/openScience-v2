@@ -415,6 +415,28 @@ section#numberOfUsersPanel img:last-child {
   right: .4%;
 }
 
+section#whyDoWeNeed {
+  position: relative;
+}
+
+section#whyDoWeNeed > div {
+  width: 90.2%;
+  max-width: 1050px;
+  display: flex;
+  justify-content: space-between;
+}
+
+section#whyDoWeNeed > div > div {
+  width: 90.2%;
+  max-width: 320px;
+}
+
+section#whyDoWeNeed h1#aminoNumbers {
+  position: absolute;
+  bottom: 0;
+  left: 5%;
+}
+
 .splitLine {
   overflow: hidden;
 }
