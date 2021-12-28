@@ -11,12 +11,6 @@ gsap.registerPlugin(scrollTrigger);
 gsap.registerPlugin(SplitText);
 gsap.registerPlugin(Draggable);
 
-// scrollTrigger.defaults({
-//   start: "top bottom-=15%",
-//   end: "top top+=20%",
-//   toggleActions: "play reverse play reverse",
-// });
-
 const teal = "#13f1df";
 const ylw = "#ebd664";
 const blue = "#001f4e";
@@ -81,12 +75,12 @@ const titleTL = gsap.timeline({
 
 gsap.set(openSource.split.chars, {
   opacity: 0,
-  y: 50,
+  y: 40,
   color: teal,
 });
 gsap.set(openScience.split.chars, {
   opacity: 0,
-  y: -25,
+  y: -45,
   color: teal,
 });
 
@@ -102,7 +96,7 @@ titleTL
       opacity: 1,
       color: white,
       stagger: {
-        each: 0.01,
+        each: 0.02,
         ease: "power2.inOut",
         from: "start",
       },
@@ -118,7 +112,7 @@ titleTL
       opacity: 1,
       color: ylw,
       stagger: {
-        each: 0.01,
+        each: 0.02,
         ease: "power2.inOut",
         from: "start",
       },
@@ -208,14 +202,6 @@ soundButtons.forEach((button) => {
 
 // Image section
 
-// Paragraphs anim
-
-let paras = gsap.utils.toArray("p:not(#introPanel p)");
-
-paras.split = new SplitText(paras, {
-  type: "lines",
-});
-
 function createIntroOutTL() {
   let introOutTL = gsap.timeline({
     scrollTrigger: {
@@ -235,7 +221,7 @@ function createIntroOutTL() {
       openSource.split.chars,
       {
         z: 22,
-        y: -6,
+        y: -13,
         autoAlpha: 0,
         filter: "blur(3px)",
         rotateY: -4,
@@ -253,7 +239,7 @@ function createIntroOutTL() {
       openScience.split.chars,
       {
         z: -22,
-        y: 12,
+        y: 24,
         autoAlpha: 0,
         ease: "power3.inOut",
         filter: "blur(6.6px)",
@@ -358,51 +344,72 @@ function setupFarAndAway() {
 scrollTrigger.addEventListener("refresh", setupFarAndAway);
 setupFarAndAway();
 
-let images = gsap.utils.toArray(".parallaxImage");
+document.addEventListener("DOMContentLoaded", (event) => {
+  let images = gsap.utils.toArray(".parallaxImage");
 
-gsap.from(images[0], {
-  scrollTrigger: {
-    scrub: true,
-    start: "top bottom",
-    end: "bottom top",
-    trigger: "#numberOfUsersPanel",
-  },
-  yPercent: -60,
+  gsap.set(images, {
+    "clip-path": "polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)",
+    yPercent: -20,
+  });
+
+  gsap.to(images, {
+    "clip-path": "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
+    yPercent: 0,
+    scrollTrigger: {
+      trigger: "#numberOfUsersPanel",
+      start: "top bottom-=17%",
+      markers: true,
+    },
+    stagger: {
+      each: 0.04,
+      from: "random",
+    },
+    duration: 0.76,
+    ease: "power3.inOut",
+  });
 });
 
-gsap.from(images[1], {
-  scrollTrigger: {
-    scrub: true,
-    start: "top bottom",
-    end: "bottom top",
-    trigger: "#numberOfUsersPanel",
-  },
-  yPercent: -22,
-});
+// gsap.from(images[0], {
+//   scrollTrigger: {
+//     scrub: true,
+//     start: "top bottom",
+//     end: "bottom top",
+//     trigger: "#numberOfUsersPanel",
+//   },
+//   yPercent: -60,
+// });
 
-gsap.to(images[2], {
-  scrollTrigger: {
-    scrub: true,
-    start: "top bottom",
-    end: "bottom top",
-    trigger: "#numberOfUsersPanel",
-  },
-  yPercent: -19,
-});
+// gsap.from(images[1], {
+//   scrollTrigger: {
+//     scrub: true,
+//     start: "top bottom",
+//     end: "bottom top",
+//     trigger: "#numberOfUsersPanel",
+//   },
+//   yPercent: -22,
+// });
 
-gsap.from(images[3], {
-  scrollTrigger: {
-    scrub: true,
-    start: "top bottom",
-    end: "bottom top",
-    trigger: "#numberOfUsersPanel",
-  },
-  yPercent: 87,
-});
+// gsap.to(images[2], {
+//   scrollTrigger: {
+//     scrub: true,
+//     start: "top bottom",
+//     end: "bottom top",
+//     trigger: "#numberOfUsersPanel",
+//   },
+//   yPercent: -19,
+// });
+
+// gsap.from(images[3], {
+//   scrollTrigger: {
+//     scrub: true,
+//     start: "top bottom",
+//     end: "bottom top",
+//     trigger: "#numberOfUsersPanel",
+//   },
+//   yPercent: 87,
+// });
 
 let container = document.querySelector("#unfoldedContainer > div");
-
-
 
 Draggable.create(container, {
   bounds: "#unfoldedContainer",
@@ -411,6 +418,17 @@ Draggable.create(container, {
   cursor: "drag",
 });
 
-// let foldedUnfoldedTL = gsap.timeline({
-//   scrollTrigger: {},
-// });
+// Paragraphs anim
+
+let paras = gsap.utils.toArray("p:not(#introPanel p)");
+
+function setupParas() {
+  paras.forEach((para) => {
+    para.split = new SplitText(para, {
+      type: "lines",
+    });
+  });
+}
+
+document.addEventListener("refresh", setupParas);
+setupParas();

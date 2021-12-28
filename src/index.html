@@ -4,12 +4,11 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Open Source. Open Science</title>
-    <link rel="stylesheet" href="styles/styles.min.css" />
+    <title>Open source, Open science</title>
+    <link rel="stylesheet" href="styles/styles.css" />
     <link rel="stylesheet" href="https://use.typekit.net/jih6lvv.css" />
   </head>
   <body>
-    <canvas id="soundIndicator"></canvas>
     <audio src="audio/ambientSoundtrack.mp3" type="audio/mpeg" paused></audio>
     <div id="scrollIndicator">
       <div></div>
@@ -27,10 +26,10 @@
           <div>
             <div id="soundButtons">
               <div id="yesSoundContainer">
-                <button><h3>yes</h3></button>
+                <button><h4>yes</h4></button>
               </div>
               <div id="noSoundContainer">
-                <button><h3>no thanks</h3></button>
+                <button><h4>no thanks</h4></button>
               </div>
             </div>
           </div>
@@ -51,17 +50,17 @@
       </section>
       <section class="panel interstitial" id="whatDoProteins">
         <div>
-          <h3>what do proteins have to do with computers?</h3>
+          <h4>what do proteins have to do with computers?</h4>
         </div>
       </section>
       <section class="panel" id="whatIsFolding">
         <div class="panelInnerLeft pannelInnerLimit">
           <div>
-            <h3 id="drag">what is protein folding?</h3>
+            <h4 id="drag">what is protein folding?</h4>
             <h2 class="fromFarAndAway">
               Proteins are the basis for cellular function. But to do their
-              work, they must
-              <em>assemble themselves into a specific shape, or ‘fold’.</em>
+              work, they must assemble themselves into a specific shape, or
+              ‘fold’.
             </h2>
           </div>
           <p>
@@ -88,7 +87,7 @@
           </div>
         </div>
       </section>
-      <section class="panel">
+      <section class="panel" id="whyDoesFoldingMatter">
         <div>
           <div>
             <h2>
@@ -98,7 +97,7 @@
             <a href="">Courtesy: Harvard.edu</a>
           </div>
           <div>
-            <h3>why does folding matter?</h3>
+            <h4>why does folding matter?</h4>
             <p>
               When we discover how, and why proteins fold into specific
               structures, we can understand what makes things go wrong. Helping
@@ -107,10 +106,10 @@
           </div>
         </div>
       </section>
-      <section class="panel" id="whyDoWeNeed">
+      <section class="panel fullWidthPanel" id="whyDoWeNeed">
         <div>
           <div>
-            <h3>why do we need computers?</h3>
+            <h4>why do we need computers?</h4>
             <h2>
               Proteins with only 20 amino acids have 10<sup>130</sup> equally
               possible folded formations.
@@ -173,7 +172,7 @@
       <section class="panel">
         <div>
           <div>
-            <h3>so what the hell does that mean?</h3>
+            <h4>so what the hell does that mean?</h4>
             <h2>
               Let's put that in perspective shall we? You'd need a little over
               70 billion iPhone 12s to top that.
@@ -193,14 +192,17 @@
           <p>Firms have to make up less of the cost of research.</p>
         </div>
       </section>
-      <section class="panel">
+      <section class="panel" id="helpingReduceCosts">
         <div>
-          <h2>
-            Cancer drugs can cost up to $10,000 per month. Exceeding the average
-            salary in the US by almost twofold.
-          </h2>
+          <div class="headingContainer">
+            <h4>helping reduce costs</h4>
+            <h2>
+              Aduhelm, an Alzheimer’s drug approved by the FDA on June 7th,
+              2021, will cost $56,000 per person per year. 76% of the income of
+              an individual aged older than 60 in America.
+            </h2>
+          </div>
           <div>
-            <h3>helping reduce costs</h3>
             <p>
               Distributed computing projects produce open source data. Anything
               it returns is required to be free for all to use. With free,
@@ -210,41 +212,58 @@
           </div>
         </div>
       </section>
-      <section class="panel">
-        <div>
-          <h3>get involved</h3>
-          <h2>Where can you help?</h2>
-        </div>
-        <div>
-          <h2>Rosetta@Home</h2>
-          <h3>users: 1,452,613</h3>
+      <section class="panel" id="howCanYouHelp">
+        <div id="helpHeadingContainer">
           <div>
+            <h4>get involved</h4>
+            <h2>How can you help?</h2>
             <p>
-              Rosetta@Home is currently working to identify candidate protein
-              areas for COVID-19 antiviral drugs. These antiviral drugs will be
-              used to shorten the length of severe reactions to COVID-19.
-            </p>
-            <p>
-              This project looks at the process of protein folding to identify
-              how a protein could be drugged.
+              Want to help contribute to live saving therapies? Learn more about
+              the institutions below and download their free installer to get
+              folding!
             </p>
           </div>
         </div>
-        <div>
-          <h2>Folding@Home</h2>
-          <h3>users: NUMBER</h3>
+        <div id="foldingProjectsContainer">
+          <!-- <div></div> -->
           <div>
-            <p>
-              Folding@Home is also actively working to identify candidate
-              protein areas for COVID-19 antiviral drugs. This is currently the
-              largest distributed computing project.
-            </p>
+            <h3>Rosetta@Home</h3>
+            <h4>users: 1,452,613</h4>
+            <div>
+              <p>
+                Rosetta@Home is currently working to identify candidate protein
+                areas for COVID-19 antiviral drugs. These antiviral drugs will
+                be used to shorten the length of severe reactions to COVID-19.
+              </p>
+              <p>
+                This project looks at the process of protein folding to identify
+                how a protein could be drugged.
+              </p>
+              <a href="https://boinc.bakerlab.org/" target="_blank"
+                >learn more</a
+              >
+            </div>
+          </div>
+          <div>
+            <h3>Folding@Home</h3>
+            <h4>users: NUMBER</h4>
+            <div>
+              <p>
+                Folding@Home is also actively working to identify candidate
+                protein areas for COVID-19 antiviral drugs. This is currently
+                the largest distributed computing project.
+              </p>
+              <a href="https://foldingathome.org/?lng=en" target="_blank"
+                >learn more</a
+              >
+            </div>
           </div>
         </div>
       </section>
     </main>
     <script src="./index.js" type="module"></script>
     <script type="module" src="./js/barGraph.js"></script>
+    <script type="module" src="./js/waveApp.js"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/ngl/2.0.0-dev.39/ngl.js"
       integrity="sha512-L4e1Z9pbAAsBXDzbcitJzkcRIHq6PUF/6GSR5UbA38XiaQ3TAS3422wJ5DllYOlwkpKUXInFt1b+C06NDvtmTg=="

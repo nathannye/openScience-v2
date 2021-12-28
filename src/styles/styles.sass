@@ -1,3 +1,5 @@
+$boundary: 90.2%
+
 @font-face
 	font-family: telegraf
 	src: url(../fonts/telegraf_200.ttf)
@@ -27,23 +29,23 @@
 	transition: all .29s ease-in-out
 
 @mixin maxWidthXS
-	width: 90.2%
+	width: $boundary
 	max-width: 320px
 
 @mixin maxWidthS
-	width: 90.2%
+	width: $boundary
 	max-width: 500px
 
 @mixin maxWidthM
-	width: 90.2%
+	width: $boundary
 	max-width: 750px
 
 @mixin maxWidthL
-	width: 90.2%
+	width: $boundary
 	max-width: 1050px	
 
 @mixin maxWidthXL
-	width: 90.2%
+	width: $boundary
 	max-width: 1350px	
 
 *
@@ -88,46 +90,68 @@ h1
 
 h2
 	@include fontIvyNormal
-	font-size: clamp(2.9em, calc(2.9rem + (6.8 - 2.9) * ((100vw - 48rem) / (120 - 48))), 6.8em)
-	line-height: 1.12
-	letter-spacing: .01em
-	font-weight: 300
+	font-size: clamp(2.9em, calc(2.9rem + (6.5 - 2.9) * ((100vw - 48rem) / (120 - 48))), 6.5em)
+	line-height: 1.23
+	letter-spacing: 0
+	margin-bottom: 0.25em
 
 	em
 		@include fontIvyItalic
 		color: var(--color-yellow)
 		letter-spacing: .005em
 
-h3
+h3	
+	@include fontIvyNormal
+	font-size: clamp(2.3em, calc(2.3rem + ((1vw - 0.48em) * 0.9722)), 3em)
+	min-height: 0vw
+	font-weight: 400 !important
+	letter-spacing: .02em
+	line-height: 1.55
+	margin-bottom: .5em
+	
+h4
 	@include fontTel
 	text-transform: uppercase
-	font-size: clamp(1.6em, calc(1.6rem + (1.8 - 1.6) * ((100vw - 48em) / (120 - 48))), 1.8em)
+	font-size: clamp(1.4em, calc(1.4rem + (1.8 - 1.4) * ((100vw - 48em) / (120 - 48))), 1.8em)
 	line-height: 1.57
 	font-weight: 400
-	color: var(--color-gry)
+	// opacity: .5
+	color: var(--color-yellow)
 	letter-spacing: .3em
-	margin-bottom: 2em
+	margin-bottom: .25em
 
 .interstitial 
 	display: flex !important
 	justify-content: center
 	align-items: center
 
-	h3
+	h4
 		perspective: 200px
 		text-align: center
 		transform: perspective(200px)
 		perspective-origin: center center
 
-h4
+h3
 	@include fontIvyNormal
 
 p, ul, li, a, ol
-	font-size: clamp(1.33em, calc(1.33rem + (2.7 - 1.33) * ((100vw - 48em) / (120 - 48))), 2.7em)
+	font-size: clamp(1.33em, calc(1.33rem + (2.55 - 1.33) * ((100vw - 48em) / (120 - 48))), 2.55em)
 	@include fontTel
-	letter-spacing: 0.003em
+	letter-spacing: 0.005em
 	font-weight: 100
-	line-height: 1.41em
+	line-height: 1.52em
+
+a
+	@include fontIvyNormal
+	margin-top: .5em !important
+	display: block
+	font-size: 1.3rem
+	text-transform: uppercase
+	text-decoration: none
+	letter-spacing: .04em
+
+	&:visited
+		color: white
 
 p
 	perspective: 200px
@@ -169,17 +193,13 @@ main
 	margin: auto
 
 section:not(section.interstitial)
-	display: flex
-	justify-content: center
+	// display: flex
+	// justify-content: center
 	height: 100vh
-	align-items: center
+	// align-items: center
 
 	&.lefty
 		justify-content: flex-start
-
-	& > div
-		@include maxWidthM
-
 
 section#introPanel
 	display: flex
@@ -325,6 +345,10 @@ section#soundAsk
 	margin: 0 auto
 	height: 100vh
 
+.fullWidthPanel
+	max-width: initial
+	width: 100%
+
 .panelInnerLeft
 	align-self: flex-start
 	display: flex
@@ -368,45 +392,23 @@ section#whatIsFolding
 					border: teal solid 6px
 					background: lightblue
 
-section#numberOfUsersPanel
-	position: relative
+section#whyDoesFoldingMatter
+	display: flex
+	align-items: flex-end
+	flex-direction: column
 
-	h2, p
-		z-index: 10
-
-	img.parallaxImage
-		position: absolute
-		width: 50%
-		max-width: 430px
-		box-shadow: 0px 0px 40px rgba(0,0 ,0 ,.3 )
-
-	img:first-child
-		top: 2%
-		
-		left: 5%
-
-	img:nth-child(2)
-		bottom: 6%
-		right: 10%
-
-	img:nth-child(3)
-		top: 2%
-		left: 1%
-
-	img:last-child
-		top: 2%
-		transform: scale(1.1)
-		right: .4%
+	& > div
+		@include maxWidthS
 
 section#whyDoWeNeed
 	position: relative
-	padding-top: 12%
+	padding: 12% 0 0 4.6%
 	width: 100% !important
 	background: var(--color-gry)
 	align-items: flex-start
 	overflow: hidden
 
-	h2, p, h3
+	h2, p, h4
 		color: var(--color-dark)
 
 	& > div
@@ -427,6 +429,110 @@ section#whyDoWeNeed
 		margin: 0
 		z-index: -1
 
+section#numberOfUsersPanel
+	position: relative
+
+	h2, p
+		z-index: 10
+
+	img.parallaxImage
+		position: absolute
+		width: 50%
+		max-width: 430px
+		box-shadow: 0px 0px 40px rgba(0,0 ,0 ,.3 )
+
+	img:first-child
+		top: 2%
+		left: 5%
+
+	img:nth-child(2)
+		bottom: 6%
+		right: 10%
+
+	img:nth-child(3)
+		top: 2%
+		left: 1%
+
+	img:last-child
+		top: 2%
+		transform: scale(1.1)
+		right: .4%
+
+section#helpingReduceCosts
+	
+	& > div
+		display: flex
+		// width: 100%
+		flex-direction: row-reverse
+		flex-wrap: wrap
+		justify-content: space-between
+
+		.headingContainer
+			width: 100%
+
+section#howCanYouHelp
+	display: block !important
+	@include maxWidthXL
+
+	#helpHeadingContainer
+		display: flex
+		@include maxWidthS
+		justify-content: start
+		margin-bottom: 5%
+
+	#foldingProjectsContainer
+		display: flex
+		justify-content: flex-end
+		column-gap: 4.6%
+
+		& > div
+			@include maxWidthXS
+
+			h2
+				margin-bottom: .25em
+
 // GSAP Classes
 .splitLine
 	overflow: hidden
+
+// Above 480px but beneath 769px
+@media only screen and (min-width: 480px)
+
+	section#helpingReduceCosts
+		
+		& > div
+			width: 100%
+			justify-content: flex-end
+			// column-gap: 3rem
+
+			.headingContainer
+				// width: 40%
+				// max-width: 500px
+				flex-grow: 1
+
+			& > div:not(.headingContainer)
+				// width: 40%
+				// max-width: 500px
+
+// Above 796px and below 1200px
+@media only screen and (min-width: 769px)
+
+	section#helpingReduceCosts
+		
+		& > div
+			column-gap: 4.6%
+
+			.headingContainer
+				width: 50%
+				max-width: 500px
+				flex-grow: 1
+
+			& > div:not(.headingContainer)
+				width: 40%
+				max-width: 500px
+
+// Above 1200px
+@media only screen and (min-width: 1200px)
+
+	blockquote
+		width: 20px

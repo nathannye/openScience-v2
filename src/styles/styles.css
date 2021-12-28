@@ -63,10 +63,10 @@ h1 em {
 h2 {
   font-family: ivypresto-headline, serif;
   font-weight: 400;
-  font-size: clamp(2.9em, calc(2.9rem + (6.8 - 2.9) * ((100vw - 48rem) / (120 - 48))), 6.8em);
-  line-height: 1.12;
-  letter-spacing: .01em;
-  font-weight: 300;
+  font-size: clamp(2.9em, calc(2.9rem + (6.5 - 2.9) * ((100vw - 48rem) / (120 - 48))), 6.5em);
+  line-height: 1.23;
+  letter-spacing: 0;
+  margin-bottom: 0.25em;
 }
 
 h2 em {
@@ -78,15 +78,26 @@ h2 em {
 }
 
 h3 {
+  font-family: ivypresto-headline, serif;
+  font-weight: 400;
+  font-size: clamp(2.3em, calc(2.3rem + ((1vw - 0.48em) * 0.9722)), 3em);
+  min-height: 0vw;
+  font-weight: 400 !important;
+  letter-spacing: .02em;
+  line-height: 1.55;
+  margin-bottom: .5em;
+}
+
+h4 {
   font-family: telegraf;
   font-style: normal;
   text-transform: uppercase;
-  font-size: clamp(1.6em, calc(1.6rem + (1.8 - 1.6) * ((100vw - 48em) / (120 - 48))), 1.8em);
+  font-size: clamp(1.4em, calc(1.4rem + (1.8 - 1.4) * ((100vw - 48em) / (120 - 48))), 1.8em);
   line-height: 1.57;
   font-weight: 400;
-  color: var(--color-gry);
+  color: var(--color-yellow);
   letter-spacing: .3em;
-  margin-bottom: 2em;
+  margin-bottom: .25em;
 }
 
 .interstitial {
@@ -95,25 +106,40 @@ h3 {
   align-items: center;
 }
 
-.interstitial h3 {
+.interstitial h4 {
   perspective: 200px;
   text-align: center;
   transform: perspective(200px);
   perspective-origin: center center;
 }
 
-h4 {
+h3 {
   font-family: ivypresto-headline, serif;
   font-weight: 400;
 }
 
 p, ul, li, a, ol {
-  font-size: clamp(1.33em, calc(1.33rem + (2.7 - 1.33) * ((100vw - 48em) / (120 - 48))), 2.7em);
+  font-size: clamp(1.33em, calc(1.33rem + (2.55 - 1.33) * ((100vw - 48em) / (120 - 48))), 2.55em);
   font-family: telegraf;
   font-style: normal;
-  letter-spacing: 0.003em;
+  letter-spacing: 0.005em;
   font-weight: 100;
-  line-height: 1.41em;
+  line-height: 1.52em;
+}
+
+a {
+  font-family: ivypresto-headline, serif;
+  font-weight: 400;
+  margin-top: .5em !important;
+  display: block;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: .04em;
+}
+
+a:visited {
+  color: white;
 }
 
 p {
@@ -162,19 +188,11 @@ main {
 }
 
 section:not(section.interstitial) {
-  display: flex;
-  justify-content: center;
   height: 100vh;
-  align-items: center;
 }
 
 section:not(section.interstitial).lefty {
   justify-content: flex-start;
-}
-
-section:not(section.interstitial) > div {
-  width: 90.2%;
-  max-width: 750px;
 }
 
 section#introPanel {
@@ -336,6 +354,11 @@ section#soundAsk h2 {
   height: 100vh;
 }
 
+.fullWidthPanel {
+  max-width: initial;
+  width: 100%;
+}
+
 .panelInnerLeft {
   align-self: flex-start;
   display: flex;
@@ -387,6 +410,53 @@ section#whatIsFolding #foldUnfoldSliderContainer #unfoldedContainer > div .unfol
   background: lightblue;
 }
 
+section#whyDoesFoldingMatter {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+}
+
+section#whyDoesFoldingMatter > div {
+  width: 90.2%;
+  max-width: 500px;
+}
+
+section#whyDoWeNeed {
+  position: relative;
+  padding: 12% 0 0 4.6%;
+  width: 100% !important;
+  background: var(--color-gry);
+  align-items: flex-start;
+  overflow: hidden;
+}
+
+section#whyDoWeNeed h2, section#whyDoWeNeed p, section#whyDoWeNeed h4 {
+  color: var(--color-dark);
+}
+
+section#whyDoWeNeed > div {
+  width: 90.2%;
+  max-width: 1050px;
+  display: flex;
+  justify-content: space-between;
+}
+
+section#whyDoWeNeed > div > div {
+  width: 90.2%;
+  max-width: 320px;
+}
+
+section#whyDoWeNeed h1#aminoNumbers {
+  position: absolute;
+  bottom: -9%;
+  left: 5%;
+  color: var(--color-yellow);
+  font-size: clamp(38em, calc(38rem + (86.8 - 38) * ((100vw - 48em) / (120 - 48))), 86.8em);
+  line-height: 1;
+  margin: 0;
+  z-index: -1;
+}
+
 section#numberOfUsersPanel {
   position: relative;
 }
@@ -423,42 +493,77 @@ section#numberOfUsersPanel img:last-child {
   right: .4%;
 }
 
-section#whyDoWeNeed {
-  position: relative;
-  padding-top: 12%;
-  width: 100% !important;
-  background: var(--color-gry);
-  align-items: flex-start;
-  overflow: hidden;
-}
-
-section#whyDoWeNeed h2, section#whyDoWeNeed p, section#whyDoWeNeed h3 {
-  color: var(--color-dark);
-}
-
-section#whyDoWeNeed > div {
-  width: 90.2%;
-  max-width: 1050px;
+section#helpingReduceCosts > div {
   display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
   justify-content: space-between;
 }
 
-section#whyDoWeNeed > div > div {
+section#helpingReduceCosts > div .headingContainer {
+  width: 100%;
+}
+
+section#howCanYouHelp {
+  display: block !important;
+  width: 90.2%;
+  max-width: 1350px;
+}
+
+section#howCanYouHelp #helpHeadingContainer {
+  display: flex;
+  width: 90.2%;
+  max-width: 500px;
+  justify-content: start;
+  margin-bottom: 5%;
+}
+
+section#howCanYouHelp #foldingProjectsContainer {
+  display: flex;
+  justify-content: flex-end;
+  column-gap: 4.6%;
+}
+
+section#howCanYouHelp #foldingProjectsContainer > div {
   width: 90.2%;
   max-width: 320px;
 }
 
-section#whyDoWeNeed h1#aminoNumbers {
-  position: absolute;
-  bottom: -9%;
-  left: 5%;
-  color: var(--color-yellow);
-  font-size: clamp(38em, calc(38rem + (86.8 - 38) * ((100vw - 48em) / (120 - 48))), 86.8em);
-  line-height: 1;
-  margin: 0;
-  z-index: -1;
+section#howCanYouHelp #foldingProjectsContainer > div h2 {
+  margin-bottom: .25em;
 }
 
 .splitLine {
   overflow: hidden;
+}
+
+@media only screen and (min-width: 480px) {
+  section#helpingReduceCosts > div {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  section#helpingReduceCosts > div .headingContainer {
+    flex-grow: 1;
+  }
+}
+
+@media only screen and (min-width: 769px) {
+  section#helpingReduceCosts > div {
+    column-gap: 4.6%;
+  }
+  section#helpingReduceCosts > div .headingContainer {
+    width: 50%;
+    max-width: 500px;
+    flex-grow: 1;
+  }
+  section#helpingReduceCosts > div > div:not(.headingContainer) {
+    width: 40%;
+    max-width: 500px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  blockquote {
+    width: 20px;
+  }
 }
