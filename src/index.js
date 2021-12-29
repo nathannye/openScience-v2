@@ -274,10 +274,12 @@ function createIntroOutTL() {
     );
 }
 
-let h3 = gsap.utils.toArray("section.interstitial h3");
+// let h4 = gsap.utils.toArray("section.interstitial h4");
+let h4 = document.querySelector("#whatDoProteins h4");
+
 let interstitialOne = document.querySelector("#whatDoProteins");
 
-h3.split = new SplitText(h3, {
+h4.split = new SplitText(h4, {
   type: "words",
 });
 
@@ -287,11 +289,12 @@ let firstInterstitial = gsap.timeline({
     end: "bottom top",
     trigger: interstitialOne,
     pin: true,
+    pinSpacing: true,
     scrub: 0.3,
   },
 });
 
-firstInterstitial.from(h3.split.words, {
+firstInterstitial.from(h4.split.words, {
   duration: 1.5,
   z: -33,
   autoAlpha: 0,
@@ -301,7 +304,7 @@ firstInterstitial.from(h3.split.words, {
     each: 0.052,
   },
 });
-firstInterstitial.to(h3.split.words, {
+firstInterstitial.to(h4.split.words, {
   duration: 1.5,
   z: -33,
   autoAlpha: 0,
