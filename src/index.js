@@ -5,6 +5,7 @@ import Draggable from "gsap/Draggable";
 import InertiaPlugin from "gsap/InertiaPlugin";
 import { random } from "gsap/gsap-core";
 import { create } from "combined-stream";
+import { stage } from "./js/nglScene";
 // import { GLTFLoader } from "three/examples/js/loaders/GLTFLoader";
 
 gsap.registerPlugin(scrollTrigger);
@@ -17,9 +18,14 @@ const blue = "#001f4e";
 const white = "white";
 let introPara = document.querySelector("#introPanel p");
 
-introPara.split = new SplitText(introPara, {
-  type: "lines, chars",
-});
+function setupIntroParaSplit() {
+  introPara.split = new SplitText(introPara, {
+    type: "lines, chars",
+  });
+}
+
+scrollTrigger.addEventListener("refresh", setupIntroParaSplit);
+setupIntroParaSplit();
 
 // Audio Control
 let soundOn = document.querySelector("#yesSoundContainer > button");
@@ -34,6 +40,7 @@ soundOn.addEventListener("click", (event) => {
 
 let soundButtons = gsap.utils.toArray("#soundButtons button");
 let body = document.querySelector("body");
+let content = document.querySelector("main");
 
 let titles = document.querySelectorAll("#introHeadingContainer h1");
 
@@ -45,16 +52,24 @@ let openScience = titles[1];
 let nglStage = document.querySelector("#viewport");
 let grain = document.querySelector("#grain");
 
+let navMarkers = gsap.utils.toArray(".navMarker");
+
+gsap.to(nglStage, {
+  scrollTrigger: {
+    trigger: content,
+    scrub: 0.5,
+    start: "top top",
+    end: "bottom bottom",
+  },
+  yPercent: -3.5,
+});
+
 gsap.set(grain, {
   opacity: 0,
 });
 
 gsap.set(nglStage, {
   opacity: 0,
-});
-
-gsap.set(body, {
-  overflow: "hidden",
 });
 
 openSource.split = new SplitText(openSource, {
@@ -66,21 +81,18 @@ openScience.split = new SplitText(openScience, {
 
 const titleTL = gsap.timeline({
   onComplete: function () {
-    gsap.to(body, {
-      overflowY: "scroll",
-    });
     createIntroOutTL();
   },
 });
 
 gsap.set(openSource.split.chars, {
   opacity: 0,
-  y: 40,
+  yPercent: 30,
   color: teal,
 });
 gsap.set(openScience.split.chars, {
   opacity: 0,
-  y: -45,
+  yPercent: -30,
   color: teal,
 });
 
@@ -92,7 +104,7 @@ titleTL
   .to(
     openSource.split.chars,
     {
-      y: 0,
+      yPercent: 0,
       opacity: 1,
       color: white,
       stagger: {
@@ -108,7 +120,7 @@ titleTL
   .to(
     openScience.split.chars,
     {
-      y: 0,
+      yPercent: 0,
       opacity: 1,
       color: ylw,
       stagger: {
@@ -150,6 +162,19 @@ titleTL
       duration: 1.25,
     },
     "start+=.3"
+  )
+  .from(
+    navMarkers,
+    {
+      stagger: 0.15,
+      scaleX: 0.5,
+      scaleY: 0.5,
+      duration: 0.46,
+      opacity: 0,
+      ease: "back.out(4.3)",
+      x: 10,
+    },
+    "start+=1.6"
   );
 
 // let audioAskTL = gsap.timeline({
@@ -221,7 +246,7 @@ function createIntroOutTL() {
       openSource.split.chars,
       {
         z: 22,
-        y: -13,
+        yPercent: -10,
         autoAlpha: 0,
         filter: "blur(3px)",
         rotateY: -4,
@@ -239,7 +264,7 @@ function createIntroOutTL() {
       openScience.split.chars,
       {
         z: -22,
-        y: 24,
+        yPercent: 14,
         autoAlpha: 0,
         ease: "power3.inOut",
         filter: "blur(6.6px)",
@@ -334,12 +359,9 @@ function setupFarAndAway() {
       },
       yPercent: 100,
       color: teal,
-      duration: 0.65,
-      ease: "power34.inOut",
-      stagger: {
-        each: 0.005,
-        ease: "power2.inOut",
-      },
+      duration: 1,
+      ease: "power3.inOut",
+      stagger: 0.0042,
     });
   });
 }
@@ -347,30 +369,30 @@ function setupFarAndAway() {
 scrollTrigger.addEventListener("refresh", setupFarAndAway);
 setupFarAndAway();
 
-document.addEventListener("DOMContentLoaded", (event) => {
-  let images = gsap.utils.toArray(".parallaxImage");
+// document.addEventListener("DOMContentLoaded", (event) => {
+//   let images = gsap.utils.toArray(".parallaxImage");
 
-  gsap.set(images, {
-    "clip-path": "polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)",
-    yPercent: -20,
-  });
+//   gsap.set(images, {
+//     "clip-path": "polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)",
+//     yPercent: -20,
+//   });
 
-  gsap.to(images, {
-    "clip-path": "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
-    yPercent: 0,
-    scrollTrigger: {
-      trigger: "#numberOfUsersPanel",
-      start: "top bottom-=17%",
-      markers: true,
-    },
-    stagger: {
-      each: 0.04,
-      from: "random",
-    },
-    duration: 0.76,
-    ease: "power3.inOut",
-  });
-});
+//   gsap.to(images, {
+//     "clip-path": "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
+//     yPercent: 0,
+//     scrollTrigger: {
+//       trigger: "#numberOfUsersPanel",
+//       start: "top bottom-=17%",
+//       markers: true,
+//     },
+//     stagger: {
+//       each: 0.04,
+//       from: "random",
+//     },
+//     duration: 0.76,
+//     ease: "power3.inOut",
+//   });
+// });
 
 // gsap.from(images[0], {
 //   scrollTrigger: {
@@ -417,7 +439,7 @@ let container = document.querySelector("#unfoldedContainer > div");
 Draggable.create(container, {
   bounds: "#unfoldedContainer",
   inertia: true,
-  type: "y",
+  type: "x",
   cursor: "drag",
 });
 
@@ -425,13 +447,66 @@ Draggable.create(container, {
 
 let paras = gsap.utils.toArray("p:not(#introPanel p)");
 
-function setupParas() {
-  paras.forEach((para) => {
-    para.split = new SplitText(para, {
-      type: "lines",
-    });
-  });
-}
+// function setupParas() {
+//   paras.forEach((para) => {
+//     para.split = new SplitText(para, {
+//       type: "lines",
+//     });
+//   });
+// }
 
-document.addEventListener("refresh", setupParas);
-setupParas();
+// document.addEventListener("refresh", setupParas);
+// setupParas();
+
+// Nav Markers Animations
+
+let navEntry = gsap.utils.toArray("nav > div > a");
+let navDots = gsap.utils.toArray(".navMarker");
+
+navEntry.forEach((entry) => {
+  let entryTL = gsap.timeline({
+    paused: true,
+  });
+
+  let entryLabel = entry.querySelector("p");
+  entryLabel.split = new SplitText(entryLabel, {
+    type: "chars, lines",
+  });
+
+  entryTL
+    .to(
+      entry.querySelector(".navMarker"),
+      {
+        x: "-.5rem",
+        duration: 0.29,
+        ease: "power3.inOut",
+      },
+      "hover"
+    )
+    // .from(entryLabel.split.chars, {
+    //   color: teal,
+    //   duration: 0.25,
+    //   stagger: 0.1,
+    // })
+    .from(
+      entryLabel.split.lines,
+      {
+        autoAlpha: 0,
+        x: "-.5rem",
+        ease: "power2.inOut",
+        duration: 0.33,
+        stagger: {
+          each: ".04",
+          from: "end",
+        },
+      },
+      "hover"
+    );
+
+  entry.addEventListener("mouseover", (event) => {
+    entryTL.play();
+  });
+  entry.addEventListener("mouseout", (event) => {
+    entryTL.reverse();
+  });
+});

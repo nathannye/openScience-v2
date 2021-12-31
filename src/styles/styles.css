@@ -19,7 +19,7 @@
   --color-gry: #EEEEEE;
   --color-teal: #13f1df;
   --color-white: white;
-  --shadow-color: #77B4E7;
+  --shadow-color: #3171a5;
   box-sizing: border-box;
 }
 
@@ -38,13 +38,17 @@ h1, h2, h3, h4, h5, h6, p, ul, li, a {
   padding: 0;
 }
 
-a:visited {
-  color: var(--color-white);
+h1 > div, h2 > div, h3 > div, h4 > div, h5 > div, h6 > div, p > div {
+  will-change: transform, opacity, position, color, visibility;
+}
+
+a:visited, a.externalLink:visited {
+  color: var(--color-white) !important;
   opacity: .4 !important;
 }
 
 h1 {
-  font-size: clamp(2.7em, calc(2.7rem + (16.8 - 2.7) * ((100vw - 48em) / (120 - 48))), 16.8em);
+  font-size: clamp(3.2em, calc(3.2rem + (21.8 - 3.2) * ((100vw - 48em) / (120 - 48))), 21.8em);
   font-family: telegraf;
   font-style: normal;
   line-height: 1.02;
@@ -65,7 +69,7 @@ h2 {
   font-weight: 400;
   font-size: clamp(2.9em, calc(2.9rem + (6.5 - 2.9) * ((100vw - 48rem) / (120 - 48))), 6.5em);
   line-height: 1.23;
-  letter-spacing: 0;
+  letter-spacing: .02em;
   margin-bottom: 0.25em;
 }
 
@@ -92,12 +96,12 @@ h4 {
   font-family: telegraf;
   font-style: normal;
   text-transform: uppercase;
-  font-size: clamp(1.4em, calc(1.4rem + (1.8 - 1.4) * ((100vw - 48em) / (120 - 48))), 1.8em);
+  font-size: clamp(1.17em, calc(1.2rem + (1.9 - 1.17) * ((100vw - 48em) / (120 - 48))), 1.9em);
   line-height: 1.57;
   font-weight: 400;
   color: var(--color-yellow);
   letter-spacing: .3em;
-  margin-bottom: .25em;
+  margin-bottom: .5em;
 }
 
 .interstitial {
@@ -119,18 +123,24 @@ h3 {
 }
 
 p, ul, li, a, ol {
-  font-size: clamp(1.33em, calc(1.33rem + (2.55 - 1.33) * ((100vw - 48em) / (120 - 48))), 2.55em);
+  font-size: clamp(1.33em, calc(1.33rem + (2.85 - 1.33) * ((100vw - 48em) / (120 - 48))), 2.85em);
   font-family: telegraf;
   font-style: normal;
   letter-spacing: 0.005em;
+  text-rendering: optimizeLegibility;
   font-weight: 100;
-  line-height: 1.52em;
+  line-height: 1.52;
+}
+
+cite > a, a.externalLink {
+  margin-top: 1.25em;
+  border-bottom: 1px solid white;
+  display: inline-block;
 }
 
 a {
   font-family: ivypresto-headline, serif;
   font-weight: 400;
-  margin-top: .5em !important;
   display: block;
   font-size: 1.3rem;
   text-transform: uppercase;
@@ -176,11 +186,49 @@ button:hover {
 
 nav {
   position: fixed;
-  right: 0;
-  top: 50%;
-  background: #000;
-  height: 50px;
-  width: 100px;
+  right: 3rem;
+  display: none;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 35;
+}
+
+nav a {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+nav a p {
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  font-style: inherit;
+  margin-right: 1em;
+  color: white;
+}
+
+nav a div.navMarker {
+  display: block;
+  width: 8px;
+  margin-left: 1.25rem;
+  border-radius: 16px;
+  height: 8px;
+  background: var(--color-teal);
+  box-shadow: 0px 0px 9px var(--shadow-color);
+}
+
+.jumpTo {
+  width: 1px;
+  position: absolute;
+  top: -25%;
+  visibility: hidden;
+}
+
+#introPanel .jumpTo {
+  top: -100%;
 }
 
 main {
@@ -199,7 +247,11 @@ section#introPanel {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 15%;
+  padding-top: 17vh;
+}
+
+section#introPanel #introHeadingContainer {
+  transform: translateX(calc(-26% /4));
 }
 
 section#introPanel #introHeadingContainer h1, section#introPanel #introHeadingContainer h1 > em {
@@ -225,7 +277,7 @@ section#introPanel #introHeadingContainer > div:last-child {
 
 section#introPanel #introHeadingContainer > div:last-child p {
   max-width: 250px;
-  margin-top: 4em;
+  margin-top: 3em;
 }
 
 @keyframes grain {
@@ -349,14 +401,13 @@ section#soundAsk h2 {
   display: block;
   width: 100%;
   width: 90.2%;
-  max-width: 1050px;
+  max-width: 1750px;
   margin: 0 auto;
-  height: 100vh;
 }
 
 .fullWidthPanel {
   max-width: initial;
-  width: 100%;
+  width: 100vw;
 }
 
 .panelInnerLeft {
@@ -364,61 +415,56 @@ section#soundAsk h2 {
   display: flex;
 }
 
-section#whatIsFolding > div > div {
+section#whatIsFolding {
+  display: flex;
   width: 90.2%;
-  max-width: 320px;
+  max-width: 1750px;
+  flex-wrap: wrap;
 }
 
-section#whatIsFolding > div > p {
+section#whatIsFolding .panelInnerLimit {
+  width: 100%;
+}
+
+section#whatIsFolding .panelInnerLimit > div {
   width: 90.2%;
-  max-width: 320px;
-  margin-top: 30%;
+  max-width: 550px;
+}
+
+section#whatIsFolding .panelInnerLimit p {
+  width: 90.2%;
+  max-width: 550px;
 }
 
 section#whatIsFolding #foldUnfoldSliderContainer {
-  background: red;
   overflow: hidden;
-  height: 100vh;
-  width: 60%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-section#whatIsFolding #foldUnfoldSliderContainer #foldedContainer {
-  width: 40%;
-  height: 40%;
-  max-height: 400px;
-  background: green;
-}
-
 section#whatIsFolding #foldUnfoldSliderContainer #unfoldedContainer {
-  height: calc(100% + 400px);
-  background: blue;
+  width: 100%;
+  height: 350px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   overflow: hidden;
 }
 
 section#whatIsFolding #foldUnfoldSliderContainer #unfoldedContainer > div {
-  max-height: calc(100% - 400px);
-  display: grid;
+  display: flex;
 }
 
 section#whatIsFolding #foldUnfoldSliderContainer #unfoldedContainer > div .unfoldedProtein {
-  width: 100%;
+  width: 200px;
   height: 200px;
-  border: teal solid 6px;
+  margin-left: 20px;
   background: lightblue;
 }
 
 section#whyDoesFoldingMatter {
-  display: flex;
-  align-items: flex-end;
-  flex-direction: column;
-}
-
-section#whyDoesFoldingMatter > div {
-  width: 90.2%;
-  max-width: 500px;
+  align-items: flex-start;
 }
 
 section#whyDoWeNeed {
@@ -434,16 +480,17 @@ section#whyDoWeNeed h2, section#whyDoWeNeed p, section#whyDoWeNeed h4 {
   color: var(--color-dark);
 }
 
-section#whyDoWeNeed > div {
-  width: 90.2%;
-  max-width: 1050px;
-  display: flex;
-  justify-content: space-between;
-}
-
 section#whyDoWeNeed > div > div {
   width: 90.2%;
-  max-width: 320px;
+  max-width: 850px;
+  display: flex;
+  column-gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+section#whyDoWeNeed > div > div h2, section#whyDoWeNeed > div > div div {
+  width: 48%;
+  min-width: 300px;
 }
 
 section#whyDoWeNeed h1#aminoNumbers {
@@ -493,6 +540,20 @@ section#numberOfUsersPanel img:last-child {
   right: .4%;
 }
 
+section#chartOfUsers {
+  width: 100%;
+  height: 100%;
+}
+
+section#chartOfUsers svg#barGraph {
+  width: 600px;
+  height: 600px;
+}
+
+.bar {
+  fill: red;
+}
+
 section#helpingReduceCosts > div {
   display: flex;
   flex-direction: row-reverse;
@@ -507,13 +568,13 @@ section#helpingReduceCosts > div .headingContainer {
 section#howCanYouHelp {
   display: block !important;
   width: 90.2%;
-  max-width: 1350px;
+  max-width: 1250px;
 }
 
 section#howCanYouHelp #helpHeadingContainer {
   display: flex;
   width: 90.2%;
-  max-width: 500px;
+  max-width: 550px;
   justify-content: start;
   margin-bottom: 5%;
 }
@@ -526,7 +587,7 @@ section#howCanYouHelp #foldingProjectsContainer {
 
 section#howCanYouHelp #foldingProjectsContainer > div {
   width: 90.2%;
-  max-width: 320px;
+  max-width: 350px;
 }
 
 section#howCanYouHelp #foldingProjectsContainer > div h2 {
@@ -538,6 +599,23 @@ section#howCanYouHelp #foldingProjectsContainer > div h2 {
 }
 
 @media only screen and (min-width: 480px) {
+  section#whatIsFolding .panelInnerLimit > div, section#whatIsFolding .panelInnerLimit > p {
+    width: 90.2%;
+    max-width: 550px;
+  }
+  nav {
+    display: flex;
+  }
+  section#whyDoesFoldingMatter {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    justify-content: center;
+  }
+  section#whyDoesFoldingMatter > div {
+    width: 90.2%;
+    max-width: 550px;
+  }
   section#helpingReduceCosts > div {
     width: 100%;
     justify-content: flex-end;
