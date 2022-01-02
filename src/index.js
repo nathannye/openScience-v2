@@ -1,14 +1,12 @@
 import gsap from "gsap";
 import SplitText from "gsap/SplitText";
-import scrollTrigger from "gsap/ScrollTrigger";
+import ScrollTrigger from "gsap/ScrollTrigger";
 import Draggable from "gsap/Draggable";
 import InertiaPlugin from "gsap/InertiaPlugin";
 import { random } from "gsap/gsap-core";
-import { create } from "combined-stream";
 import { stage } from "./js/nglScene";
-// import { GLTFLoader } from "three/examples/js/loaders/GLTFLoader";
 
-gsap.registerPlugin(scrollTrigger);
+gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(SplitText);
 gsap.registerPlugin(Draggable);
 
@@ -24,22 +22,22 @@ function setupIntroParaSplit() {
   });
 }
 
-scrollTrigger.addEventListener("refresh", setupIntroParaSplit);
+ScrollTrigger.addEventListener("refresh", setupIntroParaSplit);
 setupIntroParaSplit();
 
 // Audio Control
 let soundOn = document.querySelector("#yesSoundContainer > button");
 let soundOff = document.querySelector("#noSoundContainer > button");
-let soundtrack = document.querySelector("audio");
+const soundtrack = document.querySelector("audio");
 
 soundtrack.currentTime = 0;
 
 soundOn.addEventListener("click", (event) => {
   soundtrack.play();
+  var sound = true;
 });
 
 let soundButtons = gsap.utils.toArray("#soundButtons button");
-let body = document.querySelector("body");
 let content = document.querySelector("main");
 
 let titles = document.querySelectorAll("#introHeadingContainer h1");
@@ -51,7 +49,7 @@ let openScience = titles[1];
 
 let nglStage = document.querySelector("#viewport");
 let grain = document.querySelector("#grain");
-
+let html = document.querySelector("html");
 let navMarkers = gsap.utils.toArray(".navMarker");
 
 gsap.to(nglStage, {
@@ -79,9 +77,15 @@ openScience.split = new SplitText(openScience, {
   type: "chars",
 });
 
+gsap.set(html, {
+  overflowY: "hidden",
+});
+
 const titleTL = gsap.timeline({
   onComplete: function () {
     createIntroOutTL();
+    titleTL.invalidate();
+    titleTL.kill();
   },
 });
 
@@ -166,16 +170,18 @@ titleTL
   .from(
     navMarkers,
     {
-      stagger: 0.15,
-      scaleX: 0.5,
-      scaleY: 0.5,
-      duration: 0.46,
-      opacity: 0,
-      ease: "back.out(4.3)",
-      x: 10,
+      stagger: ".1",
+      scale: 0.75,
+      duration: 0.66,
+      autoAlpha: 0,
+      ease: "back.out(1.3)",
+      x: 17,
     },
     "start+=1.6"
-  );
+  )
+  .to(html, {
+    overflowY: "auto",
+  });
 
 // let audioAskTL = gsap.timeline({
 //   paused: true,
@@ -354,7 +360,7 @@ function setupFarAndAway() {
       scrollTrigger: {
         trigger: e,
         start: "top bottom-=24%",
-        markers: true,
+        // markers: true,
         toggleActions: "restart none none reverse",
       },
       yPercent: 100,
@@ -366,7 +372,7 @@ function setupFarAndAway() {
   });
 }
 
-scrollTrigger.addEventListener("refresh", setupFarAndAway);
+ScrollTrigger.addEventListener("refresh", setupFarAndAway);
 setupFarAndAway();
 
 // document.addEventListener("DOMContentLoaded", (event) => {
@@ -444,7 +450,6 @@ Draggable.create(container, {
 });
 
 // Paragraphs anim
-
 let paras = gsap.utils.toArray("p:not(#introPanel p)");
 
 // function setupParas() {
@@ -462,6 +467,32 @@ let paras = gsap.utils.toArray("p:not(#introPanel p)");
 
 let navEntry = gsap.utils.toArray("nav > div > a");
 let navDots = gsap.utils.toArray(".navMarker");
+let sections = gsap.utils.toArray("section.contentPanel");
+
+document.addEventListener("DOMContentLoaded", (event) => {
+  for (let i = 0; i < sections.length; i++) {
+    let tl = gsap.timeline({
+      scrollTrigger: {
+        start: "top bottom-=4%",
+        end: "bottom bottom-=12%",
+        markers: true,
+        trigger: sections[i],
+        onEnter: () => {
+          navDots[i].classList.add("activeNav");
+        },
+        onLeave: () => {
+          navDots[i].classList.remove("activeNav");
+        },
+        onEnterBack: () => {
+          navDots[i].classList.add("activeNav");
+        },
+        onLeaveBack: () => {
+          navDots[i].classList.remove("activeNav");
+        },
+      },
+    });
+  }
+});
 
 navEntry.forEach((entry) => {
   let entryTL = gsap.timeline({
@@ -509,4 +540,69 @@ navEntry.forEach((entry) => {
   entry.addEventListener("mouseout", (event) => {
     entryTL.reverse();
   });
+});
+
+// Sound Indicator Animations + Toggle
+
+let soundIndi = document.querySelector("div#soundIndicatorContainer");
+
+let soundLabel = gsap.utils.toArray("div#soundLabelSwitch > div > h5");
+
+let labelOn = soundLabel[0];
+let labelOff = soundLabel[1];
+
+labelOn.split = new SplitText(labelOn, {
+  type: "chars",
+});
+labelOff.split = new SplitText(labelOff, {
+  type: "chars",
+});
+
+let labelTL = gsap.timeline({
+  paused: true,
+});
+
+labelTL
+  .to(
+    labelOn.split.chars,
+    {
+      yPercent: -100,
+      duration: 0.37,
+      ease: "power2.inOut",
+      stagger: 0.05,
+    },
+    "start"
+  )
+  .to(
+    labelOff.split.chars,
+    {
+      yPercent: -100,
+      delay: 0.2,
+      duration: 0.37,
+      ease: "power2.inOut",
+      stagger: 0.05,
+    },
+    "start"
+  );
+
+soundIndi.addEventListener("click", (event) => {
+  console.log(soundtrack.paused);
+  if (soundtrack.paused == true) {
+    labelTL.play();
+
+    gsap.from(soundtrack, {
+      volume: 0,
+      duration: 2,
+    });
+    soundtrack.play();
+  } else if (soundtrack.paused == false) {
+    labelTL.reverse();
+    gsap.to(soundtrack, {
+      volume: 0,
+      duration: 2,
+      onComplete: function () {
+        soundtrack.pause();
+      },
+    });
+  }
 });
