@@ -171,13 +171,13 @@ titleTL
     navMarkers,
     {
       stagger: ".1",
-      scale: 0.75,
+      scale: 0.64,
       duration: 0.66,
       autoAlpha: 0,
       ease: "back.out(1.3)",
       x: 17,
     },
-    "start+=1.6"
+    "start+=.6"
   )
   .to(html, {
     overflowY: "auto",

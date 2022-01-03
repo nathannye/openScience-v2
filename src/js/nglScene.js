@@ -26,14 +26,28 @@ window.addEventListener(
   },
   false
 );
+
 // Load PDB entry 1CRN
 stage
   .loadFile("rcsb://5R81.cif", {
     assembly: "AU1",
   })
   .then((comp) => {
-    comp.addRepresentation("cartoon", {
+    comp.addRepresentation("backbone", {
       colorScheme: "residueindex",
     });
     stage.autoView();
   });
+
+// var cartoonStage = new NGL.Stage("cartoonStage");
+
+// cartoonStage
+//   .loadFile("rcsb://5R81.cif", {
+//     assembly: "AU1",
+//   })
+//   .then((comp) => {
+//     comp.addRepresentation("cartoon", {
+//       colorScheme: "residueindex",
+//     });
+//     stage.autoView();
+//   });
