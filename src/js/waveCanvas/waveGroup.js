@@ -6,7 +6,7 @@ export class WaveGroup {
     // Animate # of points for a saw?
     this.totalPoints = 17;
 
-    this.color = ["#ebd664"];
+    this.color = ["#FFE65C"];
 
     this.waves = [];
 

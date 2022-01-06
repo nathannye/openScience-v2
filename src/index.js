@@ -1,17 +1,15 @@
 import gsap from "gsap";
 import SplitText from "gsap/SplitText";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import Draggable from "gsap/Draggable";
 import InertiaPlugin from "gsap/InertiaPlugin";
 import { random } from "gsap/gsap-core";
 import { stage } from "./js/nglScene";
 
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(SplitText);
-gsap.registerPlugin(Draggable);
 
 const teal = "#13f1df";
-const ylw = "#ebd664";
+const ylw = "#FFE65C";
 const blue = "#001f4e";
 const white = "white";
 let introPara = document.querySelector("#introPanel p");
@@ -440,15 +438,6 @@ setupFarAndAway();
 //   yPercent: 87,
 // });
 
-let container = document.querySelector("#unfoldedContainer > div");
-
-Draggable.create(container, {
-  bounds: "#unfoldedContainer",
-  inertia: true,
-  type: "x",
-  cursor: "drag",
-});
-
 // Paragraphs anim
 let paras = gsap.utils.toArray("p:not(#introPanel p)");
 
@@ -606,3 +595,5 @@ soundIndi.addEventListener("click", (event) => {
     });
   }
 });
+
+// What is Folding Animation

@@ -1,11 +1,10 @@
 import { WaveGroup } from "./waveGroup";
-// import { Point } from "./point";
-// import gsap from "gsap/all";
+
+let waveContainer = document.querySelector("#soundIndicatorContainer");
 
 class App {
   constructor() {
     this.container = document.querySelector("#soundIndicatorContainer");
-    document.body.appendChild(this.container);
 
     this.canvas = document.createElement("canvas");
     this.canvas.setAttribute("id", "soundIndicator");

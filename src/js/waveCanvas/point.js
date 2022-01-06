@@ -1,6 +1,3 @@
-import { App } from "./app";
-import gsap from "gsap";
-
 export class Point {
   constructor(index, x, y) {
     this.x = x;

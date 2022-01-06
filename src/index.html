@@ -116,19 +116,7 @@
             specific protein does, or how it does it.
           </p>
         </div>
-        <div id="foldUnfoldSliderContainer">
-          <div id="foldedContainer"></div>
-          <div id="unfoldedContainer">
-            <div>
-              <div class="unfoldedProtein"></div>
-              <div class="unfoldedProtein"></div>
-              <div class="unfoldedProtein"></div>
-              <div class="unfoldedProtein"></div>
-              <div class="unfoldedProtein"></div>
-              <div class="unfoldedProtein"></div>
-            </div>
-          </div>
-        </div>
+        <div id="peptideAnimationContainer"></div>
       </section>
       <section class="panel contentPanel" id="whyDoesFoldingMatter">
         <a id="whyDoesFoldingMatterRef" class="jumpTo"></a>
@@ -213,7 +201,7 @@
         />
       </section>
       <section class="panel" id="chartOfUsers">
-        <svg id="barGraph"></svg>
+        <div id="barChartContainer"></div>
       </section>
       <!-- <section class="panel">
         <div>
@@ -324,8 +312,11 @@
       </section>
     </main>
     <script type="module" src="./js/nglScene.js"></script>
-    <script type="module" src="./js/barGraph.js"></script>
+    <!-- <script type="module" src="./js/barGraph.js"></script> -->
+    <script type="module" src="./js/barChart.js"></script>
+    <!-- <script type="module" src="./js/threeScenes.js"></script> -->
     <script type="module" src="./js/waveCanvas/app.js"></script>
+
     <script src="./index.js" type="module"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/ngl/2.0.0-dev.39/ngl.js"

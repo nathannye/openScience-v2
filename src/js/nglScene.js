@@ -33,7 +33,7 @@ stage
     assembly: "AU1",
   })
   .then((comp) => {
-    comp.addRepresentation("backbone", {
+    comp.addRepresentation("cartoon", {
       colorScheme: "residueindex",
     });
     stage.autoView();

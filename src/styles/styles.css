@@ -15,7 +15,7 @@
 * {
   --color-blue: #001F4E;
   --color-dark: #030b18;
-  --color-yellow: #ebd664;
+  --color-yellow: #FFE65C;
   --color-gry: #EEEEEE;
   --color-teal: #13f1df;
   --color-white: white;
@@ -462,6 +462,7 @@ section#whatIsFolding {
   display: flex;
   width: 90.2%;
   max-width: 1750px;
+  align-items: center;
   flex-wrap: wrap;
 }
 
@@ -477,33 +478,6 @@ section#whatIsFolding .panelInnerLimit > div {
 section#whatIsFolding .panelInnerLimit p {
   width: 90.2%;
   max-width: 550px;
-}
-
-section#whatIsFolding #foldUnfoldSliderContainer {
-  overflow: hidden;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-section#whatIsFolding #foldUnfoldSliderContainer #unfoldedContainer {
-  width: 100%;
-  height: 350px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  overflow: hidden;
-}
-
-section#whatIsFolding #foldUnfoldSliderContainer #unfoldedContainer > div {
-  display: flex;
-}
-
-section#whatIsFolding #foldUnfoldSliderContainer #unfoldedContainer > div .unfoldedProtein {
-  width: 200px;
-  height: 200px;
-  margin-left: 20px;
-  background: lightblue;
 }
 
 section#whyDoesFoldingMatter {
@@ -588,13 +562,8 @@ section#chartOfUsers {
   height: 100%;
 }
 
-section#chartOfUsers svg#barGraph {
-  width: 600px;
-  height: 600px;
-}
-
-.bar {
-  fill: red;
+#barChartContainer svg {
+  overflow: visible;
 }
 
 section#helpingReduceCosts > div {

@@ -54,7 +54,7 @@ $boundary: 90.2%
 *
 	--color-blue: #001F4E
 	--color-dark: #030b18
-	--color-yellow: #ebd664
+	--color-yellow: #FFE65C
 	--color-gry: #EEEEEE
 	--color-teal:#13f1df
 	--color-white: white
@@ -442,6 +442,7 @@ section#soundAsk
 section#whatIsFolding
 	display: flex
 	@include maxWidthXL
+	align-items: center
 	flex-wrap: wrap
 
 	.panelInnerLimit
@@ -453,38 +454,8 @@ section#whatIsFolding
 		p
 			@include maxWidthS
 		
-	#foldUnfoldSliderContainer
-		overflow: hidden
-		display: flex
-		justify-content: space-between
-		align-items: center
+	#peptideAnimationContainer
 
-		// #foldedContainer
-		// 	// width: 40%
-		// 	width: 350px
-		// 	// height: 40%
-		// 	height: 500px
-		// 	background: rgba(19,241,223, .8)
-
-		#unfoldedContainer
-			width: 100%
-			height: 350px
-			// background: blue
-			display: flex
-			flex-direction: row
-			justify-content: center
-			overflow: hidden
-
-			& > div
-				// max-height: calc(100% - 400px)
-				// margin-bottom: 400px
-				display: flex
-
-				.unfoldedProtein
-					width: 200px
-					height: 200px
-					margin-left: 20px
-					background: lightblue
 
 section#whyDoesFoldingMatter
 	align-items: flex-start
@@ -555,12 +526,8 @@ section#chartOfUsers
 	width: 100%
 	height: 100%
 
-	svg#barGraph
-		width: 600px
-		height: 600px
-
-.bar
-	fill: red
+#barChartContainer svg
+	overflow: visible
 
 section#helpingReduceCosts
 	
