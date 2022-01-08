@@ -6,10 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Open source, Open science</title>
     <link rel="stylesheet" href="./styles/styles.min.css" />
+    <link rel="preconnect" href="https://use.typekit.net" />
     <link rel="stylesheet" href="https://use.typekit.net/jih6lvv.css" />
   </head>
   <body>
-    <audio src="./audio/ambientSoundtrack.mp3" type="audio/mpeg" paused></audio>
+    <!-- <audio id="normalSoundtrack" src="./audio/ambientSoundtrack.mp3" type="audio/mpeg" paused></audio>
+    <audio id="darkSoundtrack" src="./audio/darkSoundtrack.mp3" type="audio/mpeg" paused></audio> -->
     <div id="scrollIndicator">
       <div></div>
       <h4></h4>
@@ -18,8 +20,8 @@
       <div id="soundLabelSwitch">
         <h5>sound</h5>
         <div>
-          <h5>on</h5>
           <h5>off</h5>
+          <h5>on</h5>
         </div>
       </div>
     </div>
@@ -118,6 +120,7 @@
         </div>
         <div id="peptideAnimationContainer"></div>
       </section>
+
       <section class="panel contentPanel" id="whyDoesFoldingMatter">
         <a id="whyDoesFoldingMatterRef" class="jumpTo"></a>
         <div>
@@ -137,7 +140,9 @@
             <cite><a href="">Courtesy: Harvard.edu</a></cite>
           </div>
         </div>
+        <div class="dangerCloud"></div>
       </section>
+
       <section class="panel contentPanel fullWidthPanel" id="whyDoWeNeed">
         <a id="whyDoWeNeedRef" class="jumpTo"></a>
         <div>
@@ -166,10 +171,7 @@
         <div>
           <div>
             <h2>
-              <em
-                >Folding@Home amassed over 1.2 million users during
-                COVID-19.</em
-              >
+              Folding@Home amassed over 1.2 million users during COVID-19.
               Together, all of these machines were faster than the world's nine
               fastest supercomputers. Combined.
             </h2>
@@ -181,20 +183,24 @@
         </div>
         <img
           class="parallaxImage"
+          id="laxOne"
           src="./img/gpuRig.webp"
           alt="Computer with graphics cards"
         />
         <img
+          id="laxTwo"
           class="parallaxImage"
           src="./img/manInChair.webp"
           alt="Man smiling with computer"
         />
         <img
+          id="laxThree"
           class="parallaxImage"
           src="./img/rowsOfComputers.webp"
           alt="Room of red computers"
         />
         <img
+          id="laxFour"
           class="parallaxImage"
           src="./img/pointingAtComputer.webp"
           alt="Man pointing at computer"
@@ -202,6 +208,8 @@
       </section>
       <section class="panel" id="chartOfUsers">
         <div id="barChartContainer"></div>
+        <!-- jump here -->
+        <div id="barv2"></div>
       </section>
       <!-- <section class="panel">
         <div>
@@ -312,12 +320,14 @@
       </section>
     </main>
     <script type="module" src="./js/nglScene.js"></script>
+    <script src="./js/soundToggle.js"></script>
+    <script src="./js/barGraphDiv.js"></script>
     <!-- <script type="module" src="./js/barGraph.js"></script> -->
-    <script type="module" src="./js/barChart.js"></script>
+    <!-- <script type="module" src="./js/barChart.js"></script> -->
     <!-- <script type="module" src="./js/threeScenes.js"></script> -->
     <script type="module" src="./js/waveCanvas/app.js"></script>
 
-    <script src="./index.js" type="module"></script>
+    <!-- <script src="./index.js" type="module"></script> -->
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/ngl/2.0.0-dev.39/ngl.js"
       integrity="sha512-L4e1Z9pbAAsBXDzbcitJzkcRIHq6PUF/6GSR5UbA38XiaQ3TAS3422wJ5DllYOlwkpKUXInFt1b+C06NDvtmTg=="

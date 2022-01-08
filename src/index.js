@@ -11,6 +11,7 @@ gsap.registerPlugin(SplitText);
 const teal = "#13f1df";
 const ylw = "#FFE65C";
 const blue = "#001f4e";
+const red = "#e32121";
 const white = "white";
 let introPara = document.querySelector("#introPanel p");
 
@@ -50,15 +51,15 @@ let grain = document.querySelector("#grain");
 let html = document.querySelector("html");
 let navMarkers = gsap.utils.toArray(".navMarker");
 
-gsap.to(nglStage, {
-  scrollTrigger: {
-    trigger: content,
-    scrub: 0.5,
-    start: "top top",
-    end: "bottom bottom",
-  },
-  yPercent: -3.5,
-});
+// gsap.to(nglStage, {
+//   scrollTrigger: {
+//     trigger: content,
+//     scrub: 0.5,
+//     start: "top top",
+//     end: "bottom bottom",
+//   },
+//   yPercent: -3.5,
+// });
 
 gsap.set(grain, {
   opacity: 0,
@@ -173,7 +174,6 @@ titleTL
       duration: 0.66,
       autoAlpha: 0,
       ease: "back.out(1.3)",
-      x: 17,
     },
     "start+=.6"
   )
@@ -229,8 +229,6 @@ soundButtons.forEach((button) => {
   });
 });
 
-// Image section
-
 function createIntroOutTL() {
   let introOutTL = gsap.timeline({
     scrollTrigger: {
@@ -242,6 +240,7 @@ function createIntroOutTL() {
       paused: true,
       onComplete: function () {
         createFirstInterstitial();
+        trigger();
       },
     },
   });
@@ -314,12 +313,10 @@ h4.split = new SplitText(h4, {
 
 let firstInterstitial = gsap.timeline({
   scrollTrigger: {
-    start: "top top",
+    start: "top centerq",
     end: "bottom top",
     trigger: interstitialOne,
-    pin: true,
-    pinSpacing: true,
-    scrub: 0.3,
+    pin: interstitialOne,
   },
 });
 
@@ -328,15 +325,6 @@ firstInterstitial.from(h4.split.words, {
   z: -33,
   autoAlpha: 0,
   ease: "power4.out",
-  stagger: {
-    from: "edges",
-    each: 0.052,
-  },
-});
-firstInterstitial.to(h4.split.words, {
-  duration: 1.5,
-  z: -33,
-  autoAlpha: 0,
   stagger: {
     from: "edges",
     each: 0.052,
@@ -503,11 +491,6 @@ navEntry.forEach((entry) => {
       },
       "hover"
     )
-    // .from(entryLabel.split.chars, {
-    //   color: teal,
-    //   duration: 0.25,
-    //   stagger: 0.1,
-    // })
     .from(
       entryLabel.split.lines,
       {
@@ -533,67 +516,67 @@ navEntry.forEach((entry) => {
 
 // Sound Indicator Animations + Toggle
 
-let soundIndi = document.querySelector("div#soundIndicatorContainer");
+// Image section
 
-let soundLabel = gsap.utils.toArray("div#soundLabelSwitch > div > h5");
+let images = gsap.utils.toArray("img.parallaxImage");
+let imgTrigger = document.querySelector("#numberOfUsersPanel");
 
-let labelOn = soundLabel[0];
-let labelOff = soundLabel[1];
-
-labelOn.split = new SplitText(labelOn, {
-  type: "chars",
-});
-labelOff.split = new SplitText(labelOff, {
-  type: "chars",
+gsap.set(images, {
+  clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)",
+  yPercent: 11,
 });
 
-let labelTL = gsap.timeline({
-  paused: true,
+gsap.to(images, {
+  scrollTrigger: {
+    start: "top top",
+    trigger: imgTrigger,
+  },
+  duration: 1.1,
+  yPercent: 0,
+  ease: "power3.inOut",
+  clipPath: "polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)",
+  stagger: 0.17,
 });
 
-labelTL
-  .to(
-    labelOn.split.chars,
-    {
-      yPercent: -100,
-      duration: 0.37,
-      ease: "power2.inOut",
-      stagger: 0.05,
-    },
-    "start"
-  )
-  .to(
-    labelOff.split.chars,
-    {
-      yPercent: -100,
-      delay: 0.2,
-      duration: 0.37,
-      ease: "power2.inOut",
-      stagger: 0.05,
-    },
-    "start"
-  );
+document.addEventListener("DOMContentLoaded", (event) => {
+  let dangerArea = document.getElementById("whyDoesFoldingMatter");
+  let danger = gsap.utils.toArray(".dangerCloud");
 
-soundIndi.addEventListener("click", (event) => {
-  console.log(soundtrack.paused);
-  if (soundtrack.paused == true) {
-    labelTL.play();
+  console.log(dangerArea);
 
-    gsap.from(soundtrack, {
-      volume: 0,
-      duration: 2,
-    });
-    soundtrack.play();
-  } else if (soundtrack.paused == false) {
-    labelTL.reverse();
-    gsap.to(soundtrack, {
-      volume: 0,
-      duration: 2,
-      onComplete: function () {
-        soundtrack.pause();
+  let wdfmTL = gsap.timeline({
+    paused: true,
+    scrollTrigger: {
+      start: "top center",
+      trigger: dangerArea,
+      markers: true,
+      onEnter: () => {
+        wdfmTL.play();
       },
-    });
-  }
-});
+      onLeave: () => {
+        wdfmTL.reverse();
+      },
+      onEnterBack: () => {
+        wdfmTL.reverse();
+      },
+      onLeaveBack: () => {
+        wdfmTL.play();
+      },
+    },
+  });
 
-// What is Folding Animation
+  wdfmTL
+    .to(html, {
+      background: "#e32121",
+      duration: 2,
+    })
+    .to(nglStage, {
+      filter: "blur(13px)",
+      duration: 4.5,
+      ease: "power2.i nOut",
+    })
+    .from(danger, {
+      autoAlpha: 0,
+      duration: 2,
+    });
+});

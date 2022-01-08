@@ -5,6 +5,7 @@
     "d3": "^7.1.1",
     "examples": "^0.1.0",
     "gsap": "npm:@gsap/shockingly@^3.8.0",
+    "howler": "^2.2.3",
     "jsm": "^0.0.1",
     "ngl": "^0.10.4",
     "regenerator-runtime": "^0.13.9",

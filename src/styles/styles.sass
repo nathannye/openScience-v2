@@ -1,4 +1,4 @@
-$boundary: 90.2%
+$boundary: 87.8%
 
 @font-face
 	font-family: telegraf
@@ -55,12 +55,14 @@ $boundary: 90.2%
 	--color-blue: #001F4E
 	--color-dark: #030b18
 	--color-yellow: #FFE65C
+	--color-red: #E32121
 	--color-gry: #EEEEEE
 	--color-teal:#13f1df
 	--color-white: white
 	--shadow-color:#3171a5
 	box-sizing: border-box
-	
+
+
 html, body
 	background-color: var(--color-dark)
 	scroll-behavior: smooth
@@ -80,6 +82,9 @@ h1 > div, h2 > div, h3 > div, h4 > div, h5 > div, h6 > div, p > div
 a:visited, a.externalLink:visited
 	color: var(--color-white) !important
 	opacity: .4 !important
+
+a
+	color: var(--color-white) !important
 
 h1
 	font-size: clamp(3.2em, calc(3.2rem + (21.8 - 3.2) * ((100vw - 48em) / (120 - 48))), 21.8em)
@@ -242,7 +247,7 @@ nav
 			transform: translateX(10px) 
 			@include defaultTransition
 			opacity: 1 !important
-			scale: 1.4
+			scale: 3
 			box-shadow: 0px 0px 5px var(--shadow-color)
 			
 				
@@ -354,8 +359,8 @@ section#introPanel
 
 div#soundIndicatorContainer
 	position: fixed
-	left: 8rem
-	bottom: 6rem
+	left: 6.1%
+	top: 6.1%
 	z-index: 300
 	display: flex
 	flex-direction: row-reverse
@@ -380,10 +385,12 @@ div#soundIndicatorContainer
 		transform: translateY(-.12rem)
 
 #viewport 
-	width: 100%
+	width: 100vw
 	height: 100%
 	position: fixed
 	z-index: 1
+	transform: translateZ(0)
+	will-change: filter 
 	top: 370px
 	filter: blur(.45px)
 	left: 0
@@ -429,7 +436,7 @@ section#soundAsk
 	display: block
 	width: 100%
 	@include maxWidthXL
-	margin: 0 auto
+	margin: 0 auto 40% auto
 
 .fullWidthPanel
 	max-width: initial
@@ -501,33 +508,73 @@ section#numberOfUsersPanel
 
 	img.parallaxImage
 		position: absolute
-		width: 50%
-		max-width: 430px
+		width: 40%
+		max-width: 400px
 		box-shadow: 0px 0px 40px rgba(0,0 ,0 ,.1 )
 
-	img:first-child
-		top: 2%
+	#laxOne
+		top: 44%
 		left: 5%
 
-	img:nth-child(2)
+	#laxTwo
 		bottom: 6%
-		right: 10%
+		right: 20%
 
-	img:nth-child(3)
-		top: 2%
-		left: 1%
+	#laxThree
+		top: 40%
+		left: 35%
 
-	img:last-child
-		top: 2%
-		transform: scale(1.1)
+	#laxFour
+		top: 22%
 		right: .4%
 
 section#chartOfUsers
 	width: 100%
 	height: 100%
 
-#barChartContainer svg
-	overflow: visible
+#barChartContainer 
+
+	& > svg
+		overflow: visible
+		display: block
+
+		#yAxis
+
+			.ticks:nth-child(10n)
+				visibility: hidden
+
+	.eventMarker
+		fill: green !important
+		position: relative
+
+		&::after
+
+	.eventMarkerObject
+		background: red
+		height: 50px
+		width: 50px
+		display: block
+		position: absolute
+		top: 0
+		right: 0
+
+	.eventMarkerLine
+
+	.eventMarkerDot
+
+	#declarePandemicMark
+
+	#exascaleMark
+
+.barv2
+	width: 100%
+	height: 500px
+
+.line
+	background: red
+	width: .5%
+	height: 200px
+	margin-right: .5%
 
 section#helpingReduceCosts
 	
@@ -584,8 +631,21 @@ section#howCanYouHelp
 		align-items: flex-end
 		flex-direction: column
 		justify-content: center
+		position: relative
 
-		& > div
+		.dangerCloud
+			background: radial-gradient(circle, rgba(227,33,33,1) 0%, rgba(255,255,255,0) 72%)
+			position: absolute
+			width: 1000px
+			height: 1000px
+			mix-blend-mode: color-dodge
+			top: 0
+			z-index: 1
+			opacity: .5
+			// opacity: .4
+			left: 0%
+
+		& > div:not(div.dangerCloud)
 			@include maxWidthS
 
 	section#helpingReduceCosts
@@ -606,7 +666,7 @@ section#howCanYouHelp
 
 // Above 796px
 @media only screen and (min-width: 769px)
-
+	
 	section#helpingReduceCosts
 		
 		& > div
