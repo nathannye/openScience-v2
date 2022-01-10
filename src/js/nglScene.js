@@ -17,8 +17,8 @@ stage.setParameters({
   clipFar: 32,
   lightIntensity: 1,
   ambientIntensity: 1.5,
-  // lightColor: teal,
-  // ambientColor: blue,
+  lightColor: teal,
+  ambientColor: blue,
 });
 // stage.parameters.lightColor = red;
 

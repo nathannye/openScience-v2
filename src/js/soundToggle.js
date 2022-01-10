@@ -31,7 +31,7 @@ labelTL
     labelOn.split.chars,
     {
       yPercent: -100,
-      duration: 0.37,
+      duration: 0.32,
       ease: "power2.inOut",
       stagger: 0.05,
     },
@@ -42,7 +42,7 @@ labelTL
     {
       yPercent: -100,
       delay: 0.2,
-      duration: 0.37,
+      duration: 0.32,
       ease: "power2.inOut",
       stagger: 0.05,
     },
@@ -63,21 +63,31 @@ var tracks = new Howl({
     console.log("sound loaded");
   },
   onloaderror: (id, err) => {
-    console.log("uh oh", id + err);
+    console.log("sound load failed", id + err);
   },
 });
 
+const soundFadeDuration = 1750;
+var soundOn;
+
 soundIndi.addEventListener("click", (event) => {
   if (!tracks.playing()) {
-    // Run these if sound isn't on
+    // Run these if sound isn't playing already
+    labelTL.play();
     tracks.play();
+    tracks.fade(0, 1, soundFadeDuration);
+    var soundOn = true;
   } else {
-    // Run these if sound is on
-    // soundId = tracks.pause("normal");
-    tracks.pause();
+    // Run these if sound is already playing
+    // soundId = tracks.pause("nor`ma`l");
+    tracks.fade(1, 0, soundFadeDuration);
+    labelTL.reverse();
+    setTimeout(() => {
+      tracks.pause();
+    }, soundFadeDuration);
+
+    var soundOn = false;
   }
-  // tracks.play("normal");
-  console.log(tracks.playing("normal"));
 });
 
 // soundIndi.addEventListener("click", (event) => {

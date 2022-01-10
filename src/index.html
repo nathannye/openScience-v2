@@ -4,14 +4,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Open source, Open science</title>
+    <title>Open Source, Open Science</title>
     <link rel="stylesheet" href="./styles/styles.min.css" />
     <link rel="preconnect" href="https://use.typekit.net" />
     <link rel="stylesheet" href="https://use.typekit.net/jih6lvv.css" />
   </head>
   <body>
-    <!-- <audio id="normalSoundtrack" src="./audio/ambientSoundtrack.mp3" type="audio/mpeg" paused></audio>
-    <audio id="darkSoundtrack" src="./audio/darkSoundtrack.mp3" type="audio/mpeg" paused></audio> -->
     <div id="scrollIndicator">
       <div></div>
       <h4></h4>
@@ -67,7 +65,9 @@
       <div id="cartoonStage"></div>
       <section id="soundAsk">
         <div>
-          <h2>This experience has sound. Would you like to turn it on?</h2>
+          <h2 class="fromFarAndAway">
+            This experience has sound. Would you like to turn it on?
+          </h2>
           <div>
             <div id="soundButtons">
               <div id="yesSoundContainer">
@@ -89,7 +89,7 @@
             <p>
               Distributed computing has paved the way for patent-free drug
               discovery. Millions of home computers contribute to the fight
-              against Cancer, COVID-19, and Parkinson's every day.
+              against Cancer, COVID-19, and Alzheimer's every day.
             </p>
           </div>
         </div>
@@ -103,7 +103,7 @@
         <a id="whatIsFoldingRef" class="jumpTo"></a>
         <div class="panelInnerLimit">
           <div>
-            <h4 id="drag">what is protein folding?</h4>
+            <h4>what is protein folding?</h4>
             <h2 class="fromFarAndAway">
               Proteins are the basis for cellular function. But to do their
               work, they must assemble themselves into a specific shape, or
@@ -111,11 +111,11 @@
             </h2>
           </div>
           <p>
-            Proteins are tiny chains of molecules that, at a micro level,
-            perform every function in the body. Each protein has a specific
-            function when folded. The problem being: we don’t know why they fold
-            in specific ways, making it nearly impossible to tell what a
-            specific protein does, or how it does it.
+            Proteins are tiny chains of amino acids that perform every function
+            in the body. Each protein has a specific function when folded, be it
+            . The problem being: we don’t know why they fold in specific ways,
+            making it nearly impossible to tell how a specific protein does its
+            job.
           </p>
         </div>
         <div id="peptideAnimationContainer"></div>
@@ -126,19 +126,16 @@
         <div>
           <div>
             <h4>why does folding matter?</h4>
-            <h2>
-              Terminal diseases, like Alzheimer’s, cancer, and cystic fibrosis
+            <h2 class="fromFarAndAway">
+              Terminal diseases, like Alzheimer’s, Cancer, and Cystic Fibrosis
               are believed to be caused by protein misfolds.
             </h2>
-          </div>
-          <div>
             <p>
               When we discover how, and why proteins fold into specific
               structures, we can understand what makes things go wrong. Helping
               us develop therapies for previously incurable diseases.
             </p>
             <cite><a href="">Courtesy: Harvard.edu</a></cite>
-          </div>
         </div>
         <div class="dangerCloud"></div>
       </section>
@@ -148,36 +145,38 @@
         <div>
           <h4>why do we need computers?</h4>
           <div>
-            <h2>
-              Proteins with only 20 amino acids have 10<sup>130</sup> equally
-              possible folded formations.
+            <h2 class="fromFarAndAway">
+              To accurately understand how a protein will fold, we must simulate
+              the forces in the human body every millionth of a second.
             </h2>
             <div>
-              <p>
-                With an unfathomable amount of possibilities, simulating protein
-                folds can take months with even very powerful supercomputers.
-              </p>
-              <p>
-                Through a network of home computers, scientists can boost their
-                folding speeds by hundreds of times.
+              <p class="paraAnim">
+                With such extreme time scales, and a need for near perfect
+                simulation of conditions, supercomputers are needed to crunch
+                numbers and give us accurate assessments of how a protein may
+                fold.
               </p>
             </div>
           </div>
         </div>
         <h1 id="aminoNumbers">10000000000000000000000000</h1>
       </section>
+      <section class="panel interstitial">
+        <h4>Just how powerful do computers need to be?</h4>
+      </section>
       <section class="panel contentPanel" id="numberOfUsersPanel">
         <a id="numberOfUsersPanelRef" class="jumpTo"></a>
         <div>
           <div>
-            <h2>
-              Folding@Home amassed over 1.2 million users during COVID-19.
-              Together, all of these machines were faster than the world's nine
-              fastest supercomputers. Combined.
+            <h2 class="fromFarAndAway">
+              Folding@Home, a distributed computing project, amassed over 1.2
+              million users during COVID-19. Together, all of these machines
+              were faster than the world's nine fastest supercomputers.
+              Combined.
             </h2>
             <p>
-              These 1.2 million users were the first to cross the exascale
-              barrier, 10<sup>18</sup> operations per second.
+              With the most powerful computer on the planet at hand, proteins
+              could be processed much fas
             </p>
           </div>
         </div>
@@ -215,7 +214,7 @@
         <div>
           <div>
             <h4>so what the hell does that mean?</h4>
-            <h2>
+            <h2 class="fromFarAndAway">
               Let's put that in perspective shall we? You'd need a little over
               70 billion iPhone 12s to top that.
             </h2>
@@ -226,13 +225,18 @@
         <a id="publicInformationRef" class="jumpTo"></a>
         <div>
           <div>
-            <h2>
+            <h2 class="fromFarAndAway">
               With all of that power in the public domain, data be processed
               extraordinarily fast, and provided at no cost to drug development
               firms
             </h2>
           </div>
-          <p>Firms have to make up less of the cost of research.</p>
+          <p>
+            X-Ray Crystallography, a more standard method of computing protein
+            folds, can take up to 12 months and cost upwards of $125,000 US.
+            These costs often fall back onto consumers so drug companies can
+            recoup their investment.
+          </p>
         </div>
       </section>
       <section class="panel contentPanel" id="helpingReduceCosts">
@@ -240,18 +244,18 @@
         <div>
           <div class="headingContainer">
             <h4>helping reduce costs</h4>
-            <h2>
-              Aduhelm, an Alzheimer’s drug approved by the FDA on June 7th,
-              2021, will cost $28,200 per person per year. 39% of the income of
-              an individual aged older than 60 in America.
+            <h2 class="fromFarAndAway">
+              By quickly producing a filtered list of viable protein solutions,
+              scientists can use more expensive methods on more likely
+              candidates.
             </h2>
           </div>
           <div>
             <p>
               Distributed computing projects produce open source data. Anything
-              it returns is required to be free for all to use. With free,
-              first-round data available, scientists can get into the complex
-              work of developing drugs with much less upfront cost.
+              it returns is free for all to use. With free, first-round data
+              available, scientists can get into the complex work of developing
+              drugs with much less upfront cost.
             </p>
             <cite
               ><a
@@ -268,7 +272,7 @@
         <div id="helpHeadingContainer">
           <div>
             <h4>get involved</h4>
-            <h2>How can you help?</h2>
+            <h2 class="fromFarAndAway">How can you help?</h2>
             <p>
               Want to help contribute to live saving therapies? Learn more about
               the institutions below and download their free installer to get
@@ -319,6 +323,7 @@
         </div>
       </section>
     </main>
+    
     <script type="module" src="./js/nglScene.js"></script>
     <script src="./js/soundToggle.js"></script>
     <script src="./js/barGraphDiv.js"></script>
@@ -327,7 +332,7 @@
     <!-- <script type="module" src="./js/threeScenes.js"></script> -->
     <script type="module" src="./js/waveCanvas/app.js"></script>
 
-    <!-- <script src="./index.js" type="module"></script> -->
+    <script src="./index.js" type="module"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/ngl/2.0.0-dev.39/ngl.js"
       integrity="sha512-L4e1Z9pbAAsBXDzbcitJzkcRIHq6PUF/6GSR5UbA38XiaQ3TAS3422wJ5DllYOlwkpKUXInFt1b+C06NDvtmTg=="

@@ -48,6 +48,12 @@ a:visited, a.externalLink:visited {
   opacity: .4 !important;
 }
 
+h1 div, h2 div, h3 div, h4 div, h5 div, p div, li div, a div {
+  perspective: 200px;
+  transform: perspective(200px);
+  transform-style: preserve-3d;
+}
+
 a {
   color: var(--color-white) !important;
 }
@@ -127,13 +133,6 @@ h5 {
   align-items: center;
 }
 
-.interstitial h4 {
-  perspective: 200px;
-  text-align: center;
-  transform: perspective(200px);
-  perspective-origin: center center;
-}
-
 h3 {
   font-family: ivypresto-headline, serif;
   font-weight: 400;
@@ -167,12 +166,6 @@ a {
 
 a:visited {
   color: white;
-}
-
-p {
-  perspective: 200px;
-  transform: perspective(200px);
-  transform-origin: left;
 }
 
 ::selection {
@@ -209,6 +202,7 @@ nav {
   flex-direction: column;
   justify-content: center;
   z-index: 35;
+  top: 0;
 }
 
 nav a {
@@ -233,7 +227,7 @@ nav a div.navMarker {
   margin-left: 1.25rem;
   border-radius: 16px;
   height: 6px;
-  opacity: .7;
+  opacity: .2;
   background: var(--color-teal);
   transition: all .29s ease-in-out;
 }
@@ -242,7 +236,7 @@ nav a .activeNav {
   transform: translateX(10px);
   transition: all .29s ease-in-out;
   opacity: 1 !important;
-  scale: 3;
+  transform: scale(1.4) !important;
   box-shadow: 0px 0px 5px var(--shadow-color);
 }
 
@@ -270,10 +264,12 @@ section:not(section.interstitial).lefty {
 }
 
 section#introPanel {
+  top: 0px !important;
   display: flex;
   justify-content: center;
   align-items: center;
   padding-top: 17vh;
+  height: 100vh;
 }
 
 section#introPanel #introHeadingContainer {
@@ -285,8 +281,6 @@ section#introPanel #introHeadingContainer h1, section#introPanel #introHeadingCo
   display: block;
   position: relative;
   white-space: nowrap;
-  perspective: 200px;
-  transform: perspective(200px);
 }
 
 section#introPanel #introHeadingContainer h1:first-child {
@@ -303,7 +297,7 @@ section#introPanel #introHeadingContainer > div:last-child {
 
 section#introPanel #introHeadingContainer > div:last-child p {
   max-width: 250px;
-  margin-top: 3em;
+  margin-top: clamp(1.5em, calc(1.5rem + ((1vw - 0.48em) * 2.0833)), 3em);
 }
 
 @keyframes grain {
@@ -370,6 +364,7 @@ div#soundIndicatorContainer {
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
+  overflow: hidden;
   cursor: pointer;
 }
 
@@ -394,6 +389,10 @@ div#soundIndicatorContainer canvas#soundIndicator {
   transform: translateY(-0.12rem);
 }
 
+.gs-dev-tools {
+  z-index: 900000;
+}
+
 #viewport {
   width: 100vw;
   height: 100%;
@@ -401,8 +400,6 @@ div#soundIndicatorContainer canvas#soundIndicator {
   z-index: 1;
   transform: translateZ(0);
   will-change: filter;
-  top: 370px;
-  filter: blur(0.45px);
   left: 0;
   transform: scale(2);
 }
@@ -411,6 +408,7 @@ div#soundIndicatorContainer canvas#soundIndicator {
   height: 100% !important;
   width: 100% !important;
   position: fixed;
+  transform: scale(3);
   top: 0;
   left: 0;
 }
@@ -418,7 +416,6 @@ div#soundIndicatorContainer canvas#soundIndicator {
 section#soundAsk {
   position: fixed;
   background: var(--color-dark);
-  perspective: 50em;
   z-index: 25;
   top: 0;
   display: none;
@@ -427,7 +424,6 @@ section#soundAsk {
   width: 100%;
   height: 100vh;
   perspective-origin: left;
-  transform-style: preserve-3d;
 }
 
 section#soundAsk #soundButtons {
@@ -439,7 +435,6 @@ section#soundAsk #soundButtons {
 }
 
 section#soundAsk h2 {
-  transform: perspective(50em);
   filter: blur(0);
   text-align: center;
   color: var(--color-teal);
@@ -452,7 +447,7 @@ section#soundAsk h2 {
   width: 100%;
   width: 87.8%;
   max-width: 1750px;
-  margin: 0 auto 40% auto;
+  margin: 0 auto 18% auto;
 }
 
 .fullWidthPanel {
@@ -474,17 +469,19 @@ section#whatIsFolding {
 }
 
 section#whatIsFolding .panelInnerLimit {
-  width: 100%;
-}
-
-section#whatIsFolding .panelInnerLimit > div {
   width: 87.8%;
   max-width: 550px;
 }
 
-section#whatIsFolding .panelInnerLimit p {
-  width: 87.8%;
-  max-width: 550px;
+section#whatIsFolding #peptideAnimationContainer {
+  height: 100%;
+  flex-grow: 1;
+  min-width: 300px;
+}
+
+section#whatIsFolding #peptideAnimationContainer svg > g {
+  width: 100% !important;
+  height: 100% !important;
 }
 
 section#whyDoesFoldingMatter {
@@ -512,7 +509,7 @@ section#whyDoWeNeed > div > div {
   flex-wrap: wrap;
 }
 
-section#whyDoWeNeed > div > div h2, section#whyDoWeNeed > div > div div {
+section#whyDoWeNeed > div > div > h2, section#whyDoWeNeed > div > div p {
   width: 48%;
   min-width: 300px;
 }
@@ -619,6 +616,7 @@ section#howCanYouHelp {
   display: block !important;
   width: 87.8%;
   max-width: 1250px;
+  margin-bottom: 0;
 }
 
 section#howCanYouHelp #helpHeadingContainer {
@@ -688,6 +686,10 @@ section#howCanYouHelp #foldingProjectsContainer > div h2 {
 }
 
 @media only screen and (min-width: 769px) {
+  #viewport > div > canvas {
+    top: 22%;
+    transform: scale(2.2);
+  }
   section#helpingReduceCosts > div {
     column-gap: 4.6%;
   }

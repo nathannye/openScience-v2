@@ -3,8 +3,10 @@ import SplitText from "gsap/SplitText";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import InertiaPlugin from "gsap/InertiaPlugin";
 import { random } from "gsap/gsap-core";
-import { stage } from "./js/nglScene";
+// import GSDevTools from "./js/GSDevTools.min.js";
+import lottie from "lottie-web";
 
+// gsap.registerPlugin(GSDevTools);
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(SplitText);
 
@@ -29,7 +31,7 @@ let soundOn = document.querySelector("#yesSoundContainer > button");
 let soundOff = document.querySelector("#noSoundContainer > button");
 const soundtrack = document.querySelector("audio");
 
-soundtrack.currentTime = 0;
+// soundtrack.currentTime = 0;
 
 soundOn.addEventListener("click", (event) => {
   soundtrack.play();
@@ -51,24 +53,16 @@ let grain = document.querySelector("#grain");
 let html = document.querySelector("html");
 let navMarkers = gsap.utils.toArray(".navMarker");
 
-// gsap.to(nglStage, {
-//   scrollTrigger: {
-//     trigger: content,
-//     scrub: 0.5,
-//     start: "top top",
-//     end: "bottom bottom",
-//   },
-//   yPercent: -3.5,
-// });
-
-gsap.set(grain, {
-  opacity: 0,
+gsap.to(nglStage, {
+  scrollTrigger: {
+    trigger: content,
+    scrub: 2,
+    rotateZ: 40,
+    start: "top top",
+    end: "bottom bottom",
+  },
+  yPercent: -3.4,
 });
-
-gsap.set(nglStage, {
-  opacity: 0,
-});
-
 openSource.split = new SplitText(openSource, {
   type: "chars",
 });
@@ -82,9 +76,8 @@ gsap.set(html, {
 
 const titleTL = gsap.timeline({
   onComplete: function () {
-    createIntroOutTL();
-    titleTL.invalidate();
-    titleTL.kill();
+    titleTL.invalidate(true);
+    titleTL.kill(true);
   },
 });
 
@@ -104,6 +97,27 @@ titleTL
     autoAlpha: 1,
     duration: 0.01,
   })
+  .fromTo(
+    nglStage,
+    { filter: "saturate(0)", autoAlpha: 0, filter: "blur(13px)" },
+    {
+      filter: "saturate(1)",
+      filter: "blur(1px)",
+      duration: 3,
+      autoAlpha: 1,
+      ease: "power2.out",
+    },
+    "start",
+    "stageIn"
+  )
+  .from(
+    grain,
+    {
+      opacity: 0,
+      duration: 1.2,
+    },
+    "stageIn"
+  )
   .to(
     openSource.split.chars,
     {
@@ -118,7 +132,8 @@ titleTL
       duration: 1.3,
       ease: "power4.inOut",
     },
-    "start"
+    "start+=1",
+    "text"
   )
   .to(
     openScience.split.chars,
@@ -134,37 +149,20 @@ titleTL
       duration: 1.3,
       ease: "power4.inOut",
     },
-    "start+=.167"
-  )
-  .to(
-    grain,
-    {
-      opacity: 1,
-      duration: 1.2,
-    },
-    "stageIn"
-  )
-  .to(
-    nglStage,
-    {
-      opacity: 1,
-      duration: 3,
-    },
-    "start+=18%",
-    "stageIn"
+    "start+=1.35"
   )
   .from(
     introPara.split.lines,
     {
       autoAlpha: 0,
       y: 20,
-      rotationY: -20,
+      rotateY: -20,
       color: ylw,
       ease: "power2.out",
       stagger: 0.09,
-      duration: 1.25,
+      duration: 1.15,
     },
-    "start+=.3"
+    "start+=1.5"
   )
   .from(
     navMarkers,
@@ -177,6 +175,7 @@ titleTL
     },
     "start+=.6"
   )
+  .call(createIntroOutTL, ["start+=.65"])
   .to(html, {
     overflowY: "auto",
   });
@@ -236,7 +235,7 @@ function createIntroOutTL() {
       start: "top top",
       end: "bottom top",
       scrub: 1,
-      pin: true,
+      pin: "#introPanel",
       paused: true,
       onComplete: function () {
         createFirstInterstitial();
@@ -288,17 +287,13 @@ function createIntroOutTL() {
         y: 9,
         opacity: 0,
         color: teal,
-        rotateX: -9,
-        ease: "power2.out",
+        rotateY: 3,
+        ease: "power2.inOut",
         duration: 0.7,
-        filter: "blur(1px)",
-        stagger: {
-          each: 0.04,
-          ease: "power1.inOut",
-          from: "random",
-        },
+        filter: "blur(4px)",
+        stagger: 0.14,
       },
-      "scrollingOut+=98%"
+      "scrollingOut+=50%"
     );
 }
 
@@ -313,23 +308,33 @@ h4.split = new SplitText(h4, {
 
 let firstInterstitial = gsap.timeline({
   scrollTrigger: {
-    start: "top centerq",
+    start: "top center",
     end: "bottom top",
     trigger: interstitialOne,
     pin: interstitialOne,
+    toggleActions: "restart reset restart restart",
   },
 });
 
-firstInterstitial.from(h4.split.words, {
-  duration: 1.5,
-  z: -33,
-  autoAlpha: 0,
-  ease: "power4.out",
-  stagger: {
-    from: "edges",
-    each: 0.052,
-  },
-});
+firstInterstitial
+  .from(h4.split.words, {
+    duration: 1.5,
+    z: -33,
+    autoAlpha: 0,
+    ease: "power4.out",
+    stagger: {
+      from: "edges",
+      each: 0.052,
+    },
+  })
+  .to(h4.split.words, {
+    autoAlpha: 0,
+    delay: 2,
+    z: -40,
+    duration: 1,
+    stagger: 0.052,
+    filter: "blur(4px)",
+  });
 
 let h2 = document.querySelectorAll("h2.fromFarAndAway");
 function setupFarAndAway() {
@@ -339,21 +344,20 @@ function setupFarAndAway() {
       e.split.revert();
     }
     e.split = new SplitText(e, {
-      type: "chars, lines",
+      type: "words, lines",
       linesClass: "splitLine",
     });
-    e.anim = gsap.from(e.split.chars, {
+    e.anim = gsap.from(e.split.words, {
       scrollTrigger: {
         trigger: e,
-        start: "top bottom-=24%",
-        // markers: true,
-        toggleActions: "restart none none reverse",
+        start: "top bottom-=44%",
+        toggleActions: "restart play play restart",
       },
       yPercent: 100,
-      color: teal,
-      duration: 1,
-      ease: "power3.inOut",
-      stagger: 0.0042,
+      autoAlpha: 0,
+      duration: 1.3,
+      ease: "power4.inOut",
+      stagger: 0.0242,
     });
   });
 }
@@ -361,73 +365,12 @@ function setupFarAndAway() {
 ScrollTrigger.addEventListener("refresh", setupFarAndAway);
 setupFarAndAway();
 
-// document.addEventListener("DOMContentLoaded", (event) => {
-//   let images = gsap.utils.toArray(".parallaxImage");
-
-//   gsap.set(images, {
-//     "clip-path": "polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)",
-//     yPercent: -20,
-//   });
-
-//   gsap.to(images, {
-//     "clip-path": "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
-//     yPercent: 0,
-//     scrollTrigger: {
-//       trigger: "#numberOfUsersPanel",
-//       start: "top bottom-=17%",
-//       markers: true,
-//     },
-//     stagger: {
-//       each: 0.04,
-//       from: "random",
-//     },
-//     duration: 0.76,
-//     ease: "power3.inOut",
-//   });
-// });
-
-// gsap.from(images[0], {
-//   scrollTrigger: {
-//     scrub: true,
-//     start: "top bottom",
-//     end: "bottom top",
-//     trigger: "#numberOfUsersPanel",
-//   },
-//   yPercent: -60,
-// });
-
-// gsap.from(images[1], {
-//   scrollTrigger: {
-//     scrub: true,
-//     start: "top bottom",
-//     end: "bottom top",
-//     trigger: "#numberOfUsersPanel",
-//   },
-//   yPercent: -22,
-// });
-
-// gsap.to(images[2], {
-//   scrollTrigger: {
-//     scrub: true,
-//     start: "top bottom",
-//     end: "bottom top",
-//     trigger: "#numberOfUsersPanel",
-//   },
-//   yPercent: -19,
-// });
-
-// gsap.from(images[3], {
-//   scrollTrigger: {
-//     scrub: true,
-//     start: "top bottom",
-//     end: "bottom top",
-//     trigger: "#numberOfUsersPanel",
-//   },
-//   yPercent: 87,
-// });
-
 // Paragraphs anim
-let paras = gsap.utils.toArray("p:not(#introPanel p)");
+let paras = gsap.utils.toArray("p.paraAnim");
+
+function setupParas() {
+  paras.forEach(para);
+}
 
 // function setupParas() {
 //   paras.forEach((para) => {
@@ -452,7 +395,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
       scrollTrigger: {
         start: "top bottom-=4%",
         end: "bottom bottom-=12%",
-        markers: true,
         trigger: sections[i],
         onEnter: () => {
           navDots[i].classList.add("activeNav");
@@ -523,7 +465,7 @@ let imgTrigger = document.querySelector("#numberOfUsersPanel");
 
 gsap.set(images, {
   clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)",
-  yPercent: 11,
+  // yPercent: 11,
 });
 
 gsap.to(images, {
@@ -532,51 +474,134 @@ gsap.to(images, {
     trigger: imgTrigger,
   },
   duration: 1.1,
-  yPercent: 0,
+  // yPercent: 0,
   ease: "power3.inOut",
   clipPath: "polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)",
   stagger: 0.17,
+  onComplete: createImageParallax,
 });
 
-document.addEventListener("DOMContentLoaded", (event) => {
-  let dangerArea = document.getElementById("whyDoesFoldingMatter");
-  let danger = gsap.utils.toArray(".dangerCloud");
-
-  console.log(dangerArea);
-
-  let wdfmTL = gsap.timeline({
-    paused: true,
+function createImageParallax() {
+  gsap.to(images[0], {
     scrollTrigger: {
-      start: "top center",
-      trigger: dangerArea,
-      markers: true,
-      onEnter: () => {
-        wdfmTL.play();
-      },
-      onLeave: () => {
-        wdfmTL.reverse();
-      },
-      onEnterBack: () => {
-        wdfmTL.reverse();
-      },
-      onLeaveBack: () => {
-        wdfmTL.play();
-      },
+      scrub: true,
+      start: "top bottom",
+      end: "bottom top",
+      trigger: "#numberOfUsersPanel",
     },
+    yPercent: -60,
+  });
+  gsap.to(images[1], {
+    scrollTrigger: {
+      scrub: true,
+      start: "top bottom",
+      end: "bottom top",
+      trigger: "#numberOfUsersPanel",
+    },
+    yPercent: -22,
+  });
+  gsap.to(images[2], {
+    scrollTrigger: {
+      scrub: true,
+      start: "top bottom",
+      end: "bottom top",
+      trigger: "#numberOfUsersPanel",
+    },
+    yPercent: -19,
+  });
+  gsap.to(images[3], {
+    scrollTrigger: {
+      scrub: true,
+      start: "top bottom",
+      end: "bottom top",
+      trigger: "#numberOfUsersPanel",
+    },
+    yPercent: 87,
+  });
+}
+
+let dangerArea = document.getElementById("whyDoesFoldingMatter");
+let danger = gsap.utils.toArray(".dangerCloud");
+
+let wdfmTL = gsap.timeline({
+  paused: true,
+  scrollTrigger: {
+    start: "top center",
+    trigger: dangerArea,
+    toggleActions: "restart reset restart restart",
+    // markers: true,
+    // onEnter: () => {
+    //   wdfmTL.play();
+    // },
+    // onLeave: () => {
+    //   wdfmTL.reverse();
+    // },
+    // onEnterBack: () => {
+    //   wdfmTL.reverse();
+    // },
+    // onLeaveBack: () => {
+    //   wdfmTL.play();
+    // },
+  },
+});
+
+wdfmTL
+  .to(html, {
+    background: "#e32121",
+    duration: 2,
+  })
+  .to(nglStage, {
+    filter: "blur(13px)",
+    duration: 4.5,
+    ease: "power2.i nOut",
+  })
+  .from(danger, {
+    autoAlpha: 0,
+    duration: 2,
   });
 
-  wdfmTL
-    .to(html, {
-      background: "#e32121",
-      duration: 2,
-    })
-    .to(nglStage, {
-      filter: "blur(13px)",
-      duration: 4.5,
-      ease: "power2.i nOut",
-    })
-    .from(danger, {
-      autoAlpha: 0,
-      duration: 2,
+let peptideContainer = document.getElementById("peptideAnimationContainer");
+
+function LottieScrollTrigger(vars) {
+  let playhead = { frame: 0 },
+    target = gsap.utils.toArray(vars.target)[0],
+    speeds = { slow: "+=6000", medium: "+=3000", fast: "+=100" },
+    st = {
+      trigger: target,
+      pin: true,
+      start: "top top",
+      end: speeds[vars.speed] || "+=1000",
+      scrub: 1,
+    },
+    animation = lottie.loadAnimation({
+      container: target,
+      renderer: vars.renderer || "svg",
+      loop: false,
+      autoplay: false,
+      path: vars.path,
     });
+  for (let p in vars) {
+    // let users override the ScrollTrigger defaults
+    st[p] = vars[p];
+  }
+  animation.addEventListener("DOMLoaded", function () {
+    gsap.to(playhead, {
+      frame: animation.totalFrames - 1,
+      ease: "none",
+      onUpdate: () => animation.goToAndStop(playhead.frame, true),
+      scrollTrigger: st,
+    });
+    // in case there are any other ScrollTriggers on the page and the loading of this Lottie asset caused layout changes
+    ScrollTrigger.sort();
+    ScrollTrigger.refresh();
+  });
+  return animation;
+}
+
+LottieScrollTrigger({
+  target: "#peptideAnimationContainer",
+  path: "https://assets6.lottiefiles.com/packages/lf20_wxucs4yt.json",
+  speed: "+=10000",
+  scrub: 1,
+  pin: true,
 });
