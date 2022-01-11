@@ -600,7 +600,7 @@ function LottieScrollTrigger(vars) {
 
 LottieScrollTrigger({
   target: "#peptideAnimationContainer",
-  path: "https://assets6.lottiefiles.com/packages/lf20_wxucs4yt.json",
+  path: "https://assets7.lottiefiles.com/packages/lf20_m4lh7lvj.json",
   speed: "+=10000",
   scrub: 1,
   pin: true,
