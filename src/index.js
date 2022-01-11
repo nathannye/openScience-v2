@@ -590,6 +590,9 @@ function LottieScrollTrigger(vars) {
       ease: "none",
       onUpdate: () => animation.goToAndStop(playhead.frame, true),
       scrollTrigger: st,
+      onComplete: () => {
+        console.log(playhead);
+      },
     });
     // in case there are any other ScrollTriggers on the page and the loading of this Lottie asset caused layout changes
     ScrollTrigger.sort();
@@ -600,7 +603,7 @@ function LottieScrollTrigger(vars) {
 
 LottieScrollTrigger({
   target: "#peptideAnimationContainer",
-  path: "https://assets7.lottiefiles.com/packages/lf20_m4lh7lvj.json",
+  path: "https://assets10.lottiefiles.com/packages/lf20_pttgqhi8.json",
   speed: "+=10000",
   scrub: 1,
   pin: true,
