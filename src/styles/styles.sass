@@ -471,14 +471,16 @@ section#whatIsFolding
 	flex-wrap: wrap
 
 	.panelInnerLimit
-		@include maxWidthS
+		@include maxWidthXS
 		
 	#peptideAnimationContainer
 		height: 100%
 		flex-grow: 1
+		width: 30%
 		min-width: 300px
 
 		svg
+			width: 500px !important
 
 			& > g
 				width: 100% !important
@@ -636,6 +638,11 @@ section#howCanYouHelp
 // GSAP Classes
 .splitLine
 	overflow: hidden
+
+#explainFoldingGroup
+	display: flex
+	justify-content: center
+	column-gap: 4rem
 
 // Above 480px but beneath 769px
 @media only screen and (min-width: 480px)

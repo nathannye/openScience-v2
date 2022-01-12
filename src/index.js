@@ -521,51 +521,33 @@ function createImageParallax() {
 }
 
 let dangerArea = document.getElementById("whyDoesFoldingMatter");
-let danger = gsap.utils.toArray(".dangerCloud");
 
-let wdfmTL = gsap.timeline({
-  paused: true,
-  scrollTrigger: {
-    start: "top center",
-    trigger: dangerArea,
-    toggleActions: "restart reset restart restart",
-    // markers: true,
-    // onEnter: () => {
-    //   wdfmTL.play();
-    // },
-    // onLeave: () => {
-    //   wdfmTL.reverse();
-    // },
-    // onEnterBack: () => {
-    //   wdfmTL.reverse();
-    // },
-    // onLeaveBack: () => {
-    //   wdfmTL.play();
-    // },
-  },
-});
+// let wdfmTL = gsap.timeline({
+//   paused: true,
+//   scrollTrigger: {
+//     start: "top center",
+//     trigger: dangerArea,
+//     toggleActions: "restart reset restart restart",
+//   },
+// });
 
-wdfmTL
-  .to(html, {
-    background: "#e32121",
-    duration: 2,
-  })
-  .to(nglStage, {
-    filter: "blur(13px)",
-    duration: 4.5,
-    ease: "power2.i nOut",
-  })
-  .from(danger, {
-    autoAlpha: 0,
-    duration: 2,
-  });
+// wdfmTL
+//   .to(html, {
+//     background: "#e32121",
+//     duration: 2,
+//   })
+//   .to(nglStage, {
+//     filter: "blur(13px)",
+//     duration: 4.5,
+//     ease: "power2.i nOut",
+//   });
 
 let peptideContainer = document.getElementById("peptideAnimationContainer");
 
 function LottieScrollTrigger(vars) {
   let playhead = { frame: 0 },
     target = gsap.utils.toArray(vars.target)[0],
-    speeds = { slow: "+=6000", medium: "+=3000", fast: "+=100" },
+    speeds = { slow: "+=2000", medium: "+=1000", fast: "+=500" },
     st = {
       trigger: target,
       pin: true,
@@ -590,9 +572,6 @@ function LottieScrollTrigger(vars) {
       ease: "none",
       onUpdate: () => animation.goToAndStop(playhead.frame, true),
       scrollTrigger: st,
-      onComplete: () => {
-        console.log(playhead);
-      },
     });
     // in case there are any other ScrollTriggers on the page and the loading of this Lottie asset caused layout changes
     ScrollTrigger.sort();
@@ -602,9 +581,13 @@ function LottieScrollTrigger(vars) {
 }
 
 LottieScrollTrigger({
-  target: "#peptideAnimationContainer",
+  target: peptideContainer,
   path: "https://assets10.lottiefiles.com/packages/lf20_pttgqhi8.json",
-  speed: "+=10000",
+  speed: "+=6000",
+  // pin: true,
   scrub: 1,
-  pin: true,
+  markers: true,
+  trigger: peptideContainer,
+  start: "top top",
+  end: "bottom bottom",
 });

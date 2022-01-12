@@ -49,8 +49,8 @@ a:visited, a.externalLink:visited {
 }
 
 h1 div, h2 div, h3 div, h4 div, h5 div, p div, li div, a div {
-  perspective: 100px;
-  transform: perspective(-100px);
+  perspective: 200px;
+  transform: perspective(-200px);
   transform-style: preserve-3d;
 }
 
@@ -470,13 +470,18 @@ section#whatIsFolding {
 
 section#whatIsFolding .panelInnerLimit {
   width: 87.8%;
-  max-width: 550px;
+  max-width: 350px;
 }
 
 section#whatIsFolding #peptideAnimationContainer {
   height: 100%;
   flex-grow: 1;
+  width: 30%;
   min-width: 300px;
+}
+
+section#whatIsFolding #peptideAnimationContainer svg {
+  width: 500px !important;
 }
 
 section#whatIsFolding #peptideAnimationContainer svg > g {
@@ -644,6 +649,12 @@ section#howCanYouHelp #foldingProjectsContainer > div h2 {
 
 .splitLine {
   overflow: hidden;
+}
+
+#explainFoldingGroup {
+  display: flex;
+  justify-content: center;
+  column-gap: 4rem;
 }
 
 @media only screen and (min-width: 480px) {
