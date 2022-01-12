@@ -581,10 +581,16 @@ function LottieScrollTrigger(vars) {
 }
 
 LottieScrollTrigger({
+<<<<<<< HEAD
   target: peptideContainer,
   path: "https://assets10.lottiefiles.com/packages/lf20_pttgqhi8.json",
   speed: "+=6000",
   // pin: true,
+=======
+  target: "#peptideAnimationContainer",
+  path: "https://assets6.lottiefiles.com/packages/lf20_wxucs4yt.json",
+  speed: "+=10000",
+>>>>>>> parent of be72ee7 (perspective fixed)
   scrub: 1,
   markers: true,
   trigger: peptideContainer,
