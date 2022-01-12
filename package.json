@@ -29,13 +29,10 @@
     "prettier": "^2.4.1"
   },
   "scripts": {
-    "build": "parcel build src/index.html --no-source-maps",
+    "build": "dist/index.html",
     "dev": "parcel src/index.html",
     "lint": "eslint \"src/**/*.{js}\" --quiet",
     "format": "prettier --write \"src/**/*.{js,html}\""
   },
-  "browserslist": [
-    "last 1 version",
-    "> 0.2%"
-  ]
+  "browserslist": "last 3 Chrome versions"
 }
