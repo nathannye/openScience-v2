@@ -582,7 +582,11 @@ function LottieScrollTrigger(vars) {
 
 LottieScrollTrigger({
   target: "#peptideAnimationContainer",
+<<<<<<< HEAD
   path: "https://assets6.lottiefiles.com/packages/lf20_wxucs4yt.json",
+=======
+  path: "https://assets7.lottiefiles.com/packages/lf20_m4lh7lvj.json",
+>>>>>>> parent of f197bc6 (layed framework for peptide animation)
   speed: "+=10000",
   scrub: 1,
   markers: true,
