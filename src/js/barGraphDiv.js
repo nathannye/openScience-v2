@@ -7,3 +7,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
     container.appendChild(obj);
   }
 });
+
+// let errorTargets = gsap.utils.toArray(".errorTarget");
+
+// errorTargets.forEach(target => {
+//   let errorClicker = document.createElement("")
+// })

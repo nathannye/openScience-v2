@@ -83,15 +83,6 @@ declarePandemic.setAttribute("class", "eventMarker");
 exascaleMark.setAttribute("id", "exascaleMark");
 exascaleMark.setAttribute("class", "eventMarker");
 
-d3.select("rect#exascaleMark")
-  .append("foreignObject")
-  .attr("x", 100)
-  .attr("y", 100)
-  .attr("width", 40)
-  .attr("height", 60)
-  .append("xhtml:body")
-  .html("PLEASE JESUS <br> WORK");
-
 // let events = [declarePandemic, exascaleMark];
 
 // let obj = document

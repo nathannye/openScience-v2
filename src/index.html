@@ -81,6 +81,16 @@
         </div>
       </section>
       <section class="panel lefty" id="introPanel">
+        <div class="dangerMarker">
+          <div class="middleCircle">
+            <div class="exclamation">
+              <div></div>
+              <div></div>
+            </div>
+          </div>
+          <div class="solidRing dangerRing"></div>
+          <div class="dashRing dangerRing"></div>
+        </div>
         <a id="introPanelRef" class="jumpTo"></a>
         <div id="introHeadingContainer">
           <h1>Open source</h1>
@@ -130,13 +140,13 @@
         <div class="panelInnerLimit">
           <div>
             <h4>what is protein folding?</h4>
-            <h2 class="fromFarAndAway">
+            <h2 class="headAnim">
               Proteins are the basis for cellular function. But to do their
               work, they must assemble themselves into a specific shape, or
               ‘fold’.
             </h2>
           </div>
-          <p>
+          <p class="paraAnim">
             Proteins are tiny chains of amino acids that perform every function
             in the body. Each protein has a specific function when folded, be it
             . The problem being: we don’t know why they fold in specific ways,
@@ -171,18 +181,16 @@
         <div>
           <h4>why do we need computers?</h4>
           <div>
-            <h2 class="fromFarAndAway">
+            <h2 class="headAnim">
               To accurately understand how a protein will fold, we must simulate
               the forces in the human body every millionth of a second.
             </h2>
-            <div>
-              <p class="paraAnim">
-                With such extreme time scales, and a need for near perfect
-                simulation of conditions, supercomputers are needed to crunch
-                numbers and give us accurate assessments of how a protein may
-                fold.
-              </p>
-            </div>
+            <p class="paraAnim">
+              With such extreme time scales, and a need for near perfect
+              simulation of conditions, supercomputers are needed to crunch
+              numbers and give us accurate assessments of how a protein may
+              fold.
+            </p>
           </div>
         </div>
         <h1 id="aminoNumbers">10000000000000000000000000</h1>
@@ -194,13 +202,13 @@
         <a id="numberOfUsersPanelRef" class="jumpTo"></a>
         <div>
           <div>
-            <h2 class="fromFarAndAway">
+            <h2 class="headAnim">
               Folding@Home, a distributed computing project, amassed over 1.2
               million users during COVID-19. Together, all of these machines
               were faster than the world's nine fastest supercomputers.
               Combined.
             </h2>
-            <p>
+            <p class="paraAnim">
               With the most powerful computer on the planet at hand, proteins
               could be processed much fas
             </p>
@@ -251,7 +259,7 @@
         <a id="publicInformationRef" class="jumpTo"></a>
         <div>
           <div>
-            <h2 class="fromFarAndAway">
+            <h2 class="headAnim">
               With all of that power in the public domain, data be processed
               extraordinarily fast, and provided at no cost to drug development
               firms
@@ -270,14 +278,14 @@
         <div>
           <div class="headingContainer">
             <h4>helping reduce costs</h4>
-            <h2 class="fromFarAndAway">
+            <h2 class="headAnim">
               By quickly producing a filtered list of viable protein solutions,
               scientists can use more expensive methods on more likely
               candidates.
             </h2>
           </div>
           <div>
-            <p>
+            <p class="paraAnim">
               Distributed computing projects produce open source data. Anything
               it returns is free for all to use. With free, first-round data
               available, scientists can get into the complex work of developing
@@ -298,8 +306,8 @@
         <div id="helpHeadingContainer">
           <div>
             <h4>get involved</h4>
-            <h2 class="fromFarAndAway">How can you help?</h2>
-            <p>
+            <h2 class="headAnim">How can you help?</h2>
+            <p class="paraAnim">
               Want to help contribute to live saving therapies? Learn more about
               the institutions below and download their free installer to get
               folding!
@@ -353,7 +361,7 @@
     <script src="./js/soundToggle.js"></script>
     <script src="./js/barGraphDiv.js"></script>
     <!-- <script type="module" src="./js/barGraph.js"></script> -->
-    <!-- <script type="module" src="./js/barChart.js"></script> -->
+    <script type="module" src="./js/barChart.js"></script>
     <!-- <script type="module" src="./js/threeScenes.js"></script> -->
     <script type="module" src="./js/waveCanvas/app.js"></script>
 

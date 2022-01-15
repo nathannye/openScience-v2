@@ -70,14 +70,15 @@ openScience.split = new SplitText(openScience, {
   type: "chars",
 });
 
-gsap.set(html, {
-  overflowY: "hidden",
-});
+// gsap.set(html, {
+//   overflowY: "hidden",
+// });
 
 const titleTL = gsap.timeline({
   onComplete: function () {
-    titleTL.invalidate(true);
-    titleTL.kill(true);
+    titleTL.invalidate();
+    titleTL.kill();
+    ScrollTrigger.refresh();
   },
 });
 
@@ -156,7 +157,7 @@ titleTL
     {
       autoAlpha: 0,
       y: 20,
-      rotateY: -20,
+      rotateY: -8,
       color: ylw,
       ease: "power2.out",
       stagger: 0.09,
@@ -179,7 +180,6 @@ titleTL
   .to(html, {
     overflowY: "auto",
   });
-
 // let audioAskTL = gsap.timeline({
 //   paused: true,
 //   onComplete: function () {
@@ -229,20 +229,23 @@ soundButtons.forEach((button) => {
 });
 
 function createIntroOutTL() {
+  ScrollTrigger.refresh();
   let introOutTL = gsap.timeline({
     scrollTrigger: {
       trigger: "#introPanel",
       start: "top top",
       end: "bottom top",
       scrub: 1,
+      pinSpacer: false,
       pin: "#introPanel",
       paused: true,
       onComplete: function () {
-        createFirstInterstitial();
         trigger();
+        ScrollTrigger.refresh();
       },
     },
   });
+
   introOutTL
     .to(
       openSource.split.chars,
@@ -297,7 +300,6 @@ function createIntroOutTL() {
     );
 }
 
-// let h4 = gsap.utils.toArray("section.interstitial h4");
 let h4 = document.querySelector("#whatDoProteins h4");
 
 let interstitialOne = document.querySelector("#whatDoProteins");
@@ -336,7 +338,7 @@ firstInterstitial
     filter: "blur(4px)",
   });
 
-let h2 = document.querySelectorAll("h2.fromFarAndAway");
+let h2 = document.querySelectorAll("h2.headAnim");
 function setupFarAndAway() {
   h2.forEach((e) => {
     if (e.anim) {
@@ -355,9 +357,9 @@ function setupFarAndAway() {
       },
       yPercent: 100,
       autoAlpha: 0,
-      duration: 1.3,
+      duration: 1,
       ease: "power4.inOut",
-      stagger: 0.0242,
+      stagger: 0.0142,
     });
   });
 }
@@ -369,19 +371,30 @@ setupFarAndAway();
 let paras = gsap.utils.toArray("p.paraAnim");
 
 function setupParas() {
-  paras.forEach(para);
+  paras.forEach((para) => {
+    if (para.anim) {
+      para.anim.progress(1).kill();
+      para.split.revert();
+    }
+    para.split = new SplitText(para, {
+      type: "lines",
+    });
+    para.anim = gsap.from(para.split.lines, {
+      scrollTrigger: {
+        start: "top 74%",
+        trigger: para,
+      },
+      autoAlpha: 0,
+      y: 15,
+      rotateY: -8,
+      ease: "power2.out",
+      stagger: 0.09,
+      duration: 0.9,
+    });
+  });
 }
-
-// function setupParas() {
-//   paras.forEach((para) => {
-//     para.split = new SplitText(para, {
-//       type: "lines",
-//     });
-//   });
-// }
-
-// document.addEventListener("refresh", setupParas);
-// setupParas();
+ScrollTrigger.addEventListener("refresh", setupParas);
+setupParas();
 
 // Nav Markers Animations
 
@@ -478,7 +491,7 @@ gsap.to(images, {
   ease: "power3.inOut",
   clipPath: "polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)",
   stagger: 0.17,
-  onComplete: createImageParallax,
+  // onComplete: createImageParallax,
 });
 
 function createImageParallax() {
@@ -520,48 +533,24 @@ function createImageParallax() {
   });
 }
 
-let dangerArea = document.getElementById("whyDoesFoldingMatter");
-
-// let wdfmTL = gsap.timeline({
-//   paused: true,
-//   scrollTrigger: {
-//     start: "top center",
-//     trigger: dangerArea,
-//     toggleActions: "restart reset restart restart",
-//   },
-// });
-
-// wdfmTL
-//   .to(html, {
-//     background: "#e32121",
-//     duration: 2,
-//   })
-//   .to(nglStage, {
-//     filter: "blur(13px)",
-//     duration: 4.5,
-//     ease: "power2.i nOut",
-//   });
-
-let peptideContainer = document.getElementById("peptideAnimationContainer");
-
 function LottieScrollTrigger(vars) {
-  let playhead = { frame: 0 },
-    target = gsap.utils.toArray(vars.target)[0],
-    speeds = { slow: "+=2000", medium: "+=1000", fast: "+=500" },
-    st = {
-      trigger: target,
-      pin: true,
-      start: "top top",
-      end: speeds[vars.speed] || "+=1000",
-      scrub: 1,
-    },
-    animation = lottie.loadAnimation({
-      container: target,
-      renderer: vars.renderer || "svg",
-      loop: false,
-      autoplay: false,
-      path: vars.path,
-    });
+  var playhead = { frame: 0 };
+  var target = gsap.utils.toArray(vars.target)[0];
+  var speeds = { slow: "+=2000", medium: "+=1000", fast: "+=500" };
+  var st = {
+    trigger: target,
+    pin: true,
+    start: "top top",
+    end: speeds[vars.speed] || "+=1000",
+    scrub: 1,
+  };
+  var animation = lottie.loadAnimation({
+    container: target,
+    renderer: vars.renderer || "svg",
+    loop: false,
+    autoplay: false,
+    path: vars.path,
+  });
   for (let p in vars) {
     // let users override the ScrollTrigger defaults
     st[p] = vars[p];
@@ -577,20 +566,17 @@ function LottieScrollTrigger(vars) {
     ScrollTrigger.sort();
     ScrollTrigger.refresh();
   });
+
+  animation.addEventListener("DOMLoaded", (event) => {});
+
   return animation;
 }
 
 LottieScrollTrigger({
   target: "#peptideAnimationContainer",
-<<<<<<< HEAD
-  path: "https://assets6.lottiefiles.com/packages/lf20_wxucs4yt.json",
-=======
-  path: "https://assets7.lottiefiles.com/packages/lf20_m4lh7lvj.json",
->>>>>>> parent of f197bc6 (layed framework for peptide animation)
-  speed: "+=10000",
-  scrub: 1,
-  markers: true,
-  trigger: peptideContainer,
-  start: "top top",
-  end: "bottom bottom",
+  path: "https://assets3.lottiefiles.com/packages/lf20_pttgqhi8.json",
+  trigger: document.getElementById("whatIsFolding"),
+  speed: "medium",
+  pin: true,
+  scrub: 1.2,
 });

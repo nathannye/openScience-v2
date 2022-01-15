@@ -168,6 +168,12 @@ a:visited {
   color: white;
 }
 
+p.paraAnim {
+  perspective: 200px;
+  transform: perspective(-200px);
+  transform-style: preserve-3d;
+}
+
 ::selection {
   color: var(--color-blue);
   background-color: #E3E3E3;
@@ -470,23 +476,80 @@ section#whatIsFolding {
 
 section#whatIsFolding .panelInnerLimit {
   width: 87.8%;
-  max-width: 350px;
+  max-width: 550px;
 }
 
-section#whatIsFolding #peptideAnimationContainer {
+section#whatIsFolding .panelInnerLimit #peptideAnimationContainer {
   height: 100%;
   flex-grow: 1;
-  width: 30%;
   min-width: 300px;
 }
 
-section#whatIsFolding #peptideAnimationContainer svg {
+section#whatIsFolding .panelInnerLimit #peptideAnimationContainer svg {
   width: 500px !important;
+  display: block;
 }
 
-section#whatIsFolding #peptideAnimationContainer svg > g {
+section#whatIsFolding .panelInnerLimit #peptideAnimationContainer svg > g {
   width: 100% !important;
   height: 100% !important;
+}
+
+.dangerMarker {
+  position: relative;
+}
+
+.dangerMarker .middleCircle {
+  background: var(--color-red);
+  width: 42px;
+  border-radius: 200px;
+  height: 42px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.dangerMarker .middleCircle .exclamation {
+  height: 100%;
+  width: 100%;
+}
+
+.dangerMarker .middleCircle .exclamation div {
+  background: white;
+}
+
+.dangerMarker .middleCircle .exclamation div:first-child {
+  height: 50%;
+  width: 13%;
+  margin-bottom: 5%;
+}
+
+.dangerMarker .middleCircle .exclamation div:last-child {
+  height: 20%;
+  width: 13%;
+}
+
+.dangerMarker .dangerRing {
+  position: absolute;
+  width: 110px;
+  transform-origin: center center;
+  height: 110px;
+  border-radius: 400px;
+  top: 50%;
+  left: 50%;
+}
+
+.dangerMarker .solidRing {
+  border: var(--color-red) 3px solid;
+  transform: translate(-50%, -50%) rotate(50deg);
+  clip-path: polygon(51% 15%, 0% 100%, 100% 100%);
+}
+
+.dangerMarker .dashRing {
+  border: var(--color-red) 4px dotted;
+  transform: translate(-50%, -50%) rotate(-50deg);
+  transform-origin: 50% 50%;
+  clip-path: polygon(51% 15%, 0% 100%, 100% 100%);
 }
 
 section#whyDoesFoldingMatter {
