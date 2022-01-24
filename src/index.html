@@ -6,23 +6,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Open Source, Open Science</title>
     <link rel="stylesheet" href="./styles/styles.css" />
-    <link rel="preconnect" href="https://use.typekit.net" />
+    <link rel="preconnect" href="https://use.typekit.net/" />
     <link rel="stylesheet" href="https://use.typekit.net/jih6lvv.css" />
   </head>
   <body>
+    <div id="grain"></div>
+    <div id="viewport"></div>
+    <header>
+      <div id="soundIndicatorContainer">
+        <div id="soundLabelSwitch">
+          <h5>sound</h5>
+          <div>
+            <h5>off</h5>
+            <h5>on</h5>
+          </div>
+        </div>
+      </div>
+      <div id="hamburgerIcon"></div>
+    </header>
+
+    <div id="mobileMenu">
+      <div id="mobileNav">
+        <a href="#introPanelRef">
+          <h1>Introduction</h1>
+        </a>
+        <a href="#whatIsFoldingRef">
+          <h1>What is Protein Folding?</h1>
+        </a>
+        <a href="#whyDoesFoldingMatterRef">
+          <h1>Why Does Folding Matter?</h1>
+        </a>
+        <a href="#whyDoWeNeedRef">
+          <h1>Why Do We Need Computers?</h1>
+        </a>
+        <a href="#numberOfUsersPanelRef">
+          <h1>Folding@Home during COVID-19</h1>
+        </a>
+        <a href="#publicInformationRef">
+          <h1>Public Domain</h1>
+        </a>
+        <a href="#helpingReduceCostsRef">
+          <h1>Helping Reduce Costs</h1>
+        </a>
+        <a href="#howCanYouRef">
+          <h1>Get Involved</h1>
+        </a>
+      </div>
+    </div>
     <div id="scrollIndicator">
       <div></div>
       <h4></h4>
     </div>
-    <div id="soundIndicatorContainer">
-      <div id="soundLabelSwitch">
-        <h5>sound</h5>
-        <div>
-          <h5>off</h5>
-          <h5>on</h5>
-        </div>
-      </div>
-    </div>
+
     <nav>
       <div>
         <a href="#introPanelRef">
@@ -43,11 +78,11 @@
         </a>
         <a href="#numberOfUsersPanelRef">
           <div class="navMarker"></div>
-          <p>Folding@Home Responds to COVID-19</p>
+          <p>Folding@Home during COVID-19</p>
         </a>
         <a href="#publicInformationRef">
           <div class="navMarker"></div>
-          <p>Information In the Public Domain</p>
+          <p>Public Information</p>
         </a>
         <a href="#helpingReduceCostsRef">
           <div class="navMarker"></div>
@@ -60,9 +95,6 @@
       </div>
     </nav>
     <main>
-      <div id="grain"></div>
-      <div id="viewport"></div>
-      <div id="cartoonStage"></div>
       <section id="soundAsk">
         <div>
           <h2 class="fromFarAndAway">
@@ -80,7 +112,7 @@
           </div>
         </div>
       </section>
-      <section class="panel lefty" id="introPanel">
+      <section class="panel lefty contentPanel" id="introPanel">
         <div class="dangerMarker">
           <div class="middleCircle">
             <div class="exclamation">
@@ -109,60 +141,29 @@
           <h4>what do proteins have to do with computers?</h4>
         </div>
       </section>
-      <!-- <section class="panel" id="explainFoldingGroup">
-        <div id="scrollingContainer">
-          <div id="WIF">
-            <h4>what is protein folding?</h4>
-            <h2 class="fromFarAndAway">
-              Proteins are the basis for cellular function. But to do their
-              work, they must assemble themselves into a specific shape, or
-              ‘fold’.
-            </h2>
-          </div>
-          <div id="WIFI">
-            <h4>why does folding matter?</h4>
-            <h2 class="fromFarAndAway">
-              Terminal diseases, like Alzheimer’s, Cancer, and Cystic Fibrosis
-              are believed to be caused by protein misfolds.
-            </h2>
-            <p>
-              When we discover how, and why proteins fold into specific
-              structures, we can understand what makes things go wrong. Helping
-              us develop therapies for previously incurable diseases.
-            </p>
-            <cite><a href="">Courtesy: Harvard.edu</a></cite>
-          </div>
-        </div>
-        <div id="peptideAnimationContainer"></div>
-      </section> -->
       <section class="panel contentPanel" id="whatIsFolding">
         <a id="whatIsFoldingRef" class="jumpTo"></a>
-        <div class="panelInnerLimit">
+        <div class="panelInnerLimit" id="whatIsFoldingText">
           <div>
-            <h4>what is protein folding?</h4>
-            <h2 class="headAnim">
-              Proteins are the basis for cellular function. But to do their
-              work, they must assemble themselves into a specific shape, or
-              ‘fold’.
-            </h2>
+            <div>
+              <h4>what is protein folding?</h4>
+              <h2>
+                Proteins are the basis for cellular function. But to do their
+                work, they must assemble themselves into a specific shape, or
+                ‘fold’.
+              </h2>
+            </div>
+            <p>
+              Proteins are tiny chains of amino acids that perform every
+              function in the body. Each protein has a specific function when
+              folded, be it . The problem being: we don’t know why they fold in
+              specific ways, making it nearly impossible to tell how a specific
+              protein does its job.
+            </p>
           </div>
-          <p class="paraAnim">
-            Proteins are tiny chains of amino acids that perform every function
-            in the body. Each protein has a specific function when folded, be it
-            . The problem being: we don’t know why they fold in specific ways,
-            making it nearly impossible to tell how a specific protein does its
-            job.
-          </p>
-        </div>
-        <div id="peptideAnimationContainer"></div>
-      </section>
-
-      <!-- <section class="panel contentPanel" id="whyDoesFoldingMatter">
-        <a id="whyDoesFoldingMatterRef" class="jumpTo"></a>
-        <div>
           <div>
             <h4>why does folding matter?</h4>
-            <h2 class="fromFarAndAway">
+            <h2>
               Terminal diseases, like Alzheimer’s, Cancer, and Cystic Fibrosis
               are believed to be caused by protein misfolds.
             </h2>
@@ -172,10 +173,12 @@
               us develop therapies for previously incurable diseases.
             </p>
             <cite><a href="">Courtesy: Harvard.edu</a></cite>
+          </div>
         </div>
-        <div class="dangerCloud"></div>
-      </section> -->
-
+        <div id="peptideAnimationContainer">
+          <div id="peptideSlider"></div>
+        </div>
+      </section>
       <section class="panel contentPanel fullWidthPanel" id="whyDoWeNeed">
         <a id="whyDoWeNeedRef" class="jumpTo"></a>
         <div>
@@ -193,7 +196,7 @@
             </p>
           </div>
         </div>
-        <h1 id="aminoNumbers">10000000000000000000000000</h1>
+        <h1 id="millionAcross">1000000000</h1>
       </section>
       <section class="panel interstitial">
         <h4>Just how powerful do computers need to be?</h4>
@@ -357,20 +360,20 @@
         </div>
       </section>
     </main>
-    <script type="module" src="./js/nglScene.js"></script>
-    <script src="./js/soundToggle.js"></script>
-    <script src="./js/barGraphDiv.js"></script>
-    <!-- <script type="module" src="./js/barGraph.js"></script> -->
-    <script type="module" src="./js/barChart.js"></script>
-    <!-- <script type="module" src="./js/threeScenes.js"></script> -->
-    <script type="module" src="./js/waveCanvas/app.js"></script>
-
-    <script src="./index.js" type="module"></script>
-    <script
+    <!-- <script
       src="https://cdnjs.cloudflare.com/ajax/libs/ngl/2.0.0-dev.39/ngl.js"
       integrity="sha512-L4e1Z9pbAAsBXDzbcitJzkcRIHq6PUF/6GSR5UbA38XiaQ3TAS3422wJ5DllYOlwkpKUXInFt1b+C06NDvtmTg=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
+    <script type="module" src="./js/nglScene.js"></script> -->
+    <script src="./js/soundToggle.js"></script>
+    <script type="module" src="./js/barChart.js"></script>
+    <script type="module" src="./js/waveCanvas/app.js"></script>
+    <script src="./index.js" type="module"></script>
+    <script type="module" src="./js/navMarkerAnim.js"></script>
+    <script type="module" src="./js/peptideAnim.js"></script>
+    <script type="module" src="./js/hamburgerAnim.js"></script>
+    <script type="module" src="./js/introAnims.js"></script>
   </body>
 </html>

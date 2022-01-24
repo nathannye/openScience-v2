@@ -3,13 +3,9 @@ import * as d3 from "d3";
 import { gsap } from "gsap/all";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { axisLeft, xml } from "d3";
+import colors from "./colors";
 
 gsap.registerPlugin(ScrollTrigger);
-
-const teal = "#13f1df";
-const ylw = "#FFE65C";
-const blue = "#001f4e";
-const white = "white";
 
 var width = window.innerWidth;
 
@@ -40,7 +36,7 @@ const y = d3
 
 svg
   .append("g")
-  .attr("fill", ylw)
+  .attr("fill", colors.ylw)
   .selectAll("rect")
   .data(data.sort((a, b) => d3.ascending(a.users, b.users)))
   .join("rect")

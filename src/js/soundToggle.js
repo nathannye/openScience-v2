@@ -6,9 +6,10 @@ import { Howl, Howler } from "howler";
 gsap.registerPlugin(SplitText);
 gsap.registerPlugin(ScrollTrigger);
 
+var soundOn = false;
+
+let soundButtons = gsap.utils.toArray("#soundButtons button");
 let soundIndi = document.querySelector("div#soundIndicatorContainer");
-const sound = document.querySelector("audio#normalSoundtrack");
-const darkSound = document.querySelector("audio#darkSoundtrack");
 
 let soundLabel = gsap.utils.toArray("div#soundLabelSwitch > div > h5");
 
@@ -40,7 +41,7 @@ labelTL
   .to(
     labelOff.split.chars,
     {
-      yPercent: -100,
+      yPercent: -50,
       delay: 0.2,
       duration: 0.32,
       ease: "power2.inOut",
@@ -50,25 +51,29 @@ labelTL
   );
 
 var tracks = new Howl({
-  src: [
-    require("../audio/ambientSoundtrack.mp3"),
-    // require("../audio/darkSoundtrack.mp3"),
-  ],
-  // sprite: {
-  //   normal: [500, 65000],
-  //   // dark: [500, 221000],
-  // },
-  // autoplay: false,
-  onload: () => {
-    console.log("sound loaded");
-  },
-  onloaderror: (id, err) => {
-    console.log("sound load failed", id + err);
-  },
+  src: [require("../audio/ambientSoundtrack.mp3")],
 });
 
-const soundFadeDuration = 1750;
-var soundOn;
+var darkTrack = new Howl({
+  src: [require("../audio/darkSoundtrack.mp3")],
+});
+
+// Sound Ask Controllers
+let soundOnBtn = document.querySelector("#yesSoundContainer > button");
+let soundOffBtn = document.querySelector("#noSoundContainer > button");
+
+const soundFadeDuration = 1050;
+
+// soundOnBtn.addEventListener("click", (event) => {
+//   tracks.play();
+//   tracks.fade(0, 1, soundFadeDuration);
+//   var soundOn = true;
+// });
+
+// soundOffBtn.addEventListener("click", (event) => {
+//   var soundOn = false;
+//   tracks.fade(1, 0, soundFadeDuration);
+// });
 
 soundIndi.addEventListener("click", (event) => {
   if (!tracks.playing()) {
@@ -79,7 +84,6 @@ soundIndi.addEventListener("click", (event) => {
     var soundOn = true;
   } else {
     // Run these if sound is already playing
-    // soundId = tracks.pause("nor`ma`l");
     tracks.fade(1, 0, soundFadeDuration);
     labelTL.reverse();
     setTimeout(() => {
@@ -90,66 +94,79 @@ soundIndi.addEventListener("click", (event) => {
   }
 });
 
-// soundIndi.addEventListener("click", (event) => {
-//   disableRapid();
-//   if (isPlaying === false) {
-//     // Functions when sound starts playing
-//     sound.play();
-//     labelTL.play();
-//     gsap.fromTo(sound, { volume: 0 }, { volume: 1, duration: soundFade });
-//     isPlaying = true;
-//   } else if (isPlaying) {
-//     // Functions when sound gets paused
-//     labelTL.reverse();
-//     gsap.fromTo(
-//       sound,
-//       { volume: 1 },
-//       {
-//         volume: 0,
-//         duration: soundFade,
-//         onComplete: () => {
-//           sound.pause();
-//           isPlaying = false;
-//         },
-//       }
-//     );
-//     if (darkSound.playing) {
-//       darkSound.pause();
-//     }
-//   }
+let dangerSeriesTrigger = document.getElementById("peptideSlider");
+
+dangerSeriesTrigger.addEventListener("click", (event) => {
+  // if (soundOn) {
+
+  tracks.fade(1, 0, soundFadeDuration);
+  setTimeout(() => {
+    tracks.pause();
+  }, soundFadeDuration);
+
+  darkTrack.play();
+  darkTrack.fade(0, 1, soundFadeDuration);
+  // }
+});
+
+export default function soundDangerReverse() {
+  darkTrack.fade(1, 0, soundFadeDuration);
+  setTimeout(() => {
+    darkTrack.pause();
+  }, soundFadeDuration);
+
+  tracks.fade(1, 0, soundFadeDuration);
+  setTimeout(() => {
+    tracks.pause();
+  }, soundFadeDuration);
+}
+
+// let whyDoesFoldingMatter = document.querySelector("#whyDoesFoldingMatter");
+
+// let audioAskTL = gsap.timeline({
+//   paused: true,
+//   onComplete: function () {
+//     // titleTL.play();
+//     audioAskTL.kill();
+//   },
+// });
+// audioAskTL = null;
+
+// audioAskTL
+//   .to(
+//     soundAskHeader,
+//     {
+//       duration: 1.28,
+//       autoAlpha: 0,
+//       z: 30,
+//       ease: "power4.inOut",
+//       filter: "blur(4px)",
+//     },
+//     "start"
+//   )
+//   .to(
+//     soundButtons,
+//     {
+//       z: 40,
+//       autoAlpha: 0,
+//       ease: "power4.inOut",
+//       filter: "blur(2px)",
+//       stagger: 0.05,
+//       delay: 0.148,
+//     },
+//     "start"
+//   )
+//   .to(soundAsk, {
+//     autoAlpha: 0,
+//     duration: 0.7,
+//     ease: "power2.inOut",
+//   });
+// .to(soundAsk, {
+//   display: none,
 // });
 
-// Controlling dark soundtrack on Why Does Folding Matter section
-
-let whyDoesFoldingMatter = document.querySelector("#whyDoesFoldingMatter");
-
-// ScrollTrigger.create({
-//   trigger: whyDoesFoldingMatter,
-//   start: "top center",
-//   onEnter: () => {
-//     if (isPlaying === true) {
-//       gsap.fromTo(sound, { volume: 1 }, { volume: 0, duration: soundFade });
-
-//       gsap.fromTo(
-//         darkSound,
-//         { volume: 0 },
-//         { volume: 1, duration: soundFade }
-//       );
-//     } else if (isPlaying === false) {
-//       darkSound.play();
-//     }
-//   }),
-
-// ScrollTrigger.create({
-//   trigger: whyDoesFoldingMatter,
-//   start: "top center",
-//   onEnter: () => {
-//     if (isPlaying === true) {
-//       gsap.fromTo(sound, { volume: 1 }, { volume: 0, duration: soundFade });
-
-//       gsap.fromTo(darkSound, { volume: 0 }, { volume: 1, duration: soundFade });
-//     } else if (isPlaying === false) {
-//       darkSound.play();
-//     }
-//   },
+// soundButtons.forEach((button) => {
+//   button.addEventListener("click", (event) => {
+//     audioAskTL.play();
+//   });
 // });
