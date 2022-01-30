@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 var soundOn = false;
 
 let soundButtons = gsap.utils.toArray("#soundButtons button");
-let soundIndi = document.querySelector("div#soundIndicatorContainer");
+export const soundIndi = document.querySelector("div#soundIndicatorContainer");
 
 let soundLabel = gsap.utils.toArray("div#soundLabelSwitch > div > h5");
 
@@ -76,7 +76,7 @@ const soundFadeDuration = 1050;
 // });
 
 soundIndi.addEventListener("click", (event) => {
-  if (!tracks.playing()) {
+  if (!tracks.playing() || !darkTrack.playing()) {
     // Run these if sound isn't playing already
     labelTL.play();
     tracks.play();
@@ -109,13 +109,13 @@ dangerSeriesTrigger.addEventListener("click", (event) => {
   // }
 });
 
-export default function soundDangerReverse() {
+export function soundDangerReverse() {
   darkTrack.fade(1, 0, soundFadeDuration);
   setTimeout(() => {
     darkTrack.pause();
   }, soundFadeDuration);
 
-  tracks.fade(1, 0, soundFadeDuration);
+  tracks.fade(0, 1, soundFadeDuration);
   setTimeout(() => {
     tracks.pause();
   }, soundFadeDuration);

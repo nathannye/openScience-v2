@@ -55,7 +55,6 @@ h4.split = new SplitText(h4, {
   type: "words",
 });
 
-
 let h2 = document.querySelectorAll("h2.headAnim");
 function setupFarAndAway() {
   h2.forEach((e) => {

@@ -2,6 +2,8 @@ import gsap from "gsap";
 import SplitText from "gsap/SplitText";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import colors from "./colors";
+import { hamburgerContainer } from "./hamburgerAnim";
+import { soundIndi } from "./soundToggle";
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(SplitText);
 
@@ -70,6 +72,7 @@ titleTL
     },
     "stageIn"
   )
+
   .to(
     openSource.split.chars,
     {
@@ -126,6 +129,25 @@ titleTL
       ease: "back.out(1.3)",
     },
     "start+=.6"
+  )
+  .from(
+    soundIndi,
+    {
+      autoAlpha: 0,
+      duration: 0.67,
+    },
+    ">"
+  )
+  .from(
+    hamburgerContainer,
+    {
+      scaleX: 0,
+      duration: 0.69,
+      ease: "power3.inOut",
+      delay: 0.18,
+      // transformOrigin: "5% center",
+    },
+    "<"
   )
   // .call(createIntroOutTL)
   // .call(interstitialOneCreate)
