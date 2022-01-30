@@ -5,6 +5,7 @@ import lottie from "lottie-web";
 import colors from "./colors";
 import soundDangerReverse from "./soundToggle";
 import { color, cross, reduce } from "d3";
+import { nglStage } from "./introAnims";
 
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(SplitText);
@@ -18,6 +19,7 @@ let firstPara = firstText.querySelector("p");
 let secondText = document.querySelector("#whatIsFoldingText > div:last-child");
 let secondHead = secondText.querySelector("h2");
 let secondPara = secondText.querySelector("p");
+let html = document.querySelector("html");
 
 let firstTextAnim = gsap.timeline({
   paused: true,
@@ -56,8 +58,6 @@ firstTextAnim
 //     firstHead.split.revert();
 //   }
 // }
-
-let html = document.querySelector("html");
 
 var peptideAnim = lottie.loadAnimation({
   container: peptideAnimContainer,
@@ -115,9 +115,6 @@ export default function createPeptideTL() {
   });
   peptideTL
     .call(peptideTL.scrollTrigger.refresh())
-    // .to(html, {
-    //   overflowY: "hidden",
-    // })
     .from(peptideAnimContainer, {
       autoAlpha: 0,
       filter: "blur(6px)",
@@ -154,6 +151,14 @@ dangerTL
     },
     "swap"
   )
+  .to(
+    nglStage,
+    {
+      filter: "blur(5px) !important",
+      autoAlpha: 0.3,
+    },
+    "swap"
+  )
   .call(peptideAnim.playSegments([0, 130]))
   .to(dangerSeriesTrigger, {
     autoAlpha: 0,
@@ -161,6 +166,14 @@ dangerTL
   });
 dangerSeriesTrigger.addEventListener("click", (event) => {
   dangerTL.play();
+});
+
+let dangerClearTL = gsap.timeline({
+  paused: true,
+});
+
+dangerClearTL.to(html, {
+  overflowY: "auto",
 });
 
 // Danger Click Targets

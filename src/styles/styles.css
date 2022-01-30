@@ -487,6 +487,9 @@ header div#soundIndicatorContainer canvas#soundIndicator {
   height: 100%;
   position: fixed;
   z-index: 1;
+  perspective: 200px;
+  transform: perspective(-200px);
+  transform-style: preserve-3d;
   transform: translateZ(0);
   left: 0;
 }
@@ -495,7 +498,6 @@ header div#soundIndicatorContainer canvas#soundIndicator {
   height: 100vh !important;
   width: 100% !important;
   position: fixed;
-  filter: hue-rotate(142) contrast(1.5);
   top: 0;
   left: 0;
 }

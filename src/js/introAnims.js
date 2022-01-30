@@ -8,9 +8,10 @@ gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(SplitText);
 
 // Define high level elements
-let nglStage = document.querySelector("#viewport");
+export const nglStage = document.querySelector("#viewport");
 let navMarkers = gsap.utils.toArray(".navMarker");
 let html = document.querySelector("html");
+let grain = document.getElementById("grain");
 
 let introPara = document.querySelector("#introPanel p");
 
@@ -35,6 +36,13 @@ let titleTL = gsap.timeline({
   },
 });
 
+openSource.split = new SplitText(openSource, {
+  type: "chars",
+});
+openScience.split = new SplitText(openScience, {
+  type: "chars",
+});
+
 gsap.set(openSource.split.chars, {
   opacity: 0,
   yPercent: 30,
@@ -51,28 +59,30 @@ titleTL
     autoAlpha: 1,
     duration: 0.01,
   })
-  .fromTo(
-    nglStage,
-    { filter: "saturate(0)", autoAlpha: 0, filter: "blur(13px)" },
-    {
-      filter: "saturate(1)",
-      filter: "blur(1px)",
-      duration: 3,
-      autoAlpha: 1,
-      ease: "power2.out",
-    },
-    "start",
-    "stageIn"
-  )
+  // .fromTo(
+  //   nglStage,
+  //   { filter: "saturate(0)", autoAlpha: 0, filter: "blur(13px)" },
+  //   {
+  //     filter: "saturate(1)",
+  //     filter: "blur(1px)",
+  //     duration: 3,
+  //     autoAlpha: 1,
+  //     ease: "power2.out",
+  //   },
+  //   "start",
+  //   "stageIn"
+  // )
+  .from(nglStage, {
+    autoAlpha: 0,
+  })
   .from(
     grain,
     {
-      opacity: 0,
+      autoAlpha: 0,
       duration: 1.2,
     },
     "stageIn"
   )
-
   .to(
     openSource.split.chars,
     {
@@ -149,7 +159,6 @@ titleTL
     },
     "<"
   )
-  // .call(createIntroOutTL)
   // .call(interstitialOneCreate)
   .to(html, {
     overflowY: "auto",

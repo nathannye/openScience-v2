@@ -22,15 +22,9 @@ setupIntroParaSplit();
 
 let content = document.querySelector("main");
 
-let titles = document.querySelectorAll("#introHeadingContainer h1");
-
 let introPanel = document.querySelector("#introPanel");
 
-let openSource = titles[0];
-let openScience = titles[1];
-
 let nglStage = document.querySelector("#viewport");
-let grain = document.querySelector("#grain");
 let html = document.querySelector("html");
 
 gsap.to(nglStage, {
@@ -42,12 +36,6 @@ gsap.to(nglStage, {
     end: "bottom bottom",
   },
   yPercent: -3.4,
-});
-openSource.split = new SplitText(openSource, {
-  type: "chars",
-});
-openScience.split = new SplitText(openScience, {
-  type: "chars",
 });
 
 let h4 = document.querySelector("#whatDoProteins h4");
