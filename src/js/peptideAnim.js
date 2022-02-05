@@ -1,17 +1,25 @@
 import gsap from "gsap";
 import SplitText from "gsap/SplitText";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import Draggable from "gsap/Draggable";
+import InertiaPlugin from "gsap/InertiaPlugin";
 import lottie from "lottie-web";
+import CustomEase from "gsap/src/CustomEase";
 import colors from "./colors";
+import DrawSVGPlugin from "gsap/DrawSVGPlugin";
 import soundDangerReverse from "./soundToggle";
 import { color, cross, reduce } from "d3";
 import { nglStage } from "./introAnims";
 
 gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(Draggable);
 gsap.registerPlugin(SplitText);
+gsap.registerPlugin(CustomEase);
+gsap.registerPlugin(InertiaPlugin);
+gsap.registerPlugin(DrawSVGPlugin);
 
 let peptideAnimContainer = document.getElementById("peptideAnimationContainer");
-
+let peptideLottieContainer = document.getElementById("peptideLottieContainer");
 let peptideAnimText = document.getElementById("whatIsFoldingText");
 let firstText = document.querySelector("#whatIsFoldingText > div:first-child");
 let firstHead = firstText.querySelector("h2");
@@ -60,7 +68,7 @@ firstTextAnim
 // }
 
 var peptideAnim = lottie.loadAnimation({
-  container: peptideAnimContainer,
+  container: peptideLottieContainer,
   renderer: "svg",
   loop: false,
   quality: "low",
@@ -74,13 +82,33 @@ var frameSegments = [
   [181, 240],
 ];
 
-let peptideOutTL = gsap.timeline({
+let dangerClearTL = gsap.timeline({
   paused: true,
 });
 
-peptideOutTL.to(secondText, {});
+dangerClearTL
+  .to(html, {
+    overflowY: "auto",
+  })
+  .to(nglStage, {
+    filter: "blur(4px) saturate(1) hue-rotate(0deg)",
+    duration: 3,
+  });
+
+// peptideOutTL.to(secondText, {});
 
 peptideAnim.addEventListener("DOMLoaded", (event) => {
+  // let errorTwo = document.getElementById("errorTwo");
+  // var appendMe = lottie.loadAnimation({
+  //   container: errorTwo,
+  //   renderer: "svg",
+  //   loop: true,
+  //   autoplay: true,
+  //   path: "https://assets5.lottiefiles.com/packages/lf20_szqyrfxy.json",
+  // });
+
+  // console.log(appendMe);
+
   let dangerClickTargets = gsap.utils.toArray(".errorTarget");
   dangerClickTargets.forEach((target) => {
     target.addEventListener("click", (event) => {
@@ -89,6 +117,7 @@ peptideAnim.addEventListener("DOMLoaded", (event) => {
       if (dangerClickClear === 3) {
         soundDangerReverse;
         peptideAnim.playSegments([131, 180]);
+        dangerClearTL.play();
       }
     });
   });
@@ -102,6 +131,137 @@ gsap.set(secondText, {
   autoAlpha: 0,
 });
 
+gsap.set(peptideLottieContainer, {
+  filter: "blur(5.5px)",
+});
+
+let dangerSeriesTrigger = document.getElementById("peptideSliderContainer");
+let peptideSVG = peptideLottieContainer.querySelector(
+  "svg:not(#sliderCircle, #sliderCircleBacker)"
+);
+
+let dangerTL = gsap.timeline({
+  paused: true,
+});
+
+let flickerTL = gsap.timeline({
+  paused: true,
+});
+
+flickerTL.yoyo(true);
+flickerTL.repeat(-1);
+
+flickerTL
+  .to(nglStage, {
+    filter: "blur(10px) saturate(1.3) brightness(.93)",
+    ease: "rough({ strength: 1, points: 12, template: none.in, taper: none, randomize: true, clamp: true })",
+    duration: 3,
+  })
+  .to(nglStage, {
+    filter: "blur(9px) saturate(1.2) brightness(.85)",
+    ease: "rough({ strength: 1, points: 12, template: none.in, taper: none, randomize: true, clamp: true })",
+    duration: 4.2,
+  });
+
+dangerTL
+  // Arrives at danger state
+  .to(peptideLottieContainer, {
+    filter: "blur(0px)",
+    duration: 0.5,
+  })
+  .to(
+    secondText,
+    {
+      autoAlpha: 1,
+      duration: 0.45,
+    },
+    "swap",
+    ">"
+  )
+  .to(
+    firstText,
+    {
+      autoAlpha: 0,
+      duration: 0.45,
+    },
+    "swap"
+  )
+  .call(flickerTL.play())
+  .call(peptideAnim.playSegments([0, 130]))
+  .to(dangerSeriesTrigger, {
+    autoAlpha: 0,
+    duration: 0.4,
+  });
+
+let draggerTL = gsap.timeline({
+  paused: true,
+});
+
+let knob = document.getElementById("peptideKnob");
+let sliderCirclePath = document.querySelector("#sliderCircle > circle");
+
+draggerTL
+  .to(
+    sliderCirclePath,
+    {
+      drawSVG: "0%",
+      duration: 0.5,
+      ease: "power2.inOut",
+    },
+    "start"
+  )
+  .to(
+    knob,
+    {
+      scale: 0.4,
+      duration: 0.31,
+      ease: CustomEase.create(
+        "custom",
+        "M0,0 C0,0 0.056,-0.002 0.09,-0.011 0.174,-0.034 0.201,-0.079 0.286,-0.102 0.325,-0.112 0.385,-0.15 0.45,-0.132 0.6,-0.088 0.696,-0.148 0.91,0.626 0.949,0.771 1,1 1,1 "
+      ),
+      autoAlpha: 0,
+      filter: "blur(4px)",
+    },
+    "start+=.37"
+  );
+
+function createPeptideDraggable() {
+  Draggable.create("#peptideSlider", {
+    inertia: true,
+    type: "rotation",
+
+    trigger: knob,
+    bounds: { maxRotation: 360, minRotation: 0 },
+    onThrowComplete: function () {
+      if (this.rotation === 360) {
+        draggerTL.play();
+        dangerTL.play();
+      }
+    },
+    onPress: function () {
+      gsap.to(knob, {
+        scale: 1.4,
+        color: colors.white,
+      });
+    },
+    onRelease: function () {
+      gsap.to(knob, {
+        scale: 1,
+        background: colors.ylw,
+      });
+    },
+    // onDrag: function () {
+    //   let d = this.rotation / 3.6;
+    //   let e = `${d}%`;
+    //   console.log(e);
+
+    //   gsap.to(sliderCirclePath, {
+    //     drawSVG: e,
+    //   });
+    // },
+  });
+}
+
 export default function createPeptideTL() {
   let peptideTL = gsap.timeline({
     paused: true,
@@ -113,67 +273,23 @@ export default function createPeptideTL() {
       pin: peptideAnimText,
     },
   });
+
   peptideTL
     .call(peptideTL.scrollTrigger.refresh())
-    .from(peptideAnimContainer, {
-      autoAlpha: 0,
-      filter: "blur(6px)",
-    })
-    .call(firstTextAnim.play);
+    .fromTo(
+      peptideSVG,
+      { autoAlpha: 0 },
+      { autoAlpha: 0.4, duration: 0.7, filter: "blur(8px)" }
+    )
+    .call(firstTextAnim.play)
+    .call(createPeptideDraggable);
 }
 
 peptideAnim.addEventListener("DOMLoaded", (event) => {
-  createPeptideTL();
-});
-
-let dangerSeriesTrigger = document.getElementById("peptideSlider");
-
-// Click to move TL to danger part
-let dangerTL = gsap.timeline({
-  paused: true,
-});
-
-dangerTL
-  // Arrives at danger state
-  .to(
-    secondText,
-    {
-      autoAlpha: 1,
-      duration: 0.45,
-    },
-    "swap"
-  )
-  .to(
-    firstText,
-    {
-      autoAlpha: 0,
-      duration: 0.45,
-    },
-    "swap"
-  )
-  .to(
-    nglStage,
-    {
-      filter: "blur(5px) !important",
-      autoAlpha: 0.3,
-    },
-    "swap"
-  )
-  .call(peptideAnim.playSegments([0, 130]))
-  .to(dangerSeriesTrigger, {
-    autoAlpha: 0,
-    duration: 0.4,
+  gsap.set(peptideSVG, {
+    filter: "blur(8px)",
   });
-dangerSeriesTrigger.addEventListener("click", (event) => {
-  dangerTL.play();
-});
-
-let dangerClearTL = gsap.timeline({
-  paused: true,
-});
-
-dangerClearTL.to(html, {
-  overflowY: "auto",
+  createPeptideTL();
 });
 
 // Danger Click Targets
@@ -231,98 +347,3 @@ millionTL
 //   },
 //   "start"
 // );
-
-let twoThouFlip = gsap.utils.toArray("#twoThou .numberFlipperContainer > div");
-let fiveThouFlip = gsap.utils.toArray(
-  "#fiveThou .numberFlipperContainer > div"
-);
-let crossOuts = gsap.utils.toArray(".crossOut");
-
-let twoThouChars = document.querySelectorAll(
-  "#twoThou .commaChar, #twoThou .dollarChar"
-);
-let fiveThouChars = document.querySelectorAll(
-  "#fiveThou .commaChar, #fiveThou .dollarChar"
-);
-
-let reduceCost = document.getElementById("helpingReduceCosts");
-
-let numbersFlipping = gsap.timeline({
-  scrollTrigger: {
-    trigger: reduceCost,
-    start: "top bottom-=44%",
-    markers: true,
-  },
-});
-gsap.set([twoThouFlip, fiveThouFlip], {
-  autoAlpha: 0,
-});
-
-numbersFlipping
-  .to(
-    fiveThouFlip,
-    {
-      yPercent: -75,
-      duration: 0.79,
-      autoAlpha: 1,
-
-      ease: "power3.inOut",
-      stagger: {
-        each: ".07",
-        ease: "power3.inOut",
-      },
-    },
-    "start"
-  )
-  .from(
-    fiveThouChars,
-    {
-      autoAlpha: 0,
-      stagger: 0.02,
-    },
-    "start"
-  )
-  .to(
-    twoThouFlip,
-    {
-      yPercent: -75,
-      autoAlpha: 1,
-
-      duration: 0.79,
-      ease: "power3.inOut",
-      stagger: {
-        each: ".07",
-        ease: "power3.inOut",
-      },
-    },
-    "start+=.28"
-  )
-  .from(
-    twoThouChars,
-    {
-      autoAlpha: 0,
-      stagger: 0.02,
-    },
-    "start+=.15"
-  )
-  .from(
-    crossOuts,
-    {
-      scaleX: 0,
-      transformOrigin: "left center",
-      ease: "power4.inOut",
-      duration: 0.58,
-      stagger: 0.08,
-    },
-    ">+=.05",
-    "crossOut"
-  )
-  .to(
-    [fiveThouChars, fiveThouFlip, twoThouChars, twoThouFlip],
-    {
-      opacity: 0.4,
-      duration: 0.32,
-      stagger: 0.01,
-    },
-    "crossOut-=.34"
-  );

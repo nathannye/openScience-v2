@@ -36,6 +36,10 @@ let titleTL = gsap.timeline({
   },
 });
 
+window.onload = () => {
+  titleTL.play();
+};
+
 openSource.split = new SplitText(openSource, {
   type: "chars",
 });
@@ -59,30 +63,21 @@ titleTL
     autoAlpha: 1,
     duration: 0.01,
   })
-  // .fromTo(
-  //   nglStage,
-  //   { filter: "saturate(0)", autoAlpha: 0, filter: "blur(13px)" },
-  //   {
-  //     filter: "saturate(1)",
-  //     filter: "blur(1px)",
-  //     duration: 3,
-  //     autoAlpha: 1,
-  //     ease: "power2.out",
-  //   },
-  //   "start",
-  //   "stageIn"
-  // )
-  .from(nglStage, {
-    autoAlpha: 0,
-  })
-  .from(
-    grain,
+  .fromTo(
+    nglStage,
+    { filter: "saturate(0) blur(13px)", autoAlpha: 0 },
     {
-      autoAlpha: 0,
-      duration: 1.2,
+      filter: "saturate(1) blur(1px)",
+      duration: 3.5,
+      delay: 0.8,
+      autoAlpha: 1,
     },
+    "start",
     "stageIn"
   )
+  // .from(nglStage, {
+  //   autoAlpha: 0,
+  // })
   .to(
     openSource.split.chars,
     {
@@ -111,21 +106,21 @@ titleTL
         ease: "power2.inOut",
         from: "start",
       },
-      duration: 1.3,
+      duration: 1.9,
       ease: "power4.inOut",
     },
-    "start+=1.35"
+    "start+=1.15"
   )
   .from(
     introPara.split.lines,
     {
       autoAlpha: 0,
-      y: 20,
+      y: 12,
       rotateY: -8,
       color: colors.ylw,
       ease: "power2.out",
       stagger: 0.09,
-      duration: 1.15,
+      duration: 1.8,
     },
     "start+=1.5"
   )

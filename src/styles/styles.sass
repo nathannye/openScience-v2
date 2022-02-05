@@ -32,8 +32,8 @@ $boundary: 87.8%
 	transition: cubic-bezier(.76,.03,.35,.99) .25s all
 
 @mixin has3D
-	perspective: 200px
-	transform: perspective(-200px)
+	perspective: 300px
+	transform: perspective(-500px)
 	transform-style: preserve-3d
 
 @mixin maxWidthXS
@@ -84,7 +84,7 @@ h1 > div, h2 > div, h3 > div, h4 > div, h5 > div, h6 > div, p > div
 	will-change: transform, opacity, position, color, visibility
 	
 a:visited, a.externalLink:visited
-	color: var(--color-white) !important
+	color: var(--color-white)
 	opacity: .4 !important
 
 h1, h2, h3, h4, h5, p, li, a
@@ -92,8 +92,8 @@ h1, h2, h3, h4, h5, p, li, a
 	div
 		@include has3D
 
-a
-	color: var(--color-white) !important
+a, cite > a
+	color: var(--color-white)
 
 h1
 	font-size: clamp(3.2em, calc(3.2rem + (21.8 - 3.2) * ((100vw - 48em) / (120 - 48))), 21.8em)
@@ -159,7 +159,6 @@ h5
 	h4
 		text-align: center
 
-
 p, ul, li, a, ol
 	font-size: clamp(1.33em, calc(1.33rem + (2.85 - 1.33) * ((100vw - 48em) / (120 - 48))), 2.85em)
 	@include fontTel
@@ -170,8 +169,20 @@ p, ul, li, a, ol
 
 cite > a, a.externalLink
 	margin-top: 1.25em
-	border-bottom: 1px solid white
+	position: relative
+	overflow-x: hidden
+	overflow-y: hidden
 	display: inline-block
+
+.underline, .underlineLeft
+	background: white
+	width: 100%
+	bottom: 2px
+	height: .75px
+	position: absolute
+
+.underlineLeft
+	transform: translateX(-100%)
 
 a
 	@include fontIvyNormal
@@ -466,8 +477,6 @@ header
 		height: 100vh !important
 		width: 100% !important
 		position: fixed
-		// filter: hue-rotate(142) contrast(1.5)
-		// transform: scale(3)
 		top: 0
 		left: 0
 
@@ -533,7 +542,7 @@ section#whatIsFolding
 	.panelInnerLimit
 		@include maxWidthS
 		height: 100%
-		
+
 	#peptideAnimationContainer
 		width: 50%
 		height: auto
@@ -541,13 +550,10 @@ section#whatIsFolding
 		flex-grow: 1
 		min-width: 300px
 
-		#peptideSlider
-			background: red
-			cursor: pointer
-			width: 50px
-			height: 50px
+		#peptideSliderContainer
+			width: 300px
+			height: 300px
 			z-index: 300
-			border-radius: 25px
 			position: absolute
 			top: 0
 			left: 0
@@ -555,7 +561,65 @@ section#whatIsFolding
 			right: 0
 			margin: auto
 
-		& > div:not(#peptideSlider)
+			svg#sliderCircle
+				display: inline-block
+				position: absolute
+				overflow: visible
+				top: 0
+				bottom: 0
+				z-index: 3
+				left: 0
+				right: 0
+				margin: auto
+
+				circle
+					stroke: var(--color-yellow)
+					fill: transparent
+					z-index: 3
+					stroke-width: 6px
+					transform-origin: center center
+					transform: rotate(90deg) scaleX(-1)
+
+			#sliderCircleBacker
+				display: inline-block
+				position: absolute
+				display: none
+				overflow: visible
+				top: 0
+				bottom: 0
+				z-index: 2
+				left: 0
+				right: 0
+				margin: auto
+
+				circle
+					stroke: var(--color-white);
+					z-index: 4
+					stroke-width: 6px
+					fill: transparent
+					transform-origin: center center
+					transform: rotate(-90deg)
+
+			#peptideSlider
+				height: 100%
+				width: 40px
+				position: absolute
+				top: 0
+				z-index: 10
+				left: 0
+				right: 0
+				margin-right: auto
+				margin-left: auto
+
+				#peptideKnob
+					border-radius: 50%
+					background: var(--color-yellow)
+					width: 40px
+					z-index: 40
+					height: 40px
+					transform: translateY(-50%)
+
+		#peptideLottieContainer
 			width: 100%
 			display: block
 

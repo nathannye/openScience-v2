@@ -176,7 +176,28 @@
           </div>
         </div>
         <div id="peptideAnimationContainer">
-          <div id="peptideSlider"></div>
+          <div id="peptideSliderContainer">
+            <div id="peptideSlider">
+              <div id="peptideKnob"></div>
+            </div>
+            <svg
+              id="sliderCircle"
+              version="1.1"
+              viewBox="0 0 500 500"
+              preserveAspectRatio="xMinYMin meet"
+            >
+              <circle cx="50%" cy="50%" r="50%" />
+            </svg>
+            <svg
+              id="sliderCircleBacker"
+              version="1.1"
+              viewBox="0 0 500 500"
+              preserveAspectRatio="xMinYMin meet"
+            >
+              <circle cx="50%" cy="50%" r="50%" />
+            </svg>
+          </div>
+          <div id="peptideLottieContainer"></div>
         </div>
       </section>
       <section class="panel contentPanel fullWidthPanel" id="whyDoWeNeed">
@@ -448,6 +469,7 @@
     <script type="module" src="./js/waveCanvas/app.js"></script>
     <script src="./index.js" type="module"></script>
     <script type="module" src="./js/navMarkerAnim.js"></script>
+    <script type="module" src="./js/costNUmbers.js"></script>
     <script type="module" src="./js/peptideAnim.js"></script>
     <script type="module" src="./js/hamburgerAnim.js"></script>
     <script type="module" src="./js/introAnims.js"></script>
