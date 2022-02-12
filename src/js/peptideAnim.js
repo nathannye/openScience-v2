@@ -28,9 +28,17 @@ let secondText = document.querySelector("#whatIsFoldingText > div:last-child");
 let secondHead = secondText.querySelector("h2");
 let secondPara = secondText.querySelector("p");
 let html = document.querySelector("html");
+let whatIsFolding = document.getElementById("whatIsFolding");
+
+console.log(firstPara);
 
 let firstTextAnim = gsap.timeline({
   paused: true,
+  scrollTrigger: {
+    trigger: whatIsFolding,
+    start: "top top",
+    // markers: true,
+  },
 });
 
 firstHead.split = new SplitText(firstText, {
@@ -38,27 +46,34 @@ firstHead.split = new SplitText(firstText, {
   linesClass: "splitLine",
 });
 firstPara.split = new SplitText(firstPara, {
-  type: "words, lines",
-  linesClass: "splitLine",
+  type: "lines",
 });
 
 firstTextAnim
-  .from(firstHead.split.words, {
-    yPercent: 100,
-    autoAlpha: 0,
-    duration: 1,
-    ease: "power4.inOut",
-    stagger: 0.0142,
-  })
-  .from(firstPara.split.lines, {
-    autoAlpha: 0,
-    y: 15,
-    delay: 0.25,
-    rotateY: -8,
-    ease: "power2.out",
-    stagger: 0.09,
-    duration: 0.9,
-  });
+  .from(
+    firstHead.split.words,
+    {
+      yPercent: 30,
+      autoAlpha: 0,
+      duration: 1,
+      ease: "power4.inOut",
+      stagger: 0.0142,
+    },
+    "start"
+  )
+  .from(
+    firstPara.split.lines,
+    {
+      autoAlpha: 0,
+      y: 55,
+      delay: 0.25,
+      rotateY: -8,
+      ease: "power2.out",
+      stagger: 0.09,
+      duration: 0.9,
+    },
+    "start"
+  );
 
 // function firstPeptideText() {
 //   if (firstText.anim) {
@@ -186,7 +201,7 @@ dangerTL
     },
     "swap"
   )
-  .call(flickerTL.play())
+  .call(flickerTL.play)
   .call(peptideAnim.playSegments([0, 130]))
   .to(dangerSeriesTrigger, {
     autoAlpha: 0,
@@ -229,7 +244,6 @@ function createPeptideDraggable() {
   Draggable.create("#peptideSlider", {
     inertia: true,
     type: "rotation",
-
     trigger: knob,
     bounds: { maxRotation: 360, minRotation: 0 },
     onThrowComplete: function () {
@@ -270,25 +284,59 @@ export default function createPeptideTL() {
       start: "top top",
       markers: true,
       end: "bottom top",
-      pin: peptideAnimText,
     },
+  });
+
+  let dragDirections = document.getElementById("dragDirections");
+  dragDirections.split = new SplitText(dragDirections, {
+    type: "words, lines",
+    linesClass: "splitLine",
   });
 
   peptideTL
     .call(peptideTL.scrollTrigger.refresh())
+    .to(nglStage, {
+      filter: "saturate(.5) blur(15px)",
+      duration: 0.9,
+    })
     .fromTo(
-      peptideSVG,
-      { autoAlpha: 0 },
-      { autoAlpha: 0.4, duration: 0.7, filter: "blur(8px)" }
+      peptideLottieContainer,
+      { autoAlpha: 0, filter: "blur(0px)" },
+      { autoAlpha: 0.4, duration: 0.7, filter: "blur(8px)" },
+      "start"
     )
-    .call(firstTextAnim.play)
+    .from(
+      sliderCirclePath,
+      { drawSVG: "0%" },
+      { drawSVG: "100%", duration: 0.93, ease: "power3.inOut" },
+      ">",
+      "draggerIn"
+    )
+    .from(
+      knob,
+      {
+        scale: 0,
+        duration: 0.43,
+        ease: "back.out(1.3)",
+      },
+      "draggerIn+=.3"
+    )
+    .from(
+      dragDirections.split.words,
+      {
+        yPercent: 100,
+        stagger: 0.05,
+        duration: 0.7,
+        ease: "power3.inOut",
+      },
+      "draggerIn+=.11"
+    )
+
+    .call(firstTextAnim)
     .call(createPeptideDraggable);
 }
 
 peptideAnim.addEventListener("DOMLoaded", (event) => {
-  gsap.set(peptideSVG, {
-    filter: "blur(8px)",
-  });
   createPeptideTL();
 });
 

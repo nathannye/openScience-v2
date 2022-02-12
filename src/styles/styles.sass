@@ -32,8 +32,7 @@ $boundary: 87.8%
 	transition: cubic-bezier(.76,.03,.35,.99) .25s all
 
 @mixin has3D
-	perspective: 300px
-	transform: perspective(-500px)
+	transform: perspective(300px)
 	transform-style: preserve-3d
 
 @mixin maxWidthXS
@@ -290,8 +289,6 @@ section:not(section.interstitial)
 		justify-content: flex-start
 
 section#introPanel
-	// position: absolute
-	// transform: translateY(-100%)
 	top: 0px !important
 	display: flex
 	justify-content: center
@@ -302,7 +299,10 @@ section#introPanel
 	#introHeadingContainer
 		transform: translateX(calc(-26% / 4))
 
-		h1, h1> em
+		h1:not(em)
+			letter-spacing: -.043em
+
+		h1, h1 > em
 			margin: 0
 			display: block
 			position: relative
@@ -526,11 +526,21 @@ section#soundAsk
 section#whatIsFolding
 	display: flex
 	@include maxWidthXL
-	align-items: center
+	align-items: flex-start
 	flex-wrap: wrap
+	position: relative
 
 	#whatIsFoldingText
-		position: relative
+		position: absolute
+		top: 0
+		left: 0
+		right: 0
+		bottom: 0
+		margin: auto
+		@include maxWidthXS
+
+		p
+			@include has3D
 
 		& > div
 			position: absolute
@@ -539,16 +549,28 @@ section#whatIsFolding
 			margin-bottom: 0
 			margin-top: 0
 
-	.panelInnerLimit
-		@include maxWidthS
-		height: 100%
+	// .panelInnerLimit
+	// 	@include maxWidthS
+	// 	height: 100%
 
 	#peptideAnimationContainer
-		width: 50%
-		height: auto
-		position: relative
+		// width: auto
 		flex-grow: 1
-		min-width: 300px
+		// height: 100vh
+		position: relative
+		// flex-grow: 1
+		// min-width: 300px
+		display: flex
+		justify-content: center
+		align-items: center
+
+		#peptideLottieContainer
+			width: 60%
+			position: relative
+			top: 0
+
+			svg
+				display: block
 
 		#peptideSliderContainer
 			width: 300px
@@ -560,6 +582,13 @@ section#whatIsFolding
 			bottom: 0
 			right: 0
 			margin: auto
+
+			h3	
+				text-align: center
+				position: absolute
+				width: 100%
+				top: 50%
+				transform: translateY(-50%)
 
 			svg#sliderCircle
 				display: inline-block
@@ -576,7 +605,7 @@ section#whatIsFolding
 					stroke: var(--color-yellow)
 					fill: transparent
 					z-index: 3
-					stroke-width: 6px
+					stroke-width: 7.5px
 					transform-origin: center center
 					transform: rotate(90deg) scaleX(-1)
 
@@ -618,13 +647,6 @@ section#whatIsFolding
 					z-index: 40
 					height: 40px
 					transform: translateY(-50%)
-
-		#peptideLottieContainer
-			width: 100%
-			display: block
-
-			svg
-				display: block
 
 .errorTarget > path
 	z-index: 200 !important
@@ -925,6 +947,11 @@ section#howCanYouHelp
 
 			& > div, & > p
 				@include maxWidthS
+		
+		#whatIsFoldingText
+			position: relative
+			margin: 0 auto 0 0 
+			width: 50%
 
 	nav
 		display: flex

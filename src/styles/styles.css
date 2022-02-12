@@ -49,8 +49,7 @@ a:visited, a.externalLink:visited {
 }
 
 h1 div, h2 div, h3 div, h4 div, h5 div, p div, li div, a div {
-  perspective: 300px;
-  transform: perspective(-500px);
+  transform: perspective(300px);
   transform-style: preserve-3d;
 }
 
@@ -182,14 +181,12 @@ a:visited {
 }
 
 p.paraAnim {
-  perspective: 300px;
-  transform: perspective(-500px);
+  transform: perspective(300px);
   transform-style: preserve-3d;
 }
 
 p.paraAnim div {
-  perspective: 300px;
-  transform: perspective(-500px);
+  transform: perspective(300px);
   transform-style: preserve-3d;
 }
 
@@ -244,14 +241,12 @@ nav a p {
   font-style: inherit;
   margin-right: 1em;
   color: white;
-  perspective: 300px;
-  transform: perspective(-500px);
+  transform: perspective(300px);
   transform-style: preserve-3d;
 }
 
 nav a p div {
-  perspective: 300px;
-  transform: perspective(-500px);
+  transform: perspective(300px);
   transform-style: preserve-3d;
 }
 
@@ -310,6 +305,10 @@ section#introPanel #introHeadingContainer {
   transform: translateX(calc(-26% / 4));
 }
 
+section#introPanel #introHeadingContainer h1:not(em) {
+  letter-spacing: -.043em;
+}
+
 section#introPanel #introHeadingContainer h1, section#introPanel #introHeadingContainer h1 > em {
   margin: 0;
   display: block;
@@ -332,8 +331,7 @@ section#introPanel #introHeadingContainer > div:last-child {
 section#introPanel #introHeadingContainer > div:last-child p {
   max-width: 250px;
   margin-top: clamp(1.5em, calc(1.5rem + ((1vw - 0.48em) * 2.0833)), 3em);
-  perspective: 300px;
-  transform: perspective(-500px);
+  transform: perspective(300px);
   transform-style: preserve-3d;
   will-change: transform;
 }
@@ -417,8 +415,7 @@ header div#soundIndicatorContainer canvas#soundIndicator {
   line-height: 2.5;
   font-family: ivypresto-headline, serif;
   font-weight: 400;
-  perspective: 300px;
-  transform: perspective(-500px);
+  transform: perspective(300px);
   transform-style: preserve-3d;
   text-transform: capitalize !important;
 }
@@ -501,8 +498,7 @@ header div#soundIndicatorContainer canvas#soundIndicator {
   height: 100%;
   position: fixed;
   z-index: 1;
-  perspective: 300px;
-  transform: perspective(-500px);
+  transform: perspective(300px);
   transform-style: preserve-3d;
   transform: translateZ(0);
   left: 0;
@@ -567,12 +563,25 @@ section#whatIsFolding {
   display: flex;
   width: 87.8%;
   max-width: 1750px;
-  align-items: center;
+  align-items: flex-start;
   flex-wrap: wrap;
+  position: relative;
 }
 
 section#whatIsFolding #whatIsFoldingText {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 87.8%;
+  max-width: 350px;
+}
+
+section#whatIsFolding #whatIsFoldingText p {
+  transform: perspective(300px);
+  transform-style: preserve-3d;
 }
 
 section#whatIsFolding #whatIsFoldingText > div {
@@ -583,18 +592,22 @@ section#whatIsFolding #whatIsFoldingText > div {
   margin-top: 0;
 }
 
-section#whatIsFolding .panelInnerLimit {
-  width: 87.8%;
-  max-width: 550px;
-  height: 100%;
+section#whatIsFolding #peptideAnimationContainer {
+  flex-grow: 1;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-section#whatIsFolding #peptideAnimationContainer {
-  width: 50%;
-  height: auto;
+section#whatIsFolding #peptideAnimationContainer #peptideLottieContainer {
+  width: 60%;
   position: relative;
-  flex-grow: 1;
-  min-width: 300px;
+  top: 0;
+}
+
+section#whatIsFolding #peptideAnimationContainer #peptideLottieContainer svg {
+  display: block;
 }
 
 section#whatIsFolding #peptideAnimationContainer #peptideSliderContainer {
@@ -607,6 +620,14 @@ section#whatIsFolding #peptideAnimationContainer #peptideSliderContainer {
   bottom: 0;
   right: 0;
   margin: auto;
+}
+
+section#whatIsFolding #peptideAnimationContainer #peptideSliderContainer h3 {
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 section#whatIsFolding #peptideAnimationContainer #peptideSliderContainer svg#sliderCircle {
@@ -625,7 +646,7 @@ section#whatIsFolding #peptideAnimationContainer #peptideSliderContainer svg#sli
   stroke: var(--color-yellow);
   fill: transparent;
   z-index: 3;
-  stroke-width: 6px;
+  stroke-width: 7.5px;
   transform-origin: center center;
   transform: rotate(90deg) scaleX(-1);
 }
@@ -671,15 +692,6 @@ section#whatIsFolding #peptideAnimationContainer #peptideSliderContainer #peptid
   z-index: 40;
   height: 40px;
   transform: translateY(-50%);
-}
-
-section#whatIsFolding #peptideAnimationContainer #peptideLottieContainer {
-  width: 100%;
-  display: block;
-}
-
-section#whatIsFolding #peptideAnimationContainer #peptideLottieContainer svg {
-  display: block;
 }
 
 .errorTarget > path {
@@ -1011,6 +1023,11 @@ section#howCanYouHelp #foldingProjectsContainer > div h2 {
   section#whatIsFolding .panelInnerLimit > div, section#whatIsFolding .panelInnerLimit > p {
     width: 87.8%;
     max-width: 550px;
+  }
+  section#whatIsFolding #whatIsFoldingText {
+    position: relative;
+    margin: 0 auto 0 0;
+    width: 50%;
   }
   nav {
     display: flex;

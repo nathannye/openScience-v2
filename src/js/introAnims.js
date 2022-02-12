@@ -9,8 +9,8 @@ gsap.registerPlugin(SplitText);
 
 // Define high level elements
 export const nglStage = document.querySelector("#viewport");
-let navMarkers = gsap.utils.toArray(".navMarker");
 let html = document.querySelector("html");
+let navMarkers = gsap.utils.toArray(".navMarker");
 let grain = document.getElementById("grain");
 
 let introPara = document.querySelector("#introPanel p");
@@ -127,7 +127,7 @@ titleTL
   .from(
     navMarkers,
     {
-      stagger: ".1",
+      stagger: 0.1,
       scale: 0.64,
       duration: 0.66,
       autoAlpha: 0,
@@ -141,7 +141,7 @@ titleTL
       autoAlpha: 0,
       duration: 0.67,
     },
-    ">"
+    "start+=.7"
   )
   .from(
     hamburgerContainer,

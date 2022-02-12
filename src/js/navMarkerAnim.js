@@ -3,7 +3,7 @@ import SplitText from "gsap/SplitText";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import colors from "./colors";
 let navEntry = gsap.utils.toArray("nav > div > a");
-let navDots = gsap.utils.toArray(".navMarker");
+export const navDots = gsap.utils.toArray(".navMarker");
 let sections = gsap.utils.toArray("section.contentPanel");
 
 gsap.registerPlugin(ScrollTrigger);

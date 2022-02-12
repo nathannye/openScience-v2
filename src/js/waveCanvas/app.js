@@ -4,7 +4,7 @@ let waveContainer = document.querySelector("#soundIndicatorContainer");
 
 class App {
   constructor() {
-    this.container = document.querySelector("#soundIndicatorContainer");
+    this.container = document.getElementById("soundIndicatorContainer");
 
     this.canvas = document.createElement("canvas");
     this.canvas.setAttribute("id", "soundIndicator");
@@ -16,29 +16,10 @@ class App {
     window.addEventListener("resize", this.resize.bind(this), false);
     this.resize();
 
-    // let point = new Point();
-    // gsap.set(point, {
-    //   amplitude: 32,
-    // });
-
-    // var sound = true;
-
-    // if (sound) {
-    //   console.log("sound is now off");
-    //   var sound = false;
-    //   point.amplitude = 0;
-    // } else {
-    //   console.log("sound is now on");
-    //   point.amplitude = 30;
-    //   var sound = true;
-    // }
-    // });
     requestAnimationFrame(this.animate.bind(this));
   }
 
   resize() {
-    // this.stageWidth = this.canvas.clientWidth;
-    // this.stageHeight = this.canvas.clientHeight;
     this.stageWidth = 35;
     this.stageHeight = 20;
     this.canvas.height = this.stageHeight;
