@@ -40,7 +40,7 @@ h1, h2, h3, h4, h5, h6, p, ul, li, a {
 }
 
 h1 > div, h2 > div, h3 > div, h4 > div, h5 > div, h6 > div, p > div {
-  will-change: transform, opacity, position, color, visibility;
+  will-change: transform !important;
 }
 
 a:visited, a.externalLink:visited {
@@ -500,7 +500,7 @@ header div#soundIndicatorContainer canvas#soundIndicator {
   z-index: 1;
   transform: perspective(300px);
   transform-style: preserve-3d;
-  transform: translateZ(0);
+  transform: translateZ(0) scale(2);
   left: 0;
 }
 
@@ -509,6 +509,7 @@ header div#soundIndicatorContainer canvas#soundIndicator {
   width: 100% !important;
   position: fixed;
   top: 0;
+  transform: scale(2);
   left: 0;
 }
 
@@ -606,8 +607,9 @@ section#whatIsFolding #peptideAnimationContainer #peptideLottieContainer {
   top: 0;
 }
 
-section#whatIsFolding #peptideAnimationContainer #peptideLottieContainer svg {
+section#whatIsFolding #peptideAnimationContainer #peptideLottieContainer > svg {
   display: block;
+  overflow: visible !important;
 }
 
 section#whatIsFolding #peptideAnimationContainer #peptideSliderContainer {
@@ -697,85 +699,26 @@ section#whatIsFolding #peptideAnimationContainer #peptideSliderContainer #peptid
 .errorTarget > path {
   z-index: 200 !important;
   opacity: 1 !important;
+  fill: none;
 }
 
 .errorTarget {
   pointer-events: auto;
   cursor: pointer;
-  transition: ease-in-out 2s all;
+  display: block;
 }
 
-.errorTarget.deadMarker {
-  transition: ease-in-out 2s all;
-  transform: translateX(30px);
+.errorTarget > svg {
+  display: block;
+  width: 200px !important;
+  height: 200px !important;
+  transform: scale(0.35) translate(-25%, -18.5%) !important;
 }
 
 .testTarget {
   background: green;
   z-index: 40;
   width: 60px;
-}
-
-.dangerMarker {
-  display: none;
-  position: relative;
-}
-
-.dangerMarker .middleCircle {
-  background: var(--color-red);
-  width: 42px;
-  border-radius: 200px;
-  height: 42px;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-}
-
-.dangerMarker .middleCircle .exclamation {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.dangerMarker .middleCircle .exclamation div {
-  background: white;
-}
-
-.dangerMarker .middleCircle .exclamation div:first-child {
-  height: 30%;
-  width: 10%;
-  margin-bottom: 5%;
-}
-
-.dangerMarker .middleCircle .exclamation div:last-child {
-  height: 10%;
-  width: 10%;
-}
-
-.dangerMarker .dangerRing {
-  position: absolute;
-  width: 110px;
-  transform-origin: center center;
-  height: 110px;
-  border-radius: 400px;
-  top: 50%;
-  left: 50%;
-}
-
-.dangerMarker .solidRing {
-  border: var(--color-red) 3px solid;
-  transform: translate(-50%, -50%) rotate(50deg);
-  clip-path: polygon(51% 15%, 0% 100%, 100% 100%);
-}
-
-.dangerMarker .dashRing {
-  border: var(--color-red) 2px dotted;
-  transform: translate(-50%, -50%) rotate(-110deg);
-  transform-origin: 50% 50%;
-  clip-path: polygon(51% 15%, 0% 100%, 100% 100%);
 }
 
 section#whyDoesFoldingMatter {
@@ -972,13 +915,16 @@ section#howCanYouHelp #helpHeadingContainer {
   max-width: 550px;
   justify-content: start;
   margin-bottom: 5%;
+  align-items: flex-start;
+}
+
+section#howCanYouHelp #helpHeadingContainer img {
+  width: 30%;
+  max-width: 300px;
+  display: none;
 }
 
 section#howCanYouHelp #foldingProjectsContainer {
-  display: flex;
-  justify-content: flex-start;
-  column-gap: 4.6%;
-  flex-wrap: wrap;
   width: 87.8%;
   max-width: 850px;
 }
@@ -993,6 +939,26 @@ section#howCanYouHelp #foldingProjectsContainer > div {
 
 section#howCanYouHelp #foldingProjectsContainer > div h2 {
   margin-bottom: .25em;
+}
+
+section#howCanYouHelp #faqContainer article.faqEntryContainer {
+  margin-bottom: 2rem;
+}
+
+section#howCanYouHelp #faqContainer article.faqEntryContainer .faqQuestionLine {
+  display: flex;
+  justify-content: space-between;
+  border-top: white solid .75px;
+}
+
+section#howCanYouHelp #faqContainer article.faqEntryContainer .faqAnswer {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+section#howCanYouHelp #faqContainer article.faqEntryContainer .faqAnswer p {
+  position: absolute;
 }
 
 .splitLine {

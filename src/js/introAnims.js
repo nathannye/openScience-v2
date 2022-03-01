@@ -75,9 +75,6 @@ titleTL
     "start",
     "stageIn"
   )
-  // .from(nglStage, {
-  //   autoAlpha: 0,
-  // })
   .to(
     openSource.split.chars,
     {
@@ -179,10 +176,10 @@ function createIntroOutTL() {
     .to(
       openSource.split.chars,
       {
-        z: 22,
+        z: -12,
         yPercent: -10,
         autoAlpha: 0,
-        filter: "blur(3px)",
+        // filter: "blur(3px)",
         rotateY: -4,
         duration: 1.8,
         ease: "power3.inOut",
@@ -201,7 +198,7 @@ function createIntroOutTL() {
         yPercent: 14,
         autoAlpha: 0,
         ease: "power3.inOut",
-        filter: "blur(6.6px)",
+        // filter: "blur(6.6px)",
         rotateY: 5,
         stagger: {
           each: 0.07,

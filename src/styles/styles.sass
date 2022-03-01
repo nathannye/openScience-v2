@@ -80,7 +80,7 @@ h1, h2, h3, h4, h5, h6, p, ul, li, a
 	padding: 0
 
 h1 > div, h2 > div, h3 > div, h4 > div, h5 > div, h6 > div, p > div
-	will-change: transform, opacity, position, color, visibility
+	will-change: transform !important
 	
 a:visited, a.externalLink:visited
 	color: var(--color-white)
@@ -469,15 +469,15 @@ header
 	position: fixed
 	z-index: 1
 	@include has3D
-	transform: translateZ(0)
+	transform: translateZ(0) scale(2)
 	left: 0
-	// transform: scale(2)
 
 	& > div > canvas
 		height: 100vh !important
 		width: 100% !important
 		position: fixed
 		top: 0
+		transform: scale(2)
 		left: 0
 
 section#soundAsk
@@ -549,10 +549,6 @@ section#whatIsFolding
 			margin-bottom: 0
 			margin-top: 0
 
-	// .panelInnerLimit
-	// 	@include maxWidthS
-	// 	height: 100%
-
 	#peptideAnimationContainer
 		// width: auto
 		flex-grow: 1
@@ -569,8 +565,9 @@ section#whatIsFolding
 			position: relative
 			top: 0
 
-			svg
+			& > svg
 				display: block
+				overflow: visible !important
 
 		#peptideSliderContainer
 			width: 300px
@@ -651,73 +648,23 @@ section#whatIsFolding
 .errorTarget > path
 	z-index: 200 !important
 	opacity: 1 !important
+	fill: none
 
 .errorTarget
 	pointer-events: auto
 	cursor: pointer
-	transition: ease-in-out 2s all
+	display: block
 
-	&.deadMarker
-		transition: ease-in-out 2s all
-		transform: translateX(30px)
+	& > svg
+		display: block
+		width: 200px !important
+		height: 200px !important
+		transform: scale(.35) translate(-25%, -18.5%) !important
 
 .testTarget	
 	background: green
 	z-index: 40
 	width: 60px
-
-.dangerMarker
-	display: none
-	position: relative
-
-	.middleCircle
-		background: var(--color-red)
-		width: 42px
-		border-radius: 200px
-		height: 42px
-		justify-content: center
-		align-items: center
-		display: flex
-
-		.exclamation
-			height: 100%
-			width: 100%
-			display: flex
-			flex-direction: column
-			justify-content: center
-			align-items: center
-
-			div
-				background: white
-
-				&:first-child
-					height: 30%
-					width: 10%
-					margin-bottom: 5%
-
-				&:last-child
-					height: 10%
-					width: 10%
-
-	.dangerRing
-		position: absolute
-		width: 110px
-		transform-origin: center center
-		height: 110px
-		border-radius: 400px
-		top: 50%
-		left: 50%
-
-	.solidRing
-		border: var(--color-red) 3px solid
-		transform: translate(-50%, -50%) rotate(50deg)
-		clip-path: polygon(51% 15%, 0% 100%, 100% 100%)
-
-	.dashRing
-		border: var(--color-red) 2px dotted
-		transform: translate(-50%, -50%) rotate(-110deg)
-		transform-origin: 50% 50%
-		clip-path: polygon(51% 15%, 0% 100%, 100% 100%)
 
 section#whyDoesFoldingMatter
 	align-items: flex-start
@@ -888,7 +835,6 @@ section#helpingReduceCosts
 		margin: 0 auto
 		top: calc(50% - 10px)
 
-
 section#howCanYouHelp
 	display: block !important
 	@include maxWidthL
@@ -899,12 +845,14 @@ section#howCanYouHelp
 		@include maxWidthS
 		justify-content: start
 		margin-bottom: 5%
+		align-items: flex-start
+
+		img
+			width: 30%
+			max-width: 300px
+			display: none
 
 	#foldingProjectsContainer
-		display: flex
-		justify-content: flex-start
-		column-gap: 4.6%
-		flex-wrap: wrap
 		@include maxWidthM
 		
 		& > div
@@ -915,6 +863,24 @@ section#howCanYouHelp
 
 			h2
 				margin-bottom: .25em
+
+	#faqContainer
+
+		article.faqEntryContainer
+			margin-bottom: 2rem
+			
+			.faqQuestionLine
+				display: flex
+				justify-content: space-between
+				border-top: white solid .75px
+
+			.faqAnswer
+				overflow: hidden
+				width: 100%
+				position: relative
+
+				p	
+					position: absolute
 
 // GSAP Classes
 .splitLine

@@ -30,14 +30,11 @@ let secondPara = secondText.querySelector("p");
 let html = document.querySelector("html");
 let whatIsFolding = document.getElementById("whatIsFolding");
 
-console.log(firstPara);
-
 let firstTextAnim = gsap.timeline({
   paused: true,
   scrollTrigger: {
     trigger: whatIsFolding,
     start: "top top",
-    // markers: true,
   },
 });
 
@@ -75,13 +72,6 @@ firstTextAnim
     "start"
   );
 
-// function firstPeptideText() {
-//   if (firstText.anim) {
-//     // firstText.anim.progress(1).kill();
-//     firstHead.split.revert();
-//   }
-// }
-
 var peptideAnim = lottie.loadAnimation({
   container: peptideLottieContainer,
   renderer: "svg",
@@ -92,9 +82,9 @@ var peptideAnim = lottie.loadAnimation({
 });
 
 var frameSegments = [
-  [0, 130],
-  [131, 180],
-  [181, 240],
+  [0, 1],
+  [1, 130],
+  [130, 240],
 ];
 
 let dangerClearTL = gsap.timeline({
@@ -106,32 +96,36 @@ dangerClearTL
     overflowY: "auto",
   })
   .to(nglStage, {
-    filter: "blur(4px) saturate(1) hue-rotate(0deg)",
+    filter: "blur(4px) saturate(1)",
     duration: 3,
   });
 
-// peptideOutTL.to(secondText, {});
-
 peptideAnim.addEventListener("DOMLoaded", (event) => {
-  // let errorTwo = document.getElementById("errorTwo");
-  // var appendMe = lottie.loadAnimation({
-  //   container: errorTwo,
-  //   renderer: "svg",
-  //   loop: true,
-  //   autoplay: true,
-  //   path: "https://assets5.lottiefiles.com/packages/lf20_szqyrfxy.json",
-  // });
-
-  // console.log(appendMe);
+  peptideAnim.playSegments(frameSegments[0]);
 
   let dangerClickTargets = gsap.utils.toArray(".errorTarget");
+
+  dangerClickTargets.forEach((thing) => {
+    gsap.set(thing, {
+      autoAlpha: 0,
+    });
+
+    let dangerMarkerAnim = lottie.loadAnimation({
+      container: thing,
+      renderer: "svg",
+      loop: true,
+      quality: "medium",
+      autoplay: false,
+      path: "https://assets4.lottiefiles.com/packages/lf20_f401ldqi.json",
+    });
+  });
+
   dangerClickTargets.forEach((target) => {
     target.addEventListener("click", (event) => {
       dangerClickClear += 1;
-      target.classList.add("deadMarker");
       if (dangerClickClear === 3) {
         soundDangerReverse;
-        peptideAnim.playSegments([131, 180]);
+        peptideAnim.playSegments([2, 131]);
         dangerClearTL.play();
       }
     });
@@ -142,12 +136,18 @@ peptideAnim.addEventListener("DOMLoaded", (event) => {
 //   autoAlpha: 0,
 // });
 
+let dragDirections = document.getElementById("dragDirections");
+dragDirections.split = new SplitText(dragDirections, {
+  type: "words, lines",
+  linesClass: "splitLine",
+});
+
 gsap.set(secondText, {
   autoAlpha: 0,
 });
 
 gsap.set(peptideLottieContainer, {
-  filter: "blur(5.5px)",
+  filter: "blur(3.5px)",
 });
 
 let dangerSeriesTrigger = document.getElementById("peptideSliderContainer");
@@ -182,6 +182,7 @@ dangerTL
   // Arrives at danger state
   .to(peptideLottieContainer, {
     filter: "blur(0px)",
+    autoAlpha: 1,
     duration: 0.5,
   })
   .to(
@@ -202,7 +203,6 @@ dangerTL
     "swap"
   )
   .call(flickerTL.play)
-  .call(peptideAnim.playSegments([0, 130]))
   .to(dangerSeriesTrigger, {
     autoAlpha: 0,
     duration: 0.4,
@@ -215,6 +215,7 @@ let draggerTL = gsap.timeline({
 let knob = document.getElementById("peptideKnob");
 let sliderCirclePath = document.querySelector("#sliderCircle > circle");
 
+// On drag complete, this plays
 draggerTL
   .to(
     sliderCirclePath,
@@ -238,6 +239,16 @@ draggerTL
       filter: "blur(4px)",
     },
     "start+=.37"
+  )
+  .to(
+    dragDirections.split.words,
+    {
+      yPercent: 100,
+      stagger: 0.05,
+      duration: 0.7,
+      ease: "power3.inOut",
+    },
+    "start"
   );
 
 function createPeptideDraggable() {
@@ -250,6 +261,7 @@ function createPeptideDraggable() {
       if (this.rotation === 360) {
         draggerTL.play();
         dangerTL.play();
+        peptideAnim.playSegments(frameSegments[1]);
       }
     },
     onPress: function () {
@@ -264,18 +276,9 @@ function createPeptideDraggable() {
         background: colors.ylw,
       });
     },
-    // onDrag: function () {
-    //   let d = this.rotation / 3.6;
-    //   let e = `${d}%`;
-    //   console.log(e);
-
-    //   gsap.to(sliderCirclePath, {
-    //     drawSVG: e,
-    //   });
-    // },
   });
 }
-
+// Fires and creates intro anim for peptide area
 export default function createPeptideTL() {
   let peptideTL = gsap.timeline({
     paused: true,
@@ -286,52 +289,40 @@ export default function createPeptideTL() {
       end: "bottom top",
     },
   });
-
-  let dragDirections = document.getElementById("dragDirections");
-  dragDirections.split = new SplitText(dragDirections, {
-    type: "words, lines",
-    linesClass: "splitLine",
-  });
-
   peptideTL
     .call(peptideTL.scrollTrigger.refresh())
     .to(nglStage, {
-      filter: "saturate(.5) blur(15px)",
+      filter: "saturate(.5) blur(7.5px)",
       duration: 0.9,
     })
     .fromTo(
       peptideLottieContainer,
       { autoAlpha: 0, filter: "blur(0px)" },
-      { autoAlpha: 0.4, duration: 0.7, filter: "blur(8px)" },
-      "start"
+      { autoAlpha: 0.4, duration: 0.56, filter: "blur(8px)" },
+      "draggerIn"
     )
     .from(
       sliderCirclePath,
       { drawSVG: "0%" },
-      { drawSVG: "100%", duration: 0.93, ease: "power3.inOut" },
-      ">",
+      { drawSVG: "100%", duration: 0.74, ease: "power3.inOut" },
       "draggerIn"
     )
     .from(
       knob,
       {
         scale: 0,
-        duration: 0.43,
+        duration: 0.33,
+        delay: 0.09,
         ease: "back.out(1.3)",
       },
-      "draggerIn+=.3"
+      ">"
     )
-    .from(
+    .fromTo(
       dragDirections.split.words,
-      {
-        yPercent: 100,
-        stagger: 0.05,
-        duration: 0.7,
-        ease: "power3.inOut",
-      },
-      "draggerIn+=.11"
+      { yPercent: 100 },
+      { yPercent: 0, duration: 0.57, stagger: 0.05, ease: "power3.inOut" },
+      "draggerIn"
     )
-
     .call(firstTextAnim)
     .call(createPeptideDraggable);
 }
