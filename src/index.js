@@ -1,9 +1,9 @@
 import gsap from "gsap";
 import SplitText from "gsap/SplitText";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import { random } from "gsap/gsap-core";
-import lottie from "lottie-web";
-import stage from "./js/nglScene";
+// import { random } from "gsap/gsap-core";
+// import lottie from "lottie-web";
+// import stage from "./js/nglScene";
 import colors from "./js/colors";
 
 gsap.registerPlugin(ScrollTrigger);

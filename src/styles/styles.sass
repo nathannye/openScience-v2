@@ -71,7 +71,8 @@ html, body
 	scroll-behavior: smooth
 	font-size: 62.5%
 	margin: 0
-	overflow-x: hidden
+	// overflow-y: visible !important
+	// overflow-x: hidden
 	padding: 0
 	color: white
 
@@ -158,7 +159,7 @@ h5
 	h4
 		text-align: center
 
-p, ul, li, a, ol
+p, ul, li, a, ol, td, th
 	font-size: clamp(1.33em, calc(1.33rem + (2.85 - 1.33) * ((100vw - 48em) / (120 - 48))), 2.85em)
 	@include fontTel
 	letter-spacing: 0.005em
@@ -662,7 +663,7 @@ section#whatIsFolding
 		transform: scale(.35) translate(-25%, -18.5%) !important
 
 .testTarget	
-	background: green
+	background: var(--color-teal)
 	z-index: 40
 	width: 60px
 
@@ -696,7 +697,7 @@ section#whyDoWeNeed
 		position: absolute
 		bottom: -9%
 		left: 5%
-		color: var(--color-yellow)
+		color: var(--color-blue)
 		font-size: clamp(38em, calc(38rem + (86.8 - 38) * ((100vw - 48em) / (120 - 48))), 86.8em)
 		line-height: 1
 		white-space: nowrap
@@ -734,9 +735,12 @@ section#numberOfUsersPanel
 section#chartOfUsers
 	width: 100%
 	height: 100%
+	margin: 0 !important
+	max-width: initial !important
+	overflow: hidden
 
 #barChartContainer 
-	width: 100%
+	width: 200vw
 
 	& > svg
 		overflow: visible
@@ -748,10 +752,8 @@ section#chartOfUsers
 				visibility: hidden
 
 	.eventMarker
-		fill: green !important
+		fill: var(--color-teal) !important
 		position: relative
-
-		&::after
 
 	.eventMarkerObject
 		background: red
@@ -770,9 +772,33 @@ section#chartOfUsers
 
 	#exascaleMark
 
-.barv2
-	width: 100%
-	height: 500px
+#supercomputerTable
+	border-spacing: 0
+
+	td
+		border-top: 1px solid white
+		margin: 0
+		padding: 0
+
+	th
+		text-align: left
+		color: var(--color-yellow)
+		
+	tr > td:first-child
+		padding-right: 6rem
+		padding-bottom: 1.75rem
+
+	tr > td:nth-child(2)
+		display: flex
+
+		.opsText
+			min-width: 50px
+
+	.supercomputerDataBar
+		height: 2px
+		display: block
+		margin: auto 0 auto .25rem
+		background: var(--color-teal)
 
 .line
 	background: red
@@ -780,13 +806,10 @@ section#chartOfUsers
 	height: 200px
 	margin-right: .5%
 
-
-
 section#helpingReduceCosts
 	
 	& > div
 		display: flex
-		// width: 100%
 		flex-direction: row-reverse
 		flex-wrap: wrap
 		justify-content: space-between
@@ -882,7 +905,7 @@ section#howCanYouHelp
 				p	
 					position: absolute
 
-// GSAP Classes
+
 .splitLine
 	overflow: hidden
 

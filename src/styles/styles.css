@@ -29,7 +29,6 @@ html, body {
   scroll-behavior: smooth;
   font-size: 62.5%;
   margin: 0;
-  overflow-x: hidden;
   padding: 0;
   color: white;
 }
@@ -136,7 +135,7 @@ h5 {
   text-align: center;
 }
 
-p, ul, li, a, ol {
+p, ul, li, a, ol, td, th {
   font-size: clamp(1.33em, calc(1.33rem + (2.85 - 1.33) * ((100vw - 48em) / (120 - 48))), 2.85em);
   font-family: telegraf;
   font-style: normal;
@@ -716,7 +715,7 @@ section#whatIsFolding #peptideAnimationContainer #peptideSliderContainer #peptid
 }
 
 .testTarget {
-  background: green;
+  background: var(--color-teal);
   z-index: 40;
   width: 60px;
 }
@@ -755,7 +754,7 @@ section#whyDoWeNeed h1#millionAcross {
   position: absolute;
   bottom: -9%;
   left: 5%;
-  color: var(--color-yellow);
+  color: var(--color-blue);
   font-size: clamp(38em, calc(38rem + (86.8 - 38) * ((100vw - 48em) / (120 - 48))), 86.8em);
   line-height: 1;
   white-space: nowrap;
@@ -801,10 +800,13 @@ section#numberOfUsersPanel #laxFour {
 section#chartOfUsers {
   width: 100%;
   height: 100%;
+  margin: 0 !important;
+  max-width: initial !important;
+  overflow: hidden;
 }
 
 #barChartContainer {
-  width: 100%;
+  width: 200vw;
 }
 
 #barChartContainer > svg {
@@ -817,7 +819,7 @@ section#chartOfUsers {
 }
 
 #barChartContainer .eventMarker {
-  fill: green !important;
+  fill: var(--color-teal) !important;
   position: relative;
 }
 
@@ -831,9 +833,39 @@ section#chartOfUsers {
   right: 0;
 }
 
-.barv2 {
-  width: 100%;
-  height: 500px;
+#supercomputerTable {
+  border-spacing: 0;
+}
+
+#supercomputerTable td {
+  border-top: 1px solid white;
+  margin: 0;
+  padding: 0;
+}
+
+#supercomputerTable th {
+  text-align: left;
+  color: var(--color-yellow);
+}
+
+#supercomputerTable tr > td:first-child {
+  padding-right: 6rem;
+  padding-bottom: 1.75rem;
+}
+
+#supercomputerTable tr > td:nth-child(2) {
+  display: flex;
+}
+
+#supercomputerTable tr > td:nth-child(2) .opsText {
+  min-width: 50px;
+}
+
+#supercomputerTable .supercomputerDataBar {
+  height: 2px;
+  display: block;
+  margin: auto 0 auto .25rem;
+  background: var(--color-teal);
 }
 
 .line {

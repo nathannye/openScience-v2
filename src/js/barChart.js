@@ -7,21 +7,25 @@ import colors from "./colors";
 
 gsap.registerPlugin(ScrollTrigger);
 
-var width = window.innerWidth;
+// window.onresize = (event) => {
+//   var width = window.innerWidth;
+//   console.log(width);
+// };
 
-window.onresize = (event) => {
-  var width = window.innerWidth;
-};
+function buildChart() {}
 
-const height = 400;
-const margin = { top: 50, bottom: 50, left: 50, right: 50 };
+const heightValue = 150;
+const widthValue = 1100;
 
 const svg = d3
   .select("#barChartContainer")
   .append("svg")
-  .attr("height", height - margin.top - margin.bottom)
-  .attr("width", width - margin.left - margin.top)
-  .attr("viewbox", [0, 0, width, height]);
+  .attr("viewBox", `0 0 ${widthValue} ${heightValue}`);
+
+const margin = { top: 0, bottom: 0, left: 0, right: 0 };
+
+const height = 150 - margin.top - margin.bottom;
+const width = 1100 - margin.left - margin.right;
 
 const x = d3
   .scaleBand()
@@ -36,7 +40,7 @@ const y = d3
 
 svg
   .append("g")
-  .attr("fill", colors.ylw)
+  .attr("fill", colors.gry)
   .selectAll("rect")
   .data(data.sort((a, b) => d3.ascending(a.users, b.users)))
   .join("rect")
@@ -52,19 +56,19 @@ svg
   .attr("width", x.bandwidth())
   .attr("class", "bar");
 
-function xAxis(g) {
-  g.attr("transform", `translate(0, ${height - margin.bottom})`)
-    .attr("id", "xAxis")
-    .call(d3.axisBottom(x).tickFormat((i) => data[i].date));
-}
+// function xAxis(g) {
+//   g.attr("transform", `translate(0, ${height - margin.bottom})`)
+//     .attr("id", "xAxis")
+//     .call(d3.axisBottom(x).tickFormat((i) => data[i].date));
+// }
 
-function yAxis(g) {
-  g.attr("transform", `translate(${margin.left}, 0)`)
-    .attr("id", "yAxis")
-    .call(d3.axisLeft(y).ticks(null, data.format));
-}
-svg.append("g").call(yAxis);
-svg.append("g").call(xAxis);
+// function yAxis(g) {
+//   g.attr("transform", `translate(${margin.left}, 0)`)
+//     .attr("id", "yAxis")
+//     .call(d3.axisLeft(y).ticks(null, data.format));
+// }
+// svg.append("g").call(yAxis);
+// svg.append("g").call(xAxis);
 svg.node();
 
 let bars = gsap.utils.toArray("rect.bar");
@@ -78,6 +82,48 @@ declarePandemic.setAttribute("id", "pandemicDeclaredMark");
 declarePandemic.setAttribute("class", "eventMarker");
 exascaleMark.setAttribute("id", "exascaleMark");
 exascaleMark.setAttribute("class", "eventMarker");
+
+function animateChart() {
+  let tillPandemic = bars.slice(0, 8);
+  let pandemicTillExa = bars.slice(9, bars.length);
+
+  gsap.set(bars, {
+    // opacity: 0,
+    scaleY: 0,
+    transformOrigin: "center bottom",
+  });
+
+  const chartContainer = document.getElementById("chartOfUsers");
+  let graphtl = gsap.timeline({
+    paused: true,
+    scrollTrigger: {
+      pin: true,
+      scrub: 0.24,
+      trigger: chartContainer,
+      start: "bottom bottom",
+    },
+  });
+
+  graphtl
+    .to(tillPandemic, {
+      opacity: 1,
+      scaleY: 1,
+      duration: 0.8,
+      stagger: {
+        each: 0.05,
+      },
+    })
+    .to(declarePandemic, {
+      // opacity: 1,
+      scaleY: 1,
+      duration: 0.2,
+    })
+    .to(pandemicTillExa, {
+      opacity: 1,
+    });
+}
+
+animateChart();
 
 // let events = [declarePandemic, exascaleMark];
 
