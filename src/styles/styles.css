@@ -57,7 +57,7 @@ a, cite > a {
 }
 
 h1 {
-  font-size: clamp(3.2em, calc(3.2rem + (21.8 - 3.2) * ((100vw - 48em) / (120 - 48))), 21.8em);
+  font-size: clamp(4.4rem, calc(4.4rem + ((1vw - 0.34rem) * 10.5455)), 16rem);
   font-family: telegraf;
   font-style: normal;
   line-height: 1.02;
@@ -129,6 +129,7 @@ h5 {
   display: flex !important;
   justify-content: center;
   align-items: center;
+  height: 100vh;
 }
 
 .interstitial h4 {
@@ -146,7 +147,7 @@ p, ul, li, a, ol, td, th {
 }
 
 cite > a, a.externalLink {
-  margin-top: 1.25em;
+  margin-top: .75em;
   position: relative;
   overflow-x: hidden;
   overflow-y: hidden;
@@ -268,6 +269,26 @@ nav a .activeNav {
   box-shadow: 0px 0px 5px var(--shadow-color);
 }
 
+#scrollIndicator {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  bottom: 3rem;
+  align-items: center;
+  z-index: 2;
+  right: 2.25rem;
+}
+
+#scrollIndicator #scrollAnimContainer {
+  width: 20px;
+}
+
+#scrollIndicator h4 {
+  writing-mode: vertical-lr;
+  color: white;
+  margin: 2rem 0 0 0;
+}
+
 .jumpTo {
   width: 1px;
   position: absolute;
@@ -335,6 +356,10 @@ section#introPanel #introHeadingContainer > div:last-child p {
   will-change: transform;
 }
 
+#supercomputerHoverContainer {
+  display: none;
+}
+
 header {
   position: fixed;
   top: 0;
@@ -365,6 +390,7 @@ header div#soundIndicatorContainer {
   align-items: center;
   overflow: hidden;
   cursor: pointer;
+  opacity: 0;
 }
 
 header div#soundIndicatorContainer #soundLabelSwitch {
@@ -546,7 +572,7 @@ section#soundAsk h2 {
   width: 100%;
   width: 87.8%;
   max-width: 1750px;
-  margin: 0 auto 18% auto;
+  margin: 0 auto 14% auto;
 }
 
 .fullWidthPanel {
@@ -563,17 +589,14 @@ section#whatIsFolding {
   display: flex;
   width: 87.8%;
   max-width: 1750px;
-  align-items: flex-start;
+  align-items: center;
   flex-wrap: wrap;
   position: relative;
 }
 
 section#whatIsFolding #whatIsFoldingText {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  position: relative;
+  height: 320px;
   margin: auto;
   width: 87.8%;
   max-width: 350px;
@@ -594,6 +617,7 @@ section#whatIsFolding #whatIsFoldingText > div {
 
 section#whatIsFolding #peptideAnimationContainer {
   flex-grow: 1;
+  height: 100%;
   position: relative;
   display: flex;
   justify-content: center;
@@ -602,6 +626,7 @@ section#whatIsFolding #peptideAnimationContainer {
 
 section#whatIsFolding #peptideAnimationContainer #peptideLottieContainer {
   width: 60%;
+  flex-grow: 1;
   position: relative;
   top: 0;
 }
@@ -612,8 +637,10 @@ section#whatIsFolding #peptideAnimationContainer #peptideLottieContainer > svg {
 }
 
 section#whatIsFolding #peptideAnimationContainer #peptideSliderContainer {
-  width: 300px;
-  height: 300px;
+  width: 60vw;
+  height: 60vw;
+  max-width: 300px;
+  max-height: 300px;
   z-index: 300;
   position: absolute;
   top: 0;
@@ -728,7 +755,6 @@ section#whyDoWeNeed {
   position: relative;
   padding: 12% 0 0 4.6%;
   width: 100% !important;
-  background: var(--color-gry);
   align-items: flex-start;
   overflow: hidden;
 }
@@ -754,12 +780,60 @@ section#whyDoWeNeed h1#millionAcross {
   position: absolute;
   bottom: -9%;
   left: 5%;
-  color: var(--color-blue);
+  color: var(--color-white);
   font-size: clamp(38em, calc(38rem + (86.8 - 38) * ((100vw - 48em) / (120 - 48))), 86.8em);
   line-height: 1;
   white-space: nowrap;
   margin: 0;
-  z-index: -1;
+  z-index: 3;
+}
+
+section#whyDoWeNeed .aminoPathGuide {
+  height: 103%;
+  position: absolute;
+  overflow: visible;
+  opacity: 0;
+  z-index: 30;
+}
+
+section#whyDoWeNeed #firstPathContainer {
+  right: 0;
+  bottom: 0;
+}
+
+section#whyDoWeNeed #secondPathContainer {
+  top: 0;
+  width: 100%;
+}
+
+section#whyDoWeNeed #thirdPathContainer {
+  top: 10%;
+  left: 25%;
+  height: 120%;
+}
+
+section#whyDoWeNeed .aminoDudeContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+section#whyDoWeNeed .aminoDudeContainer:first-child {
+  width: 12%;
+  z-index: 1;
+  min-width: 140px;
+}
+
+section#whyDoWeNeed .aminoDudeContainer:nth-child(2) {
+  width: 4%;
+  z-index: 1;
+  min-width: 80px;
+}
+
+section#whyDoWeNeed .aminoDudeContainer:nth-child(3) {
+  width: 10%;
+  z-index: 5;
+  min-width: 120px;
 }
 
 section#numberOfUsersPanel {
@@ -798,20 +872,53 @@ section#numberOfUsersPanel #laxFour {
 }
 
 section#chartOfUsers {
-  width: 100%;
-  height: 100%;
+  height: 100vh;
+  top: 0 !important;
   margin: 0 !important;
   max-width: initial !important;
   overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  position: relative;
 }
 
-#barChartContainer {
-  width: 200vw;
+section#chartOfUsers .eventEntry {
+  width: 87.8%;
+  max-width: 350px;
+  text-align: right;
+  position: absolute;
+  padding-right: 2.5rem;
+  margin-bottom: 4rem;
+}
+
+section#chartOfUsers .eventEntry .eventLine {
+  width: 1.5px;
+  height: 100%;
+  top: 0;
+  position: absolute;
+  right: .25rem;
+  background: var(--color-yellow);
+}
+
+section#chartOfUsers #chartCaptionContainer {
+  position: absolute;
+  top: 5%;
+  left: 2%;
+  width: 87.8%;
+  max-width: 850px;
+}
+
+section#chartOfUsers #chartCaptionContainer h2 {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 #barChartContainer > svg {
   overflow: visible;
   display: block;
+  width: 600vw;
+  height: 100%;
 }
 
 #barChartContainer > svg #yAxis .ticks:nth-child(10n) {
@@ -819,7 +926,7 @@ section#chartOfUsers {
 }
 
 #barChartContainer .eventMarker {
-  fill: var(--color-teal) !important;
+  fill: var(--color-yellow) !important;
   position: relative;
 }
 
@@ -833,14 +940,29 @@ section#chartOfUsers {
   right: 0;
 }
 
+#supercomputerCompare {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 1.25%;
+  justify-content: center;
+  position: fixed;
+  z-index: 3;
+  top: 0;
+  left: 0;
+}
+
 #supercomputerTable {
   border-spacing: 0;
+  width: 87.8%;
+  max-width: 550px;
 }
 
 #supercomputerTable td {
   border-top: 1px solid white;
   margin: 0;
-  padding: 0;
+  padding: .5rem 0 0 0;
 }
 
 #supercomputerTable th {
@@ -861,11 +983,11 @@ section#chartOfUsers {
   min-width: 50px;
 }
 
-#supercomputerTable .supercomputerDataBar {
+#supercomputerTable .dataBar {
   height: 2px;
   display: block;
   margin: auto 0 auto .25rem;
-  background: var(--color-teal);
+  background: var(--color-yellow);
 }
 
 .line {
@@ -875,27 +997,30 @@ section#chartOfUsers {
   margin-right: .5%;
 }
 
-section#helpingReduceCosts > div {
+section#helpingReduceCosts {
   display: flex;
-  flex-direction: row-reverse;
   flex-wrap: wrap;
-  justify-content: space-between;
 }
 
-section#helpingReduceCosts > div .headingContainer {
-  width: 100%;
+section#helpingReduceCosts .headingContainer {
+  width: 50%;
+  max-width: 650px;
+  flex-grow: 1;
 }
 
 #costNumbersContainer {
-  display: flex;
   margin-top: 8%;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  display: flex;
+  flex-direction: column;
 }
 
 #costNumbersContainer cite > a {
   margin-top: 0;
   font-size: inherit;
+}
+
+#costNumbersContainer #twoThou {
+  margin-bottom: 4%;
 }
 
 #costNumbersContainer #fiveThou > div, #costNumbersContainer #twoThou > div {
@@ -927,11 +1052,11 @@ section#helpingReduceCosts > div .headingContainer {
   position: absolute;
   background: var(--color-yellow);
   width: 100%;
-  height: 1.1vh;
+  height: .5rem;
   left: 0;
   right: 0;
   margin: 0 auto;
-  top: calc(50% - 10px);
+  top: calc(50% - .5rem);
 }
 
 section#howCanYouHelp {
@@ -939,58 +1064,130 @@ section#howCanYouHelp {
   width: 87.8%;
   max-width: 1250px;
   margin-bottom: 0;
+  height: unset !important;
+  margin-bottom: 17%;
 }
 
 section#howCanYouHelp #helpHeadingContainer {
   display: flex;
-  width: 87.8%;
-  max-width: 550px;
-  justify-content: start;
+  flex-wrap: wrap;
+  justify-content: center;
   margin-bottom: 5%;
-  align-items: flex-start;
+  column-gap: 6%;
+  row-gap: 4rem;
 }
 
-section#howCanYouHelp #helpHeadingContainer img {
-  width: 30%;
-  max-width: 300px;
-  display: none;
+section#howCanYouHelp #helpHeadingContainer > div {
+  width: 47%;
+  flex-grow: 1;
+  min-width: 250px;
+}
+
+section#howCanYouHelp #helpHeadingContainer object {
+  width: 23.5%;
+  margin-right: 23.5%;
+  flex-grow: .5;
+  align-self: flex-end;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+
+section#howCanYouHelp section#lower {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  height: unset;
+  column-gap: 6%;
+}
+
+section#howCanYouHelp section#lower #helpingLeft {
+  display: flex;
+  flex-grow: 1;
+  width: 47%;
+  min-width: 250px;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+section#howCanYouHelp section#lower #helpingLeft img {
+  width: 50%;
+  object-fit: cover;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  flex-grow: 0.5;
 }
 
 section#howCanYouHelp #foldingProjectsContainer {
-  width: 87.8%;
-  max-width: 850px;
-}
-
-section#howCanYouHelp #foldingProjectsContainer > div {
-  width: 87.8%;
-  max-width: 350px;
-  width: 45%;
-  min-width: 240px;
+  width: 47%;
   flex-grow: 1;
 }
 
-section#howCanYouHelp #foldingProjectsContainer > div h2 {
+section#howCanYouHelp #foldingProjectsContainer #rosetta {
+  margin-bottom: 5rem;
+}
+
+section#howCanYouHelp #foldingProjectsContainer h3 {
   margin-bottom: .25em;
 }
 
-section#howCanYouHelp #faqContainer article.faqEntryContainer {
+section#howCanYouHelp #faqContainer {
+  width: 100%;
+  height: unset;
+  margin-top: 4%;
+}
+
+section#howCanYouHelp #faqContainer article {
   margin-bottom: 2rem;
+  cursor: pointer;
 }
 
-section#howCanYouHelp #faqContainer article.faqEntryContainer .faqQuestionLine {
+section#howCanYouHelp #faqContainer article > div {
   display: flex;
+  flex-direction: row-reverse;
   justify-content: space-between;
-  border-top: white solid .75px;
+  position: relative;
+  margin-top: .25rem;
+  padding-top: .25rem;
+  align-items: center;
+  transition: .25s ease-in-out all;
 }
 
-section#howCanYouHelp #faqContainer article.faqEntryContainer .faqAnswer {
+section#howCanYouHelp #faqContainer article > div:hover {
+  opacity: .6;
+  transition: .25s ease-in-out all;
+}
+
+section#howCanYouHelp #faqContainer article .faqQuestionLine {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  background: white;
+  height: 0.75px;
+}
+
+section#howCanYouHelp #faqContainer article .faqArrow {
+  background-image: url("../img/arrow.svg");
+  background-size: 100% 100%;
+  transform: rotate(-90deg);
+  transform-origin: center center;
+  width: 15px;
+  height: 15px;
+  filter: saturate(0);
+}
+
+section#howCanYouHelp #faqContainer article .faqAnswer {
   overflow: hidden;
   width: 100%;
   position: relative;
 }
 
-section#howCanYouHelp #faqContainer article.faqEntryContainer .faqAnswer p {
+section#howCanYouHelp #faqContainer article .faqAnswer p {
   position: absolute;
+  left: 0;
+  top: 1rem;
+  opacity: .75;
+  height: 100px;
 }
 
 .splitLine {
@@ -1008,6 +1205,9 @@ section#howCanYouHelp #faqContainer article.faqEntryContainer .faqAnswer p {
 }
 
 @media only screen and (min-width: 480px) {
+  section#howCanYouHelp {
+    margin-bottom: 5%;
+  }
   header {
     padding-top: calc(6.1% / 2);
     padding-left: calc(6.2% / 2);
@@ -1052,18 +1252,18 @@ section#howCanYouHelp #faqContainer article.faqEntryContainer .faqAnswer p {
     width: 87.8%;
     max-width: 550px;
   }
-  section#helpingReduceCosts > div {
-    width: 100%;
-    justify-content: flex-end;
-  }
   section#helpingReduceCosts > div .headingContainer {
     flex-grow: 1;
   }
 }
 
 @media only screen and (min-width: 769px) {
-  section#howCanYouHelp #foldingProjectsContainer {
-    justify-content: flex-end;
+  #costNumbersContainer .crossOut {
+    height: 1rem;
+  }
+  #barChartContainer svg {
+    width: 100%;
+    height: 100%;
   }
   #viewport > div > canvas {
     top: 22%;
@@ -1073,12 +1273,10 @@ section#howCanYouHelp #faqContainer article.faqEntryContainer .faqAnswer p {
     column-gap: 4.6%;
   }
   section#helpingReduceCosts > div .headingContainer {
-    width: 50%;
     max-width: 500px;
     flex-grow: 1;
   }
   section#helpingReduceCosts > div > div:not(.headingContainer) {
-    width: 40%;
     max-width: 500px;
   }
 }

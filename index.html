@@ -58,10 +58,8 @@
       </div>
     </div>
     <div id="scrollIndicator">
-      <div>
-        <div id="scrollAnimContainer"></div>
-      </div>
-      <h4>scroll</h4>
+      <div></div>
+      <h4></h4>
     </div>
 
     <nav>
@@ -208,59 +206,6 @@
         </div>
       </section>
       <section class="panel contentPanel fullWidthPanel" id="whyDoWeNeed">
-        <div class="aminoDudeContainer"></div>
-        <div class="aminoDudeContainer"></div>
-        <div class="aminoDudeContainer"></div>
-        <svg
-          class="aminoPathGuide"
-          id="firstPathContainer"
-          width="979"
-          height="1008"
-          viewBox="0 0 979 1008"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            id="firstPath"
-            d="M1058.41 17.5507C909.677 -9.22277 594.531 -17.9355 523.842 161.401C435.48 385.572 544.984 604.394 430.579 639.449C316.173 674.504 -10.5565 790.844 15.0803 984.848C35.5897 1140.05 15.2019 1206.32 2.44424 1220.05"
-            stroke="red"
-            stroke-width="15"
-          />
-        </svg>
-
-        <svg
-          width="1440"
-          height="449"
-          id="secondPathContainer"
-          class="aminoPathGuide"
-          viewBox="0 0 1440 449"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            id="secondPath"
-            d="M-122.777 447.426C-104.8 343.208 -48.2028 135.445 34.3679 138.134C137.581 141.496 450.933 468.882 661.942 343.178C872.951 217.474 993 -61 1187.02 170.601C1246.52 241.629 1487.43 140.737 1528.64 1.39095"
-            stroke="black"
-            stroke-width="18"
-          />
-        </svg>
-        <svg
-          id="thirdPathContainer"
-          class="aminoPathGuide"
-          width="428"
-          height="860"
-          viewBox="0 0 428 860"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            id="thirdPath"
-            d="M4.68635 -146.296C-14.0757 -58.1663 93.9229 66.4296 157.686 165.703C215.686 232.203 312.987 417.703 238.187 627.703C163.387 837.703 427.5 857.566 427.5 857.566"
-            stroke="blue"
-            stroke-width="12"
-          />
-        </svg>
-
         <a id="whyDoWeNeedRef" class="jumpTo"></a>
         <div>
           <h4>why do we need computers?</h4>
@@ -270,9 +215,10 @@
               the forces in the human body every millionth of a second.
             </h2>
             <p class="paraAnim">
-              With such extreme time scales, each protein chain having more than
-              10<sup>30</sup> different combinations. Supercomputers are needed
-              to even stand a chance at solving for the correct combination.
+              With such extreme time scales, and a need for near perfect
+              simulation of conditions, supercomputers are needed to crunch
+              numbers and give us accurate assessments of how a protein may
+              fold.
             </p>
           </div>
         </div>
@@ -281,7 +227,7 @@
       <section class="panel interstitial">
         <h4>Just how powerful do computers need to be?</h4>
       </section>
-      <!-- <section class="panel contentPanel" id="numberOfUsersPanel">
+      <section class="panel contentPanel" id="numberOfUsersPanel">
         <a id="numberOfUsersPanelRef" class="jumpTo"></a>
         <div>
           <div>
@@ -321,7 +267,7 @@
           src="./img/pointingAtComputer.webp"
           alt="Man pointing at computer"
         />
-      </section> -->
+      </section>
       <section class="panel" id="chartOfUsers">
         <div id="chartCaptionContainer">
           <h2>
@@ -338,28 +284,13 @@
             powerful than the worlds ten fastest supercomputers. Combined.
           </h2>
         </div>
-        <div id="eventLabelContainer"></div>
-        <div id="barChartContainer">
-          <article class="eventEntry" id="pandemicEvent">
-            <h4>march 11, 2020</h4>
-            <p>The CDC declares COVID-19 a global pandemic</p>
-            <span class="eventLine"></span>
-          </article>
-          <article class="eventEntry" id="exascaleEvent">
-            <h4>june 3, 2020</h4>
-            <p>
-              Folding@Home becomes the first body of computers to cross the
-              exascale barrier.
-            </p>
-            <span class="eventLine"></span>
-          </article>
-        </div>
+        <div id="barChartContainer"></div>
 
         <div id="supercomputerCompare">
-          <!-- <h2>
+          <h2>
             With over 1,000,000 users in 2021, Folding @ Home became more
             powerful than the worlds ten fastest supercomputers. Combined.
-          </h2> -->
+          </h2>
           <table id="supercomputerTable">
             <tr>
               <th>Computer</th>
@@ -389,12 +320,14 @@
       </section> -->
       <section class="panel contentPanel" id="helpingReduceCosts">
         <a id="helpingReduceCostsRef" class="jumpTo"></a>
-        <div class="headingContainer">
-          <h4>helping reduce costs</h4>
-          <h2 class="headAnim">
-            The data generated by these computers is public information. Making
-            research costs for other institutions less expensive.
-          </h2>
+        <div>
+          <div class="headingContainer">
+            <h4>helping reduce costs</h4>
+            <h2 class="headAnim">
+              The data generated by these computers is public information.
+              Making research costs for other institutions less expensive.
+            </h2>
+          </div>
           <div>
             <p class="paraAnim">
               Distributed computing projects produce open source data. Anything
@@ -512,52 +445,64 @@
               folding!
             </p>
           </div>
-          <object data="../src/img/pointingAtComputer.webp"></object>
+          <img
+            src="./img/pointingAtComputer.webp"
+            alt="Happy man pointing at computer for folding"
+          />
         </div>
-        <section id="lower">
-          <div id="helpingLeft">
-            <img src="./img/manInChair.webp" alt="" />
-            <section id="faqContainer">
-              <h4>faq</h4>
-              <!-- FAQs placed here -->
-            </section>
-          </div>
-          <div id="foldingProjectsContainer">
-            <h4>projects</h4>
-            <div id="rosetta">
-              <h3>Rosetta@Home</h3>
-              <div>
-                <p class="paraAnim">
-                  Rosetta@Home is working to identify candidate protein areas
-                  for COVID-19 antiviral drugs. These antiviral drugs will be
-                  used to shorten the length of severe reactions to COVID-19.
-                </p>
-                <a
-                  class="externalLink"
-                  href="https://boinc.bakerlab.org/"
-                  target="_blank"
-                  >about rosetta</a
-                >
-              </div>
-            </div>
+        <div id="foldingProjectsContainer">
+          <h4>projects</h4>
+          <div>
+            <h3>Rosetta@Home</h3>
             <div>
-              <h3>Folding@Home</h3>
-              <div>
-                <p class="paraAnim">
-                  Folding@Home is also actively working to identify candidate
-                  protein areas for COVID-19 antiviral drugs. This is currently
-                  the largest distributed computing project.
-                </p>
-                <a
-                  class="externalLink"
-                  href="https://foldingathome.org/?lng=en"
-                  target="_blank"
-                  >about folding</a
-                >
-              </div>
+              <p>
+                Rosetta@Home is currently working to identify candidate protein
+                areas for COVID-19 antiviral drugs. These antiviral drugs will
+                be used to shorten the length of severe reactions to COVID-19.
+              </p>
+              <p>
+                This project looks at the process of protein folding to identify
+                how a protein could be drugged.
+              </p>
+              <a
+                class="externalLink"
+                href="https://boinc.bakerlab.org/"
+                target="_blank"
+                >about rosetta</a
+              >
             </div>
           </div>
-        </section>
+          <div>
+            <h3>Folding@Home</h3>
+            <div>
+              <p>
+                Folding@Home is also actively working to identify candidate
+                protein areas for COVID-19 antiviral drugs. This is currently
+                the largest distributed computing project.
+              </p>
+              <a
+                class="externalLink"
+                href="https://foldingathome.org/?lng=en"
+                target="_blank"
+                >about folding</a
+              >
+            </div>
+          </div>
+        </div>
+        <div id="helpingLower">
+          <img src="./img//manInChair.webp" alt="" />
+          <section id="faqContainer">
+            <h4>faq</h4>
+            <article class="faqEntryContainer">
+              <div class="faqQuestionLine">
+                <p>Do I need a super fast computer?</p>
+              </div>
+              <div class="faqAnswer">
+                <p>heres ya answer</p>
+              </div>
+            </article>
+          </section>
+        </div>
       </section>
     </main>
     <script
@@ -570,17 +515,16 @@
     <script type="module" src="./js/nglScene.js"></script>
     <script type="module" src="./js/soundToggle.js"></script>
     <script type="module" src="./js/barChart.js"></script>
-    <!-- <script type="module" src="./js/aminoDudes.js"></script> -->
+
     <script type="module" src="./js/navMarkerAnim.js"></script>
-    <script type="module" src="./js/interstitialAnim.js"></script>
     <script src="./index.js" type="module"></script>
     <script type="module" src="./js/costNumbers.js"></script>
     <script type="module" src="./js/peptideAnim.js"></script>
+    <script type="module" src="./js/hamburgerAnim.js"></script>
     <script type="module" src="./js/introAnims.js"></script>
     <script type="module" src="./js/waveCanvas/app.js"></script>
-    <script type="module" src="./js/faqAnim.js"></script>
-    <!-- <script type="module" src="./js/supercomputersData.js"></script> -->
-    <!-- <script type="module" src="./js/supercomputerHover.js"></script> -->
-    <!-- <script type="module" src="./js/supercomputerTableAnim.js"></script> -->
+    <script type="module" src="./js/supercomputersData.js"></script>
+    <script type="module" src="./js/supercomputerHover.js"></script>
+    <script type="module" src="./js/supercomputerTableAnim.js"></script>
   </body>
 </html>

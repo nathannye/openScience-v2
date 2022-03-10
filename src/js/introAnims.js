@@ -3,15 +3,33 @@ import SplitText from "gsap/SplitText";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import colors from "./colors";
 import { hamburgerContainer } from "./hamburgerAnim";
-import { soundIndi } from "./soundToggle";
+import soundIndi from "./soundToggle";
+import navDots from "./navMarkerAnim";
+import Lottie from "lottie-web";
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(SplitText);
+
+let container = document.getElementById("scrollAnimContainer");
+
+function playScrollLottie() {
+  var scrollIndi = Lottie.loadAnimation({
+    container: container,
+    loop: false,
+    renderer: "svg",
+    autoplay: true,
+    path: "https://assets5.lottiefiles.com/packages/lf20_hzdymoq2.json",
+  });
+}
 
 // Define high level elements
 export const nglStage = document.querySelector("#viewport");
 let html = document.querySelector("html");
-let navMarkers = gsap.utils.toArray(".navMarker");
-let grain = document.getElementById("grain");
+let scrollIndiText = document.querySelector("#scrollIndicator h4");
+
+let scrollIndiSplit = new SplitText(scrollIndiText, {
+  type: "lines, chars",
+  linesClass: "splitLine",
+});
 
 let introPara = document.querySelector("#introPanel p");
 
@@ -35,10 +53,6 @@ let titleTL = gsap.timeline({
     createIntroOutTL();
   },
 });
-
-window.onload = () => {
-  titleTL.play();
-};
 
 openSource.split = new SplitText(openSource, {
   type: "chars",
@@ -67,7 +81,7 @@ titleTL
     nglStage,
     { filter: "saturate(0) blur(13px)", autoAlpha: 0 },
     {
-      filter: "saturate(1) blur(1px)",
+      filter: "saturate(.68) blur(1px)",
       duration: 3.5,
       delay: 0.8,
       autoAlpha: 1,
@@ -122,7 +136,7 @@ titleTL
     "start+=1.5"
   )
   .from(
-    navMarkers,
+    navDots,
     {
       stagger: 0.1,
       scale: 0.64,
@@ -132,14 +146,26 @@ titleTL
     },
     "start+=.6"
   )
-  .from(
+  .to(
     soundIndi,
     {
-      autoAlpha: 0,
+      opacity: 1,
       duration: 0.67,
     },
     "start+=.7"
   )
+  .call(playScrollLottie, {}, "start+=1.5")
+  .from(
+    scrollIndiSplit.chars,
+    {
+      xPercent: 100,
+      stagger: 0.02,
+      duration: 1.4,
+      ease: "power3.inOut",
+    },
+    "start+=.7"
+  )
+
   .from(
     hamburgerContainer,
     {
@@ -147,7 +173,7 @@ titleTL
       duration: 0.69,
       ease: "power3.inOut",
       delay: 0.18,
-      // transformOrigin: "5% center",
+      transformOrigin: "5% center",
     },
     "<"
   )
@@ -198,7 +224,6 @@ function createIntroOutTL() {
         yPercent: 14,
         autoAlpha: 0,
         ease: "power3.inOut",
-        // filter: "blur(6.6px)",
         rotateY: 5,
         stagger: {
           each: 0.07,
@@ -223,6 +248,24 @@ function createIntroOutTL() {
         stagger: 0.14,
       },
       "scrollingOut+=50%"
+    )
+    .to(
+      container,
+      {
+        scaleY: 0,
+        transformOrigin: "center bottom",
+        duration: 0.75,
+      },
+      "scrollingOut+=70%"
+    )
+    .to(
+      scrollIndiSplit.chars,
+      {
+        autoAlpha: 0,
+        duration: 2,
+        stagger: 0.02,
+      },
+      "scrollingOut+=71%"
     );
 }
 
@@ -259,3 +302,7 @@ function interstitialOneCreate() {
       filter: "blur(4px)",
     });
 }
+
+window.onload = () => {
+  titleTL.play();
+};

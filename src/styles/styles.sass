@@ -96,7 +96,7 @@ a, cite > a
 	color: var(--color-white)
 
 h1
-	font-size: clamp(3.2em, calc(3.2rem + (21.8 - 3.2) * ((100vw - 48em) / (120 - 48))), 21.8em)
+	font-size: clamp(4.4rem, calc(4.4rem + ((1vw - 0.34rem) * 10.5455)), 16rem)
 	font-family: telegraf
 	font-style: normal
 	line-height: 1.02
@@ -155,6 +155,7 @@ h5
 	display: flex !important
 	justify-content: center
 	align-items: center
+	height: 100vh
 
 	h4
 		text-align: center
@@ -168,7 +169,7 @@ p, ul, li, a, ol, td, th
 	line-height: 1.52
 
 cite > a, a.externalLink
-	margin-top: 1.25em
+	margin-top: .75em
 	position: relative
 	overflow-x: hidden
 	overflow-y: hidden
@@ -269,6 +270,23 @@ nav
 			transform: scale(1.4) !important
 			box-shadow: 0px 0px 5px var(--shadow-color)
 			
+#scrollIndicator
+	display: flex
+	flex-direction: column
+	position: fixed
+	bottom: 3rem
+	align-items: center
+	z-index: 2
+	right: 2.25rem
+
+	#scrollAnimContainer
+		width: 20px
+
+	h4
+		writing-mode: vertical-lr
+		color: white
+		margin: 2rem 0 0 0
+
 // Nav jump Links
 .jumpTo
 	// background: red
@@ -325,6 +343,9 @@ section#introPanel
 				@include has3D
 				will-change: transform
 
+#supercomputerHoverContainer
+	display: none
+
 header
 	position: fixed
 	top: 0
@@ -352,6 +373,7 @@ header
 		align-items: center
 		overflow: hidden
 		cursor: pointer
+		opacity: 0
 
 		#soundLabelSwitch
 			height: clamp(1.3em, calc(1.3rem + (1.7 - 1.3) * ((100vw - 48em) / (120 - 48))), 1.7em)	
@@ -514,7 +536,7 @@ section#soundAsk
 	display: block
 	width: 100%
 	@include maxWidthXL
-	margin: 0 auto 18% auto
+	margin: 0 auto 14% auto
 
 .fullWidthPanel
 	max-width: initial
@@ -527,16 +549,17 @@ section#soundAsk
 section#whatIsFolding
 	display: flex
 	@include maxWidthXL
-	align-items: flex-start
+	align-items: center
 	flex-wrap: wrap
 	position: relative
 
 	#whatIsFoldingText
-		position: absolute
-		top: 0
-		left: 0
-		right: 0
-		bottom: 0
+		position: relative
+		// top: 0
+		// left: 0
+		// right: 0
+		// bottom: 0
+		height: 320px
 		margin: auto
 		@include maxWidthXS
 
@@ -554,6 +577,7 @@ section#whatIsFolding
 		// width: auto
 		flex-grow: 1
 		// height: 100vh
+		height: 100%
 		position: relative
 		// flex-grow: 1
 		// min-width: 300px
@@ -563,6 +587,7 @@ section#whatIsFolding
 
 		#peptideLottieContainer
 			width: 60%
+			flex-grow: 1
 			position: relative
 			top: 0
 
@@ -571,8 +596,10 @@ section#whatIsFolding
 				overflow: visible !important
 
 		#peptideSliderContainer
-			width: 300px
-			height: 300px
+			width: 60vw
+			height: 60vw
+			max-width: 300px
+			max-height: 300px
 			z-index: 300
 			position: absolute
 			top: 0
@@ -674,7 +701,7 @@ section#whyDoWeNeed
 	position: relative
 	padding: 12% 0 0 4.6%
 	width: 100% !important
-	background: var(--color-gry)
+	// background: var(--color-gry)
 	align-items: flex-start
 	overflow: hidden
 
@@ -697,12 +724,52 @@ section#whyDoWeNeed
 		position: absolute
 		bottom: -9%
 		left: 5%
-		color: var(--color-blue)
+		color: var(--color-white)
 		font-size: clamp(38em, calc(38rem + (86.8 - 38) * ((100vw - 48em) / (120 - 48))), 86.8em)
 		line-height: 1
 		white-space: nowrap
 		margin: 0
-		z-index: -1
+		z-index: 3
+
+	.aminoPathGuide
+		height: 103%
+		position: absolute
+		overflow: visible
+		opacity: 0
+		z-index: 30
+
+	#firstPathContainer
+		right: 0
+		bottom: 0
+
+	#secondPathContainer
+		top: 0
+		width: 100%
+
+	#thirdPathContainer
+		top: 10%
+		left: 25%
+		height: 120%
+
+	.aminoDudeContainer
+		position: absolute
+		top: 0
+		left: 0
+
+		&:first-child
+			width: 12%
+			z-index: 1
+			min-width: 140px
+
+		&:nth-child(2)
+			width: 4%
+			z-index: 1
+			min-width: 80px
+
+		&:nth-child(3)
+			width: 10%
+			z-index: 5
+			min-width: 120px
 
 section#numberOfUsersPanel
 	position: relative
@@ -733,18 +800,58 @@ section#numberOfUsersPanel
 		right: .4%
 
 section#chartOfUsers
-	width: 100%
-	height: 100%
+	// width: 300vw
+	height: 100vh
+	top: 0 !important
 	margin: 0 !important
 	max-width: initial !important
 	overflow: hidden
+	display: flex
+	align-items: flex-end
+	position: relative
 
-#barChartContainer 
-	width: 200vw
+	// #eventLabelContainer
+	// 	position: fixed
+	// 	top: 30%
+	// 	left: calc((100/92)*8)
+
+	.eventEntry
+		@include maxWidthXS
+		text-align: right	
+		position: absolute
+		padding-right: 2.5rem
+		margin-bottom: 4rem
+
+		&:first-child
+
+
+		.eventLine
+			width: 1.5px
+			height: 100%
+			top: 0
+			position: absolute
+			right: .25rem
+			background: var(--color-yellow)
+
+
+	#chartCaptionContainer
+		position: absolute
+		top: 5%
+		left: 2%
+		@include maxWidthM
+
+		h2
+			position: absolute
+			top: 0
+			left: 0
+
+#barChartContainer
 
 	& > svg
 		overflow: visible
 		display: block
+		width: 600vw
+		height: 100%
 
 		#yAxis
 
@@ -752,7 +859,7 @@ section#chartOfUsers
 				visibility: hidden
 
 	.eventMarker
-		fill: var(--color-teal) !important
+		fill: var(--color-yellow) !important
 		position: relative
 
 	.eventMarkerObject
@@ -764,21 +871,26 @@ section#chartOfUsers
 		top: 0
 		right: 0
 
-	.eventMarkerLine
-
-	.eventMarkerDot
-
-	#declarePandemicMark
-
-	#exascaleMark
+#supercomputerCompare
+	width: 100vw
+	height: 100vh
+	display: flex
+	align-items: flex-end
+	padding-bottom: 1.25%
+	justify-content: center
+	position: fixed
+	z-index: 3
+	top: 0
+	left: 0
 
 #supercomputerTable
 	border-spacing: 0
-
+	@include maxWidthS
+	
 	td
 		border-top: 1px solid white
 		margin: 0
-		padding: 0
+		padding: .5rem 0 0 0
 
 	th
 		text-align: left
@@ -794,11 +906,11 @@ section#chartOfUsers
 		.opsText
 			min-width: 50px
 
-	.supercomputerDataBar
+	.dataBar
 		height: 2px
 		display: block
 		margin: auto 0 auto .25rem
-		background: var(--color-teal)
+		background: var(--color-yellow)
 
 .line
 	background: red
@@ -807,25 +919,25 @@ section#chartOfUsers
 	margin-right: .5%
 
 section#helpingReduceCosts
-	
-	& > div
-		display: flex
-		flex-direction: row-reverse
-		flex-wrap: wrap
-		justify-content: space-between
+	display: flex
+	flex-wrap: wrap
 
-		.headingContainer
-			width: 100%
+	.headingContainer
+		width: 50%
+		max-width: 650px
+		flex-grow: 1
 
 #costNumbersContainer
-	display: flex
 	margin-top: 8%
-	justify-content: space-between
-	flex-wrap: wrap
+	display: flex
+	flex-direction: column
 
 	cite > a
 		margin-top: 0
 		font-size: inherit
+
+	#twoThou
+		margin-bottom: 4%
 
 	#fiveThou > div, #twoThou > div
 		display: inline-flex
@@ -852,50 +964,113 @@ section#helpingReduceCosts
 		position: absolute
 		background: var(--color-yellow)
 		width: 100%
-		height: 1.1vh
+		height: .5rem
 		left: 0
 		right: 0
 		margin: 0 auto
-		top: calc(50% - 10px)
+		top: calc(50% - .5rem)
 
 section#howCanYouHelp
 	display: block !important
 	@include maxWidthL
 	margin-bottom: 0
+	height: unset !important
+	margin-bottom: 17%
 
 	#helpHeadingContainer
 		display: flex
-		@include maxWidthS
-		justify-content: start
+		flex-wrap: wrap
+		justify-content: center
 		margin-bottom: 5%
-		align-items: flex-start
+		column-gap: 6%
+		row-gap: 4rem
+		// align-items: flex-start
 
-		img
-			width: 30%
-			max-width: 300px
-			display: none
-
-	#foldingProjectsContainer
-		@include maxWidthM
-		
 		& > div
-			@include maxWidthXS
-			width: 45%
-			min-width: 240px
+			width: 47%
 			flex-grow: 1
+			min-width: 250px
 
-			h2
-				margin-bottom: .25em
+		object
+			width: 23.5%
+			margin-right: 23.5%
+			flex-grow: .5
+			align-self: flex-end
+			aspect-ratio: 1/1
+			object-fit: cover
+
+	section#lower
+		display: flex
+		justify-content: center
+		flex-wrap: wrap
+		width: 100%
+		height: unset
+		column-gap: 6%
+
+		#helpingLeft
+			display: flex
+			flex-grow: 1
+			width: 47%
+			min-width: 250px
+			flex-direction: column
+			align-items: flex-end
+
+			img
+				width: 50%
+				object-fit: cover
+				// height: 200px
+				aspect-ratio: 1/1
+				object-fit: cover
+				flex-grow: 0.5
+				
+	#foldingProjectsContainer
+		width: 47%
+		flex-grow: 1
+		
+		#rosetta
+			margin-bottom: 5rem
+
+		h3
+			margin-bottom: .25em
 
 	#faqContainer
+		width: 100%
+		height: unset
+		margin-top: 4%
 
-		article.faqEntryContainer
+		article
 			margin-bottom: 2rem
+			cursor: pointer
+
+			& > div
+				display: flex
+				flex-direction: row-reverse
+				justify-content: space-between
+				position: relative
+				margin-top: .25rem
+				padding-top: .25rem
+				align-items: center
+				transition: .25s ease-in-out all
+
+				&:hover 
+					opacity: .6
+					transition: .25s ease-in-out all
 			
 			.faqQuestionLine
-				display: flex
-				justify-content: space-between
-				border-top: white solid .75px
+				position: absolute
+				top: 0
+				width: 100%
+				background: white
+				height: 0.75px
+
+			.faqArrow
+				background-image: url('../img/arrow.svg')
+				background-size: 100% 100% 
+				transform: rotate(-90deg)
+				transform-origin: center center
+				width: 15px
+				height: 15px
+				filter: saturate(0)
 
 			.faqAnswer
 				overflow: hidden
@@ -904,7 +1079,10 @@ section#howCanYouHelp
 
 				p	
 					position: absolute
-
+					left: 0
+					top: 1rem
+					opacity: .75
+					height: 100px
 
 .splitLine
 	overflow: hidden
@@ -919,6 +1097,9 @@ section#howCanYouHelp
 
 // Above 480px but beneath 769px
 @media only screen and (min-width: 480px)
+
+	section#howCanYouHelp
+		margin-bottom: 5%
 
 	header
 		padding-top: calc(6.1% / 2)
@@ -970,9 +1151,7 @@ section#howCanYouHelp
 	section#helpingReduceCosts
 		
 		& > div
-			width: 100%
-			justify-content: flex-end
-			// column-gap: 3rem
+			// width: 100%
 
 			.headingContainer
 				// width: 40%
@@ -986,10 +1165,17 @@ section#howCanYouHelp
 // Above 796px
 @media only screen and (min-width: 769px)
 
-	section#howCanYouHelp
-		
-		#foldingProjectsContainer 
-			justify-content: flex-end
+	#costNumbersContainer
+
+		.crossOut
+			height: 1rem
+
+	#barChartContainer
+		// width: 400vw
+
+		svg
+			width: 100%
+			height: 100%
 
 	#viewport > div > canvas
 		top: 22%
@@ -1001,10 +1187,10 @@ section#howCanYouHelp
 			column-gap: 4.6%
 
 			.headingContainer
-				width: 50%
+				// width: 50%
 				max-width: 500px
 				flex-grow: 1
 
 			& > div:not(.headingContainer)
-				width: 40%
+				// width: 40%
 				max-width: 500px

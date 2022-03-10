@@ -3,7 +3,7 @@ import SplitText from "gsap/SplitText";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import colors from "./colors";
 let navEntry = gsap.utils.toArray("nav > div > a");
-export const navDots = gsap.utils.toArray(".navMarker");
+let navDots = gsap.utils.toArray(".navMarker");
 let sections = gsap.utils.toArray("section.contentPanel");
 
 gsap.registerPlugin(ScrollTrigger);
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 });
 
 navEntry.forEach((entry) => {
-  let entryTL = gsap.timeline({
+  entry.tl = gsap.timeline({
     paused: true,
   });
 
@@ -43,13 +43,13 @@ navEntry.forEach((entry) => {
     type: "chars, lines",
   });
 
-  entryTL
+  entry.tl
     .to(
       entry.querySelector(".navMarker"),
       {
-        x: "-.5rem",
-        duration: 0.29,
-        ease: "power3.inOut",
+        x: -7,
+        duration: 0.1,
+        opacity: 1,
       },
       "hover"
     )
@@ -71,9 +71,11 @@ navEntry.forEach((entry) => {
     );
 
   entry.addEventListener("mouseover", (event) => {
-    entryTL.play();
+    entry.tl.play();
   });
   entry.addEventListener("mouseout", (event) => {
-    entryTL.reverse();
+    entry.tl.reverse();
   });
 });
+
+export default navDots;

@@ -6,40 +6,54 @@ const supercomputers = [
   {
     name: "RIKU Fugaku",
     flops: 415,
+    img: "fugaku",
+    country: "japan",
   },
   {
     name: "IBM Summit",
     flops: 148,
+    img: "summit",
+    country: "usa",
   },
   {
     name: "IBM Sierra",
     flops: 94,
+    img: "sierra",
+    country: "usa",
   },
   {
     name: "Sunway TaihuLight",
     flops: 93,
+    img: "sunway",
+    country: "china",
   },
   {
     name: "Tianhe: 2A",
     flops: 61,
+    img: "tianhe",
+    country: "china",
   },
   {
-    name: "DELL HPC5",
+    name: "Eni HPC5",
     flops: 35,
-    relative: "x",
+    img: "hpc5",
+    country: "italy",
   },
   {
     name: "NVIDIA Selene",
     flops: 27,
+    img: "selene",
+    country: "usa",
   },
   {
-    name: "TACC Frontera",
+    name: "Frontera",
     flops: 23,
-    relative: "x",
+    img: "usa",
   },
   {
     name: "Cineca Marconi-100",
     flops: 21,
+    country: "italy",
   },
 ];
 

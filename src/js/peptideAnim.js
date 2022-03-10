@@ -285,12 +285,11 @@ export default function createPeptideTL() {
     scrollTrigger: {
       trigger: whatIsFolding,
       start: "top top",
-      markers: true,
       end: "bottom top",
     },
   });
   peptideTL
-    .call(peptideTL.scrollTrigger.refresh())
+    // .call(peptideTL.scrollTrigger.refresh())
     .to(nglStage, {
       filter: "saturate(.5) blur(7.5px)",
       duration: 0.9,
@@ -323,7 +322,9 @@ export default function createPeptideTL() {
       { yPercent: 0, duration: 0.57, stagger: 0.05, ease: "power3.inOut" },
       "draggerIn"
     )
-    .call(firstTextAnim)
+    .call(function () {
+      firstTextAnim.play();
+    })
     .call(createPeptideDraggable);
 }
 
@@ -333,56 +334,3 @@ peptideAnim.addEventListener("DOMLoaded", (event) => {
 
 // Danger Click Targets
 var dangerClickClear = 0;
-
-let numbers = document.getElementById("millionAcross");
-let wdwn = document.getElementById("whyDoWeNeed");
-numbers.split = new SplitText(numbers, {
-  type: "chars, lines",
-  linesClass: "splitLIne",
-});
-let millionTL = gsap.timeline({
-  scrollTrigger: {
-    scrub: 0.4,
-    trigger: wdwn,
-    start: "top bottom-=18%",
-    end: "bottom top",
-  },
-});
-
-millionTL
-  .from(
-    wdwn,
-    {
-      background: "transparent",
-    },
-    "start"
-  )
-  .from(
-    numbers.split.chars,
-    {
-      yPercent: 100,
-      stagger: 0.1,
-    },
-    "start"
-  );
-
-// let millionLateral = gsap.timeline({
-//   scrollTrigger: {
-//     scrub: 0.4,
-//     markers: true,
-//     trigger: wdwn,
-//     start: "top top",
-//     end: "bottom top",
-//   },
-// });
-
-// millionLateral.to(numbers, {
-//   xPercent: -35,
-// });
-// .to(
-//   numbers,
-//   {
-//     xPercent: -47,
-//   },
-//   "start"
-// );

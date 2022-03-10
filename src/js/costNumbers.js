@@ -22,7 +22,6 @@ let numbersFlipping = gsap.timeline({
   scrollTrigger: {
     trigger: reduceCost,
     start: "top bottom-=44%",
-    markers: true,
   },
 });
 gsap.set([twoThouFlip, fiveThouFlip], {

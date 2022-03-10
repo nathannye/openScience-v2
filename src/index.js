@@ -57,8 +57,7 @@ function setupFarAndAway() {
     e.anim = gsap.from(e.split.words, {
       scrollTrigger: {
         trigger: e,
-        start: "top bottom-=44%",
-        // toggleActions: "restart play play restart",
+        start: "top bottom-=14%",
       },
       yPercent: 100,
       autoAlpha: 0,
@@ -86,7 +85,7 @@ function setupParas() {
     });
     para.anim = gsap.from(para.split.lines, {
       scrollTrigger: {
-        start: "top 74%",
+        start: "top bottom-=15%",
         trigger: para,
       },
       autoAlpha: 0,
@@ -103,7 +102,7 @@ setupParas();
 
 // Image section
 let images = gsap.utils.toArray("img.parallaxImage");
-let imgTrigger = document.querySelector("#numberOfUsersPanel");
+let imgTrigger = document.getElementById("numberOfUsersPanel");
 
 gsap.set(images, {
   clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)",
@@ -126,7 +125,7 @@ gsap.to(images[0], {
     scrub: true,
     start: "top bottom",
     end: "bottom top",
-    trigger: "#numberOfUsersPanel",
+    trigger: imgTrigger,
   },
   yPercent: -60,
 });
@@ -135,7 +134,7 @@ gsap.to(images[1], {
     scrub: true,
     start: "top bottom",
     end: "bottom top",
-    trigger: "#numberOfUsersPanel",
+    trigger: imgTrigger,
   },
   yPercent: -22,
 });
@@ -144,7 +143,7 @@ gsap.to(images[2], {
     scrub: true,
     start: "top bottom",
     end: "bottom top",
-    trigger: "#numberOfUsersPanel",
+    trigger: imgTrigger,
   },
   yPercent: -19,
 });
@@ -153,7 +152,7 @@ gsap.to(images[3], {
     scrub: true,
     start: "top bottom",
     end: "bottom top",
-    trigger: "#numberOfUsersPanel",
+    trigger: imgTrigger,
   },
   yPercent: 87,
 });
@@ -210,5 +209,44 @@ links.forEach((link) => {
 
   link.addEventListener("mouseout", (event) => {
     e.tl.reverse();
+  });
+});
+
+let h3 = gsap.utils.toArray("h3");
+
+h3.forEach((e) => {
+  e.split = new SplitText(e, {
+    type: "lines, words",
+    linesClass: "splitLine",
+  });
+
+  gsap.from(e.split.words, {
+    scrollTrigger: {
+      trigger: e,
+      start: "top bottom-=14%",
+      markers: true,
+    },
+    yPercent: 100,
+    duration: 0.65,
+    ease: "power3.inOut",
+    stagger: 0.03,
+  });
+});
+
+let helpImages = gsap.utils.toArray("#howCanYouHelp object, img");
+
+helpImages.forEach((e) => {
+  gsap.set(e, {
+    clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
+  });
+
+  gsap.to(e, {
+    clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+    duration: 1.25,
+    ease: "power3.inOut",
+    scrollTrigger: {
+      start: "top bottom+=12%",
+      trigger: e,
+    },
   });
 });

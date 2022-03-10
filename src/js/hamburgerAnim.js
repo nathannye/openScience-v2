@@ -2,7 +2,6 @@ import gsap from "gsap";
 import SplitText from "gsap/SplitText";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import lottie from "lottie-web";
-import colors from "./colors";
 
 let hamburgerContainer = document.getElementById("hamburgerIcon");
 let hamburgerMenu = document.getElementById("mobileMenu");
