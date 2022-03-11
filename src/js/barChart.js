@@ -157,7 +157,6 @@ function animateChart() {
     .to(
       declarePandemic,
       {
-        // fill: colors.gry,
         duration: 10,
       },
       "next"
@@ -180,12 +179,25 @@ function animateChart() {
       exaCaption.tl.play();
       pandemicCaption.tl.reverse();
     })
-    .to(barChartContainer, {
-      x: "-100vw",
-      delay: 100,
-      ease: "power2.inOut",
-      duration: 200,
-    });
+    .to(
+      barChartContainer,
+      {
+        x: "-109.7vw",
+        delay: 160,
+        ease: "power2.inOut",
+        duration: 200,
+      },
+      "next"
+    )
+    .to(
+      barChartContainer,
+      {
+        autoAlpha: 0,
+        duration: 100,
+        delay: 100,
+      },
+      ">"
+    );
 }
 
 animateChart();

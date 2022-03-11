@@ -21,11 +21,10 @@ gsap.registerPlugin(
 let nglStage = document.querySelector("#viewport");
 
 document.addEventListener("DOMContentLoaded", (event) => {
-  // let peptideAnimContainer = document.getElementById("peptideAnimationContainer");
   let peptideLottieContainer = document.getElementById(
     "peptideLottieContainer"
   );
-  // let peptideAnimText = document.getElementById("whatIsFoldingText");
+
   let firstText = document.querySelector(
     "#whatIsFoldingText > div:first-child"
   );
@@ -113,22 +112,52 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     let dangerClickTargets = gsap.utils.toArray(".errorTarget");
 
-    dangerClickTargets.forEach((thing) => {
-      gsap.set(thing, {
+    dangerTL
+      // Arrives at danger state
+      .to(peptideLottieContainer, {
+        filter: "blur(0px)",
+        autoAlpha: 1,
+        duration: 0.5,
+      })
+      .to(
+        secondText,
+        {
+          autoAlpha: 1,
+          duration: 0.45,
+        },
+        "swap",
+        ">"
+      )
+      .to(
+        firstText,
+        {
+          autoAlpha: 0,
+          duration: 0.45,
+        },
+        "swap"
+      )
+      .to(dangerClickTargets, {
+        autoAlpha: 1,
+        delay: 1,
+        duration: 0.6,
+        stagger: 0.2,
+      })
+      .call(flickerTL.play, null, "swap")
+      .to(dangerSeriesTrigger, {
         autoAlpha: 0,
+        duration: 0.4,
       });
 
-      // var dangerMarkerAnim = Lottie.loadAnimation({
-      //   container: thing,
-      //   renderer: "svg",
-      //   loop: true,
-      //   quality: "medium",
-      //   autoplay: false,
-      //   path: "https://assets4.lottiefiles.com/packages/lf20_f401ldqi.json",
-      // });
-    });
-
     dangerClickTargets.forEach((target) => {
+      var dangerMarkerAnim = Lottie.loadAnimation({
+        container: target,
+        renderer: "svg",
+        loop: true,
+        quality: "medium",
+        autoplay: true,
+        path: "https://assets4.lottiefiles.com/packages/lf20_f401ldqi.json",
+      });
+
       target.addEventListener("click", (event) => {
         dangerClickClear += 1;
         if (dangerClickClear === 3) {
@@ -136,6 +165,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
           peptideAnim.playSegments([2, 131]);
           dangerClearTL.play();
         }
+
+        console.log(dangerClickClear);
       });
     });
   });
@@ -177,36 +208,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
       filter: "blur(9px) saturate(1.2) brightness(.85)",
       ease: "rough({ strength: 1, points: 12, template: none.in, taper: none, randomize: true, clamp: true })",
       duration: 4.2,
-    });
-
-  dangerTL
-    // Arrives at danger state
-    .to(peptideLottieContainer, {
-      filter: "blur(0px)",
-      autoAlpha: 1,
-      duration: 0.5,
-    })
-    .to(
-      secondText,
-      {
-        autoAlpha: 1,
-        duration: 0.45,
-      },
-      "swap",
-      ">"
-    )
-    .to(
-      firstText,
-      {
-        autoAlpha: 0,
-        duration: 0.45,
-      },
-      "swap"
-    )
-    .call(flickerTL.play)
-    .to(dangerSeriesTrigger, {
-      autoAlpha: 0,
-      duration: 0.4,
     });
 
   let draggerTL = gsap.timeline({

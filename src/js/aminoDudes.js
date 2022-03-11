@@ -9,8 +9,68 @@ gsap.registerPlugin(MotionPathPlugin, ScrollTrigger);
 const paths = ["#firstPath", "#secondPath", "#thirdPath"];
 
 let grain = document.getElementById("grain");
+let text = document.querySelectorAll(
+  "#whyDoWeNeed h2, #whyDoWeNeed p, #whyDoWeNeed h4"
+);
+
+let cnv = document.querySelector("#viewport canvas");
 let container = document.getElementById("whyDoWeNeed");
 let animContainer = gsap.utils.toArray(".aminoDudeContainer");
+
+container.h2 = document.querySelector("#whyDoWeNeed h2");
+container.p = document.querySelector("#whyDoWeNeed p");
+container.h4 = document.querySelector("#whyDoWeNeed h4");
+
+let tl = gsap.timeline({
+  scrollTrigger: {
+    trigger: container,
+    start: "top top+=2%",
+    markers: true,
+  },
+});
+container.h2.split = new SplitText(container.h2, {
+  type: "words, lines",
+  linesClass: "splitLine",
+});
+container.p.split = new SplitText(container.p, {
+  type: "lines",
+});
+
+tl.from(
+  container.h4,
+  {
+    x: -10,
+    autoAlpha: 0,
+    duration: 1.2,
+    ease: "power3.inOut",
+  },
+  "go"
+)
+
+  .from(
+    container.h2.split.words,
+    {
+      yPercent: 100,
+      autoAlpha: 0,
+      duration: 1,
+      ease: "power4.inOut",
+      stagger: 0.0142,
+    },
+    "go+=.35"
+  )
+  .from(
+    container.p.split.lines,
+    {
+      autoAlpha: 0,
+      y: 15,
+      delay: 0.6,
+      rotateY: -8,
+      ease: "power2.out",
+      stagger: 0.09,
+      duration: 0.9,
+    },
+    "go+=.65"
+  );
 
 let animOne = Lottie.loadAnimation({
   container: animContainer[0],
@@ -36,31 +96,7 @@ let animThree = Lottie.loadAnimation({
   loop: true,
 });
 
-// const anim = [];
-
-// for (let i = 0; i < paths.length; i++) {
-//   anim[i] = Lottie.loadAnimation({
-//     container: animContainer[i],
-//     path: "https://assets5.lottiefiles.com/packages/lf20_cpwcuygx.json",
-//     autoplay: true,
-//     quality: "low",
-//     loop: true,
-//   });
-//   anim.addEventListener("DOMLoaded", (event) => {
-// let tl = gsap.timeline({
-//   scrollTrigger: {
-//     trigger: container,
-//     start: "top bottom",
-//     scrub: 1,
-//     end: "bottom top",
-//   },
-// });
-
-//   console.log(paths[i]);
-// }
-
-let html = document.querySelector("html");
-let body = document.querySelector("body");
+let wrappers = document.querySelectorAll("html, body");
 
 let numbers = document.getElementById("millionAcross");
 numbers.split = new SplitText(numbers, {
@@ -72,70 +108,62 @@ let needTL = gsap.timeline({
   scrollTrigger: {
     trigger: container,
     start: "top top",
+    pin: true,
     end: "bottom top",
     scrub: 0.3,
     toggleActions: "play reset reverse play",
   },
-  //     onComplete: () => {
-  //       gsap.to(html, {
-
-  //       })
-  //   },
+  onComplete: () => {
+    gsap.to(cnv, {
+      autoAlpha: 1,
+      duration: 0.3,
+    });
+  },
 });
 
 needTL
   .to(
-    grain,
+    text,
     {
-      autoAlpha: 0,
-      duration: 0.1,
-    },
-    0
-  )
-  // .from(
-  //   nglStage,
-  //   {
-  //     autoAlpha: 0,
-  //   },
-  //   0
-  // )
-  //   .to(
-  //     body,
-  //     {
-  //       background: colors.gry,
-  //       duration: 2,
-  //     },
-  //     0
-  //   )
-  //   .to(
-  //     html,
-  //     {
-  //       background: colors.gry,
-  //       duration: 2,
-  //     },
-  //     0
-  //   )
-  //   .from(
-  //     container,
-  //     {
-  //       background: "transparent",
-  //       duration: 3,
-  //     },
-  //     0
-  //   )
-  .from(
-    numbers.split.chars,
-    {
-      yPercent: 100,
-      stagger: 3,
-      duration: 20,
+      color: colors.blue,
+      duration: 4,
     },
     0
   )
   .to(
+    wrappers,
+    {
+      background: colors.gry,
+      duration: 10,
+    },
+    0
+  )
+  .to(
+    grain,
+    {
+      autoAlpha: 0,
+    },
+    0
+  )
+  .to(
+    cnv,
+    {
+      autoAlpha: 0,
+    },
+    0
+  )
+  .from(
+    numbers.split.chars,
+    {
+      yPercent: 100,
+      duration: needTL.duration,
+    },
+    "main"
+  )
+  .to(
     animContainer[0],
     {
-      duration: 25,
+      duration: 15,
       motionPath: {
         end: 0.1,
         start: 0.85,
@@ -145,7 +173,7 @@ needTL
         autoRotate: true,
       },
     },
-    0
+    "main"
   )
   .to(
     animContainer[1],
@@ -160,12 +188,12 @@ needTL
         autoRotate: true,
       },
     },
-    0
+    "main"
   )
   .to(
     animContainer[2],
     {
-      duration: 25,
+      duration: 19,
       motionPath: {
         end: 0.5,
         start: 1,
@@ -175,7 +203,32 @@ needTL
         autoRotate: true,
       },
     },
-    0
+    "main"
+  )
+  .to(
+    cnv,
+    {
+      autoAlpha: 1,
+      duration: 7,
+      delay: 4,
+    },
+    "end"
+  )
+  .to(
+    wrappers,
+    {
+      background: colors.dark,
+      duration: 7,
+    },
+    "end"
+  )
+  .to(
+    text,
+    {
+      color: colors.white,
+      duration: 7,
+    },
+    "end"
   );
 
 // let millionTL = gsap.timeline({

@@ -125,7 +125,7 @@ links.forEach((link) => {
   });
 });
 
-let h3 = gsap.utils.toArray("h3");
+let h3 = gsap.utils.toArray("h3:not(h3#dragDirections)");
 
 h3.forEach((e) => {
   e.split = new SplitText(e, {

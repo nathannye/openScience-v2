@@ -29,6 +29,7 @@ html, body {
   scroll-behavior: smooth;
   font-size: 62.5%;
   margin: 0;
+  overflow-x: hidden;
   padding: 0;
   color: white;
 }
@@ -526,6 +527,7 @@ header div#soundIndicatorContainer canvas#soundIndicator {
 #viewport {
   width: 100vw;
   height: 100%;
+  pointer-events: none;
   position: fixed;
   z-index: 1;
   transform: perspective(300px);
@@ -601,10 +603,10 @@ section#whatIsFolding {
 
 section#whatIsFolding #whatIsFoldingText {
   position: relative;
-  height: 320px;
   margin: auto;
   width: 87.8%;
   max-width: 350px;
+  flex-grow: 1;
 }
 
 section#whatIsFolding #whatIsFoldingText p {
@@ -634,6 +636,7 @@ section#whatIsFolding #peptideAnimationContainer #peptideLottieContainer {
   flex-grow: 1;
   position: relative;
   top: 0;
+  height: 100vh;
 }
 
 section#whatIsFolding #peptideAnimationContainer #peptideLottieContainer > svg {
@@ -721,9 +724,9 @@ section#whatIsFolding #peptideAnimationContainer #peptideSliderContainer #peptid
 section#whatIsFolding #peptideAnimationContainer #peptideSliderContainer #peptideSlider #peptideKnob {
   border-radius: 50%;
   background: var(--color-yellow);
-  width: 40px;
+  width: 34px;
   z-index: 40;
-  height: 40px;
+  height: 34px;
   transform: translateY(-50%);
 }
 
@@ -734,16 +737,15 @@ section#whatIsFolding #peptideAnimationContainer #peptideSliderContainer #peptid
 }
 
 .errorTarget {
-  pointer-events: auto;
+  opacity: 0;
   cursor: pointer;
-  display: block;
 }
 
 .errorTarget > svg {
   display: block;
   width: 200px !important;
   height: 200px !important;
-  transform: scale(0.35) translate(-25%, -18.5%) !important;
+  transform: scale(0.28) translate(-25%, -18.5%) !important;
 }
 
 .testTarget {
@@ -765,7 +767,10 @@ section#whyDoWeNeed {
 }
 
 section#whyDoWeNeed h2, section#whyDoWeNeed p, section#whyDoWeNeed h4 {
-  color: var(--color-dark);
+  color: white;
+  transform: perspective(300px);
+  transform-style: preserve-3d;
+  z-index: 10;
 }
 
 section#whyDoWeNeed > div > div {
@@ -786,7 +791,7 @@ section#whyDoWeNeed h1#millionAcross {
   bottom: -9%;
   left: 5%;
   color: var(--color-white);
-  font-size: clamp(38em, calc(38rem + (86.8 - 38) * ((100vw - 48em) / (120 - 48))), 86.8em);
+  font-size: clamp(17em, calc(17rem + (86.8 - 17) * ((100vw - 48em) / (120 - 48))), 86.8em);
   line-height: 1;
   white-space: nowrap;
   margin: 0;

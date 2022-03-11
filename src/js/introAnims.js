@@ -129,7 +129,7 @@ titleTL
       autoAlpha: 0,
       y: 12,
       rotateY: -8,
-      color: colors.ylw,
+      color: colors.teal,
       ease: "power2.out",
       stagger: 0.09,
       duration: 1.8,

@@ -34,28 +34,22 @@ supercomputers.forEach((computer) => {
 });
 
 function tableAnim() {
-  let dataBars = gsap.utils.toArray(".dataBar");
-  let operationsText = gsap.utils.toArray(".opsText");
-  let name = gsap.utils.toArray(".computerName");
-  let rows = gsap.utils.toArray("#superComputerTable > tr");
-  let labels = gsap.utils.toArray("#supercomputerTable > tbody > tr > th");
-
-  ScrollTrigger.refresh();
-
-  console.log(dataBars, operationsText, name, rows, labels);
-
-  let tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: table,
-      start: "top 50%",
-    },
-  });
-
-  tl.from(rows, {
-    y: 20,
-    stagger: 0.2,
-    autoAlpha: 0,
-  });
+  // let dataBars = gsap.utils.toArray(".dataBar");
+  // let operationsText = gsap.utils.toArray(".opsText");
+  // let name = gsap.utils.toArray(".computerName");
+  // let rows = gsap.utils.toArray("#superComputerTable > tr");
+  // let labels = gsap.utils.toArray("#supercomputerTable > tbody > tr > th");
+  // let tl = gsap.timeline({
+  //   scrollTrigger: {
+  //     trigger: table,
+  //     start: "top 50%",
+  //   },
+  // });
+  // tl.from(rows, {
+  //   y: 20,
+  //   stagger: 0.2,
+  //   autoAlpha: 0,
+  // });
 }
 
 tableAnim();

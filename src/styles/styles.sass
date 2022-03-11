@@ -72,7 +72,7 @@ html, body
 	font-size: 62.5%
 	margin: 0
 	// overflow-y: visible !important
-	// overflow-x: hidden
+	overflow-x: hidden
 	padding: 0
 	color: white
 
@@ -493,6 +493,7 @@ header
 #viewport 
 	width: 100vw
 	height: 100%
+	pointer-events: none
 	position: fixed
 	z-index: 1
 	@include has3D
@@ -563,9 +564,9 @@ section#whatIsFolding
 		// left: 0
 		// right: 0
 		// bottom: 0
-		height: 320px
 		margin: auto
 		@include maxWidthXS
+		flex-grow: 1
 
 		p
 			@include has3D
@@ -594,6 +595,7 @@ section#whatIsFolding
 			flex-grow: 1
 			position: relative
 			top: 0
+			height: 100vh
 
 			& > svg
 				display: block
@@ -672,9 +674,9 @@ section#whatIsFolding
 				#peptideKnob
 					border-radius: 50%
 					background: var(--color-yellow)
-					width: 40px
+					width: 34px
 					z-index: 40
-					height: 40px
+					height: 34px
 					transform: translateY(-50%)
 
 .errorTarget > path
@@ -683,15 +685,21 @@ section#whatIsFolding
 	fill: none
 
 .errorTarget
-	pointer-events: auto
+	opacity: 0
 	cursor: pointer
-	display: block
+	// transform: scale(1)
+	// pointer-events: auto
+	// cursor: pointer
+	// width: 30px
+	// height: 30px
+	// transform: scale(4)
+	// display: block
 
 	& > svg
 		display: block
 		width: 200px !important
 		height: 200px !important
-		transform: scale(.35) translate(-25%, -18.5%) !important
+		transform: scale(.28) translate(-25%, -18.5%) !important
 
 .testTarget	
 	background: var(--color-teal)
@@ -710,7 +718,9 @@ section#whyDoWeNeed
 	overflow: hidden
 
 	h2, p, h4
-		color: var(--color-dark)
+		color: white
+		@include has3D
+		z-index: 10
 
 	& > div
 
@@ -729,7 +739,7 @@ section#whyDoWeNeed
 		bottom: -9%
 		left: 5%
 		color: var(--color-white)
-		font-size: clamp(38em, calc(38rem + (86.8 - 38) * ((100vw - 48em) / (120 - 48))), 86.8em)
+		font-size: clamp(17em, calc(17rem + (86.8 - 17) * ((100vw - 48em) / (120 - 48))), 86.8em)
 		line-height: 1
 		white-space: nowrap
 		margin: 0
