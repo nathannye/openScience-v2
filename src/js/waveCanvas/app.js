@@ -1,7 +1,5 @@
 import { WaveGroup } from "./waveGroup";
 
-let waveContainer = document.querySelector("#soundIndicatorContainer");
-
 class App {
   constructor() {
     this.container = document.getElementById("soundIndicatorContainer");

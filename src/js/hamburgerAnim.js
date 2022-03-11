@@ -3,6 +3,8 @@ import SplitText from "gsap/SplitText";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import lottie from "lottie-web";
 
+gsap.registerPlugin(ScrollTrigger, SplitText);
+
 let hamburgerContainer = document.getElementById("hamburgerIcon");
 let hamburgerMenu = document.getElementById("mobileMenu");
 let mobileNavLinks = gsap.utils.toArray("#mobileMenu #mobileNav h1");
@@ -11,9 +13,6 @@ let html = document.querySelector("html");
 mobileNavLinks.split = new SplitText(mobileNavLinks, {
   type: "lines",
 });
-
-gsap.registerPlugin(ScrollTrigger);
-gsap.registerPlugin(SplitText);
 
 // function setupMobileAnimation() {
 // function setupMobileNavLinks() {
@@ -93,9 +92,9 @@ mowTL
       z: -4,
       transformOrigin: "left center",
       autoAlpha: 0,
-      duration: 0.9,
+      duration: 1.4,
       ease: "power3.out",
-      stagger: 0.13,
+      stagger: 0.2,
     },
     "menuOpen+=.3"
   );
@@ -106,14 +105,12 @@ hamburgerContainer.addEventListener("click", (event) => {
   hamburgerAnim.play();
   direction = -direction;
 
-  mowTL.reversed()
-    ? mowTL.timeScale(1.2).play()
-    : mowTL.timeScale(2.2).reverse();
+  mowTL.reversed() ? mowTL.play() : mowTL.timeScale(1.6).reverse();
 });
 
 mobileNavLinks.forEach((link) => {
   link.addEventListener("click", (event) => {
-    mowTL.timeScale(2.2).reverse();
+    mowTL.timeScale(1.6).reverse();
     hamburgerAnim.setDirection(direction);
     hamburgerAnim.play();
     direction = -direction;

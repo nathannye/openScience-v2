@@ -2,34 +2,35 @@ import gsap from "gsap";
 import SplitText from "gsap/SplitText";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import colors from "./colors";
-import { hamburgerContainer } from "./hamburgerAnim";
-import soundIndi from "./soundToggle";
+// import soundIndi from "./soundToggle";
 import navDots from "./navMarkerAnim";
 import Lottie from "lottie-web";
-gsap.registerPlugin(ScrollTrigger);
-gsap.registerPlugin(SplitText);
 
-let container = document.getElementById("scrollAnimContainer");
+gsap.registerPlugin(ScrollTrigger, SplitText);
 
-function playScrollLottie() {
-  var scrollIndi = Lottie.loadAnimation({
-    container: container,
-    loop: false,
-    renderer: "svg",
-    autoplay: true,
-    path: "https://assets5.lottiefiles.com/packages/lf20_hzdymoq2.json",
-  });
-}
+let soundIndi = document.querySelector("div#soundIndicatorContainer");
 
-// Define high level elements
-export const nglStage = document.querySelector("#viewport");
+let hamburgerContainer = document.getElementById("hamburgerIcon");
+let indiContainer = document.getElementById("scrollAnimContainer");
+let nglStage = document.querySelector("#viewport");
 let html = document.querySelector("html");
 let scrollIndiText = document.querySelector("#scrollIndicator h4");
-
 let scrollIndiSplit = new SplitText(scrollIndiText, {
   type: "lines, chars",
   linesClass: "splitLine",
 });
+
+function playMe() {
+  let scrollIndi = Lottie.loadAnimation({
+    container: indiContainer,
+    loop: false,
+    renderer: "svg",
+    quality: "low",
+    autoplay: false,
+    path: "https://assets5.lottiefiles.com/packages/lf20_hzdymoq2.json",
+  });
+  scrollIndi.play;
+}
 
 let introPara = document.querySelector("#introPanel p");
 
@@ -146,15 +147,14 @@ titleTL
     },
     "start+=.6"
   )
-  .to(
+  .from(
     soundIndi,
     {
-      opacity: 1,
+      opacity: 0,
       duration: 0.67,
     },
     "start+=.7"
   )
-  .call(playScrollLottie, {}, "start+=1.5")
   .from(
     scrollIndiSplit.chars,
     {
@@ -165,7 +165,7 @@ titleTL
     },
     "start+=.7"
   )
-
+  .call(playMe, null, "start+=.5")
   .from(
     hamburgerContainer,
     {
@@ -192,9 +192,6 @@ function createIntroOutTL() {
       pinSpacing: false,
       pin: "#introPanel",
       paused: true,
-      onComplete: function () {
-        trigger();
-      },
     },
   });
 
@@ -250,7 +247,7 @@ function createIntroOutTL() {
       "scrollingOut+=50%"
     )
     .to(
-      container,
+      indiContainer,
       {
         scaleY: 0,
         transformOrigin: "center bottom",
@@ -263,44 +260,10 @@ function createIntroOutTL() {
       {
         autoAlpha: 0,
         duration: 2,
-        stagger: 0.02,
+        stagger: 0.22,
       },
       "scrollingOut+=71%"
     );
-}
-
-let interstitialOne = document.querySelector("#whatDoProteins");
-
-function interstitialOneCreate() {
-  let firstInterstitial = gsap.timeline({
-    scrollTrigger: {
-      start: "top center",
-      end: "bottom top",
-      trigger: interstitialOne,
-      // pin: interstitialOne,
-      toggleActions: "play pause pause restart",
-    },
-  });
-
-  firstInterstitial
-    .from(h4.split.words, {
-      duration: 1.5,
-      z: -33,
-      autoAlpha: 0,
-      ease: "power4.out",
-      stagger: {
-        from: "edges",
-        each: 0.052,
-      },
-    })
-    .to(h4.split.words, {
-      autoAlpha: 0,
-      delay: 2,
-      z: -40,
-      duration: 1,
-      stagger: 0.052,
-      filter: "blur(4px)",
-    });
 }
 
 window.onload = () => {

@@ -1,42 +1,9 @@
 import gsap from "gsap";
 import SplitText from "gsap/SplitText";
 import ScrollTrigger from "gsap/ScrollTrigger";
-// import { random } from "gsap/gsap-core";
-// import lottie from "lottie-web";
-// import stage from "./js/nglScene";
 import colors from "./js/colors";
 
-gsap.registerPlugin(ScrollTrigger);
-gsap.registerPlugin(SplitText);
-
-let introPara = document.querySelector("#introPanel p");
-
-function setupIntroParaSplit() {
-  introPara.split = new SplitText(introPara, {
-    type: "lines, chars",
-  });
-}
-
-ScrollTrigger.addEventListener("refresh", setupIntroParaSplit);
-setupIntroParaSplit();
-
-let content = document.querySelector("main");
-
-let introPanel = document.querySelector("#introPanel");
-
-let nglStage = document.querySelector("#viewport");
-let html = document.querySelector("html");
-
-gsap.to(nglStage, {
-  scrollTrigger: {
-    trigger: content,
-    scrub: 2,
-    rotateZ: 40,
-    start: "top top",
-    end: "bottom bottom",
-  },
-  yPercent: -3.4,
-});
+gsap.registerPlugin(ScrollTrigger, SplitText);
 
 let h4 = document.querySelector("#whatDoProteins h4");
 h4.split = new SplitText(h4, {
@@ -67,8 +34,6 @@ function setupFarAndAway() {
     });
   });
 }
-
-ScrollTrigger.addEventListener("refresh", setupFarAndAway);
 setupFarAndAway();
 
 // Paragraphs anim
@@ -97,64 +62,12 @@ function setupParas() {
     });
   });
 }
-ScrollTrigger.addEventListener("refresh", setupParas);
+
 setupParas();
 
-// Image section
-let images = gsap.utils.toArray("img.parallaxImage");
-let imgTrigger = document.getElementById("numberOfUsersPanel");
-
-gsap.set(images, {
-  clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)",
-  // yPercent: 11,
-});
-
-gsap.to(images, {
-  scrollTrigger: {
-    start: "top top",
-    trigger: imgTrigger,
-  },
-  duration: 1.1,
-  ease: "power3.inOut",
-  clipPath: "polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)",
-  stagger: 0.17,
-});
-
-gsap.to(images[0], {
-  scrollTrigger: {
-    scrub: true,
-    start: "top bottom",
-    end: "bottom top",
-    trigger: imgTrigger,
-  },
-  yPercent: -60,
-});
-gsap.to(images[1], {
-  scrollTrigger: {
-    scrub: true,
-    start: "top bottom",
-    end: "bottom top",
-    trigger: imgTrigger,
-  },
-  yPercent: -22,
-});
-gsap.to(images[2], {
-  scrollTrigger: {
-    scrub: true,
-    start: "top bottom",
-    end: "bottom top",
-    trigger: imgTrigger,
-  },
-  yPercent: -19,
-});
-gsap.to(images[3], {
-  scrollTrigger: {
-    scrub: true,
-    start: "top bottom",
-    end: "bottom top",
-    trigger: imgTrigger,
-  },
-  yPercent: 87,
+ScrollTrigger.addEventListener("refresh", function () {
+  setupFarAndAway();
+  setupParas();
 });
 
 // Link animations
@@ -224,7 +137,6 @@ h3.forEach((e) => {
     scrollTrigger: {
       trigger: e,
       start: "top bottom-=14%",
-      markers: true,
     },
     yPercent: 100,
     duration: 0.65,

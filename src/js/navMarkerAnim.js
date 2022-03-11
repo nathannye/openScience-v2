@@ -2,12 +2,12 @@ import gsap from "gsap";
 import SplitText from "gsap/SplitText";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import colors from "./colors";
+
 let navEntry = gsap.utils.toArray("nav > div > a");
 let navDots = gsap.utils.toArray(".navMarker");
 let sections = gsap.utils.toArray("section.contentPanel");
 
-gsap.registerPlugin(ScrollTrigger);
-gsap.registerPlugin(SplitText);
+gsap.registerPlugin(ScrollTrigger, SplitText);
 
 document.addEventListener("DOMContentLoaded", (event) => {
   for (let i = 0; i < sections.length; i++) {
@@ -40,7 +40,8 @@ navEntry.forEach((entry) => {
 
   let entryLabel = entry.querySelector("p");
   entryLabel.split = new SplitText(entryLabel, {
-    type: "chars, lines",
+    type: "words, lines",
+    linesClass: "splitLine",
   });
 
   entry.tl
@@ -49,18 +50,15 @@ navEntry.forEach((entry) => {
       {
         x: -7,
         duration: 0.1,
-        opacity: 1,
       },
       "hover"
     )
     .from(
-      entryLabel.split.chars,
+      entryLabel.split.words,
       {
-        autoAlpha: 0,
         // x: "-.5rem",
-        color: colors.teal,
-        rotateX: -50,
-        y: 4,
+        // color: colors.teal,
+        yPercent: 100,
         ease: "power2.inOut",
         duration: 0.23,
         stagger: {

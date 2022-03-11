@@ -1,16 +1,11 @@
 import Lottie from "lottie-web";
-import LottieScrollTrigger from "./lottieScrollTrigger";
-import { nglStage } from "./introAnims";
 import gsap from "gsap";
 import SplitText from "gsap/SplitText";
 import MotionPathPlugin from "gsap/MotionPathPlugin";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import colors from "./colors";
-import { color } from "d3";
 
-gsap.registerPlugin(MotionPathPlugin);
-gsap.registerPlugin(ScrollTrigger);
-
+gsap.registerPlugin(MotionPathPlugin, ScrollTrigger);
 const paths = ["#firstPath", "#secondPath", "#thirdPath"];
 
 let grain = document.getElementById("grain");
@@ -79,7 +74,6 @@ let needTL = gsap.timeline({
     start: "top top",
     end: "bottom top",
     scrub: 0.3,
-    pin: true,
     toggleActions: "play reset reverse play",
   },
   //     onComplete: () => {
@@ -98,13 +92,13 @@ needTL
     },
     0
   )
-  .from(
-    nglStage,
-    {
-      autoAlpha: 0,
-    },
-    0
-  )
+  // .from(
+  //   nglStage,
+  //   {
+  //     autoAlpha: 0,
+  //   },
+  //   0
+  // )
   //   .to(
   //     body,
   //     {

@@ -1,6 +1,9 @@
 import gsap from "gsap/all";
 import SplitText from "gsap/SplitText";
 import supercomputers from "./supercomputersData";
+import ScrollTrigger from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(SplitText, ScrollTrigger);
 
 const table = document.getElementById("supercomputerTable");
 
@@ -30,58 +33,85 @@ supercomputers.forEach((computer) => {
   table.appendChild(tableRow);
 });
 
-let dataBars = gsap.utils.toArray(".dataBar");
-let operationsText = gsap.utils.toArray("opsText");
-let rows = gsap.utils.toArray("#superComputerTable > tr");
-let labels = gsap.utils.toArray("#supercomputerTable > tbody > tr > th");
+function tableAnim() {
+  let dataBars = gsap.utils.toArray(".dataBar");
+  let operationsText = gsap.utils.toArray(".opsText");
+  let name = gsap.utils.toArray(".computerName");
+  let rows = gsap.utils.toArray("#superComputerTable > tr");
+  let labels = gsap.utils.toArray("#supercomputerTable > tbody > tr > th");
 
-operationsText.forEach((e) => {
-  e.split = new SplitText(e, {
-    type: "lines, words",
-    linesClass: "splitLine",
-  });
+  ScrollTrigger.refresh();
 
-  gsap.set(e.split.words, {
-    // yPercent: 0,
-    autoAlpha: 0,
-  });
+  console.log(dataBars, operationsText, name, rows, labels);
 
-  e.tl = gsap.timeline({
-    paused: true,
-  });
-
-  e.tl.to(e.split.words, {
-    yPercent: 100,
-  });
-});
-
-let tabletl = gsap.timeline({
-  paused: true,
-});
-
-tabletl
-  .from(labels, {
-    autoAlpha: 0,
-    duration: 0.35,
-    stagger: 0.04,
-  })
-  .from(
-    rows,
-    {
-      duration: 0.74,
-      y: 20,
-      autoAlpha: 0,
-      ease: "power3.inOut",
-      stagger: 0.03,
+  let tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: table,
+      start: "top 50%",
     },
-    "rows"
-  )
-  .call(function () {
-    for (let i = 0; i < operationsText.length; i++) {
-      setInterval(() => {
-        operationsText[i].tl.play();
-      }, 300);
-    }
-  }, "rows");
+  });
 
-export default tabletl;
+  tl.from(rows, {
+    y: 20,
+    stagger: 0.2,
+    autoAlpha: 0,
+  });
+}
+
+tableAnim();
+
+// name.forEach((e) => {
+//   e.split = new SplitText(e, {
+//     type: "lines, words",
+//     linesClass: "splitLine",
+//   });
+
+//   gsap.set(e.split.words, {
+//     autoAlpha: 0,
+//   });
+
+//   e.tl = gsap.timeline({
+//     scrollTrigger: {
+//       trigger: table,
+//       start: "top top",
+//     },
+//   });
+
+//   e.tl.to(e.split.words, {
+//     yPercent: 100,
+//     duration: 0.75,
+//     stagger: 0.04,
+//     ease: "power3.inOut",
+//   });
+// });
+
+// let tabletl = gsap.timeline({
+//   paused: true,
+// });
+
+// tabletl
+//   .from(labels, {
+//     autoAlpha: 0,
+//     duration: 0.35,
+//     stagger: 0.04,
+//   })
+//   .from(
+//     rows,
+//     {
+//       duration: 0.74,
+//       y: 20,
+//       autoAlpha: 0,
+//       ease: "power3.inOut",
+//       stagger: 0.03,
+//     },
+//     "rows"
+//   )
+//   .call(function () {
+//     for (let i = 0; i < operationsText.length; i++) {
+//       setInterval(() => {
+//         operationsText[i].tl.play();
+//       }, 300);
+//     }
+//   }, "rows");
+
+// export default tabletl;

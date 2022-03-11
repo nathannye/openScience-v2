@@ -27,13 +27,12 @@
     "eslint-config-recommended": "^4.1.0",
     "eslint-plugin-import": "^2.25.2",
     "parcel-bundler": "^1.12.5",
-    "prettier": "^2.4.1"
+    "prettier": "^2.4.1",
+    "vite": "^2.8.6"
   },
   "scripts": {
-    "build": "dist/index.html",
-    "dev": "parcel src/index.html",
-    "lint": "eslint \"src/**/*.{js}\" --quiet",
-    "format": "prettier --write \"src/**/*.{js,html}\""
+    "build": "vite build",
+    "dev": "vite"
   },
   "browserslist": "last 3 Chrome versions"
 }

@@ -2,14 +2,15 @@ import gsap from "gsap";
 import SplitText from "gsap/SplitText";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { Howl, Howler } from "howler";
+import normalSound from "../audio/ambientSoundtrack.mp3";
+import darkSound from "../audio/darkSoundtrack.mp3";
 
-gsap.registerPlugin(SplitText);
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(SplitText, ScrollTrigger);
 
 var soundOn = false;
 
 let soundButtons = gsap.utils.toArray("#soundButtons button");
-export const soundIndi = document.querySelector("div#soundIndicatorContainer");
+const soundIndi = document.querySelector("div#soundIndicatorContainer");
 
 let soundLabel = gsap.utils.toArray("div#soundLabelSwitch > div > h5");
 
@@ -51,11 +52,11 @@ labelTL
   );
 
 var tracks = new Howl({
-  src: [require("../audio/ambientSoundtrack.mp3")],
+  src: [normalSound],
 });
 
 var darkTrack = new Howl({
-  src: [require("../audio/darkSoundtrack.mp3")],
+  src: [darkSound],
 });
 
 // Sound Ask Controllers
@@ -109,7 +110,7 @@ dangerSeriesTrigger.addEventListener("click", (event) => {
   // }
 });
 
-export function soundDangerReverse() {
+export default function soundDangerReverse() {
   darkTrack.fade(1, 0, soundFadeDuration);
   setTimeout(() => {
     darkTrack.pause();

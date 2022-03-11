@@ -248,10 +248,6 @@ nav
 			font-style: inherit
 			margin-right: 1em
 			color: white
-			@include has3D
-			
-			div
-				@include has3D
 
 		div.navMarker
 			display: block
@@ -286,6 +282,9 @@ nav
 		writing-mode: vertical-lr
 		color: white
 		margin: 2rem 0 0 0
+
+		div
+			transform-style: unset !important
 
 // Nav jump Links
 .jumpTo
@@ -343,6 +342,9 @@ section#introPanel
 				@include has3D
 				will-change: transform
 
+				div
+					@include has3D
+
 #supercomputerHoverContainer
 	display: none
 
@@ -396,7 +398,8 @@ header
 	width: 100%
 	height: 100%
 	backdrop-filter: blur(35px) saturate(.9) brightness(1.2)
-	background: rgba(0, 0, 19, .79)
+	-webkit-backdrop-filter: blur(35px) saturate(.9) brightness(1.2)
+	background: var(--color-dark)
 	z-index: 399
 	position: fixed
 	top: 0
@@ -413,8 +416,9 @@ header
 
 	h1
 		font-size: clamp(1.6em, calc(1.6rem + (12 - 3.2) * ((100vw - 48em) / (120 - 48))), 12em)
-		// letter-spacing: .072em
+		letter-spacing: -0.03em
 		line-height: 2.5
+		color: var(--color-white)
 		@include fontIvyNormal
 		@include has3D
 		text-transform: capitalize !important
@@ -803,9 +807,10 @@ section#chartOfUsers
 	// width: 300vw
 	height: 100vh
 	top: 0 !important
-	margin: 0 !important
+	margin: 0 0 15% 0 !important
 	max-width: initial !important
 	overflow: hidden
+	width: 200vw
 	display: flex
 	align-items: flex-end
 	position: relative
@@ -846,18 +851,16 @@ section#chartOfUsers
 			left: 0
 
 #barChartContainer
+	width: 300vw
+	display: flex
+	flex-direction: column
 
 	& > svg
 		overflow: visible
 		display: block
-		width: 600vw
+		width: 100%
 		height: 100%
-
-		#yAxis
-
-			.ticks:nth-child(10n)
-				visibility: hidden
-
+		
 	.eventMarker
 		fill: var(--color-yellow) !important
 		position: relative
@@ -1171,7 +1174,7 @@ section#howCanYouHelp
 			height: 1rem
 
 	#barChartContainer
-		// width: 400vw
+		width: 300vw
 
 		svg
 			width: 100%
