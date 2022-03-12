@@ -2,6 +2,8 @@ const supercomputers = [
   {
     name: "Folding @ Home",
     flops: 1100,
+    img: "folding",
+    country: "all",
   },
   {
     name: "RIKU Fugaku",

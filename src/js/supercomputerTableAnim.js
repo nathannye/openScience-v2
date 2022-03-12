@@ -27,8 +27,10 @@ supercomputers.forEach((computer) => {
 
   gsap.set(image, {
     clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
-    filter: "blur(9px) saturate(.3)",
-    scale: 1.35,
+    filter: "saturate(0)",
+    scale: 1.03,
+    autoAlpha: 0,
+    y: 90,
   });
 
   let tl = gsap.timeline({
@@ -37,10 +39,11 @@ supercomputers.forEach((computer) => {
 
   tl.to(image, {
     clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-    filter: "blur(0px) saturate(1)",
-    scale: 1,
-    duration: 0.55,
-    ease: "power3.inOut",
+    filter: "saturate(1)",
+    autoAlpha: 1,
+    y: 0,
+    duration: 0.44,
+    ease: "power2.inOut",
   });
 
   dataName.addEventListener("mouseover", (event) => {
