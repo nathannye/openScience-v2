@@ -440,6 +440,7 @@ header div#soundIndicatorContainer canvas#soundIndicator {
   height: 100%;
   position: fixed;
   top: 0;
+  display: none;
   left: 0;
 }
 

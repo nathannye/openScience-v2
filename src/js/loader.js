@@ -1,23 +1,25 @@
-import gsap from "gsap";
+// Put this back when we fix loading issues
 
-let container = document.getElementById("loader");
-let backer = document.getElementById("loaderBacker");
-import setupIntroTL from "./introAnims";
+// import gsap from "gsap";
 
-let loader = gsap.timeline({
-  onComplete: setupIntroTL(),
-});
+// let container = document.getElementById("loader");
+// let backer = document.getElementById("loaderBacker");
+// import setupIntroTL from "./introAnims";
 
-loader.to(container, {
-  scale: 0.4,
-  duration: 1,
-});
+// let loader = gsap.timeline({
+//   onComplete: setupIntroTL(),
+// });
 
-window.addEventListener("load", (event) => {
-  gsap.to(container, {
-    autoAlpha: 0,
-  });
+// loader.to(container, {
+//   scale: 0.4,
+//   duration: 1,
+// });
 
-    setupIntroTL();
-    
-});
+// window.addEventListener("load", (event) => {
+//   gsap.to(container, {
+//     autoAlpha: 0,
+//   });
+
+//     setupIntroTL();
+
+// });
