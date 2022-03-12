@@ -8,6 +8,7 @@ import CustomEase from "gsap/src/CustomEase";
 import colors from "./colors";
 import DrawSVGPlugin from "gsap/DrawSVGPlugin";
 import soundDangerReverse from "./soundToggle";
+import { color } from "d3";
 
 gsap.registerPlugin(
   ScrollTrigger,
@@ -19,6 +20,7 @@ gsap.registerPlugin(
 );
 
 let nglStage = document.querySelector("#viewport");
+let canvas = document.getElementById("#viewport canvas");
 
 document.addEventListener("DOMContentLoaded", (event) => {
   let peptideLottieContainer = document.getElementById(
@@ -85,7 +87,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     loop: false,
     quality: "low",
     autoplay: false,
-    path: "https://assets10.lottiefiles.com/packages/lf20_c5t9h6bj.json",
+    path: "https://assets2.lottiefiles.com/packages/lf20_dwwvpyiy.json",
   });
 
   var frameSegments = [
@@ -94,23 +96,55 @@ document.addEventListener("DOMContentLoaded", (event) => {
     [130, 240],
   ];
 
-  let dangerClearTL = gsap.timeline({
-    paused: true,
-  });
-
-  dangerClearTL
-    .to(html, {
-      overflowY: "auto",
-    })
-    .to(nglStage, {
-      filter: "blur(4px) saturate(1)",
-      duration: 3,
-    });
-
   peptideAnim.addEventListener("DOMLoaded", (event) => {
     peptideAnim.playSegments(frameSegments[0]);
 
     let dangerClickTargets = gsap.utils.toArray(".errorTarget");
+    let chain = document.querySelector("#yellowChainBase > path");
+    let dots = gsap.utils.toArray(
+      ".aminoMarker:not(.isError) > path:nth-child(2)"
+    );
+    let errorDots = gsap.utils.toArray(
+      ".aminoMarker.isError > path:nth-child(2)"
+    );
+    let redChains = gsap.utils.toArray(
+      "#firstRedChain > path, #middleRedChain > path, #lastRedChain > path"
+    );
+    let errorGroups = [
+      errorDots.slice(0, 5),
+      errorDots.slice(5, 10),
+      errorDots.slice(10, 16),
+    ];
+
+    let dangerClearTL = gsap.timeline({
+      paused: true,
+    });
+
+    dangerClearTL
+      .to(html, {
+        overflowY: "auto",
+      })
+      .to(
+        dots,
+        {
+          stroke: colors.ylw,
+          duration: 0.7,
+        },
+        "revertColors"
+      )
+      .to(
+        chain,
+        {
+          stroke: colors.ylw,
+          duration: 0.7,
+        },
+        "revertColors"
+      )
+      .to(nglStage, {
+        filter:
+          "blur(4px) saturate(.7) hue-rotate(0deg) contrast(1) brightness(1)",
+        duration: 0.25,
+      });
 
     dangerTL
       // Arrives at danger state
@@ -119,6 +153,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         autoAlpha: 1,
         duration: 0.5,
       })
+
       .to(
         secondText,
         {
@@ -136,12 +171,38 @@ document.addEventListener("DOMContentLoaded", (event) => {
         },
         "swap"
       )
-      .to(dangerClickTargets, {
-        autoAlpha: 1,
-        delay: 1,
-        duration: 0.6,
-        stagger: 0.2,
-      })
+      .from(
+        dangerClickTargets,
+        {
+          autoAlpha: 0,
+          delay: 1.35,
+          duration: 0.6,
+          filter: "blur(2.5px)",
+          stagger: {
+            each: 0.2,
+            from: "end",
+          },
+        },
+        "state"
+      )
+      .to(
+        chain,
+        {
+          stroke: colors.blue,
+          duration: 0.6,
+          delay: 0.8,
+        },
+        "state"
+      )
+      .to(
+        dots,
+        {
+          stroke: colors.blue,
+          duration: 0.6,
+          delay: 0.8,
+        },
+        "state"
+      )
       .call(flickerTL.play, null, "swap")
       .to(dangerSeriesTrigger, {
         autoAlpha: 0,
@@ -155,18 +216,30 @@ document.addEventListener("DOMContentLoaded", (event) => {
         loop: true,
         quality: "medium",
         autoplay: true,
-        path: "https://assets4.lottiefiles.com/packages/lf20_f401ldqi.json",
+        path: "https://assets10.lottiefiles.com/packages/lf20_rfmlfn38.json",
       });
 
       target.addEventListener("click", (event) => {
+        let e = dangerClickTargets.indexOf(target);
         dangerClickClear += 1;
+        gsap.to(target, {
+          autoAlpha: 0,
+          duration: 0.6,
+          ease: "back.out(5)",
+        });
+
+        gsap.to(errorGroups[e], {
+          stroke: colors.ylw,
+        });
+        gsap.to(redChains[e], {
+          stroke: colors.ylw,
+        });
+
         if (dangerClickClear === 3) {
           soundDangerReverse;
-          peptideAnim.playSegments([2, 131]);
+          peptideAnim.playSegments([130, 240]);
           dangerClearTL.play();
         }
-
-        console.log(dangerClickClear);
       });
     });
   });
@@ -264,6 +337,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
           draggerTL.play();
           dangerTL.play();
           peptideAnim.playSegments(frameSegments[1]);
+          setTimeout(() => {
+            gsap.to(nglStage, {
+              filter:
+                "blur(7.5px) saturate(.8) hue-rotate(135deg) brightness(.7) contrast(1.25)",
+              duration: 0.25,
+            });
+          }, 2000);
         }
       },
       onPress: function () {
@@ -293,7 +373,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     peptideTL
       // .call(peptideTL.scrollTrigger.refresh())
       .to(nglStage, {
-        filter: "saturate(.5) blur(7.5px)",
+        filter: "saturate(.3) blur(7.5px)",
         duration: 0.9,
       })
       .fromTo(

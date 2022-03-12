@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="https://use.typekit.net/jih6lvv.css" />
   </head>
   <body>
+    <div id="loader">
+      <div id="loaderBacker"></div>
+    </div>
     <div id="grain"></div>
     <div id="viewport"></div>
     <div id="supercomputerHoverContainer">
@@ -38,17 +41,11 @@
         <a href="#whatIsFoldingRef">
           <h1>What is Protein Folding?</h1>
         </a>
-        <a href="#whyDoesFoldingMatterRef">
-          <h1>Why Does Folding Matter?</h1>
-        </a>
         <a href="#whyDoWeNeedRef">
           <h1>Why Do We Need Computers?</h1>
         </a>
-        <a href="#numberOfUsersPanelRef">
+        <a href="#chartRef">
           <h1>Folding@Home during COVID-19</h1>
-        </a>
-        <a href="#publicInformationRef">
-          <h1>Public Domain</h1>
         </a>
         <a href="#helpingReduceCostsRef">
           <h1>Helping Reduce Costs</h1>
@@ -75,21 +72,13 @@
           <div class="navMarker"></div>
           <p>What is Protein Folding?</p>
         </a>
-        <a href="#whyDoesFoldingMatterRef">
-          <div class="navMarker"></div>
-          <p>Why Does Folding Matter?</p>
-        </a>
         <a href="#whyDoWeNeedRef">
           <div class="navMarker"></div>
           <p>Why Do We Need Computers?</p>
         </a>
-        <a href="#numberOfUsersPanelRef">
+        <a href="#chartRef">
           <div class="navMarker"></div>
           <p>Folding@Home during COVID-19</p>
-        </a>
-        <a href="#publicInformationRef">
-          <div class="navMarker"></div>
-          <p>Public Information</p>
         </a>
         <a href="#helpingReduceCostsRef">
           <div class="navMarker"></div>
@@ -120,6 +109,7 @@
         </div>
       </section>
       <section class="panel lefty contentPanel" id="introPanel">
+        <a id="introPanelRef" class="jumpTo"></a>
         <div class="dangerMarker">
           <div class="middleCircle">
             <div class="exclamation">
@@ -130,7 +120,7 @@
           <div class="solidRing dangerRing"></div>
           <div class="dashRing dangerRing"></div>
         </div>
-        <a id="introPanelRef" class="jumpTo"></a>
+
         <div id="introHeadingContainer">
           <h1>Open source</h1>
           <div>
@@ -167,6 +157,7 @@
               specific protein does its job.
             </p>
           </div>
+
           <div>
             <h4>why does folding matter?</h4>
             <h2>
@@ -209,6 +200,8 @@
         </div>
       </section>
       <section class="panel contentPanel fullWidthPanel" id="whyDoWeNeed">
+        <a id="whyDoWeNeedRef" class="jumpTo"></a>
+        <div class="aminoDudeContainer"></div>
         <div class="aminoDudeContainer"></div>
         <div class="aminoDudeContainer"></div>
         <div class="aminoDudeContainer"></div>
@@ -261,8 +254,23 @@
             stroke-width="12"
           />
         </svg>
+        <svg
+          width="691"
+          height="1024"
+          class="aminoPathGuide"
+          id="fourthPathContainer"
+          viewBox="0 0 691 1024"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            id="fourthPath"
+            d="M688 1117.52C584.449 1132.72 368.942 1106.03 335.326 877.695C293.305 592.271 25.1726 601.928 16.1682 466.191C7.16374 330.453 362.839 365.863 335.326 121.751C307.812 -122.362 205.261 -79.4412 199.759 -95"
+            stroke="#FF00F5"
+            stroke-width="31"
+          />
+        </svg>
 
-        <a id="whyDoWeNeedRef" class="jumpTo"></a>
         <div>
           <h4>why do we need computers?</h4>
           <div>
@@ -282,52 +290,13 @@
       <section class="panel interstitial">
         <h4>Just how powerful do computers need to be?</h4>
       </section>
-      <!-- <section class="panel contentPanel" id="numberOfUsersPanel">
-        <a id="numberOfUsersPanelRef" class="jumpTo"></a>
-        <div>
-          <div>
-            <h2 class="headAnim">
-              Folding@Home, a distributed computing project, amassed over 1.2
-              million users during COVID-19. Together, all of these machines
-              were faster than the world's nine fastest supercomputers.
-              Combined.
-            </h2>
-            <p class="paraAnim">
-              With the most powerful computer on the planet at hand, proteins
-              could be processed much fas
-            </p>
-          </div>
-        </div>
-        <img
-          class="parallaxImage"
-          id="laxOne"
-          src="./img/gpuRig.webp"
-          alt="Computer with graphics cards"
-        />
-        <img
-          id="laxTwo"
-          class="parallaxImage"
-          src="./img/manInChair.webp"
-          alt="Man smiling with computer"
-        />
-        <img
-          id="laxThree"
-          class="parallaxImage"
-          src="./img/rowsOfComputers.webp"
-          alt="Room of red computers"
-        />
-        <img
-          id="laxFour"
-          class="parallaxImage"
-          src="./img/pointingAtComputer.webp"
-          alt="Man pointing at computer"
-        />
-      </section> -->
-      <section class="panel" id="chartOfUsers">
+      <section class="panel contentPanel" id="chartOfUsers">
+        <a id="chartRef"></a>
         <div id="chartCaptionContainer">
           <h2>
             As COVID-19 spread and worldwide isolation came into effect, people
-            wanted to do their part to contribute. Enter: Folding@Home.
+            wanted to do their part to help fight the pandemic. Folding@Home, a
+            distributed computing project.
           </h2>
           <h2>
             Less than two months after Folding @ Home announced participation in
@@ -355,12 +324,19 @@
             <span class="eventLine"></span>
           </article>
         </div>
+      </section>
 
+      <section class="panel contentPanel" id="supercomputerInfo">
         <div id="supercomputerCompare">
-          <!-- <h2>
-            With over 1,000,000 users in 2021, Folding @ Home became more
-            powerful than the worlds ten fastest supercomputers. Combined.
-          </h2> -->
+          <table id="supercomputerTable">
+            <tr>
+              <th>Computer</th>
+              <th>Operations/sec x 10<sup>15</sup></th>
+            </tr>
+            <!-- content is created here in js -->
+          </table>
+        </div>
+        <div id="supercomputerCompare">
           <table id="supercomputerTable">
             <tr>
               <th>Computer</th>
@@ -370,24 +346,6 @@
           </table>
         </div>
       </section>
-
-      <!-- <section class="panel contentPanel" id="publicInformation">
-        <a id="publicInformationRef" class="jumpTo"></a>
-        <div>
-          <div>
-            <h2 class="headAnim">
-              The data generated by these computers is public information.
-              Keeping research costs lower for other institutions.
-            </h2>
-          </div>
-          <p>
-            X-Ray Crystallography, a more standard method of computing protein
-            folds, can take up to 12 months and cost upwards of $125,000 US.
-            These costs often fall back onto consumers so drug companies can
-            recoup their investment.
-          </p>
-        </div>
-      </section> -->
       <section class="panel contentPanel" id="helpingReduceCosts">
         <a id="helpingReduceCostsRef" class="jumpTo"></a>
         <div class="headingContainer">

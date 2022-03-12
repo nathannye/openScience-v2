@@ -17,7 +17,7 @@ function setupInterstitials() {
     e.tl = gsap.timeline({
       scrollTrigger: {
         trigger: e,
-        pin: true,
+        // pin: true,
         start: "top top",
         end: "bottom 25%",
         toggleActions: "play reverse play play",

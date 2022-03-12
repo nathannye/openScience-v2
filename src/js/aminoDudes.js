@@ -6,7 +6,7 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import colors from "./colors";
 
 gsap.registerPlugin(MotionPathPlugin, ScrollTrigger);
-const paths = ["#firstPath", "#secondPath", "#thirdPath"];
+const paths = ["#firstPath", "#secondPath", "#thirdPath", "#fourthPath"];
 
 let grain = document.getElementById("grain");
 let text = document.querySelectorAll(
@@ -25,7 +25,6 @@ let tl = gsap.timeline({
   scrollTrigger: {
     trigger: container,
     start: "top top+=2%",
-    markers: true,
   },
 });
 container.h2.split = new SplitText(container.h2, {
@@ -96,6 +95,14 @@ let animThree = Lottie.loadAnimation({
   loop: true,
 });
 
+let animFour = Lottie.loadAnimation({
+  container: animContainer[3],
+  path: "https://assets5.lottiefiles.com/packages/lf20_cpwcuygx.json",
+  autoplay: true,
+  quality: "low",
+  loop: true,
+});
+
 let wrappers = document.querySelectorAll("html, body");
 
 let numbers = document.getElementById("millionAcross");
@@ -110,7 +117,7 @@ let needTL = gsap.timeline({
     start: "top top",
     pin: true,
     end: "bottom top",
-    scrub: 0.3,
+    scrub: 0.9,
     toggleActions: "play reset reverse play",
   },
   onComplete: () => {
@@ -165,7 +172,7 @@ needTL
     {
       duration: 15,
       motionPath: {
-        end: 0.1,
+        end: 0,
         start: 0.85,
         path: paths[0],
         align: paths[0],
@@ -195,10 +202,25 @@ needTL
     {
       duration: 19,
       motionPath: {
-        end: 0.5,
+        end: 0.1,
         start: 1,
         path: paths[2],
         align: paths[2],
+        // alignOrigin: [0.5, 0.5],
+        autoRotate: true,
+      },
+    },
+    "main"
+  )
+  .to(
+    animContainer[3],
+    {
+      duration: 24,
+      motionPath: {
+        end: 0.4,
+        start: 0,
+        path: paths[3],
+        align: paths[3],
         // alignOrigin: [0.5, 0.5],
         autoRotate: true,
       },

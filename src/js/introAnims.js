@@ -2,14 +2,12 @@ import gsap from "gsap";
 import SplitText from "gsap/SplitText";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import colors from "./colors";
-// import soundIndi from "./soundToggle";
 import navDots from "./navMarkerAnim";
 import Lottie from "lottie-web";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 let soundIndi = document.querySelector("div#soundIndicatorContainer");
-
 let hamburgerContainer = document.getElementById("hamburgerIcon");
 let indiContainer = document.getElementById("scrollAnimContainer");
 let nglStage = document.querySelector("#viewport");
@@ -20,17 +18,9 @@ let scrollIndiSplit = new SplitText(scrollIndiText, {
   linesClass: "splitLine",
 });
 
-function playMe() {
-  let scrollIndi = Lottie.loadAnimation({
-    container: indiContainer,
-    loop: false,
-    renderer: "svg",
-    quality: "low",
-    autoplay: false,
-    path: "https://assets5.lottiefiles.com/packages/lf20_hzdymoq2.json",
-  });
-  scrollIndi.play;
-}
+gsap.set(html, {
+  overflowY: "hidden",
+});
 
 let introPara = document.querySelector("#introPanel p");
 
@@ -74,21 +64,85 @@ gsap.set(openScience.split.chars, {
 });
 
 titleTL
-  .to(introPanel, {
-    autoAlpha: 1,
-    duration: 0.01,
-  })
+  .to(
+    introPanel,
+    {
+      autoAlpha: 1,
+      duration: 0.01,
+    },
+    "start"
+  )
   .fromTo(
     nglStage,
     { filter: "saturate(0) blur(13px)", autoAlpha: 0 },
     {
       filter: "saturate(.68) blur(1px)",
       duration: 3.5,
-      delay: 0.8,
+      delay: 0.3,
       autoAlpha: 1,
     },
     "start",
     "stageIn"
+  )
+  .from(
+    soundIndi,
+    {
+      autoAlpha: 0,
+      duration: 0.8,
+      scaleY: 0.7,
+    },
+    0.8
+  )
+  .from(
+    navDots,
+    {
+      x: 10,
+      stagger: 0.09,
+      scale: 0.64,
+      duration: 0.96,
+      autoAlpha: 0,
+      ease: "power3.inOut",
+    },
+    1.3
+  )
+  .call(
+    function () {
+      let scrollIndi = Lottie.loadAnimation({
+        container: indiContainer,
+        loop: false,
+        renderer: "svg",
+        quality: "low",
+        autoplay: true,
+        path: "https://assets6.lottiefiles.com/packages/lf20_t5abavzf.json",
+      });
+
+      scrollIndi.setSpeed(1.35);
+    },
+    null,
+    "stageIn",
+    1
+  )
+  .from(
+    scrollIndiSplit.chars,
+    {
+      xPercent: 100,
+      stagger: 0.02,
+      duration: 1,
+      ease: "power3.inOut",
+    },
+    "scrollIndi",
+    1
+  )
+  .from(
+    hamburgerContainer,
+    {
+      scaleX: 0,
+      duration: 0.4,
+      ease: "power3.inOut",
+      delay: 0.18,
+      transformOrigin: "5% center",
+    },
+    "start"
   )
   .to(
     openSource.split.chars,
@@ -101,27 +155,27 @@ titleTL
         ease: "power2.inOut",
         from: "start",
       },
-      duration: 1.3,
+      duration: 1.2,
       ease: "power4.inOut",
     },
-    "start+=1",
-    "text"
+    0.2
   )
   .to(
     openScience.split.chars,
     {
       yPercent: 0,
       opacity: 1,
+      delay: 0.25,
       color: colors.ylw,
       stagger: {
         each: 0.02,
         ease: "power2.inOut",
         from: "start",
       },
-      duration: 1.9,
+      duration: 1.6,
       ease: "power4.inOut",
     },
-    "start+=1.15"
+    0.2
   )
   .from(
     introPara.split.lines,
@@ -129,58 +183,14 @@ titleTL
       autoAlpha: 0,
       y: 12,
       rotateY: -8,
+      delay: 0.5,
       color: colors.teal,
       ease: "power2.out",
       stagger: 0.09,
-      duration: 1.8,
+      duration: 1.5,
     },
-    "start+=1.5"
-  )
-  .from(
-    navDots,
-    {
-      stagger: 0.1,
-      scale: 0.64,
-      duration: 0.66,
-      autoAlpha: 0,
-      ease: "back.out(1.3)",
-    },
-    "start+=.6"
-  )
-  .from(
-    soundIndi,
-    {
-      opacity: 0,
-      duration: 0.67,
-    },
-    "start+=.7"
-  )
-  .from(
-    scrollIndiSplit.chars,
-    {
-      xPercent: 100,
-      stagger: 0.02,
-      duration: 1.4,
-      ease: "power3.inOut",
-    },
-    "start+=.7"
-  )
-  .call(playMe, null, "start+=.5")
-  .from(
-    hamburgerContainer,
-    {
-      scaleX: 0,
-      duration: 0.69,
-      ease: "power3.inOut",
-      delay: 0.18,
-      transformOrigin: "5% center",
-    },
-    "<"
-  )
-  // .call(interstitialOneCreate)
-  .to(html, {
-    overflowY: "auto",
-  });
+    0.35
+  );
 
 function createIntroOutTL() {
   let introOutTL = gsap.timeline({
@@ -253,17 +263,24 @@ function createIntroOutTL() {
         transformOrigin: "center bottom",
         duration: 0.75,
       },
-      "scrollingOut+=70%"
+      "scrollingOut+=70%",
+      "indi"
     )
     .to(
       scrollIndiSplit.chars,
       {
         autoAlpha: 0,
-        duration: 2,
-        stagger: 0.22,
+        duration: 0.75,
+        stagger: 0.09,
       },
-      "scrollingOut+=71%"
+      "scrollingOut+=70%",
+      "indi"
     );
+  ScrollTrigger.refresh();
+  // Only give scrolling back AFTER the outro timeline has been created, not after intro has fired
+  gsap.to(html, {
+    overflowY: "auto",
+  });
 }
 
 window.onload = () => {

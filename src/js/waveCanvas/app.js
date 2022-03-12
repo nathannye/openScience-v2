@@ -36,6 +36,4 @@ class App {
   }
 }
 
-window.onload = () => {
-  new App();
-};
+new App();

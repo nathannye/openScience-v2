@@ -3,7 +3,6 @@ import * as d3 from "d3";
 import gsap from "gsap/all";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import colors from "./colors";
-// import tableAnim from "./supercomputerTableAnim";
 import SplitText from "gsap/SplitText";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
@@ -101,12 +100,16 @@ function animateChart() {
       paused: true,
     });
 
-    caption.tl.to(caption.split.words, {
-      yPercent: 0,
-      duration: 0.7,
-      ease: "power3.inOut",
-      stagger: 0.05,
-    });
+    caption.tl.to(
+      caption.split.words,
+      {
+        yPercent: 0,
+        duration: 0.65,
+        ease: "power3.inOut",
+        stagger: 0.02,
+      },
+      "splitIn"
+    );
   });
 
   gsap.set(bars, {
@@ -128,32 +131,46 @@ function animateChart() {
 
   graphtl
     .call(function () {
-      introCaption.tl.play();
-      introCaption.tl.reversed(true);
-      console.log(introCaption.tl.reversed);
+      if (graphtl.reversed(true)) {
+        introCaption.tl.reverse();
+      } else {
+        introCaption.tl.play();
+      }
     })
     .to(tillPandemic, {
       opacity: 1,
       scaleY: 1,
-      delay: 40,
+      delay: 80,
       duration: 40,
       fill: colors.gry,
       stagger: {
         each: 12,
       },
     })
-    .call(function () {
-      pandemicCaption.tl.play();
-      introCaption.tl.reverse();
-      console.log(introCaption.tl.reversed);
-    })
-    .to(declarePandemic, {
-      opacity: 1,
-      delay: 7,
-      scaleY: 1,
-      fill: colors.ylw,
-      duration: 17,
-    })
+    .call(
+      function () {
+        if (graphtl.reversed(true)) {
+          pandemicCaption.tl.reverse();
+          introCaption.tl.play();
+        } else {
+          introCaption.tl.reverse();
+          pandemicCaption.tl.play();
+        }
+      },
+      null,
+      "pandemic"
+    )
+    .to(
+      declarePandemic,
+      {
+        opacity: 1,
+        delay: 7,
+        scaleY: 1,
+        fill: colors.ylw,
+        duration: 17,
+      },
+      "pandemic"
+    )
     .to(
       declarePandemic,
       {
@@ -176,27 +193,23 @@ function animateChart() {
       "next"
     )
     .call(function () {
-      exaCaption.tl.play();
-      pandemicCaption.tl.reverse();
+      if (graphtl.reversed(true)) {
+        exaCaption.tl.reverse();
+        pandemicCaption.tl.play();
+      } else {
+        pandemicCaption.tl.reverse();
+        exaCaption.tl.play();
+      }
     })
     .to(
       barChartContainer,
       {
-        x: "-109.7vw",
+        x: "-100vw",
         delay: 160,
         ease: "power2.inOut",
         duration: 200,
       },
       "next"
-    )
-    .to(
-      barChartContainer,
-      {
-        autoAlpha: 0,
-        duration: 100,
-        delay: 100,
-      },
-      ">"
     );
 }
 

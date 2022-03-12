@@ -130,7 +130,7 @@ h5 {
   display: flex !important;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 100vh !important;
 }
 
 .interstitial h4 {
@@ -280,7 +280,7 @@ nav a .activeNav {
 #scrollIndicator h4 {
   writing-mode: vertical-lr;
   color: white;
-  margin: 2rem 0 0 0;
+  margin: 1rem 0 0 0;
 }
 
 #scrollIndicator h4 div {
@@ -360,7 +360,27 @@ section#introPanel #introHeadingContainer > div:last-child p div {
 }
 
 #supercomputerHoverContainer {
-  display: none;
+  position: absolute;
+  transform: translate(-150%, -50%);
+  height: 300px;
+  overflow: hidden;
+  pointer-events: none;
+  width: 175px;
+  z-index: 5000;
+}
+
+#supercomputerHoverContainer svg {
+  width: 100%;
+  height: 100%;
+}
+
+#supercomputerHoverContainer img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 header {
@@ -385,15 +405,15 @@ header #hamburgerIcon svg:nth-child(2) {
 }
 
 header div#soundIndicatorContainer {
-  left: 6.1%;
+  left: 4.65%;
   top: 6.1%;
+  position: fixed;
   z-index: 300;
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
   overflow: hidden;
   cursor: pointer;
-  opacity: 0;
 }
 
 header div#soundIndicatorContainer #soundLabelSwitch {
@@ -602,10 +622,10 @@ section#whatIsFolding {
 }
 
 section#whatIsFolding #whatIsFoldingText {
-  position: relative;
+  display: grid;
   margin: auto;
   width: 87.8%;
-  max-width: 350px;
+  max-width: 550px;
   flex-grow: 1;
 }
 
@@ -615,11 +635,8 @@ section#whatIsFolding #whatIsFoldingText p {
 }
 
 section#whatIsFolding #whatIsFoldingText > div {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  margin-bottom: 0;
-  margin-top: 0;
+  grid-column: 1;
+  grid-row: 1;
 }
 
 section#whatIsFolding #peptideAnimationContainer {
@@ -645,8 +662,8 @@ section#whatIsFolding #peptideAnimationContainer #peptideLottieContainer > svg {
 }
 
 section#whatIsFolding #peptideAnimationContainer #peptideSliderContainer {
-  width: 60vw;
-  height: 60vw;
+  width: 53vw;
+  height: 53vw;
   max-width: 300px;
   max-height: 300px;
   z-index: 300;
@@ -732,20 +749,20 @@ section#whatIsFolding #peptideAnimationContainer #peptideSliderContainer #peptid
 
 .errorTarget > path {
   z-index: 200 !important;
-  opacity: 1 !important;
   fill: none;
 }
 
 .errorTarget {
-  opacity: 0;
   cursor: pointer;
+  transform-origin: "center center";
 }
 
 .errorTarget > svg {
   display: block;
   width: 200px !important;
   height: 200px !important;
-  transform: scale(0.28) translate(-25%, -18.5%) !important;
+  transform: scale(0.48) translate(-28%, -18.5%) !important;
+  transform-origin: "center center";
 }
 
 .testTarget {
@@ -760,7 +777,7 @@ section#whyDoesFoldingMatter {
 
 section#whyDoWeNeed {
   position: relative;
-  padding: 12% 0 0 4.6%;
+  padding: 25% 0 0 4.6%;
   width: 100% !important;
   align-items: flex-start;
   overflow: hidden;
@@ -788,7 +805,7 @@ section#whyDoWeNeed > div > div > h2, section#whyDoWeNeed > div > div p {
 
 section#whyDoWeNeed h1#millionAcross {
   position: absolute;
-  bottom: -9%;
+  bottom: 0;
   left: 5%;
   color: var(--color-white);
   font-size: clamp(17em, calc(17rem + (86.8 - 17) * ((100vw - 48em) / (120 - 48))), 86.8em);
@@ -799,7 +816,7 @@ section#whyDoWeNeed h1#millionAcross {
 }
 
 section#whyDoWeNeed .aminoPathGuide {
-  height: 103%;
+  height: 113%;
   position: absolute;
   overflow: visible;
   opacity: 0;
@@ -808,7 +825,7 @@ section#whyDoWeNeed .aminoPathGuide {
 
 section#whyDoWeNeed #firstPathContainer {
   right: 0;
-  bottom: 0;
+  top: 0;
 }
 
 section#whyDoWeNeed #secondPathContainer {
@@ -820,6 +837,12 @@ section#whyDoWeNeed #thirdPathContainer {
   top: 10%;
   left: 25%;
   height: 120%;
+}
+
+section#whyDoWeNeed #fourthPathContainer {
+  top: 0;
+  right: 20%;
+  height: 100%;
 }
 
 section#whyDoWeNeed .aminoDudeContainer {
@@ -844,6 +867,12 @@ section#whyDoWeNeed .aminoDudeContainer:nth-child(3) {
   width: 10%;
   z-index: 5;
   min-width: 120px;
+}
+
+section#whyDoWeNeed .aminoDudeContainer:nth-child(4) {
+  width: 13%;
+  z-index: 5;
+  min-width: 100px;
 }
 
 section#numberOfUsersPanel {
@@ -915,20 +944,21 @@ section#chartOfUsers #chartCaptionContainer {
   position: absolute;
   top: 5%;
   left: 2%;
+  display: grid;
   width: 87.8%;
   max-width: 850px;
 }
 
 section#chartOfUsers #chartCaptionContainer h2 {
-  position: absolute;
-  top: 0;
-  left: 0;
+  grid-row: 1;
+  grid-column: 1;
 }
 
 #barChartContainer {
-  width: 300vw;
+  width: 400vw;
   display: flex;
-  flex-direction: column;
+  height: 100vh;
+  flex-direction: row-reverse;
 }
 
 #barChartContainer > svg {
@@ -960,14 +990,12 @@ section#chartOfUsers #chartCaptionContainer h2 {
   align-items: flex-end;
   padding-bottom: 1.25%;
   justify-content: center;
-  position: fixed;
   z-index: 3;
-  top: 0;
-  left: 0;
 }
 
 #supercomputerTable {
   border-spacing: 0;
+  display: block;
   width: 87.8%;
   max-width: 550px;
 }
@@ -994,6 +1022,10 @@ section#chartOfUsers #chartCaptionContainer h2 {
 
 #supercomputerTable tr > td:nth-child(2) .opsText {
   min-width: 50px;
+}
+
+#supercomputerTable .computerName {
+  cursor: pointer;
 }
 
 #supercomputerTable .dataBar {
@@ -1192,6 +1224,7 @@ section#howCanYouHelp #faqContainer article .faqArrow {
 section#howCanYouHelp #faqContainer article .faqAnswer {
   overflow: hidden;
   width: 100%;
+  height: 0px;
   position: relative;
 }
 
@@ -1200,7 +1233,6 @@ section#howCanYouHelp #faqContainer article .faqAnswer p {
   left: 0;
   top: 1rem;
   opacity: .75;
-  height: 100px;
 }
 
 .splitLine {
@@ -1218,6 +1250,12 @@ section#howCanYouHelp #faqContainer article .faqAnswer p {
 }
 
 @media only screen and (min-width: 480px) {
+  section#whyDoWeNeed {
+    padding-top: 12% !important;
+  }
+  .errorTarget > svg {
+    transform: scale(0.26) translate(-28%, -15.5%) !important;
+  }
   section#howCanYouHelp {
     margin-bottom: 5%;
   }
@@ -1239,6 +1277,7 @@ section#howCanYouHelp #faqContainer article .faqAnswer p {
     position: relative;
     margin: 0 auto 0 0;
     width: 50%;
+    height: 50%;
   }
   nav {
     display: flex;
@@ -1275,7 +1314,7 @@ section#howCanYouHelp #faqContainer article .faqAnswer p {
     height: 1rem;
   }
   #barChartContainer {
-    width: 300vw;
+    width: 400vw;
   }
   #barChartContainer svg {
     width: 100%;

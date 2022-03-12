@@ -15,6 +15,7 @@ function setupFarAndAway() {
   h2.forEach((e) => {
     if (e.anim) {
       e.anim.progress(1).kill();
+      e.anim.invalidate();
       e.split.revert();
     }
     e.split = new SplitText(e, {
@@ -24,7 +25,7 @@ function setupFarAndAway() {
     e.anim = gsap.from(e.split.words, {
       scrollTrigger: {
         trigger: e,
-        start: "top bottom-=14%",
+        start: "top bottom-=24%",
       },
       yPercent: 100,
       autoAlpha: 0,
@@ -44,13 +45,14 @@ function setupParas() {
     if (para.anim) {
       para.anim.progress(1).kill();
       para.split.revert();
+      para.anim.invalidate();
     }
     para.split = new SplitText(para, {
       type: "lines",
     });
     para.anim = gsap.from(para.split.lines, {
       scrollTrigger: {
-        start: "top bottom-=15%",
+        start: "top bottom-=24%",
         trigger: para,
       },
       autoAlpha: 0,

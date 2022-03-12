@@ -48,12 +48,14 @@ const supercomputers = [
   {
     name: "Frontera",
     flops: 23,
-    img: "usa",
+    img: "frontera",
+    country: "usa",
   },
   {
     name: "Cineca Marconi-100",
     flops: 21,
     country: "italy",
+    img: "marconi",
   },
 ];
 

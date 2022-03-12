@@ -4,6 +4,7 @@ const colors = {
   gry: "#EEEEEE",
   blue: "#001f4e",
   red: "#e32121",
+  dark: "#030b18",
   white: "white",
 };
 
