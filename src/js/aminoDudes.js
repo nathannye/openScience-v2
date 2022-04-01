@@ -12,6 +12,8 @@ let grain = document.getElementById("grain");
 let text = document.querySelectorAll(
   "#whyDoWeNeed h2, #whyDoWeNeed p, #whyDoWeNeed h4"
 );
+let soundIndi = document.querySelector("div#soundIndicatorContainer");
+// let nglStage = document.querySelector("#viewport");
 
 let cnv = document.querySelector("#viewport canvas");
 let container = document.getElementById("whyDoWeNeed");
@@ -45,7 +47,6 @@ tl.from(
   },
   "go"
 )
-
   .from(
     container.h2.split.words,
     {
@@ -118,7 +119,6 @@ let needTL = gsap.timeline({
     pin: true,
     end: "bottom top",
     scrub: 0.9,
-    toggleActions: "play reset reverse play",
   },
   onComplete: () => {
     gsap.to(cnv, {
@@ -133,6 +133,14 @@ needTL
     text,
     {
       color: colors.blue,
+      duration: 4,
+    },
+    0
+  )
+  .to(
+    soundIndi,
+    {
+      filter: "saturate(0) brightness(.3)",
       duration: 4,
     },
     0
@@ -172,8 +180,8 @@ needTL
     {
       duration: 15,
       motionPath: {
-        end: 0,
-        start: 0.85,
+        end: 1,
+        start: 0.35,
         path: paths[0],
         align: paths[0],
         //   alignOrigin: [0.5, 0.5],
@@ -251,16 +259,12 @@ needTL
       duration: 7,
     },
     "end"
+  )
+  .to(
+    soundIndi,
+    {
+      filter: "unset",
+      duration: 7,
+    },
+    "end"
   );
-
-// let millionTL = gsap.timeline({
-//   scrollTrigger: {
-//         scrub: 0.4,
-//       pin:L true
-//     trigger: wdwn,
-//     start: "top bottom-=18%",
-//     end: "bottom top",
-//   },
-// });
-
-// millionTL

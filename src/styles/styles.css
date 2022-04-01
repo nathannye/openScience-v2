@@ -836,13 +836,13 @@ section#whyDoWeNeed #firstPathContainer {
 }
 
 section#whyDoWeNeed #secondPathContainer {
-  top: 0;
+  top: -30%;
   width: 100%;
 }
 
 section#whyDoWeNeed #thirdPathContainer {
   top: 10%;
-  left: 25%;
+  right: 30%;
   height: 120%;
 }
 
@@ -1131,7 +1131,7 @@ section#howCanYouHelp #helpHeadingContainer > div {
   min-width: 250px;
 }
 
-section#howCanYouHelp #helpHeadingContainer object {
+section#howCanYouHelp #helpHeadingContainer img {
   width: 23.5%;
   margin-right: 23.5%;
   flex-grow: .5;

@@ -91,7 +91,6 @@ function tableAnim() {
     scrollTrigger: {
       trigger: table,
       start: "top center",
-      markers: true,
     },
   });
   tl.from(

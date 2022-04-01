@@ -1,13 +1,13 @@
 import gsap from "gsap/all";
 import colors from "./colors";
+// import NGL from "ngl/dist/ngl";
 import ScrollTrigger from "gsap/ScrollTrigger";
 // Create NGL Stage object
 
 gsap.registerPlugin(ScrollTrigger);
 
 var stage = new NGL.Stage("viewport");
-let content = document.querySelector("main");
-let v = document.getElementById("viewport");
+
 
 stage.setParameters({
   backgroundColor: "#030b18",
@@ -41,13 +41,3 @@ stage
     });
     stage.autoView();
   });
-
-gsap.to(v, {
-  scrollTrigger: {
-    trigger: content,
-    scrub: 2.5,
-    start: "top top",
-    end: "bottom bottom",
-  },
-  yPercent: -7.4,
-});
