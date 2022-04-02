@@ -216,7 +216,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         loop: true,
         quality: "medium",
         autoplay: true,
-        path: "https://assets10.lottiefiles.com/packages/lf20_rfmlfn38.json",
+        path: "https://assets5.lottiefiles.com/packages/lf20_wofk7irx.json",
       });
 
       target.addEventListener("click", (event) => {

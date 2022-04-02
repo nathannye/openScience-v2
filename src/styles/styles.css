@@ -1108,7 +1108,8 @@ section#helpingReduceCosts .headingContainer {
 }
 
 section#howCanYouHelp {
-  display: block !important;
+  display: flex !important;
+  flex-direction: row;
   width: 87.8%;
   max-width: 1250px;
   margin-bottom: 0;
@@ -1116,11 +1117,18 @@ section#howCanYouHelp {
   margin-bottom: 17%;
 }
 
+section#howCanYouHelp > div, section#howCanYouHelp > section {
+  align-self: flex-start;
+  width: 50% !important;
+}
+
 section#howCanYouHelp #helpHeadingContainer {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
   margin-bottom: 5%;
+  margin-right: 5%;
   column-gap: 6%;
   row-gap: 4rem;
 }
@@ -1132,11 +1140,9 @@ section#howCanYouHelp #helpHeadingContainer > div {
 }
 
 section#howCanYouHelp #helpHeadingContainer img {
-  width: 23.5%;
-  margin-right: 23.5%;
+  width: 50%;
   flex-grow: .5;
   align-self: flex-end;
-  aspect-ratio: 1/1;
   object-fit: cover;
 }
 
@@ -1158,12 +1164,10 @@ section#howCanYouHelp section#lower #helpingLeft {
   align-items: flex-end;
 }
 
-section#howCanYouHelp section#lower #helpingLeft img {
-  width: 50%;
+section#howCanYouHelp section#lower img {
+  width: 27%;
   object-fit: cover;
-  aspect-ratio: 1/1;
-  object-fit: cover;
-  flex-grow: 0.5;
+  flex-grow: 1;
 }
 
 section#howCanYouHelp #foldingProjectsContainer {

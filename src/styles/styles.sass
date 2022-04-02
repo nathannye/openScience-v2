@@ -1011,17 +1011,24 @@ section#helpingReduceCosts
 		top: calc(50% - .5rem)
 
 section#howCanYouHelp
-	display: block !important
+	display: flex !important
+	flex-direction: row
 	@include maxWidthL
 	margin-bottom: 0
 	height: unset !important
 	margin-bottom: 17%
 
+	& > div, & > section
+		align-self: flex-start
+		width: 50% !important
+
 	#helpHeadingContainer
 		display: flex
+		flex-direction: column
 		flex-wrap: wrap
 		justify-content: center
 		margin-bottom: 5%
+		margin-right: 5%
 		column-gap: 6%
 		row-gap: 4rem
 		// align-items: flex-start
@@ -1032,11 +1039,9 @@ section#howCanYouHelp
 			min-width: 250px
 
 		img
-			width: 23.5%
-			margin-right: 23.5%
+			width: 50%
 			flex-grow: .5
 			align-self: flex-end
-			aspect-ratio: 1/1
 			object-fit: cover
 
 	section#lower
@@ -1055,13 +1060,10 @@ section#howCanYouHelp
 			flex-direction: column
 			align-items: flex-end
 
-			img
-				width: 50%
-				object-fit: cover
-				// height: 200px
-				aspect-ratio: 1/1
-				object-fit: cover
-				flex-grow: 0.5
+		img
+			width: 27%
+			object-fit: cover
+			flex-grow: 1
 				
 	#foldingProjectsContainer
 		width: 47%
