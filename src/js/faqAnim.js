@@ -83,7 +83,7 @@ for (let i = 0; i < faq.length; i++) {
     .to(
       answerContainer,
       {
-        height: 250,
+        height: 160,
         ease: "power3.inOut",
         duration: 0.5,
       },

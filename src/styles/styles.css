@@ -1134,13 +1134,12 @@ section#howCanYouHelp #helpHeadingContainer {
 }
 
 section#howCanYouHelp #helpHeadingContainer > div {
-  width: 47%;
   flex-grow: 1;
-  min-width: 250px;
 }
 
 section#howCanYouHelp #helpHeadingContainer img {
   width: 50%;
+  height: 300px;
   flex-grow: .5;
   align-self: flex-end;
   object-fit: cover;
@@ -1165,8 +1164,10 @@ section#howCanYouHelp section#lower #helpingLeft {
 }
 
 section#howCanYouHelp section#lower img {
-  width: 27%;
+  width: 47%;
+  height: 300px;
   object-fit: cover;
+  margin-bottom: 5rem;
   flex-grow: 1;
 }
 
@@ -1176,7 +1177,7 @@ section#howCanYouHelp #foldingProjectsContainer {
 }
 
 section#howCanYouHelp #foldingProjectsContainer #rosetta {
-  margin-bottom: 5rem;
+  margin-bottom: 3rem;
 }
 
 section#howCanYouHelp #foldingProjectsContainer h3 {

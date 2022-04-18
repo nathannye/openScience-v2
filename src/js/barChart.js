@@ -8,7 +8,7 @@ import SplitText from "gsap/SplitText";
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 const heightValue = 325;
-const widthValue = 1100;
+const widthValue = 900;
 
 const svg = d3
   .select("#barChartContainer")
@@ -18,7 +18,7 @@ const svg = d3
 const margin = { top: 0, bottom: 0, left: 0, right: 0 };
 
 const height = 325 - margin.top - margin.bottom;
-const width = 1100 - margin.left - margin.right;
+const width = 900 - margin.left - margin.right;
 
 const x = d3
   .scaleBand()
