@@ -35,6 +35,27 @@ $boundary: 87.8%
 	transform: perspective(300px)
 	transform-style: preserve-3d
 
+
+
+*
+	--color-blue: #001F4E
+	--color-dark: #030b18
+	--color-yellow: #FFE65C
+	--color-red: #E32121
+	--color-gry: #EEEEEE
+	--color-teal:#13f1df
+	--color-white: white
+	--shadow-color:#3171a5
+	--unit: 16.667%
+	--spacer: clamp(1.5rem, calc(1.5rem + ((1vw - 0.36rem) * 1.7857)), 3rem)
+	--widthOne: calc((--unit * 1) - var(--spacer))
+	--widthTwo: calc((--unit * 2) - var(--spacer))
+	--widthThree: calc((--unit * 3) - var(--spacer))
+	--widthFour: calc((--unit * 4) - var(--spacer))
+	--widthFive: calc((--unit * 5) - var(--spacer))
+	--widthSix: calc((--unit * 6) - var(--spacer))
+	box-sizing: border-box
+
 @mixin maxWidthXS
 	width: $boundary
 	max-width: 350px
@@ -55,16 +76,6 @@ $boundary: 87.8%
 	width: $boundary
 	max-width: 1750px	
 
-*
-	--color-blue: #001F4E
-	--color-dark: #030b18
-	--color-yellow: #FFE65C
-	--color-red: #E32121
-	--color-gry: #EEEEEE
-	--color-teal:#13f1df
-	--color-white: white
-	--shadow-color:#3171a5
-	box-sizing: border-box
 
 html, body
 	background-color: var(--color-dark)
@@ -112,7 +123,7 @@ h2
 	font-size: clamp(2.9em, calc(2.9rem + (6.5 - 2.9) * ((100vw - 48rem) / (120 - 48))), 6.5em)
 	line-height: 1.23
 	letter-spacing: .02em
-	margin-bottom: 0.25em
+	margin-bottom: .35em
 
 	em
 		@include fontIvyItalic
@@ -121,7 +132,7 @@ h2
 
 h3	
 	@include fontIvyNormal
-	font-size: clamp(2.3em, calc(2.3rem + ((1vw - 0.48em) * 0.9722)), 3em)
+	font-size: clamp(1.6em, calc(1.6rem + ((1vw - 0.48em) * 0.9722)), 3em)
 	min-height: 0vw
 	font-weight: 400 !important
 	letter-spacing: .02em
@@ -137,7 +148,7 @@ h4
 	// opacity: .5
 	color: var(--color-yellow)
 	letter-spacing: .3em
-	margin-bottom: .5em
+	margin-bottom: 1.5em
 
 h5
 	@include fontTel
@@ -145,7 +156,6 @@ h5
 	font-size: clamp(1.3em, calc(1.3rem + (1.7 - 1.3) * ((100vw - 48em) / (120 - 48))), 1.7em)
 	line-height: 1.57
 	font-weight: 400
-	// opacity: .5
 	color: var(--color-yellow)
 	letter-spacing: .03em
 	margin-bottom: .5em
@@ -160,7 +170,7 @@ h5
 		text-align: center
 
 p, ul, li, a, ol, td, th
-	font-size: clamp(1.33em, calc(1.33rem + (2.85 - 1.33) * ((100vw - 48em) / (120 - 48))), 2.85em)
+	font-size: clamp(1.6rem, calc(1.6rem + ((1vw - 0.36rem) * 1.4881)), 2rem)
 	@include fontTel
 	letter-spacing: 0.005em
 	text-rendering: optimizeLegibility
@@ -168,7 +178,7 @@ p, ul, li, a, ol, td, th
 	line-height: 1.52
 
 cite > a, a.externalLink
-	margin-top: .75em
+	margin-top: 1.75em
 	position: relative
 	overflow-x: hidden
 	overflow-y: hidden
@@ -275,7 +285,7 @@ nav
 	right: 2.25rem
 
 	#scrollAnimContainer
-		width: 20px
+		width: 2rem
 
 	h4
 		writing-mode: vertical-lr
@@ -327,7 +337,7 @@ section#introPanel
 
 		h1:first-child
 			z-index: 4
-			text-shadow: 0px 0px 52px rgba(0,0,0, .25)
+			text-shadow: 0px 0px 52px rgba(0,0,0, 1)
 
 		& > div:last-child
 			z-index: 3
@@ -339,6 +349,7 @@ section#introPanel
 				max-width: 250px
 				margin-top: clamp(1.5em, calc(1.5rem + ((1vw - 0.48em) * 2.0833)), 3em)
 				@include has3D
+				margin-left: 1rem
 				will-change: transform
 
 				div
@@ -346,11 +357,11 @@ section#introPanel
 
 #supercomputerHoverContainer
 	position: absolute
-	transform: translate(-150%, -50%)
-	height: 270px
+	transform: translate(-125%, -50%)
+	height: 40rem
 	overflow: hidden
 	pointer-events: none
-	width: 185px
+	@include maxWidthS
 	z-index: 5000
 	display: none
 
@@ -373,8 +384,8 @@ header
 	padding: calc(6.1% * 1.5) 6.1% 0 6.1%
 	
 	#hamburgerIcon
-		width: 47px
-		height: 47px 
+		width: 5rem	
+		height: 5rem
 		transform: translateX(4px)
 
 		svg:nth-child(2)
@@ -421,8 +432,8 @@ header
 #mobileMenu
 	width: 100%
 	height: 100%
-	backdrop-filter: blur(35px) saturate(.9) brightness(1.2)
-	-webkit-backdrop-filter: blur(35px) saturate(.9) brightness(1.2)
+	// backdrop-filter: blur(35px) saturate(.9) brightness(1.2)
+	// -webkit-backdrop-filter: blur(35px) saturate(.9) brightness(1.2)
 	background: var(--color-dark)
 	z-index: 399
 	position: fixed
@@ -436,7 +447,7 @@ header
 	#mobileNav
 		padding-top: 40%
 		text-align: left
-		width: $boundary
+		width: var(--widthSix)
 
 	h1
 		font-size: clamp(1.6em, calc(1.6rem + (12 - 3.2) * ((100vw - 48em) / (120 - 48))), 12em)
@@ -565,7 +576,7 @@ section#soundAsk
 	display: block
 	width: 100%
 	@include maxWidthXL
-	margin: 0 auto 14% auto
+	margin: 0 auto 20rem auto
 
 .fullWidthPanel
 	max-width: initial
@@ -679,7 +690,7 @@ section#whatIsFolding
 
 			#peptideSlider
 				height: 100%
-				width: 40px
+				width: 4rem
 				position: absolute
 				top: 0
 				z-index: 10
@@ -691,9 +702,9 @@ section#whatIsFolding
 				#peptideKnob
 					border-radius: 50%
 					background: var(--color-yellow)
-					width: 34px
+					width: 3rem
 					z-index: 40
-					height: 34px
+					height: 3rem
 					transform: translateY(-50%)
 
 .errorTarget > path
@@ -864,9 +875,6 @@ section#chartOfUsers
 		padding-right: 2.5rem
 		margin-bottom: 4rem
 
-		&:first-child
-
-
 		.eventLine
 			width: 1.5px
 			height: 100%
@@ -874,7 +882,6 @@ section#chartOfUsers
 			position: absolute
 			right: .25rem
 			background: var(--color-yellow)
-
 
 	#chartCaptionContainer
 		position: absolute
@@ -888,9 +895,8 @@ section#chartOfUsers
 			grid-column: 1
 
 #barChartContainer
-	width: 400vw
 	display: flex
-	height: 100vh
+	height: 70vh
 	flex-direction: row-reverse
 	// flex-direction: column
 
@@ -906,8 +912,8 @@ section#chartOfUsers
 
 	.eventMarkerObject
 		background: red
-		height: 50px
-		width: 50px
+		height: 5rem
+		width: 5rem
 		display: block
 		position: absolute
 		top: 0
@@ -952,12 +958,6 @@ section#chartOfUsers
 		margin: auto 0 auto .25rem
 		background: var(--color-yellow)
 
-.line
-	background: red
-	width: .5%
-	height: 200px
-	margin-right: .5%
-
 section#helpingReduceCosts
 	display: flex
 	flex-wrap: wrap
@@ -995,6 +995,7 @@ section#helpingReduceCosts
 
 		h1
 			margin: 0
+			font-size: 24.5vw
 			text-align: center
 
 		.commaChar
@@ -1186,37 +1187,23 @@ section#howCanYouHelp
 		justify-content: center
 		position: relative
 
-		.dangerCloud
-			background: radial-gradient(circle, rgba(227,33,33,1) 0%, rgba(255,255,255,0) 72%)
-			position: absolute
-			width: 1000px
-			height: 1000px
-			mix-blend-mode: color-dodge
-			top: 0
-			z-index: 1
-			opacity: .5
-			// opacity: .4
-			left: 0%
-
 		& > div:not(div.dangerCloud)
 			@include maxWidthS
 
 	section#helpingReduceCosts
-		
-		& > div
-			// width: 100%
 
-			.headingContainer
-				// width: 40%
-				// max-width: 500px
-				flex-grow: 1
-
-			& > div:not(.headingContainer)
-				// width: 40%
-				// max-width: 500px
+		.headingContainer
+			flex-grow: 1
 
 // Above 796px
 @media only screen and (min-width: 769px)
+
+	#costNumbersContainer
+
+		#fiveThou > div, #twoThou > div
+
+			h1
+				font-size: clamp(4.4rem, calc(4.4rem + ((1vw - 0.34rem) * 10.5455)), 16rem)
 
 	.computerName
 		cursor: pointer
@@ -1249,10 +1236,8 @@ section#howCanYouHelp
 			column-gap: 4.6%
 
 			.headingContainer
-				// width: 50%
 				max-width: 500px
 				flex-grow: 1
 
 			& > div:not(.headingContainer)
-				// width: 40%
 				max-width: 500px
