@@ -31,21 +31,10 @@ function setupIntroParaSplit() {
 }
 
 ScrollTrigger.addEventListener("refresh", setupIntroParaSplit);
-setupIntroParaSplit();
 
 let titles = document.querySelectorAll("#introHeadingContainer h1");
 let openSource = titles[0];
 let openScience = titles[1];
-
-// export default function setupIntroTL() {
-let titleTL = gsap.timeline({
-  paused: true,
-  onComplete: function () {
-    titleTL.invalidate();
-    titleTL.kill();
-    createIntroOutTL();
-  },
-});
 
 openSource.split = new SplitText(openSource, {
   type: "chars",
@@ -64,6 +53,18 @@ gsap.set(openScience.split.chars, {
   yPercent: -30,
   color: colors.teal,
 });
+
+// export default function setupIntroTL() {
+let titleTL = gsap.timeline({
+  paused: true,
+  onComplete: function () {
+    titleTL.invalidate;
+    titleTL.kill;
+    createIntroOutTL();
+  },
+});
+
+setupIntroParaSplit();
 
 titleTL
   .to(
