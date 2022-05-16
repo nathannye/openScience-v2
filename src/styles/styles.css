@@ -356,12 +356,6 @@ section#introPanel #introHeadingContainer > div:last-child p {
   transform: perspective(300px);
   transform-style: preserve-3d;
   margin-left: 1rem;
-  will-change: transform;
-}
-
-section#introPanel #introHeadingContainer > div:last-child p div {
-  transform: perspective(300px);
-  transform-style: preserve-3d;
 }
 
 #supercomputerHoverContainer {

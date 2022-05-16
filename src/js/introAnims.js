@@ -23,14 +23,28 @@ gsap.set(html, {
 });
 
 let introPara = document.querySelector("#introPanel p");
+introPara.tl = gsap.timeline({
+  paused: true,
+});
 
 function setupIntroParaSplit() {
   introPara.split = new SplitText(introPara, {
     type: "lines",
   });
+
+  introPara.tl.from(introPara.split.lines, {
+    autoAlpha: 0,
+    y: 12,
+    rotateY: -8,
+    delay: 1.4,
+    color: colors.teal,
+    ease: "power2.out",
+    stagger: 0.09,
+    duration: 1.5,
+  });
 }
 
-ScrollTrigger.addEventListener("refresh", setupIntroParaSplit);
+setupIntroParaSplit();
 
 let titles = document.querySelectorAll("#introHeadingContainer h1");
 let openSource = titles[0];
@@ -57,14 +71,11 @@ gsap.set(openScience.split.chars, {
 // export default function setupIntroTL() {
 let titleTL = gsap.timeline({
   paused: true,
-  onComplete: function () {
-    titleTL.invalidate;
-    titleTL.kill;
+  onComplete: () => {
+    console.log("run");
     createIntroOutTL();
   },
 });
-
-setupIntroParaSplit();
 
 titleTL
   .to(
@@ -95,6 +106,13 @@ titleTL
       scaleY: 0.7,
     },
     0.8
+  )
+  .call(
+    function () {
+      introPara.tl.play();
+    },
+    null,
+    "start"
   )
   .from(
     navDots,
@@ -179,20 +197,6 @@ titleTL
       ease: "power4.inOut",
     },
     0.2
-  )
-  .from(
-    introPara.split.lines,
-    {
-      autoAlpha: 0,
-      y: 12,
-      rotateY: -8,
-      delay: 0.5,
-      color: colors.teal,
-      ease: "power2.out",
-      stagger: 0.09,
-      duration: 1.5,
-    },
-    0.35
   );
 
 titleTL.play();
@@ -211,13 +215,18 @@ function createIntroOutTL() {
   });
 
   introOutTL
+    .call(() => {
+      introPara.tl.kill;
+      introPara.tl.invalidate;
+      titleTL.invalidate;
+      titleTL.kill;
+    })
     .to(
       openSource.split.chars,
       {
         z: -12,
         yPercent: -10,
         autoAlpha: 0,
-        // filter: "blur(3px)",
         rotateY: -4,
         duration: 1.8,
         ease: "power3.inOut",
@@ -251,12 +260,11 @@ function createIntroOutTL() {
       {
         z: -2,
         y: 9,
-        opacity: 0,
+        autoAlpha: 0,
         color: colors.teal,
-        rotateY: 3,
+        rotateY: 10,
         ease: "power2.inOut",
         duration: 0.7,
-        filter: "blur(4px)",
         stagger: 0.14,
       },
       "scrollingOut+=50%"
