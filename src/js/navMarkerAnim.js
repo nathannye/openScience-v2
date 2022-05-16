@@ -10,6 +10,11 @@ let sections = gsap.utils.toArray("section.contentPanel");
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 document.addEventListener("DOMContentLoaded", (event) => {
+  gsap.to(navEntry, {
+    opacity: 1,
+    duration: 0.001,
+  });
+
   for (let i = 0; i < sections.length; i++) {
     let tl = gsap.timeline({
       scrollTrigger: {
@@ -31,48 +36,48 @@ document.addEventListener("DOMContentLoaded", (event) => {
       },
     });
   }
-});
 
-navEntry.forEach((entry) => {
-  entry.tl = gsap.timeline({
-    paused: true,
-  });
+  navEntry.forEach((entry) => {
+    entry.tl = gsap.timeline({
+      paused: true,
+    });
 
-  let entryLabel = entry.querySelector("p");
-  entryLabel.split = new SplitText(entryLabel, {
-    type: "words, lines",
-    linesClass: "splitLine",
-  });
+    let entryLabel = entry.querySelector("span");
+    entryLabel.split = new SplitText(entryLabel, {
+      type: "words, lines",
+      linesClass: "splitLine",
+    });
 
-  entry.tl
-    .to(
-      entry.querySelector(".navMarker"),
-      {
-        x: -7,
-        duration: 0.1,
-      },
-      "hover"
-    )
-    .from(
-      entryLabel.split.words,
-      {
-        // x: "-.5rem",
-        // color: colors.teal,
-        yPercent: 100,
-        ease: "power2.inOut",
-        duration: 0.23,
-        stagger: {
-          each: ".008",
+    gsap.set(entryLabel.split.words, {
+      yPercent: 100,
+    });
+
+    entry.tl
+      .to(
+        entry.querySelector(".navMarker"),
+        {
+          x: -7,
+          duration: 0.1,
         },
-      },
-      "hover"
-    );
+        "hover"
+      )
+      .to(
+        entryLabel.split.words,
+        {
+          yPercent: -100,
+          ease: "power2.inOut",
+          duration: 0.23,
+          stagger: 0.008,
+        },
+        "hover"
+      );
 
-  entry.addEventListener("mouseover", (event) => {
-    entry.tl.play();
-  });
-  entry.addEventListener("mouseout", (event) => {
-    entry.tl.reverse();
+    entry.addEventListener("mouseover", (event) => {
+      entry.tl.play();
+    });
+    entry.addEventListener("mouseout", (event) => {
+      entry.tl.reverse();
+    });
   });
 });
 
