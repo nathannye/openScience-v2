@@ -22,6 +22,7 @@
   --color-white: white;
   --shadow-color: #3171a5;
   --unit: 16.667%;
+  --smoothTransition: all 0.27s cubic-bezier(0.81, 0, 0.37, 1);
   --spacer: clamp(1.5rem, calc(1.5rem + ((1vw - 0.36rem) * 1.7857)), 3rem);
   --widthOne: calc((--unit * 1) - var(--spacer));
   --widthTwo: calc((--unit * 2) - var(--spacer));
@@ -50,6 +51,48 @@ h1, h2, h3, h4, h5, h6, p, ul, li, a {
 a:visited, a.externalLink:visited {
   color: var(--color-white);
   opacity: .4 !important;
+}
+
+cite > a, a.externalLink {
+  transition: var(--smoothTransition);
+  position: relative;
+}
+
+cite > a::after, cite > a::before, a.externalLink::after, a.externalLink::before {
+  position: absolute;
+  background: var(--color-white);
+  height: 1px;
+  width: 100%;
+  transition: var(--smoothTransition);
+  content: '';
+}
+
+cite > a::before, a.externalLink::before {
+  left: 0;
+  bottom: 0;
+}
+
+cite > a::after, a.externalLink::after {
+  left: -100%;
+  bottom: 0;
+}
+
+cite > a:hover, a.externalLink:hover {
+  color: var(--color-yellow);
+  transition: var(--smoothTransition);
+}
+
+cite > a:hover::before, a.externalLink:hover::before {
+  transition: var(--smoothTransition);
+  background: var(--color-yellow);
+  transform: translateX(100%);
+}
+
+cite > a:hover::after, a.externalLink:hover::after {
+  transition: var(--smoothTransition);
+  transition-delay: .13s;
+  transform: translateX(100%);
+  background: var(--color-yellow);
 }
 
 h1 div, h2 div, h3 div, h4 div, h5 div, p div, li div, a div {

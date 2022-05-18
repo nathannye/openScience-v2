@@ -30,7 +30,7 @@ window.addEventListener(
   false
 );
 
-// Load PDB entry 1CRN
+// Load PDB entry
 stage
   .loadFile("rcsb://5R81.cif", {
     assembly: "AU1",

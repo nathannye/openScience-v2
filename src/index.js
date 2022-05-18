@@ -74,58 +74,56 @@ ScrollTrigger.addEventListener("refresh", function () {
 
 // Link animations
 
-const links = gsap.utils.toArray("cite > a, a.externalLink");
+// const links = gsap.utils.toArray("cite > a, a.externalLink");
 
-links.forEach((link) => {
-  let e = document.createElement("div");
-  let f = document.createElement("div");
-  e.className = "underline";
-  f.className = "underlineLeft";
-  link.appendChild(e);
-  link.appendChild(f);
+// links.forEach((link) => {
+//   let e = document.createElement("div");
+//   let f = document.createElement("div");
+//   e.className = "underline";
+//   f.className = "underlineLeft";
+//   link.appendChild(e);
+//   link.appendChild(f);
 
-  e.tl = gsap.timeline({
-    paused: true,
-  });
+//   e.tl = gsap.timeline({
+//     paused: true,
+//   });
 
-  e.tl
-    .to(
-      e,
-      {
-        xPercent: 100,
-        duration: 0.4,
-        background: colors.ylw,
-        ease: "power3.inOut",
-      },
-      "start"
-    )
-    .to(
-      f,
-      {
-        xPercent: 100,
-        duration: 0.4,
-        background: colors.ylw,
-        ease: "power3.inOut",
-      },
-      "start+=.085"
-    )
-    .to(
-      link,
-      {
-        color: colors.ylw,
-        duration: 0.45,
-      },
-      "start"
-    );
+//   e.tl
+//     .to(
+//       e,
+//       {
+//         xPercent: 100,
+//         duration: 0.4,
+//         ease: "power3.inOut",
+//       },
+//       "start"
+//     )
+//     .to(
+//       f,
+//       {
+//         xPercent: 100,
+//         duration: 0.4,
+//         ease: "power3.inOut",
+//       },
+//       "start+=.085"
+//     )
+//     .to(
+//       link,
+//       {
+//         color: colors.ylw,
+//         duration: 0.45,
+//       },
+//       "start"
+//     );
 
-  link.addEventListener("mouseover", (event) => {
-    e.tl.play();
-  });
+//   link.addEventListener("mouseover", (event) => {
+//     e.tl.play();
+//   });
 
-  link.addEventListener("mouseout", (event) => {
-    e.tl.reverse();
-  });
-});
+//   link.addEventListener("mouseout", (event) => {
+//     e.tl.reverse();
+//   });
+// });
 
 let h3 = gsap.utils.toArray("h3:not(h3#dragDirections)");
 
