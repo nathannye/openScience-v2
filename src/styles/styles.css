@@ -114,7 +114,7 @@ h4 {
   line-height: 1.57;
   font-weight: 400;
   color: var(--color-yellow);
-  letter-spacing: .3em;
+  letter-spacing: .25em;
   margin-bottom: 1.5em;
 }
 
@@ -281,13 +281,12 @@ nav a div.navMarker.activeNav {
 
 #scrollIndicator #scrollAnimContainer {
   width: 2rem;
-  transform: scaleY(0.8);
 }
 
 #scrollIndicator h4 {
   writing-mode: vertical-lr;
   color: white;
-  margin: .25rem 0 0 0;
+  margin: 1rem 0 0 0;
   opacity: 0;
 }
 
@@ -1262,7 +1261,7 @@ section#howCanYouHelp #faqContainer article .faqAnswer p {
     transform: scale(0.26) translate(-28%, -15.5%) !important;
   }
   section#howCanYouHelp {
-    margin-bottom: 5%;
+    padding-bottom: 5%;
   }
   header {
     padding-top: calc(6.1% / 2);

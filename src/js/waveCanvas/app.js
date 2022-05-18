@@ -1,4 +1,5 @@
 import { WaveGroup } from "./waveGroup";
+import gsap from "gsap";
 
 class App {
   constructor() {
@@ -13,7 +14,6 @@ class App {
 
     window.addEventListener("resize", this.resize.bind(this), false);
     this.resize();
-
     requestAnimationFrame(this.animate.bind(this));
   }
 
@@ -23,7 +23,6 @@ class App {
     this.canvas.height = this.stageHeight;
     this.canvas.width = this.stageWidth;
     this.ctx.scale(2, 2);
-
     this.waveGroup.resize(this.stageWidth, this.stageHeight);
   }
 

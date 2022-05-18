@@ -1,4 +1,5 @@
 import { Point } from "./point";
+import gsap from "gsap";
 
 export class Wave {
   constructor(index, totalPoints, color) {
@@ -51,15 +52,8 @@ export class Wave {
       prevY = this.points[i].y;
     }
     ctx.moveTo(prevX, prevY);
-    // ctx.lineTo(this.stageWidth, this.stageHeight);
-    // ctx.lineTo(this.points[0].x, this.stageWidth);
     ctx.stroke();
     ctx.lineWidth = 0.7;
     ctx.lineCap = "square";
-    // ctx.closePath();
-    // this.point.update();
-
-    // ctx.arc(this.point.x, this.point.y, 100, 0, 2 * Math.PI);
-    // ctx.fill();
   }
 }

@@ -4,8 +4,9 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import { Howl, Howler } from "howler";
 import normalSound from "../audio/ambientSoundtrack.mp3";
 import darkSound from "../audio/darkSoundtrack.mp3";
+import MorphSVG from "gsap/MorphSVGPlugin";
 
-gsap.registerPlugin(SplitText, ScrollTrigger);
+gsap.registerPlugin(SplitText, ScrollTrigger, MorphSVG);
 
 var soundOn = false;
 

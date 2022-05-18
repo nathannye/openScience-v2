@@ -121,6 +121,9 @@ window.onload = () => {
       },
       1.3
     )
+    .call(() => {
+      navDots[0].classList.add("activeNav");
+    })
     .call(
       function () {
         let scrollIndi = Lottie.loadAnimation({
@@ -129,10 +132,10 @@ window.onload = () => {
           renderer: "svg",
           quality: "low",
           autoplay: true,
-          path: "https://assets6.lottiefiles.com/packages/lf20_t5abavzf.json",
+          path: "https://assets10.lottiefiles.com/packages/lf20_n5nf19df.json",
         });
 
-        scrollIndi.setSpeed(1.35);
+        scrollIndi.setSpeed(1.15);
       },
       null,
       "stageIn",
@@ -142,11 +145,11 @@ window.onload = () => {
       scrollIndiSplit.chars,
       {
         xPercent: 100,
-        stagger: 0.02,
-        duration: 1,
+        stagger: 0.05,
+        duration: 1.1,
         ease: "power3.inOut",
       },
-      "scrollIndi+=1.2",
+      "scrollIndi+=.6",
       1
     )
     .to(

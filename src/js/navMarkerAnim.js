@@ -15,22 +15,32 @@ document.addEventListener("DOMContentLoaded", (event) => {
     duration: 0.001,
   });
 
+  function clearDotClasses() {
+    navDots.forEach((dot) => {
+      dot.classList.remove("activeNav");
+    });
+  }
+
   for (let i = 0; i < sections.length; i++) {
     let tl = gsap.timeline({
       scrollTrigger: {
-        start: "top bottom+=1%",
-        end: "bottom bottom-=12%",
+        start: "top bottom",
+        end: "bottom bottom",
         trigger: sections[i],
         onEnter: () => {
+          clearDotClasses();
           navDots[i].classList.add("activeNav");
         },
         onLeave: () => {
+          clearDotClasses();
           navDots[i].classList.remove("activeNav");
         },
         onEnterBack: () => {
+          clearDotClasses();
           navDots[i].classList.add("activeNav");
         },
         onLeaveBack: () => {
+          clearDotClasses();
           navDots[i].classList.remove("activeNav");
         },
       },
