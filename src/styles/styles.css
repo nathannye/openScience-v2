@@ -667,11 +667,10 @@ section#soundAsk h2 {
 
 section#whatIsFolding {
   display: flex;
-  width: 87.8%;
-  max-width: 1750px;
   align-items: center;
   flex-wrap: wrap;
   position: relative;
+  width: unset;
 }
 
 section#whatIsFolding #whatIsFoldingText {
@@ -704,9 +703,10 @@ section#whatIsFolding #peptideAnimationContainer {
 section#whatIsFolding #peptideAnimationContainer #peptideLottieContainer {
   width: 60%;
   flex-grow: 1;
+  align-self: flex-start;
   position: relative;
   top: 0;
-  height: 100vh;
+  height: 70%;
 }
 
 section#whatIsFolding #peptideAnimationContainer #peptideLottieContainer > svg {
@@ -1346,6 +1346,9 @@ section#howCanYouHelp #faqContainer article .faqAnswer p {
 }
 
 @media only screen and (min-width: 769px) {
+  section#whatIsFolding #peptideAnimationContainer #peptideLottieContainer {
+    height: 100vh;
+  }
   #costNumbersContainer #fiveThou > div h1, #costNumbersContainer #twoThou > div h1 {
     font-size: clamp(4.4rem, calc(4.4rem + ((1vw - 0.34rem) * 10.5455)), 16rem);
   }

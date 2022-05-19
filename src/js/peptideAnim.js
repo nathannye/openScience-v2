@@ -20,7 +20,6 @@ gsap.registerPlugin(
 );
 
 let nglStage = document.querySelector("#viewport");
-let canvas = document.getElementById("#viewport canvas");
 
 document.addEventListener("DOMContentLoaded", (event) => {
   let peptideLottieContainer = document.getElementById(
@@ -33,17 +32,20 @@ document.addEventListener("DOMContentLoaded", (event) => {
   let firstHead = firstText.querySelector("h2");
   let firstPara = firstText.querySelector("p");
   let secondText = document.querySelector(
-    "#whatIsFoldingText > div:last-child"
+    "#whatIsFoldingText > div:last-of-type"
   );
-  // let secondHead = secondText.querySelector("h2");
-  // let secondPara = secondText.querySelector("p");
+
+  let secondHead = secondText.querySelector("h2");
+  let secondPara = secondText.querySelector("p");
+  let harvardLink = secondText.querySelector("cite");
   let html = document.querySelector("html");
   let whatIsFolding = document.getElementById("whatIsFolding");
 
   let firstTextAnim = gsap.timeline({
     scrollTrigger: {
       trigger: whatIsFolding,
-      start: "top bottom+=22%",
+      markers: true,
+      start: "top top+=12%",
     },
   });
 
@@ -54,32 +56,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
   firstPara.split = new SplitText(firstPara, {
     type: "lines",
   });
-
-  firstTextAnim
-    .from(
-      firstHead.split.words,
-      {
-        yPercent: 30,
-        autoAlpha: 0,
-        duration: 1,
-        ease: "power4.inOut",
-        stagger: 0.0142,
-      },
-      "start"
-    )
-    .from(
-      firstPara.split.lines,
-      {
-        autoAlpha: 0,
-        y: 55,
-        delay: 0.25,
-        rotateY: -8,
-        ease: "power2.out",
-        stagger: 0.09,
-        duration: 0.9,
-      },
-      "start"
-    );
+  secondHead.split = new SplitText(secondHead, {
+    type: "words, lines",
+    linesClass: "splitLine",
+  });
+  secondPara.split = new SplitText(secondPara, {
+    type: "lines",
+  });
 
   var peptideAnim = Lottie.loadAnimation({
     container: peptideLottieContainer,
@@ -95,7 +78,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     [1, 130],
     [130, 240],
   ];
-
+  // Wait for Lottie to load before appending to/editing it
   peptideAnim.addEventListener("DOMLoaded", (event) => {
     peptideAnim.playSegments(frameSegments[0]);
 
@@ -110,6 +93,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     let redChains = gsap.utils.toArray(
       "#firstRedChain > path, #middleRedChain > path, #lastRedChain > path"
     );
+    // Slice array into pieces that match the sections that change color
     let errorGroups = [
       errorDots.slice(0, 5),
       errorDots.slice(5, 10),
@@ -153,24 +137,79 @@ document.addEventListener("DOMContentLoaded", (event) => {
         autoAlpha: 1,
         duration: 0.5,
       })
-
       .to(
-        secondText,
+        firstHead.split.words,
         {
-          autoAlpha: 1,
-          duration: 0.45,
+          yPercent: 100,
+          duration: 1,
+          ease: "power4.inOut",
+          stagger: 0.0142,
         },
         "swap",
         ">"
       )
       .to(
-        firstText,
+        firstPara.split.lines,
+        {
+          z: -2,
+          y: 9,
+          autoAlpha: 0,
+          color: colors.teal,
+          rotateY: 5,
+          ease: "power2.inOut",
+          duration: 0.7,
+          stagger: 0.14,
+        },
+        "swap"
+      )
+      .from(
+        secondHead.split.words,
+        {
+          yPercent: 100,
+          duration: 1,
+          ease: "power4.inOut",
+          stagger: 0.0142,
+          delay: 0.5,
+        },
+        "swap"
+      )
+      .from(
+        secondPara.split.lines,
+        {
+          autoAlpha: 0,
+          y: 12,
+          rotateY: -8,
+          color: colors.teal,
+          stagger: 0.09,
+          duration: 1.5,
+          ease: "power2.inOut",
+          delay: 0.75,
+        },
+        "swap"
+      )
+      .from(
+        harvardLink,
         {
           autoAlpha: 0,
           duration: 0.45,
         },
-        "swap"
+        ">"
       )
+
+      // .from(
+      //   secondPara.split.lines,
+      //   {
+      //     autoAlpha: 0,
+      //     y: 12,
+      //     rotateY: -8,
+      //     delay: 1.4,
+      //     color: colors.teal,
+      //     ease: "power2.out",
+      //     stagger: 0.09,
+      //     duration: 1.5,
+      //   },
+      //   "swap"
+      // )
       .from(
         dangerClickTargets,
         {
@@ -248,10 +287,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
   dragDirections.split = new SplitText(dragDirections, {
     type: "words, lines",
     linesClass: "splitLine",
-  });
-
-  gsap.set(secondText, {
-    autoAlpha: 0,
   });
 
   gsap.set(peptideLottieContainer, {
@@ -333,7 +368,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
       trigger: knob,
       bounds: { maxRotation: 360, minRotation: 0 },
       onThrowComplete: function () {
-        if (this.rotation === 360) {
+        if (this.rotation == 360) {
           draggerTL.play();
           dangerTL.play();
           peptideAnim.playSegments(frameSegments[1]);
@@ -370,44 +405,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         end: "bottom top",
       },
     });
-    peptideTL
-      // .call(peptideTL.scrollTrigger.refresh())
-      .to(nglStage, {
-        filter: "saturate(.3) blur(7.5px)",
-        duration: 0.9,
-      })
-      .fromTo(
-        peptideLottieContainer,
-        { autoAlpha: 0, filter: "blur(0px)" },
-        { autoAlpha: 0.4, duration: 0.56, filter: "blur(8px)" },
-        "draggerIn"
-      )
-      .from(
-        sliderCirclePath,
-        { drawSVG: "0%" },
-        { drawSVG: "100%", duration: 0.74, ease: "power3.inOut" },
-        "draggerIn"
-      )
-      .from(
-        knob,
-        {
-          scale: 0,
-          duration: 0.33,
-          delay: 0.09,
-          ease: "back.out(1.3)",
-        },
-        ">"
-      )
-      .fromTo(
-        dragDirections.split.words,
-        { yPercent: 100 },
-        { yPercent: 0, duration: 0.57, stagger: 0.05, ease: "power3.inOut" },
-        "draggerIn"
-      )
-      .call(function () {
-        firstTextAnim.play();
-      })
-      .call(createPeptideDraggable);
+    peptideTL;
   }
 
   peptideAnim.addEventListener("DOMLoaded", (event) => {
@@ -416,4 +414,83 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
   // Danger Click Targets
   var dangerClickClear = 0;
+
+  let peptideAnimInTL = gsap.timeline({
+    scrollTrigger: {
+      trigger: whatIsFolding,
+      markers: true,
+      start: "top top",
+    },
+  });
+
+  peptideAnimInTL
+    .to(html, {
+      overflowY: "hidden",
+    })
+    .from(
+      firstHead.split.words,
+      {
+        yPercent: 100,
+        autoAlpha: 0,
+        duration: 1,
+        ease: "power4.inOut",
+        stagger: 0.0142,
+      },
+      "start"
+    )
+    .from(
+      firstPara.split.lines,
+      {
+        autoAlpha: 0,
+        y: 55,
+        delay: 0.25,
+        rotateY: -8,
+        ease: "power2.out",
+        stagger: 0.09,
+        duration: 0.9,
+      },
+      "start"
+    )
+    .to(
+      nglStage,
+      {
+        filter: "saturate(.3) blur(7.5px)",
+        duration: 0.9,
+        delay: 0.5,
+      },
+      "start"
+    )
+    .fromTo(
+      peptideLottieContainer,
+      { autoAlpha: 0, filter: "blur(0px)" },
+      { autoAlpha: 0.4, duration: 0.56, filter: "blur(8px)" },
+      "<+=.5",
+      "draggerIn"
+    )
+    .from(
+      sliderCirclePath,
+      { drawSVG: "0%" },
+      { drawSVG: "100%", duration: 0.74, ease: "power3.inOut" },
+      "draggerIn"
+    )
+    .from(
+      knob,
+      {
+        scale: 0,
+        duration: 0.33,
+        delay: 0.09,
+        ease: "back.out(1.3)",
+      },
+      ">"
+    )
+    .fromTo(
+      dragDirections.split.words,
+      { yPercent: 100 },
+      { yPercent: 0, duration: 0.57, stagger: 0.05, ease: "power3.inOut" },
+      "draggerIn"
+    )
+    // .call(function () {
+    //   firstTextAnim.play();
+    // })
+    .call(createPeptideDraggable);
 });

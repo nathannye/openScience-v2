@@ -595,10 +595,8 @@ section#soundAsk
 		justify-content: center
 		transform: translateZ(90px)
 		column-gap: 5em
-		// @include has3D
 
 	h2
-		// @include has3D
 		filter: blur(0)
 		text-align: center
 		color: var(--color-teal)
@@ -621,10 +619,10 @@ section#soundAsk
 
 section#whatIsFolding
 	display: flex
-	@include maxWidthXL
 	align-items: center
 	flex-wrap: wrap
 	position: relative
+	width: unset
 
 	#whatIsFoldingText
 		display: grid
@@ -654,9 +652,10 @@ section#whatIsFolding
 		#peptideLottieContainer
 			width: 60%
 			flex-grow: 1
+			align-self: flex-start
 			position: relative
 			top: 0
-			height: 100vh
+			height: 70%
 
 			& > svg
 				display: block
@@ -1181,8 +1180,10 @@ section#howCanYouHelp
 	section#whyDoWeNeed
 		padding-top: 12% !important
 
-	.errorTarget > svg
-		transform: scale(.26) translate(-28%, -15.5%) !important
+	.errorTarget 
+	
+		& > svg
+			transform: scale(.26) translate(-28%, -15.5%) !important
 
 	section#howCanYouHelp
 		padding-bottom: 5%
@@ -1230,6 +1231,13 @@ section#howCanYouHelp
 
 // Above 796px
 @media only screen and (min-width: 769px)
+
+	section#whatIsFolding
+
+		#peptideAnimationContainer
+			
+			#peptideLottieContainer
+				height: 100vh 
 
 	#costNumbersContainer
 
