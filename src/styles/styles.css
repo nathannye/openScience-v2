@@ -149,7 +149,18 @@ h3 {
   margin-bottom: .5em;
 }
 
-h4 {
+td {
+  font-family: ivypresto-headline, serif;
+  font-weight: 400;
+  font-size: clamp(1.6rem, calc(1.6rem + ((1vw - 0.36rem) * 5.8333)), 4rem);
+  min-height: 0vw;
+  font-weight: 400 !important;
+  letter-spacing: .02em;
+  line-height: 1.55;
+  margin-bottom: .5em;
+}
+
+h4, th {
   font-family: telegraf;
   font-style: normal;
   text-transform: uppercase;
@@ -184,7 +195,7 @@ h5 {
   text-align: center;
 }
 
-p, ul, li, a, ol, td, th {
+p, ul, li, a, ol {
   font-size: clamp(1.6rem, calc(1.6rem + ((1vw - 0.36rem) * 1.4881)), 2rem);
   font-family: telegraf;
   font-style: normal;
@@ -676,8 +687,6 @@ section#whatIsFolding {
 section#whatIsFolding #whatIsFoldingText {
   display: grid;
   margin: auto;
-  width: 87.8%;
-  max-width: 550px;
   flex-grow: 1;
 }
 
@@ -689,6 +698,9 @@ section#whatIsFolding #whatIsFoldingText p {
 section#whatIsFolding #whatIsFoldingText > div {
   grid-column: 1;
   grid-row: 1;
+  margin: auto;
+  width: 87.8%;
+  max-width: 550px;
 }
 
 section#whatIsFolding #peptideAnimationContainer {
@@ -794,9 +806,9 @@ section#whatIsFolding #peptideAnimationContainer #peptideSliderContainer #peptid
 section#whatIsFolding #peptideAnimationContainer #peptideSliderContainer #peptideSlider #peptideKnob {
   border-radius: 50%;
   background: var(--color-yellow);
-  width: 3rem;
+  width: 4rem;
   z-index: 40;
-  height: 3rem;
+  height: 4rem;
   transform: translateY(-50%);
 }
 
@@ -928,39 +940,12 @@ section#whyDoWeNeed .aminoDudeContainer:nth-child(4) {
   min-width: 100px;
 }
 
+section#whyDoWeNeed .aminoDudeContainer svg {
+  transform: rotate(90deg) !important;
+}
+
 section#numberOfUsersPanel {
   position: relative;
-}
-
-section#numberOfUsersPanel h2, section#numberOfUsersPanel p {
-  z-index: 10;
-}
-
-section#numberOfUsersPanel img.parallaxImage {
-  position: absolute;
-  width: 40%;
-  max-width: 400px;
-  box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.1);
-}
-
-section#numberOfUsersPanel #laxOne {
-  top: 44%;
-  left: 5%;
-}
-
-section#numberOfUsersPanel #laxTwo {
-  bottom: 6%;
-  right: 20%;
-}
-
-section#numberOfUsersPanel #laxThree {
-  top: 40%;
-  left: 35%;
-}
-
-section#numberOfUsersPanel #laxFour {
-  top: 22%;
-  right: .4%;
 }
 
 section#chartOfUsers {
@@ -1036,50 +1021,63 @@ section#chartOfUsers #chartCaptionContainer h2 {
 }
 
 #supercomputerCompare {
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   display: flex;
   align-items: flex-end;
   padding-bottom: 1.25%;
-  justify-content: center;
   z-index: 3;
 }
 
-#supercomputerTable {
+table#supercomputerTable {
   border-spacing: 0;
-  display: block;
-  width: 87.8%;
-  max-width: 550px;
+  width: 100%;
 }
 
-#supercomputerTable td {
+table#supercomputerTable tr {
+  width: 100%;
+  transform: perspective(300px);
+  transform-style: preserve-3d;
+}
+
+table#supercomputerTable td {
   border-top: 1px solid white;
   margin: 0;
   padding: .5rem 0 0 0;
+  transform: perspective(300px);
+  transform-style: preserve-3d;
 }
 
-#supercomputerTable th {
+table#supercomputerTable th {
   text-align: left;
   color: var(--color-yellow);
+  width: 100%;
+  padding-bottom: .57rem;
 }
 
-#supercomputerTable tr > td:first-child {
-  padding-right: 6rem;
+table#supercomputerTable th:first-of-type {
+  width: 50%;
+  max-width: 490px;
+}
+
+table#supercomputerTable tr > td:first-child {
+  padding-right: 2rem;
   padding-bottom: 1.75rem;
 }
 
-#supercomputerTable tr > td:nth-child(2) {
+table#supercomputerTable tr > td:nth-child(2) {
   display: flex;
+  width: 100%;
 }
 
-#supercomputerTable tr > td:nth-child(2) .opsText {
-  min-width: 50px;
+table#supercomputerTable tr > td:nth-child(2) .opsText {
+  min-width: 45px;
 }
 
-#supercomputerTable .dataBar {
+table#supercomputerTable .dataBar {
   height: 2px;
   display: block;
-  margin: auto 0 auto .25rem;
+  margin: auto 0 auto 1rem;
   background: var(--color-yellow);
 }
 
@@ -1346,6 +1344,45 @@ section#howCanYouHelp #faqContainer article .faqAnswer p {
 }
 
 @media only screen and (min-width: 769px) {
+  table#supercomputerTable {
+    border-spacing: 0;
+    width: 100%;
+  }
+  table#supercomputerTable tr {
+    width: 100%;
+  }
+  table#supercomputerTable td {
+    border-top: 1px solid white;
+    margin: 0;
+    padding: 0 0 5rem 0;
+  }
+  table#supercomputerTable th {
+    text-align: left;
+    color: var(--color-yellow);
+    width: 100%;
+    padding-bottom: .57rem;
+  }
+  table#supercomputerTable th:first-of-type {
+    width: 30%;
+    max-width: 490px;
+  }
+  table#supercomputerTable tr > td:first-child {
+    padding-right: 2rem;
+    padding-bottom: 5rem;
+  }
+  table#supercomputerTable tr > td:nth-child(2) {
+    display: flex;
+    width: 100%;
+  }
+  table#supercomputerTable tr > td:nth-child(2) .opsText {
+    min-width: 95px;
+  }
+  table#supercomputerTable .dataBar {
+    height: 2px;
+    display: block;
+    margin: auto 0 auto 3rem;
+    background: var(--color-yellow);
+  }
   section#whatIsFolding #peptideAnimationContainer #peptideLottieContainer {
     height: 100vh;
   }

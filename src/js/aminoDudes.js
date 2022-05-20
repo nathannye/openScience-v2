@@ -8,6 +8,33 @@ import colors from "./colors";
 gsap.registerPlugin(MotionPathPlugin, ScrollTrigger);
 const paths = ["#firstPath", "#secondPath", "#thirdPath", "#fourthPath"];
 
+const aminoProps = [
+  {
+    p: "#firstPath",
+    dur: 15,
+    start: 0.35,
+    end: 1,
+  },
+  {
+    p: "#secondPath",
+    dur: 25,
+    start: 0.9,
+    end: 0.2,
+  },
+  {
+    p: "#thirdPath",
+    dur: 19,
+    start: 1,
+    end: 0.1,
+  },
+  {
+    p: "#fourthPath",
+    dur: 24,
+    start: 0,
+    end: 0.4,
+  },
+];
+
 let grain = document.getElementById("grain");
 let text = document.querySelectorAll(
   "#whyDoWeNeed h2, #whyDoWeNeed p, #whyDoWeNeed h4"
@@ -72,38 +99,6 @@ tl.from(
     "go+=.65"
   );
 
-let animOne = Lottie.loadAnimation({
-  container: animContainer[0],
-  path: "https://assets5.lottiefiles.com/packages/lf20_cpwcuygx.json",
-  autoplay: true,
-  quality: "low",
-  loop: true,
-});
-
-let animTwo = Lottie.loadAnimation({
-  container: animContainer[1],
-  path: "https://assets5.lottiefiles.com/packages/lf20_cpwcuygx.json",
-  autoplay: true,
-  quality: "low",
-  loop: true,
-});
-
-let animThree = Lottie.loadAnimation({
-  container: animContainer[2],
-  path: "https://assets5.lottiefiles.com/packages/lf20_cpwcuygx.json",
-  autoplay: true,
-  quality: "low",
-  loop: true,
-});
-
-let animFour = Lottie.loadAnimation({
-  container: animContainer[3],
-  path: "https://assets5.lottiefiles.com/packages/lf20_cpwcuygx.json",
-  autoplay: true,
-  quality: "low",
-  loop: true,
-});
-
 let wrappers = document.querySelectorAll("html, body");
 
 let numbers = document.getElementById("millionAcross");
@@ -112,6 +107,7 @@ numbers.split = new SplitText(numbers, {
   linesClass: "splitLIne",
 });
 
+// Init timeline here so for loop can access it to add tweens
 let needTL = gsap.timeline({
   scrollTrigger: {
     trigger: container,
@@ -173,68 +169,68 @@ needTL
       yPercent: 100,
       duration: needTL.duration,
     },
-    "main"
+    "appendAmino"
   )
-  .to(
-    animContainer[0],
-    {
-      duration: 15,
-      motionPath: {
-        end: 1,
-        start: 0.35,
-        path: paths[0],
-        align: paths[0],
-        //   alignOrigin: [0.5, 0.5],
-        autoRotate: true,
-      },
-    },
-    "main"
-  )
-  .to(
-    animContainer[1],
-    {
-      duration: 25,
-      motionPath: {
-        end: 0.2,
-        start: 0.9,
-        path: paths[1],
-        align: paths[1],
-        // alignOrigin: [0.5, 0.5],
-        autoRotate: true,
-      },
-    },
-    "main"
-  )
-  .to(
-    animContainer[2],
-    {
-      duration: 19,
-      motionPath: {
-        end: 0.1,
-        start: 1,
-        path: paths[2],
-        align: paths[2],
-        // alignOrigin: [0.5, 0.5],
-        autoRotate: true,
-      },
-    },
-    "main"
-  )
-  .to(
-    animContainer[3],
-    {
-      duration: 24,
-      motionPath: {
-        end: 0.4,
-        start: 0,
-        path: paths[3],
-        align: paths[3],
-        // alignOrigin: [0.5, 0.5],
-        autoRotate: true,
-      },
-    },
-    "main"
-  )
+  // .to(
+  //   animContainer[0],
+  //   {
+  //     duration: 15,
+  //     motionPath: {
+  //       end: 1,
+  //       start: 0.35,
+  //       path: paths[0],
+  //       align: paths[0],
+  //       //   alignOrigin: [0.5, 0.5],
+  //       autoRotate: true,
+  //     },
+  //   },
+  //   "main"
+  // )
+  // .to(
+  //   animContainer[1],
+  //   {
+  //     duration: 25,
+  //     motionPath: {
+  //       end: 0.2,
+  //       start: 0.9,
+  //       path: paths[1],
+  //       align: paths[1],
+  //       // alignOrigin: [0.5, 0.5],
+  //       autoRotate: true,
+  //     },
+  //   },
+  //   "main"
+  // )
+  // .to(
+  //   animContainer[2],
+  //   {
+  //     duration: 19,
+  //     motionPath: {
+  //       end: 0.1,
+  //       start: 1,
+  //       path: paths[2],
+  //       align: paths[2],
+  //       // alignOrigin: [0.5, 0.5],
+  //       autoRotate: true,
+  //     },
+  //   },
+  //   "main"
+  // )
+  // .to(
+  //   animContainer[3],
+  //   {
+  //     duration: 24,
+  //     motionPath: {
+  //       end: 0.4,
+  //       start: 0,
+  //       path: paths[3],
+  //       align: paths[3],
+  //       // alignOrigin: [0.5, 0.5],
+  //       autoRotate: true,
+  //     },
+  //   },
+  //   "main"
+  // )
   .to(
     cnv,
     {
@@ -268,3 +264,31 @@ needTL
     },
     "end"
   );
+
+for (let i = 0; i < aminoProps.length; i++) {
+  let dude = Lottie.loadAnimation({
+    container: animContainer[i],
+    path: "https://assets5.lottiefiles.com/packages/lf20_cpwcuygx.json",
+    autoplay: true,
+    quality: "low",
+    loop: true,
+  });
+
+  dude.setSpeed(1.3);
+
+  let anim = gsap.to(
+    animContainer[i],
+    {
+      duration: aminoProps.dur,
+      motionPath: {
+        start: aminoProps.start,
+        end: aminoProps.end,
+        path: paths[i],
+        align: paths[i],
+      },
+    },
+    "main"
+  );
+  needTL.add(anim, "appendAmino" + i);
+  console.log(anim);
+}

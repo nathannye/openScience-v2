@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
   let firstHead = firstText.querySelector("h2");
   let firstPara = firstText.querySelector("p");
   let secondText = document.querySelector(
-    "#whatIsFoldingText > div:last-of-type"
+    "#whatIsFoldingText > div:last-child"
   );
 
   let secondHead = secondText.querySelector("h2");
@@ -44,7 +44,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
   let firstTextAnim = gsap.timeline({
     scrollTrigger: {
       trigger: whatIsFolding,
-      markers: true,
       start: "top top+=12%",
     },
   });
@@ -162,6 +161,51 @@ document.addEventListener("DOMContentLoaded", (event) => {
         },
         "swap"
       )
+      .to(
+        firstText.querySelector("h4"),
+        {
+          autoAlpha: 0,
+
+          duration: 0.5,
+        },
+        "swap"
+      )
+      .from(
+        secondText.querySelector("h4"),
+        {
+          autoAlpha: 0,
+          duration: 0.5,
+          delay: 1,
+        },
+        "swap"
+      )
+      .to(
+        chain,
+        {
+          stroke: colors.blue,
+          duration: 0.6,
+          delay: 0.8,
+        },
+        "<"
+      )
+      .to(
+        dots,
+        {
+          stroke: colors.blue,
+          duration: 0.6,
+        },
+        "<",
+        "state"
+      )
+      .to(
+        dangerSeriesTrigger,
+        {
+          autoAlpha: 0,
+          duration: 0.4,
+        },
+        "state"
+      )
+
       .from(
         secondHead.split.words,
         {
@@ -195,21 +239,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
         },
         ">"
       )
-
-      // .from(
-      //   secondPara.split.lines,
-      //   {
-      //     autoAlpha: 0,
-      //     y: 12,
-      //     rotateY: -8,
-      //     delay: 1.4,
-      //     color: colors.teal,
-      //     ease: "power2.out",
-      //     stagger: 0.09,
-      //     duration: 1.5,
-      //   },
-      //   "swap"
-      // )
       .from(
         dangerClickTargets,
         {
@@ -222,31 +251,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
             from: "end",
           },
         },
+        "swap+=.4",
         "state"
-      )
-      .to(
-        chain,
-        {
-          stroke: colors.blue,
-          duration: 0.6,
-          delay: 0.8,
-        },
-        "state"
-      )
-      .to(
-        dots,
-        {
-          stroke: colors.blue,
-          duration: 0.6,
-          delay: 0.8,
-        },
-        "state"
-      )
-      .call(flickerTL.play, null, "swap")
-      .to(dangerSeriesTrigger, {
-        autoAlpha: 0,
-        duration: 0.4,
-      });
+      );
 
     dangerClickTargets.forEach((target) => {
       var dangerMarkerAnim = Lottie.loadAnimation({
@@ -401,7 +408,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
       paused: true,
       scrollTrigger: {
         trigger: whatIsFolding,
-        start: "top top",
+        start: "top top+=18%",
         end: "bottom top",
       },
     });
@@ -418,7 +425,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
   let peptideAnimInTL = gsap.timeline({
     scrollTrigger: {
       trigger: whatIsFolding,
-      markers: true,
       start: "top top",
     },
   });
@@ -427,6 +433,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     .to(html, {
       overflowY: "hidden",
     })
+    .call(createPeptideDraggable)
     .from(
       firstHead.split.words,
       {
@@ -464,33 +471,31 @@ document.addEventListener("DOMContentLoaded", (event) => {
       peptideLottieContainer,
       { autoAlpha: 0, filter: "blur(0px)" },
       { autoAlpha: 0.4, duration: 0.56, filter: "blur(8px)" },
-      "<+=.5",
-      "draggerIn"
-    )
-    .from(
-      sliderCirclePath,
-      { drawSVG: "0%" },
-      { drawSVG: "100%", duration: 0.74, ease: "power3.inOut" },
-      "draggerIn"
+      0.7
     )
     .from(
       knob,
       {
         scale: 0,
         duration: 0.33,
-        delay: 0.09,
         ease: "back.out(1.3)",
       },
-      ">"
+      0.7
+    )
+    .from(
+      sliderCirclePath,
+      { drawSVG: "0%" },
+      { drawSVG: "100%", duration: 0.74, ease: "power3.inOut" },
+      1
     )
     .fromTo(
       dragDirections.split.words,
       { yPercent: 100 },
       { yPercent: 0, duration: 0.57, stagger: 0.05, ease: "power3.inOut" },
-      "draggerIn"
-    )
-    // .call(function () {
-    //   firstTextAnim.play();
-    // })
-    .call(createPeptideDraggable);
+      0.7
+    );
+
+  // .call(function () {
+  //   firstTextAnim.play();
+  // })
 });

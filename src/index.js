@@ -14,9 +14,9 @@ let h2 = document.querySelectorAll("h2.headAnim");
 function setupFarAndAway() {
   h2.forEach((e) => {
     if (e.anim) {
-      e.anim.progress(1).kill();
-      e.anim.invalidate();
-      e.split.revert();
+      e.anim.progress(1).kill;
+      e.anim.invalidate;
+      e.split.revert;
     }
     e.split = new SplitText(e, {
       type: "words, lines",
