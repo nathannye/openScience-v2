@@ -17,38 +17,21 @@ function setupInterstitials() {
     e.tl = gsap.timeline({
       scrollTrigger: {
         trigger: e,
-        pin: true,
-        scrub: 2,
+        // pin: true,
         start: "top top",
-        end: "bottom 70%",
+        end: "bottom 25%",
         toggleActions: "play reverse play play",
       },
     });
 
-    e.tl
-      .from(
-        e.split.words,
-        {
-          yPercent: 100,
-          duration: 13,
-          autoAlpha: 1,
-          filter: "blur(8px)",
-          ease: "power2.inOut",
-          stagger: 9,
-        },
-        0
-      )
-      .to(e.split.words, {
-        yPercent: 100,
-        duration: 16,
-        delay: 40,
-        autoAlpha: 0,
-        filter: "blur(8px)",
-        ease: "power2.inOut",
-        stagger: -9,
-      });
+    e.tl.from(e.split.words, {
+      yPercent: 100,
+      autoAlpha: 1,
+      duration: 0.55,
+      ease: "power3.inOut",
+      stagger: 0.03,
+    });
   });
-  ScrollTrigger.refresh();
 }
 
 ScrollTrigger.addEventListener("refresh", setupInterstitials);

@@ -2,16 +2,8 @@ import gsap from "gsap";
 import SplitText from "gsap/SplitText";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import colors from "./js/colors";
-import ScrollSmoother from "gsap/ScrollSmoother";
 
-gsap.registerPlugin(ScrollTrigger, SplitText, ScrollSmoother);
-
-let smoother = ScrollSmoother.create({
-  smooth: 2.25,
-  content: "#smoothContent",
-  wrapper: "#smoothWrapper",
-  normalizeScroll: true,
-});
+gsap.registerPlugin(ScrollTrigger, SplitText);
 
 let h4 = document.querySelector("#whatDoProteins h4");
 h4.split = new SplitText(h4, {

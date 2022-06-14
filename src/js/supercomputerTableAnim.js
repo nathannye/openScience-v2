@@ -94,7 +94,7 @@ function tableAnim() {
         scrollTrigger: {
           trigger: table,
           start: "top bottom-=10%",
-          scrub: 1,
+          scrub: 0.25,
         },
       });
       tl.from(
@@ -131,7 +131,7 @@ function tableAnim() {
         scrollTrigger: {
           trigger: table,
           start: "top bottom-=10%",
-          scrub: true,
+          scrub: 0.25,
         },
       });
       tl.from(

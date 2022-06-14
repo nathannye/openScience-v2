@@ -89,12 +89,6 @@ h1, h2, h3, h4, h5, h6, p, ul, li, a
 	margin: 0
 	padding: 0
 	
-#smoothWrapper
-	z-index: 30
-// Makes up for the pinned starting section
-#smoothContent
-	margin-top: 100vh
-
 a:visited, a.externalLink:visited
 	color: var(--color-white)
 	opacity: .4 !important
@@ -406,7 +400,7 @@ section#introPanel
 
 #supercomputerHoverContainer
 	position: absolute
-	transform: translate(50%, -50%)
+	transform: translate(-125%, -50%)
 	height: 40rem
 	overflow: hidden
 	pointer-events: none
@@ -425,7 +419,6 @@ section#introPanel
 header
 	position: fixed
 	top: 0
-	display: block
 	align-items: center
 	z-index: 400
 	justify-content: space-between
@@ -556,7 +549,7 @@ header
 	height: 100vh
 	left: 0
 	top: 0
-	z-index: 1
+	z-index: 2
 	overflow: hidden
 	position: fixed
 
@@ -580,11 +573,10 @@ header
 	height: 100%
 	pointer-events: none
 	position: fixed
-	z-index: 0
+	z-index: 1
 	@include has3D
 	transform: translateZ(0) scale(2)
 	left: 0
-	top: 0
 
 	& > div > canvas
 		height: 100vh !important
@@ -645,6 +637,7 @@ section#whatIsFolding
 	#whatIsFoldingText
 		display: grid
 		margin: auto
+		
 		flex-grow: 1
 
 		p

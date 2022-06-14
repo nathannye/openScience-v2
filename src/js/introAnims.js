@@ -92,7 +92,7 @@ window.onload = () => {
     )
     .fromTo(
       nglStage,
-      { filter: "saturate(0) blur(6px)", autoAlpha: 0 },
+      { filter: "saturate(0) blur(13px)", autoAlpha: 0 },
       {
         filter: "saturate(.68) blur(1px)",
         duration: 3.5,
