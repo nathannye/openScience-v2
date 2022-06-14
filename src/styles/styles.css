@@ -613,9 +613,7 @@ header div#soundIndicatorContainer canvas#soundIndicator {
   height: 100%;
   pointer-events: none;
   position: fixed;
-  z-index: 1;
-  transform: perspective(300px);
-  transform-style: preserve-3d;
+  z-index: 0;
   transform: translateZ(0) scale(2);
   left: 0;
 }

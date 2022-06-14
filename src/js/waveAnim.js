@@ -1,28 +1,138 @@
-import { index } from "d3";
-import gsap from "gsap";
-import colors from "./colors";
+class Point {
+  constructor(index, x, y) {
+    this.x = x;
+    //Amplitude I want to animate
+    this.amplitude = 10;
+    this.y = y;
+    this.fixedY = y;
+    this.speed = 0.045;
+    this.cur = index;
+    this.max = Math.random() * 0 + this.amplitude;
+  }
 
-const stage = {
-  height: 20,
-  width: 35,
-};
+  update() {
+    this.cur += this.speed;
+    this.y = this.fixedY + Math.sin(this.cur) * this.max;
+  }
+}
+class Wave {
+  constructor(index, totalPoints, color) {
+    this.index = index;
+    this.totalPoints = totalPoints;
+    this.color = color;
+    this.points = [];
+  }
 
-const container = document.getElementById("soundIndicatorContainer");
-const canvas = document.createElement("canvas");
-canvas.setAttribute("id", "soundIndicator");
-const ctx = canvas.getContext("2d");
-container.appendChild(canvas);
-canvas.height = stage.height;
-canvas.width = stage.width;
+  resize(stageWidth, stageHeight) {
+    this.stageWidth = stageWidth;
+    this.stageHeight = stageHeight;
 
-c.beginPath();
+    this.centerX = stageWidth / 8;
+    this.centerY = stageHeight / 4;
 
-c.moveTo(0, canvas.height / 2);
+    this.pointGap = this.stageWidth / (this.totalPoints + 8) ;
 
-for (let i = 0; i < canvas.width; i++) {
-  c.lineTo(i, i);
+    this.init();
+  }
+
+  init() {
+    this.points = [];
+    for (let i = 0; i < this.totalPoints; i++) {
+      const point = new Point(this.index + i, this.pointGap * i, this.centerY);
+      this.points[i] = point;
+    }
+  }
+
+  draw(ctx) {
+    ctx.beginPath();
+    ctx.strokeStyle = this.color;
+
+    let prevX = this.points[0].x;
+    let prevY = this.points[0].y;
+
+    ctx.moveTo(prevX, prevY);
+
+    for (let i = 1; i < this.totalPoints; i++) {
+      if (i < this.totalPoints - 1) {
+        this.points[i].update();
+      }
+
+      const cx = (prevX + this.points[i].x) / 2;
+      const cy = (prevY + this.points[i].y) / 2;
+
+      ctx.quadraticCurveTo(prevX, prevY, cx, cy);
+
+      prevX = this.points[i].x;
+      prevY = this.points[i].y;
+    }
+    ctx.moveTo(prevX, prevY);
+    ctx.stroke();
+    ctx.lineWidth = 0.7;
+    ctx.lineCap = "square";
+  }
+}
+class WaveGroup {
+  constructor() {
+    this.totalWaves = 3;
+    // Animate # of points for a saw?
+    this.totalPoints = 17;
+
+    this.color = ["#FFE65C"];
+
+    this.waves = [];
+
+    for (let i = 0; i < this.totalWaves; i++) {
+      const wave = new Wave(i, this.totalPoints, this.color[i]);
+      this.waves[i] = wave;
+    }
+  }
+
+  resize(stageWidth, stageHeight) {
+    for (let i = 0; i < this.totalWaves; i++) {
+      const wave = this.waves[i];
+      wave.resize(stageWidth, stageHeight);
+    }
+  }
+  draw(ctx) {
+    for (let i = 0; i < this.totalWaves; i++) {
+      const wave = this.waves[i];
+      wave.draw(ctx);
+    }
+  }
 }
 
-c.stroke();
-c.lineWidth = 3;
-c.strokeStyle = colors.ylw;
+class App {
+  constructor() {
+    this.container = document.getElementById("container");
+
+    this.canvas = document.createElement("canvas");
+    this.canvas.setAttribute("id", "soundIndicator");
+    this.ctx = this.canvas.getContext("2d");
+    this.container.appendChild(this.canvas);
+
+    this.waveGroup = new WaveGroup();
+
+    window.addEventListener("resize", this.resize.bind(this), false);
+    this.resize();
+    requestAnimationFrame(this.animate.bind(this));
+  }
+
+  resize() {
+    this.stageWidth = 200;
+    this.stageHeight = 100;
+    this.canvas.height = this.stageHeight;
+    this.canvas.width = this.stageWidth;
+    this.ctx.scale(2, 2);
+    this.waveGroup.resize(this.stageWidth, this.stageHeight);
+  }
+
+  animate(t) {
+    this.ctx.clearRect(0, 0, this.stageWidth, this.stageHeight);
+
+    this.waveGroup.draw(this.ctx);
+
+    requestAnimationFrame(this.animate.bind(this));
+  }
+}
+
+new App();

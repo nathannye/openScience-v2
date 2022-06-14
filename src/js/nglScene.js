@@ -8,7 +8,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 var stage = new NGL.Stage("viewport");
 
-
 stage.setParameters({
   backgroundColor: "#030b18",
   fogFar: 35,
