@@ -6,7 +6,6 @@ import colors from "./colors";
 let navEntry = gsap.utils.toArray("nav > div > a");
 let navDots = gsap.utils.toArray(".navMarker");
 let sections = gsap.utils.toArray("section.contentPanel");
-
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 document.addEventListener("DOMContentLoaded", (event) => {
@@ -27,6 +26,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
         start: "top bottom",
         end: "bottom bottom",
         trigger: sections[i],
+        onUpdate: () => {
+          console.log(navEntry[i]);
+        },
         onEnter: () => {
           clearDotClasses();
           navDots[i].classList.add("activeNav");
@@ -46,49 +48,53 @@ document.addEventListener("DOMContentLoaded", (event) => {
       },
     });
   }
+  function createNavAnim() {
+    navEntry.forEach((entry) => {
+      entry.tl = gsap.timeline({
+        paused: true,
+      });
+      console.log(entry);
 
-  navEntry.forEach((entry) => {
-    entry.tl = gsap.timeline({
-      paused: true,
-    });
+      let entryLabel = entry.querySelector("span");
+      entryLabel.split = new SplitText(entryLabel, {
+        type: "words, lines",
+        linesClass: "splitLine",
+      });
 
-    let entryLabel = entry.querySelector("span");
-    entryLabel.split = new SplitText(entryLabel, {
-      type: "words, lines",
-      linesClass: "splitLine",
-    });
+      gsap.set(entryLabel.split.words, {
+        yPercent: 100,
+        autoAlpha: 0,
+      });
 
-    gsap.set(entryLabel.split.words, {
-      yPercent: 100,
-    });
+      entry.tl
+        .to(
+          entry.querySelector(".navMarker"),
+          {
+            x: -7,
+            duration: 0.12,
+            ease: "power2.inOut",
+          },
+          0
+        )
+        .to(
+          entryLabel.split.words,
+          {
+            yPercent: 0,
+            autoAlpha: 1,
+            ease: "power3.out",
+            duration: 0.39,
+            stagger: 0.02,
+          },
+          0.2
+        );
 
-    entry.tl
-      .to(
-        entry.querySelector(".navMarker"),
-        {
-          x: -7,
-          duration: 0.1,
-        },
-        "hover"
-      )
-      .to(
-        entryLabel.split.words,
-        {
-          yPercent: -100,
-          ease: "power2.inOut",
-          duration: 0.23,
-          stagger: 0.008,
-        },
-        "hover"
-      );
-
-    entry.addEventListener("mouseover", (event) => {
-      entry.tl.play();
+      entry.addEventListener("mouseover", (event) => {
+        entry.tl.play();
+      });
+      entry.addEventListener("mouseout", (event) => {
+        entry.tl.reverse();
+      });
     });
-    entry.addEventListener("mouseout", (event) => {
-      entry.tl.reverse();
-    });
-  });
+  }
+  createNavAnim();
 });
-
-export default navDots;

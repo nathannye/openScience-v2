@@ -2,10 +2,10 @@ class Point {
   constructor(index, x, y) {
     this.x = x;
     //Amplitude I want to animate
-    this.amplitude = 10;
+    this.amplitude = 3;
     this.y = y;
     this.fixedY = y;
-    this.speed = 0.045;
+    this.speed = 0.065;
     this.cur = index;
     this.max = Math.random() * 0 + this.amplitude;
   }
@@ -30,7 +30,7 @@ class Wave {
     this.centerX = stageWidth / 8;
     this.centerY = stageHeight / 4;
 
-    this.pointGap = this.stageWidth / (this.totalPoints + 8) ;
+    this.pointGap = this.stageWidth / (this.totalPoints - 1);
 
     this.init();
   }
@@ -73,7 +73,7 @@ class Wave {
 }
 class WaveGroup {
   constructor() {
-    this.totalWaves = 3;
+    this.totalWaves = 1;
     // Animate # of points for a saw?
     this.totalPoints = 17;
 
@@ -103,8 +103,7 @@ class WaveGroup {
 
 class App {
   constructor() {
-    this.container = document.getElementById("container");
-
+    this.container = document.getElementById("soundIndicatorContainer");
     this.canvas = document.createElement("canvas");
     this.canvas.setAttribute("id", "soundIndicator");
     this.ctx = this.canvas.getContext("2d");
@@ -118,8 +117,8 @@ class App {
   }
 
   resize() {
-    this.stageWidth = 200;
-    this.stageHeight = 100;
+    this.stageWidth = 35;
+    this.stageHeight = 20;
     this.canvas.height = this.stageHeight;
     this.canvas.width = this.stageWidth;
     this.ctx.scale(2, 2);

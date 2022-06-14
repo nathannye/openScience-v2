@@ -2,7 +2,6 @@ import gsap from "gsap";
 import SplitText from "gsap/SplitText";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import colors from "./colors";
-import navDots from "./navMarkerAnim";
 import Lottie from "lottie-web";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
@@ -14,6 +13,7 @@ window.onload = () => {
   let nglStage = document.querySelector("#viewport");
   let html = document.querySelector("html");
   let scrollIndiText = document.querySelector("#scrollIndicator h4");
+  let navDots = gsap.utils.toArray(".navMarker");
   let scrollIndiSplit = new SplitText(scrollIndiText, {
     type: "lines, chars",
     linesClass: "splitLine",
@@ -178,12 +178,12 @@ window.onload = () => {
         opacity: 1,
         color: colors.white,
         stagger: {
-          each: 0.02,
+          each: 0.035,
           ease: "power2.inOut",
           from: "start",
         },
-        duration: 1.2,
-        ease: "power4.inOut",
+        duration: 1.45,
+        ease: "power3.out",
       },
       0.2
     )
@@ -195,12 +195,12 @@ window.onload = () => {
         delay: 0.25,
         color: colors.ylw,
         stagger: {
-          each: 0.02,
+          each: 0.035,
           ease: "power2.inOut",
           from: "start",
         },
-        duration: 1.6,
-        ease: "power4.inOut",
+        duration: 1.7,
+        ease: "power3.out",
       },
       0.2
     );

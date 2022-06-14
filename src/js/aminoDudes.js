@@ -290,5 +290,4 @@ for (let i = 0; i < aminoProps.length; i++) {
     "main"
   );
   needTL.add(anim, "appendAmino" + i);
-  console.log(anim);
 }
