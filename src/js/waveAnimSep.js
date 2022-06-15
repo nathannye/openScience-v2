@@ -1,38 +1,44 @@
-var amplitude = 7;
-var speed = 0.065;
-var max = Math.random() * 0 + amplitude;
-var cur = 0;
-var y = 0;
-var x = 0;
-var fixedY = y;
-const totalPoints = 17;
-var totalWaves = 1;
-const stageWidth = 35;
-const stageHeight = 20;
-const centerX = stageWidth / 8;
-const centerY = stageHeight / 4;
+import * as dat from "dat.gui";
+
+const gui = new dat.GUI();
+
 const container = document.getElementById("soundIndicatorContainer");
 const canvas = document.createElement("canvas");
 canvas.setAttribute("id", "soundIndicator");
+container.appendChild(canvas);
+
 const ctx = canvas.getContext("2d");
+canvas.width = 35;
+canvas.height = 20;
 
-const resize = () => {
-  stageWidth = document.body.clientWidth;
-  stageHeight = document.body.clientHeight;
-  canvas.height = stageHeight;
-  canvas.width = stageWidth;
-  ctx.scale(2, 2);
+ctx.strokeWidth = 30;
+ctx.strokeStyle = "#FFE65C";
+
+const wave = {
+  amplitude: 5,
+  wavelength: 0.33,
+  frequency: 0.05,
+  increment: 0.05,
 };
 
-function createWave() {
-  window.addEventListener("resize", resize, false);
+const animate = () => {
+  requestAnimationFrame(animate);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    for (let i = 0; i < totalWaves; i++) {
-      
+  ctx.beginPath();
+
+  // Move from top left to middle left
+  ctx.moveTo(0, canvas.height / 2);
+
+  for (let i = 0; i < canvas.width * 9; i++) {
+    ctx.lineTo(
+      i,
+      canvas.height / 2 +
+        Math.sin(i * wave.wavelength + wave.increment) * wave.amplitude
+    );
   }
-}
-
-const update = () => {
-  cur += speed;
-  y = fixedY + Math.sin(cur) * max;
+  ctx.stroke();
+  wave.increment += wave.frequency;
 };
+
+animate();

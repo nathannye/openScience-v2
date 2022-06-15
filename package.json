@@ -21,6 +21,7 @@
     "@babel/core": "^7.16.0",
     "@parcel/babel-preset-env": "^2.0.0",
     "babel": "^6.23.0",
+    "dat.gui": "^0.7.9",
     "eslint": "^8.1.0",
     "eslint-config-gsap": "^3.0.0",
     "eslint-config-prettier": "^8.3.0",

@@ -18,7 +18,6 @@ const dur = 1050;
 let soundButtons = gsap.utils.toArray("#soundButtons button");
 let soundOnBtn = document.querySelector("#yesSoundContainer > button");
 let soundOffBtn = document.querySelector("#noSoundContainer > button");
-let dangerSeriesTrigger = document.getElementById("peptideSlider");
 const soundIndi = document.querySelector("div#soundIndicatorContainer");
 let soundLabel = gsap.utils.toArray("div#soundLabelSwitch > div > h5");
 let labelOn = soundLabel[0];
@@ -27,9 +26,11 @@ let labelOff = soundLabel[1];
 const normalTrack = new Howl({
   src: [normalSound],
 });
+const normalTrackDuration = Math.floor(normalTrack.duration * 1000);
 const darkTrack = new Howl({
   src: [darkSound],
 });
+const darkTrackDuration = Math.floor(darkTrack.duration * 1000);
 
 labelOn.split = new SplitText(labelOn, {
   type: "chars",
