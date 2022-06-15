@@ -106,12 +106,12 @@ export const handleAudioSwitch = () => {
   console.log(activeTrack);
   if (activeTrack === "normalSound") {
     activeTrack = "darkSound";
-    // normalTrack.fade(maxVol, 0, dur);
+    normalTrack.fade(maxVol, 0, dur);
     setTimeout(() => {
       normalTrack.pause();
     }, dur);
-    // darkTrack.play();
-    // darkTrack.fade(0, maxVol, dur);
+    darkTrack.play();
+    darkTrack.fade(0, maxVol, dur);
   } else if (activeTrack === "darkSound") {
     normalTrack.fade(0, maxVol, dur);
     darkTrack.fade(maxVol, 0, dur);

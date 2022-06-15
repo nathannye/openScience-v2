@@ -281,7 +281,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
 
         if (dangerClickClear === 3) {
-          soundDangerReverse;
+          handleAudioSwitch();
           peptideAnim.playSegments([130, 240]);
           dangerClearTL.play();
         }
