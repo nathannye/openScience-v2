@@ -12,14 +12,6 @@
     <link rel="stylesheet" href="https://use.typekit.net/jih6lvv.css" />
   </head>
   <body>
-    <div id="loader">
-      <div id="loaderBacker"></div>
-    </div>
-    <div id="grain"></div>
-    <div id="viewport"></div>
-    <div id="supercomputerHoverContainer">
-      <!-- Images get placed here -->
-    </div>
     <header>
       <div id="soundIndicatorContainer">
         <div id="soundLabelSwitch">
@@ -32,6 +24,14 @@
       </div>
       <div id="hamburgerIcon"></div>
     </header>
+    <div id="loader">
+      <div id="loaderBacker"></div>
+    </div>
+    <div id="grain"></div>
+    <div id="viewport"></div>
+    <div id="supercomputerHoverContainer">
+      <!-- Images get placed here -->
+    </div>
 
     <div id="mobileMenu">
       <div id="mobileNav">
@@ -127,7 +127,6 @@
           <div class="solidRing dangerRing"></div>
           <div class="dashRing dangerRing"></div>
         </div>
-
         <div id="introHeadingContainer">
           <h1>Open source</h1>
           <div>
@@ -304,7 +303,7 @@
         <h4>Just how powerful do computers need to be?</h4>
       </section>
       <section class="panel contentPanel" id="chartOfUsers">
-        <a id="chartRef"></a>
+        <a id="chartRef" class="jumpTo"></a>
         <div id="chartCaptionContainer">
           <h2>
             As COVID-19 spread and worldwide isolation came into effect, people
@@ -340,7 +339,7 @@
       </section>
 
       <section class="panel contentPanel" id="supercomputerInfo">
-        <a id="supercomputerTableRef"></a>
+        <a id="supercomputerTableRef" class="jumpTo"></a>
         <div id="supercomputerCompare">
           <table id="supercomputerTable">
             <tr>
@@ -531,6 +530,7 @@
     <script type="module" src="./src/js/navMarkerAnim.js"></script>
     <script type="module" src="./src/js/interstitialAnim.js"></script>
     <script src="./src/index.js" type="module"></script>
+    <script type="module" src="./src/js/hamburgerAnim.js"></script>
     <script type="module" src="./src/js/costNumbers.js"></script>
     <script type="module" src="./src/js/peptideAnim.js"></script>
     <script type="module" src="./src/js/introAnims.js"></script>

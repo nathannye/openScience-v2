@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 
 window.onload = () => {
   let soundIndi = document.querySelector("div#soundIndicatorContainer");
-  let hamburgerContainer = document.getElementById("hamburgerIcon");
+  let hamburger = document.querySelectorAll("#hamburgerIcon > svg > g > g");
   let indiContainer = document.getElementById("scrollAnimContainer");
   let nglStage = document.querySelector("#viewport");
   let html = document.querySelector("html");
@@ -41,11 +41,11 @@ window.onload = () => {
       autoAlpha: 0,
       y: 12,
       rotateY: -8,
-      delay: 1.4,
+      delay: 0.34,
       color: colors.teal,
       ease: "power2.out",
       stagger: 0.09,
-      duration: 1.5,
+      duration: 1.1,
     });
   }
 
@@ -119,27 +119,35 @@ window.onload = () => {
         autoAlpha: 1,
         ease: "power2.inOut",
       },
-      1.3
+      0.4
     )
-    .call(() => {
-      navDots[0].classList.add("activeNav");
-    })
+    .call(
+      () => {
+        navDots[0].classList.add("activeNav");
+      },
+      null,
+      "start"
+    )
     .call(
       function () {
-        let scrollIndi = Lottie.loadAnimation({
-          container: indiContainer,
-          loop: false,
-          renderer: "svg",
-          quality: "low",
-          autoplay: true,
-          path: "https://assets10.lottiefiles.com/packages/lf20_n5nf19df.json",
-        });
+        let scrollIndi = Lottie.loadAnimation(
+          {
+            container: indiContainer,
+            loop: false,
+            renderer: "svg",
+            quality: "low",
+            autoplay: true,
+            path: "https://assets10.lottiefiles.com/packages/lf20_n5nf19df.json",
+          },
+          null,
+          "start"
+        );
 
         scrollIndi.setSpeed(1.15);
       },
       null,
       "stageIn",
-      1
+      0.5
     )
     .from(
       scrollIndiSplit.chars,
@@ -150,7 +158,7 @@ window.onload = () => {
         ease: "power3.inOut",
       },
       "scrollIndi+=.6",
-      1
+      0.76
     )
     .to(
       soundIndi,
@@ -158,18 +166,18 @@ window.onload = () => {
         autoAlpha: 1,
         duration: 0.4,
       },
-      "scrollIndi"
+      "<"
     )
     .from(
-      hamburgerContainer,
+      hamburger,
       {
         scaleX: 0,
-        duration: 0.4,
-        ease: "power3.inOut",
-        delay: 0.18,
-        transformOrigin: "5% center",
+        stagger: -0.1,
+        duration: 1.25,
+        ease: "power4.inOut",
+        transformOrigin: "left center",
       },
-      "start"
+      "scrollIndi"
     )
     .to(
       openSource.split.chars,

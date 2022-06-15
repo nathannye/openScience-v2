@@ -10,116 +10,87 @@ let hamburgerMenu = document.getElementById("mobileMenu");
 let mobileNavLinks = gsap.utils.toArray("#mobileMenu #mobileNav h1");
 let html = document.querySelector("html");
 
-mobileNavLinks.split = new SplitText(mobileNavLinks, {
-  type: "lines",
-});
-
-// function setupMobileAnimation() {
-// function setupMobileNavLinks() {
-//   mobileNavLinks.forEach((e) => {
-//     if (e.anim) {
-//       e.anim.progress(1).kill();
-//       e.split.revert();
-//     }
-//     e.split = new SplitText(e, {
-//       type: "lines",
-//       linesClass: "splitLine",
-//     });
-//     e.anim = gsap.from(e.split.lines, {
-//       yPercent: 100,
-//       autoAlpha: 0,
-//       duration: 1,
-//       ease: "power3.inOut",
-//       stagger: 0.4142,
-//     });
-//   });
-// }
-
-// ScrollTrigger.addEventListener("refresh", setupMobileNavLinks, {
-//   passive: true,
-// });
-// setupMobileNavLinks();
-
-var hamburgerAnim = lottie.loadAnimation({
-  container: document.getElementById("hamburgerIcon"),
-  renderer: "svg",
-  loop: false,
-  autoplay: false,
-  path: "https://assets2.lottiefiles.com/packages/lf20_szqyrfxy.json",
-});
-
-function overflowControl() {
-  if (html.style.overflowY == "auto" || html.style.overflowY == "") {
-    gsap.to(html, {
-      overflowY: "hidden",
-    });
-  } else {
-    gsap.to(html, {
-      overflowY: "auto",
-    });
-  }
-}
-
-gsap.set(hamburgerMenu, {
-  autoAlpha: 0,
-  display: "flex",
-});
-
-hamburgerAnim.setSpeed(0.8);
-
-var direction = 1;
-
 let mowTL = gsap.timeline({
   paused: true,
 });
 
-mowTL
-  .to(
-    hamburgerMenu,
-    {
-      autoAlpha: 1,
-      duration: 0.85,
-      ease: "power2.inOut",
-    },
-    "menuOpen"
-  )
-  .call(overflowControl(), "menuOpen")
-  .from(
-    mobileNavLinks.split.lines,
-    {
-      y: 15,
-      rotateY: 8,
-      z: -4,
-      transformOrigin: "left center",
-      autoAlpha: 0,
-      duration: 1.4,
-      ease: "power3.out",
-      stagger: 0.2,
-    },
-    "menuOpen+=.3"
-  );
-mowTL.reversed(true);
+function setupMobileAnimation() {
+  // ScrollTrigger.addEventListener("refresh", setupMobileNavLinks, {
+  //   passive: true,
+  // });
+  var hamburgerAnim = lottie.loadAnimation({
+    container: document.getElementById("hamburgerIcon"),
+    renderer: "svg",
+    loop: false,
+    autoplay: false,
+    path: "https://assets6.lottiefiles.com/packages/lf20_szqyrfxy.json",
+  });
 
-hamburgerContainer.addEventListener("click", (event) => {
-  hamburgerAnim.setDirection(direction);
-  hamburgerAnim.play();
-  direction = -direction;
+  function overflowControl() {
+    if (html.style.overflowY == "auto" || html.style.overflowY == "") {
+      gsap.to(html, {
+        overflowY: "hidden",
+      });
+    } else {
+      gsap.to(html, {
+        overflowY: "auto",
+      });
+    }
+  }
 
-  mowTL.reversed() ? mowTL.play() : mowTL.timeScale(1.6).reverse();
-});
+  gsap.set(hamburgerMenu, {
+    autoAlpha: 0,
+    display: "flex",
+  });
 
-mobileNavLinks.forEach((link) => {
-  link.addEventListener("click", (event) => {
-    mowTL.timeScale(1.6).reverse();
+  hamburgerAnim.setSpeed(1.15);
+
+  var direction = 1;
+
+  mowTL
+    .to(
+      hamburgerMenu,
+      {
+        autoAlpha: 1,
+        duration: 0.35,
+      },
+      0
+    )
+    .from(
+      hamburgerMenu.querySelectorAll("a"),
+      {
+        autoAlpha: 0,
+        y: 20,
+        scale: 0.96,
+        transformOrigin: "center center",
+        stagger: 0.1,
+      },
+      0.1
+    )
+    .call(overflowControl(), null, 0);
+
+  mowTL.reversed(true);
+
+  hamburgerContainer.addEventListener("click", (event) => {
     hamburgerAnim.setDirection(direction);
     hamburgerAnim.play();
     direction = -direction;
+
+    mowTL.reversed()
+      ? mowTL.timeScale(1).play()
+      : mowTL.timeScale(1.2).reverse();
   });
-});
 
-// }
-// }
+  mobileNavLinks.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      mowTL.timeScale(1.4).reverse();
+      hamburgerAnim.setDirection(direction);
+      hamburgerAnim.play();
+      direction = -direction;
+    });
+  });
+}
 
-// document.addEventListener("resize", setupMobileAnimation);
+document.addEventListener("resize", setupMobileAnimation);
 
-// setupMobileAnimation();
+setupMobileAnimation();

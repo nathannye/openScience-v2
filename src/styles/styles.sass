@@ -47,6 +47,7 @@ $boundary: 87.8%
 	--unit: 16.667%
 	--smoothTransition: all .27s cubic-bezier(.81,0,.37,1)
 	--spacer: clamp(1.5rem, calc(1.5rem + ((1vw - 0.36rem) * 1.7857)), 3rem)
+	--gutter: 3.25rem
 	--widthOne: calc((--unit * 1) - var(--spacer))
 	--widthTwo: calc((--unit * 2) - var(--spacer))
 	--widthThree: calc((--unit * 3) - var(--spacer))
@@ -309,6 +310,7 @@ nav
 			margin-left: 1.25rem
 			border-radius: 16px
 			height: 6px
+			will-change: transform, opacity, box-shadow
 			background: rgba(19,241,223, .2)
 			@include defaultTransition
 
@@ -344,8 +346,8 @@ nav
 .jumpTo
 	// background: red
 	width: 1px
-	position: absolute
-	top: -25%
+	position: fixed
+	top: 0
 	visibility: hidden
 
 #introPanel .jumpTo
@@ -353,6 +355,10 @@ nav
 
 main
 	margin: auto
+	z-index: 40
+
+	& > .pin-spacer
+		position: relative
 
 section:not(section.interstitial)
 	height: 100vh
@@ -393,7 +399,7 @@ section#introPanel
 			margin-left: 26%
 
 			p
-				max-width: 250px
+				max-width: 550px
 				margin-top: clamp(1.5em, calc(1.5rem + ((1vw - 0.48em) * 2.0833)), 3em)
 				@include has3D
 				margin-left: 1rem
@@ -420,24 +426,20 @@ header
 	position: fixed
 	top: 0
 	align-items: center
-	z-index: 400
+	z-index: 99999
 	justify-content: space-between
 	display: flex
 	width: 100%
 	padding: calc(6.1% * 1.5) 6.1% 0 6.1%
+	padding: calc(var(--spacer) * 2.25) var(--spacer)
 	
 	#hamburgerIcon
-		width: 5rem	
-		height: 5rem
-		transform: translateX(4px)
+		width: 6.5rem	
 
 		svg:nth-child(2)
 			display: none
 
 	div#soundIndicatorContainer
-		left: 4.65%
-		top: 6.1%
-		position: fixed
 		z-index: 300
 		opacity: 0
 		display: flex
@@ -445,6 +447,11 @@ header
 		align-items: center
 		overflow: hidden
 		cursor: pointer
+		transition: var(--smoothTransition)
+
+		&:hover
+			opacity: .5
+			transition: var(--smoothTransition)
 
 		#soundLabelSwitch
 			height: clamp(1.3em, calc(1.3rem + (1.7 - 1.3) * ((100vw - 48em) / (120 - 48))), 1.7em)	
@@ -476,21 +483,22 @@ header
 #mobileMenu
 	width: 100%
 	height: 100%
-	// backdrop-filter: blur(35px) saturate(.9) brightness(1.2)
-	// -webkit-backdrop-filter: blur(35px) saturate(.9) brightness(1.2)
-	background: var(--color-dark)
-	z-index: 399
+	backdrop-filter: blur(15px) saturate(2) brightness(1.2)
+	-webkit-backdrop-filter: blur(15px) saturate(.75) brightness(1.2)
+	background: rgba(0,0,0, .6)
+	z-index: 999
 	position: fixed
 	top: 0
 	display: none
-	justify-content: center
-	align-items: center
+	padding-left: var(--gutter)
+	justify-content: flex-start
+	align-items: flex-end
 	left: 0
 
 	#mobileNav
-		padding-top: 40%
+		padding-bottom: 40%
 		text-align: left
-		width: var(--widthSix)
+		// width: var(--widthSix)
 
 	h1
 		font-size: clamp(1.6em, calc(1.6rem + (12 - 3.2) * ((100vw - 48em) / (120 - 48))), 12em)
@@ -673,6 +681,7 @@ section#whatIsFolding
 			& > svg
 				display: block
 				overflow: visible !important
+				position: relative
 
 		#peptideSliderContainer
 			width: 53vw
@@ -758,9 +767,10 @@ section#whatIsFolding
 
 .errorTarget
 	cursor: pointer
-	transform-origin: "center center"
-	// transform: scale(1)
+	// transform-origin: center center
+	// transform: scale(.5)
 	// pointer-events: auto
+	// position: absolute
 	// cursor: pointer
 	// width: 30px
 	// height: 30px
@@ -945,8 +955,6 @@ section#chartOfUsers
 #supercomputerCompare
 	width: 100%
 	height: 100vh
-	display: flex
-	align-items: flex-end
 	padding-bottom: 1.25%
 	z-index: 3
 
@@ -1232,6 +1240,8 @@ section#howCanYouHelp
 
 // Above 796px
 @media only screen and (min-width: 769px)
+	*
+		--gutter: 3rem
 
 	table#supercomputerTable
 		border-spacing: 0

@@ -24,6 +24,7 @@
   --unit: 16.667%;
   --smoothTransition: all 0.27s cubic-bezier(0.81, 0, 0.37, 1);
   --spacer: clamp(1.5rem, calc(1.5rem + ((1vw - 0.36rem) * 1.7857)), 3rem);
+  --gutter: 3.25rem;
   --widthOne: calc((--unit * 1) - var(--spacer));
   --widthTwo: calc((--unit * 2) - var(--spacer));
   --widthThree: calc((--unit * 3) - var(--spacer));
@@ -311,6 +312,7 @@ nav a div.navMarker {
   margin-left: 1.25rem;
   border-radius: 16px;
   height: 6px;
+  will-change: transform, opacity, box-shadow;
   background: rgba(19, 241, 223, 0.2);
   transition: all .25s ease-in-out;
 }
@@ -350,8 +352,8 @@ nav a div.navMarker.activeNav {
 
 .jumpTo {
   width: 1px;
-  position: absolute;
-  top: -25%;
+  position: fixed;
+  top: 0;
   visibility: hidden;
 }
 
@@ -361,6 +363,11 @@ nav a div.navMarker.activeNav {
 
 main {
   margin: auto;
+  z-index: 40;
+}
+
+main > .pin-spacer {
+  position: relative;
 }
 
 section:not(section.interstitial) {
@@ -410,7 +417,7 @@ section#introPanel #introHeadingContainer > div:last-child {
 }
 
 section#introPanel #introHeadingContainer > div:last-child p {
-  max-width: 250px;
+  max-width: 550px;
   margin-top: clamp(1.5em, calc(1.5rem + ((1vw - 0.48em) * 2.0833)), 3em);
   transform: perspective(300px);
   transform-style: preserve-3d;
@@ -442,17 +449,16 @@ header {
   position: fixed;
   top: 0;
   align-items: center;
-  z-index: 400;
+  z-index: 99999;
   justify-content: space-between;
   display: flex;
   width: 100%;
   padding: calc(6.1% * 1.5) 6.1% 0 6.1%;
+  padding: calc(var(--spacer) * 2.25) var(--spacer);
 }
 
 header #hamburgerIcon {
-  width: 5rem;
-  height: 5rem;
-  transform: translateX(4px);
+  width: 6.5rem;
 }
 
 header #hamburgerIcon svg:nth-child(2) {
@@ -460,9 +466,6 @@ header #hamburgerIcon svg:nth-child(2) {
 }
 
 header div#soundIndicatorContainer {
-  left: 4.65%;
-  top: 6.1%;
-  position: fixed;
   z-index: 300;
   opacity: 0;
   display: flex;
@@ -470,6 +473,12 @@ header div#soundIndicatorContainer {
   align-items: center;
   overflow: hidden;
   cursor: pointer;
+  transition: var(--smoothTransition);
+}
+
+header div#soundIndicatorContainer:hover {
+  opacity: .5;
+  transition: var(--smoothTransition);
 }
 
 header div#soundIndicatorContainer #soundLabelSwitch {
@@ -507,20 +516,22 @@ header div#soundIndicatorContainer canvas#soundIndicator {
 #mobileMenu {
   width: 100%;
   height: 100%;
-  background: var(--color-dark);
-  z-index: 399;
+  backdrop-filter: blur(15px) saturate(2) brightness(1.2);
+  -webkit-backdrop-filter: blur(15px) saturate(0.75) brightness(1.2);
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 999;
   position: fixed;
   top: 0;
   display: none;
-  justify-content: center;
-  align-items: center;
+  padding-left: var(--gutter);
+  justify-content: flex-start;
+  align-items: flex-end;
   left: 0;
 }
 
 #mobileMenu #mobileNav {
-  padding-top: 40%;
+  padding-bottom: 40%;
   text-align: left;
-  width: var(--widthSix);
 }
 
 #mobileMenu h1 {
@@ -722,6 +733,7 @@ section#whatIsFolding #peptideAnimationContainer #peptideLottieContainer {
 section#whatIsFolding #peptideAnimationContainer #peptideLottieContainer > svg {
   display: block;
   overflow: visible !important;
+  position: relative;
 }
 
 section#whatIsFolding #peptideAnimationContainer #peptideSliderContainer {
@@ -817,7 +829,6 @@ section#whatIsFolding #peptideAnimationContainer #peptideSliderContainer #peptid
 
 .errorTarget {
   cursor: pointer;
-  transform-origin: "center center";
 }
 
 .errorTarget > svg {
@@ -1021,8 +1032,6 @@ section#chartOfUsers #chartCaptionContainer h2 {
 #supercomputerCompare {
   width: 100%;
   height: 100vh;
-  display: flex;
-  align-items: flex-end;
   padding-bottom: 1.25%;
   z-index: 3;
 }
@@ -1342,6 +1351,9 @@ section#howCanYouHelp #faqContainer article .faqAnswer p {
 }
 
 @media only screen and (min-width: 769px) {
+  * {
+    --gutter: 3rem;
+  }
   table#supercomputerTable {
     border-spacing: 0;
     width: 100%;

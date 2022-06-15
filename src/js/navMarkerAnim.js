@@ -24,26 +24,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
     let tl = gsap.timeline({
       scrollTrigger: {
         start: "top bottom",
-        end: "bottom bottom",
         trigger: sections[i],
-        onUpdate: () => {
-          console.log(navEntry[i]);
-        },
         onEnter: () => {
           clearDotClasses();
           navDots[i].classList.add("activeNav");
         },
-        onLeave: () => {
-          clearDotClasses();
-          navDots[i].classList.remove("activeNav");
-        },
         onEnterBack: () => {
           clearDotClasses();
           navDots[i].classList.add("activeNav");
-        },
-        onLeaveBack: () => {
-          clearDotClasses();
-          navDots[i].classList.remove("activeNav");
         },
       },
     });

@@ -7,8 +7,7 @@ import Lottie from "lottie-web";
 import CustomEase from "gsap/src/CustomEase";
 import colors from "./colors";
 import DrawSVGPlugin from "gsap/DrawSVGPlugin";
-import soundDangerReverse from "./soundToggle";
-import { color } from "d3";
+import { handleAudioSwitch } from "./soundToggle";
 
 gsap.registerPlugin(
   ScrollTrigger,
@@ -376,6 +375,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
       bounds: { maxRotation: 360, minRotation: 0 },
       onThrowComplete: function () {
         if (this.rotation == 360) {
+          handleAudioSwitch();
           draggerTL.play();
           dangerTL.play();
           peptideAnim.playSegments(frameSegments[1]);

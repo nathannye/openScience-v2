@@ -5,18 +5,31 @@ import { Howl, Howler } from "howler";
 import normalSound from "../audio/ambientSoundtrack.mp3";
 import darkSound from "../audio/darkSoundtrack.mp3";
 import MorphSVG from "gsap/MorphSVGPlugin";
+import { active } from "d3";
 
 gsap.registerPlugin(SplitText, ScrollTrigger, MorphSVG);
 
-var soundOn = false;
-
+// Sound Variables
+var sound = false;
+var activeTrack = "normalSound";
+const maxVol = 0.5;
+const dur = 1050;
+// Declare Objects
 let soundButtons = gsap.utils.toArray("#soundButtons button");
+let soundOnBtn = document.querySelector("#yesSoundContainer > button");
+let soundOffBtn = document.querySelector("#noSoundContainer > button");
+let dangerSeriesTrigger = document.getElementById("peptideSlider");
 const soundIndi = document.querySelector("div#soundIndicatorContainer");
-
 let soundLabel = gsap.utils.toArray("div#soundLabelSwitch > div > h5");
-
 let labelOn = soundLabel[0];
 let labelOff = soundLabel[1];
+
+const normalTrack = new Howl({
+  src: [normalSound],
+});
+const darkTrack = new Howl({
+  src: [darkSound],
+});
 
 labelOn.split = new SplitText(labelOn, {
   type: "chars",
@@ -34,95 +47,88 @@ labelTL
     labelOn.split.chars,
     {
       yPercent: -100,
-      duration: 0.32,
+      duration: 0.42,
       ease: "power2.inOut",
-      stagger: 0.05,
+      stagger: 0.03,
     },
-    "start"
+    0
   )
   .to(
     labelOff.split.chars,
     {
-      yPercent: -50,
-      delay: 0.2,
-      duration: 0.32,
+      yPercent: -100,
+      duration: 0.42,
       ease: "power2.inOut",
-      stagger: 0.05,
+      stagger: 0.03,
     },
-    "start"
+    0.11
   );
 
-var tracks = new Howl({
-  src: [normalSound],
-});
-
-var darkTrack = new Howl({
-  src: [darkSound],
-});
-
 // Sound Ask Controllers
-let soundOnBtn = document.querySelector("#yesSoundContainer > button");
-let soundOffBtn = document.querySelector("#noSoundContainer > button");
 
-const soundFadeDuration = 1050;
-
-// soundOnBtn.addEventListener("click", (event) => {
-//   tracks.play();
-//   tracks.fade(0, 1, soundFadeDuration);
-//   var soundOn = true;
-// });
-
-// soundOffBtn.addEventListener("click", (event) => {
-//   var soundOn = false;
-//   tracks.fade(1, 0, soundFadeDuration);
-// });
-
-soundIndi.addEventListener("click", (event) => {
-  if (!tracks.playing() || !darkTrack.playing()) {
-    // Run these if sound isn't playing already
-    labelTL.play();
-    tracks.play();
-    tracks.fade(0, 1, soundFadeDuration);
-    var soundOn = true;
-  } else {
-    // Run these if sound is already playing
-    tracks.fade(1, 0, soundFadeDuration);
+const soundIndicatorToggle = (e) => {
+  if (!sound) {
     labelTL.reverse();
-    setTimeout(() => {
-      tracks.pause();
-    }, soundFadeDuration);
-
-    var soundOn = false;
+  } else if (sound) {
+    labelTL.play();
   }
+};
+
+const handleAudioToggle = (e) => {
+  if (!sound) {
+    if (activeTrack === "normalSound") {
+      sound = true;
+      normalTrack.fade(0, maxVol, dur);
+      normalTrack.play();
+    } else if (activeTrack === "darkSound") {
+      sound = true;
+      normalTrack.fade(0, maxVol, dur);
+      darkTrack.play();
+    }
+  } else if (sound) {
+    if (activeTrack === "normalSound") {
+      sound = false;
+      normalTrack.fade(maxVol, 0, dur);
+      setTimeout(() => {
+        normalTrack.pause();
+      }, dur);
+    } else if (activeTrack === "darkSound") {
+      sound = false;
+      darkTrack.fade(maxVol, 0, dur);
+      setTimeout(() => {
+        darkTrack.pause();
+      }, dur);
+    }
+  }
+};
+
+export const handleAudioSwitch = () => {
+  console.log(activeTrack);
+  if (activeTrack === "normalSound") {
+    activeTrack = "darkSound";
+    // normalTrack.fade(maxVol, 0, dur);
+    setTimeout(() => {
+      normalTrack.pause();
+    }, dur);
+    // darkTrack.play();
+    // darkTrack.fade(0, maxVol, dur);
+  } else if (activeTrack === "darkSound") {
+    normalTrack.fade(0, maxVol, dur);
+    darkTrack.fade(maxVol, 0, dur);
+    setTimeout(() => {
+      darkTrack.pause();
+    }, dur);
+    activeTrack = "normalSound";
+  }
+  console.log(activeTrack);
+};
+
+soundIndi.addEventListener("click", () => {
+  handleAudioToggle();
+  soundIndicatorToggle();
 });
 
-let dangerSeriesTrigger = document.getElementById("peptideSlider");
-
-dangerSeriesTrigger.addEventListener("click", (event) => {
-  // if (soundOn) {
-
-  tracks.fade(1, 0, soundFadeDuration);
-  setTimeout(() => {
-    tracks.pause();
-  }, soundFadeDuration);
-
-  darkTrack.play();
-  darkTrack.fade(0, 1, soundFadeDuration);
-  // }
-});
-
-export default function soundDangerReverse() {
-  darkTrack.fade(1, 0, soundFadeDuration);
-  setTimeout(() => {
-    darkTrack.pause();
-  }, soundFadeDuration);
-
-  tracks.fade(0, 1, soundFadeDuration);
-  setTimeout(() => {
-    tracks.pause();
-  }, soundFadeDuration);
-}
-
+const interfaceSounds = () => {};
 // let whyDoesFoldingMatter = document.querySelector("#whyDoesFoldingMatter");
 
 // let audioAskTL = gsap.timeline({

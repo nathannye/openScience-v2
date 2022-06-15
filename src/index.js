@@ -16,7 +16,6 @@ function setupFarAndAway() {
     if (e.anim) {
       e.anim.progress(1).kill;
       e.anim.invalidate;
-      e.split.revert;
     }
     e.split = new SplitText(e, {
       type: "words, lines",
@@ -26,6 +25,9 @@ function setupFarAndAway() {
       scrollTrigger: {
         trigger: e,
         start: "top bottom-=24%",
+      },
+      onComplete: () => {
+        e.split.revert();
       },
       yPercent: 100,
       autoAlpha: 0,
@@ -54,6 +56,9 @@ function setupParas() {
       scrollTrigger: {
         start: "top bottom-=24%",
         trigger: para,
+      },
+      onComplete: () => {
+        para.split.revert();
       },
       autoAlpha: 0,
       y: 15,
