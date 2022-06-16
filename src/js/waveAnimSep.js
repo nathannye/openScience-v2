@@ -1,6 +1,5 @@
-import * as dat from "dat.gui";
-
-const gui = new dat.GUI();
+// import * as dat from "dat.gui";
+import gsap from "gsap";
 
 const container = document.getElementById("soundIndicatorContainer");
 const canvas = document.createElement("canvas");
@@ -14,15 +13,23 @@ canvas.height = 20;
 ctx.strokeWidth = 30;
 ctx.strokeStyle = "#FFE65C";
 
-const wave = {
+let wave = {
   amplitude: 5,
   wavelength: 0.33,
   frequency: 0.05,
   increment: 0.05,
 };
 
+gsap.to(wave, {
+  amplitude: 1,
+  duration: 5,
+  yoyo: true,
+  repeat: -1,
+});
+
 const animate = () => {
   requestAnimationFrame(animate);
+
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   ctx.beginPath();
@@ -39,6 +46,7 @@ const animate = () => {
   }
   ctx.stroke();
   wave.increment += wave.frequency;
+  console.log(wave.amplitude);
 };
 
 animate();
