@@ -3,6 +3,7 @@ import SplitText from "gsap/SplitText";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import colors from "./colors";
 import { wave } from "./waveAnim";
+import { ampSet, freqSet } from "./soundToggle";
 import Lottie from "lottie-web";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
@@ -216,7 +217,7 @@ window.onload = () => {
     .to(
       wave,
       {
-        amplitude: 3.25,
+        amplitude: ampSet,
         duration: 1.25,
         ease: "none",
       },
@@ -225,7 +226,7 @@ window.onload = () => {
     .to(
       wave,
       {
-        frequency: 0.1,
+        frequency: freqSet,
         ease: "none",
         duration: 0.25,
       },

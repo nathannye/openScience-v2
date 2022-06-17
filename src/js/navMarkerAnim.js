@@ -41,7 +41,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
       entry.tl = gsap.timeline({
         paused: true,
       });
-      console.log(entry);
 
       let entryLabel = entry.querySelector("span");
       entryLabel.split = new SplitText(entryLabel, {

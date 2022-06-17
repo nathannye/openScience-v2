@@ -11,6 +11,8 @@ gsap.registerPlugin(SplitText, ScrollTrigger, MorphSVG);
 
 // Sound Variables
 var sound = false;
+export var ampSet = 0.5;
+export var freqSet = 0.1;
 var activeTrack = "normalSound";
 const maxVol = 0.5;
 const dur = 1050;
@@ -70,23 +72,26 @@ labelTL
 const soundIndicatorToggle = (e) => {
   if (!sound) {
     labelTL.reverse();
-    gsap.to(wave, {
-      amplitude: 0.5,
-      duration: 1,
-      ease: "power3.inOut",
-    });
   } else if (sound) {
     labelTL.play();
-    gsap.to(wave, {
-      amplitude: 3.25,
-      duration: 1,
-      ease: "power3.inOut",
-    });
   }
 };
 
 const handleAudioToggle = (e) => {
   if (!sound) {
+    ampSet = 3.25;
+    freqSet = 0.17;
+    gsap.to(wave, {
+      frequency: freqSet,
+      duration: 0.65,
+      ease: "none",
+    });
+    gsap.to(wave, {
+      amplitude: ampSet,
+      duration: 0.9,
+      delay: 0.3,
+      ease: "none",
+    });
     if (activeTrack === "normalSound") {
       sound = true;
       normalTrack.fade(0, maxVol, dur);
@@ -97,6 +102,19 @@ const handleAudioToggle = (e) => {
       darkTrack.play();
     }
   } else if (sound) {
+    ampSet = 0.5;
+    freqSet = 0.1;
+    gsap.to(wave, {
+      frequency: freqSet,
+      duration: 0.65,
+      ease: "none",
+    });
+    gsap.to(wave, {
+      amplitude: ampSet,
+      duration: 1,
+      delay: 0.3,
+      ease: "none",
+    });
     if (activeTrack === "normalSound") {
       sound = false;
       normalTrack.fade(maxVol, 0, dur);
@@ -114,7 +132,6 @@ const handleAudioToggle = (e) => {
 };
 
 export const handleAudioSwitch = () => {
-  console.log(activeTrack);
   if (activeTrack === "normalSound") {
     activeTrack = "darkSound";
     normalTrack.fade(maxVol, 0, dur);
@@ -131,7 +148,6 @@ export const handleAudioSwitch = () => {
     }, dur);
     activeTrack = "normalSound";
   }
-  console.log(activeTrack);
 };
 
 soundIndi.addEventListener("click", () => {
