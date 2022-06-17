@@ -2,12 +2,14 @@ import gsap from "gsap";
 import SplitText from "gsap/SplitText";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import colors from "./colors";
+import { wave } from "./waveAnim";
 import Lottie from "lottie-web";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 window.onload = () => {
-  let soundIndi = document.querySelector("div#soundIndicatorContainer");
+  let soundSwitchLabel = document.getElementById("soundLabelSwitch");
+  let waveContainer = document.getElementById("soundIndicator");
   let hamburger = document.querySelectorAll("#hamburgerIcon > svg > g > g");
   let indiContainer = document.getElementById("scrollAnimContainer");
   let nglStage = document.querySelector("#viewport");
@@ -102,7 +104,39 @@ window.onload = () => {
       "start",
       "stageIn"
     )
-
+    .to(
+      openSource.split.chars,
+      {
+        yPercent: 0,
+        opacity: 1,
+        color: colors.white,
+        stagger: {
+          each: 0.035,
+          ease: "power2.inOut",
+          from: "start",
+        },
+        duration: 1.45,
+        ease: "power3.out",
+      },
+      0.2
+    )
+    .to(
+      openScience.split.chars,
+      {
+        yPercent: 0,
+        opacity: 1,
+        delay: 0.25,
+        color: colors.ylw,
+        stagger: {
+          each: 0.035,
+          ease: "power2.inOut",
+          from: "start",
+        },
+        duration: 1.7,
+        ease: "power3.out",
+      },
+      0.2
+    )
     .call(
       function () {
         introPara.tl.play();
@@ -142,31 +176,10 @@ window.onload = () => {
           null,
           "start"
         );
-
         scrollIndi.setSpeed(1.15);
       },
       null,
-      "stageIn",
-      0.5
-    )
-    .from(
-      scrollIndiSplit.chars,
-      {
-        xPercent: 100,
-        stagger: 0.05,
-        duration: 1.1,
-        ease: "power3.inOut",
-      },
-      "scrollIndi+=.6",
-      0.76
-    )
-    .to(
-      soundIndi,
-      {
-        autoAlpha: 1,
-        duration: 0.4,
-      },
-      "<"
+      0.9
     )
     .from(
       hamburger,
@@ -177,40 +190,54 @@ window.onload = () => {
         ease: "power4.inOut",
         transformOrigin: "left center",
       },
-      "scrollIndi"
+      0.8
+    )
+    .from(
+      scrollIndiSplit.chars,
+      {
+        xPercent: 100,
+        stagger: 0.05,
+        duration: 1.1,
+        ease: "power2.out",
+      },
+      0.9
+    )
+    .fromTo(
+      waveContainer,
+      {
+        scaleX: 0,
+        duration: 0.8,
+        ease: "power4.inOut",
+        transformOrigin: "left center",
+      },
+      { scaleX: 1, duration: 0.8, ease: "power4.inOut" },
+      1.2
     )
     .to(
-      openSource.split.chars,
+      wave,
       {
-        yPercent: 0,
-        opacity: 1,
-        color: colors.white,
-        stagger: {
-          each: 0.035,
-          ease: "power2.inOut",
-          from: "start",
-        },
-        duration: 1.45,
-        ease: "power3.out",
+        amplitude: 3.25,
+        duration: 1.25,
+        ease: "none",
       },
-      0.2
+      1.75
     )
     .to(
-      openScience.split.chars,
+      wave,
       {
-        yPercent: 0,
-        opacity: 1,
-        delay: 0.25,
-        color: colors.ylw,
-        stagger: {
-          each: 0.035,
-          ease: "power2.inOut",
-          from: "start",
-        },
-        duration: 1.7,
-        ease: "power3.out",
+        frequency: 0.1,
+        ease: "none",
+        duration: 0.25,
       },
-      0.2
+      ">"
+    )
+    .to(
+      soundSwitchLabel,
+      {
+        opacity: 1,
+        duration: 0.7,
+      },
+      1.95
     );
 
   titleTL.play();

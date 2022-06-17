@@ -5,7 +5,7 @@ import { Howl, Howler } from "howler";
 import normalSound from "../audio/ambientSoundtrack.mp3";
 import darkSound from "../audio/darkSoundtrack.mp3";
 import MorphSVG from "gsap/MorphSVGPlugin";
-import { active } from "d3";
+import { wave } from "./waveAnim";
 
 gsap.registerPlugin(SplitText, ScrollTrigger, MorphSVG);
 
@@ -70,8 +70,18 @@ labelTL
 const soundIndicatorToggle = (e) => {
   if (!sound) {
     labelTL.reverse();
+    gsap.to(wave, {
+      amplitude: 0.5,
+      duration: 1,
+      ease: "power3.inOut",
+    });
   } else if (sound) {
     labelTL.play();
+    gsap.to(wave, {
+      amplitude: 3.25,
+      duration: 1,
+      ease: "power3.inOut",
+    });
   }
 };
 

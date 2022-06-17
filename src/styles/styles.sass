@@ -441,7 +441,6 @@ header
 
 	div#soundIndicatorContainer
 		z-index: 300
-		opacity: 0
 		display: flex
 		flex-direction: row-reverse
 		align-items: center
@@ -457,6 +456,7 @@ header
 			height: clamp(1.3em, calc(1.3rem + (1.7 - 1.3) * ((100vw - 48em) / (120 - 48))), 1.7em)	
 			overflow: hidden
 			display: flex
+			opacity: 0
 			margin-left: 1.5rem
 
 			& > div
@@ -469,6 +469,8 @@ header
 
 		canvas#soundIndicator
 			transform: translateY(-.12rem)
+			width: 35px
+			height: 25px
 
 #loader
 	background: grey
@@ -498,7 +500,6 @@ header
 	#mobileNav
 		padding-bottom: 40%
 		text-align: left
-		// width: var(--widthSix)
 
 	h1
 		font-size: clamp(1.6em, calc(1.6rem + (12 - 3.2) * ((100vw - 48em) / (120 - 48))), 12em)

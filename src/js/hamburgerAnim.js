@@ -67,7 +67,7 @@ function setupMobileAnimation() {
       },
       0.1
     )
-    .call(overflowControl(), null, 0);
+    .call(overflowControl, null, 0);
 
   mowTL.reversed(true);
 
