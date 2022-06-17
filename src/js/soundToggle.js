@@ -11,6 +11,7 @@ gsap.registerPlugin(SplitText, ScrollTrigger, MorphSVG);
 
 // Sound Variables
 var sound = false;
+// Set initial amp + freq so animation starts at correct point
 export var ampSet = 0.5;
 export var freqSet = 0.1;
 var activeTrack = "normalSound";
@@ -80,7 +81,7 @@ const soundIndicatorToggle = (e) => {
 const handleAudioToggle = (e) => {
   if (!sound) {
     ampSet = 3.25;
-    freqSet = 0.17;
+    freqSet = 0.135;
     gsap.to(wave, {
       frequency: freqSet,
       duration: 0.65,
