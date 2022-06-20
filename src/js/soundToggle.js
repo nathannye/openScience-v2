@@ -2,8 +2,8 @@ import gsap from "gsap";
 import SplitText from "gsap/SplitText";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { Howl, Howler } from "howler";
-import normalSound from "../audio/ambientSoundtrack.mp3";
-import darkSound from "../audio/darkSoundtrack.mp3";
+import normalSound from "../audio/ambientSoundtrackLoop.mp3";
+import darkSound from "../audio/darkSoundtrackLoop.mp3";
 import MorphSVG from "gsap/MorphSVGPlugin";
 import { wave } from "./waveAnim";
 
@@ -28,10 +28,12 @@ let labelOff = soundLabel[1];
 
 const normalTrack = new Howl({
   src: [normalSound],
+  loop: true,
 });
 const normalTrackDuration = Math.floor(normalTrack.duration * 1000);
 const darkTrack = new Howl({
   src: [darkSound],
+  loop: true,
 });
 const darkTrackDuration = Math.floor(darkTrack.duration * 1000);
 
@@ -133,21 +135,23 @@ const handleAudioToggle = (e) => {
 };
 
 export const handleAudioSwitch = () => {
-  if (activeTrack === "normalSound") {
-    activeTrack = "darkSound";
-    normalTrack.fade(maxVol, 0, dur);
-    setTimeout(() => {
-      normalTrack.pause();
-    }, dur);
-    darkTrack.play();
-    darkTrack.fade(0, maxVol, dur);
-  } else if (activeTrack === "darkSound") {
-    normalTrack.fade(0, maxVol, dur);
-    darkTrack.fade(maxVol, 0, dur);
-    setTimeout(() => {
-      darkTrack.pause();
-    }, dur);
-    activeTrack = "normalSound";
+  if (sound) {
+    if (activeTrack === "normalSound") {
+      activeTrack = "darkSound";
+      normalTrack.fade(maxVol, 0, dur);
+      setTimeout(() => {
+        normalTrack.pause();
+      }, dur);
+      darkTrack.play();
+      darkTrack.fade(0, maxVol, dur);
+    } else if (activeTrack === "darkSound") {
+      normalTrack.fade(0, maxVol, dur);
+      darkTrack.fade(maxVol, 0, dur);
+      setTimeout(() => {
+        darkTrack.pause();
+      }, dur);
+      activeTrack = "normalSound";
+    }
   }
 };
 

@@ -453,8 +453,9 @@ header {
   justify-content: space-between;
   display: flex;
   width: 100%;
-  padding: calc(6.1% * 1.5) 6.1% 0 6.1%;
-  padding: calc(var(--spacer) * 2.25) var(--spacer);
+  padding-top: calc(var(--spacer) * 2.25);
+  padding-left: var(--spacer);
+  padding-right: var(--spacer);
 }
 
 header #hamburgerIcon {
@@ -833,14 +834,6 @@ section#whatIsFolding #peptideAnimationContainer #peptideSliderContainer #peptid
   cursor: pointer;
 }
 
-.errorTarget > svg {
-  display: block;
-  width: 200px !important;
-  height: 200px !important;
-  transform: scale(0.48) translate(-28%, -18.5%) !important;
-  transform-origin: "center center";
-}
-
 .testTarget {
   background: var(--color-teal);
   z-index: 40;
@@ -1158,14 +1151,18 @@ section#howCanYouHelp {
   flex-direction: row;
   width: 87.8%;
   max-width: 1250px;
-  margin-bottom: 0;
+  flex-wrap: wrap;
+  margin-bottom: 0 !important;
   height: unset !important;
   margin-bottom: 17%;
 }
 
 section#howCanYouHelp > div, section#howCanYouHelp > section {
   align-self: flex-start;
-  width: 50% !important;
+  width: 50%;
+  flex-grow: 1;
+  min-width: 250px;
+  max-width: 600px;
 }
 
 section#howCanYouHelp #helpHeadingContainer {
@@ -1174,19 +1171,19 @@ section#howCanYouHelp #helpHeadingContainer {
   flex-wrap: wrap;
   justify-content: center;
   margin-bottom: 5%;
-  margin-right: 5%;
   column-gap: 6%;
   row-gap: 4rem;
 }
 
 section#howCanYouHelp #helpHeadingContainer > div {
+  width: 47%;
   flex-grow: 1;
+  min-width: 250px;
 }
 
 section#howCanYouHelp #helpHeadingContainer img {
-  width: 50%;
   height: 300px;
-  flex-grow: .5;
+  flex-grow: 1;
   align-self: flex-end;
   object-fit: cover;
 }
@@ -1232,8 +1229,8 @@ section#howCanYouHelp #foldingProjectsContainer h3 {
 
 section#howCanYouHelp #faqContainer {
   width: 100%;
-  height: unset;
   margin-top: 4%;
+  height: unset !important;
 }
 
 section#howCanYouHelp #faqContainer article {
@@ -1246,8 +1243,8 @@ section#howCanYouHelp #faqContainer article > div {
   flex-direction: row-reverse;
   justify-content: space-between;
   position: relative;
-  margin-top: .25rem;
-  padding-top: .25rem;
+  margin-top: .5rem;
+  padding-top: .75rem;
   align-items: center;
   transition: .25s ease-in-out all;
 }
@@ -1270,15 +1267,15 @@ section#howCanYouHelp #faqContainer article .faqArrow {
   background-size: 100% 100%;
   transform: rotate(-90deg);
   transform-origin: center center;
-  width: 15px;
-  height: 15px;
+  width: 13px;
+  height: 13px;
   filter: saturate(0);
 }
 
 section#howCanYouHelp #faqContainer article .faqAnswer {
   overflow: hidden;
   width: 100%;
-  height: 0px;
+  height: 0;
   position: relative;
 }
 
@@ -1306,9 +1303,6 @@ section#howCanYouHelp #faqContainer article .faqAnswer p {
 @media only screen and (min-width: 480px) {
   section#whyDoWeNeed {
     padding-top: 12% !important;
-  }
-  .errorTarget > svg {
-    transform: scale(0.26) translate(-28%, -15.5%) !important;
   }
   section#howCanYouHelp {
     padding-bottom: 5%;

@@ -430,8 +430,9 @@ header
 	justify-content: space-between
 	display: flex
 	width: 100%
-	padding: calc(6.1% * 1.5) 6.1% 0 6.1%
-	padding: calc(var(--spacer) * 2.25) var(--spacer)
+	padding-top: calc(var(--spacer) * 2.25)
+	padding-left: var(--spacer)
+	padding-right: var(--spacer)
 	
 	#hamburgerIcon
 		width: 6.5rem	
@@ -768,22 +769,6 @@ section#whatIsFolding
 
 .errorTarget
 	cursor: pointer
-	// transform-origin: center center
-	// transform: scale(.5)
-	// pointer-events: auto
-	// position: absolute
-	// cursor: pointer
-	// width: 30px
-	// height: 30px
-	// transform: scale(4)
-	// display: block
-
-	& > svg
-		display: block
-		width: 200px !important
-		height: 200px !important
-		transform: scale(.48) translate(-28%, -18.5%) !important
-		transform-origin: "center center"
 
 .testTarget	
 	background: var(--color-teal)
@@ -1057,13 +1042,17 @@ section#howCanYouHelp
 	display: flex !important
 	flex-direction: row
 	@include maxWidthL
-	margin-bottom: 0
+	flex-wrap: wrap
+	margin-bottom: 0 !important
 	height: unset !important
 	margin-bottom: 17%
 
 	& > div, & > section
 		align-self: flex-start
-		width: 50% !important
+		width: 50%
+		flex-grow: 1
+		min-width: 250px
+		max-width: 600px
 
 	#helpHeadingContainer
 		display: flex
@@ -1071,20 +1060,19 @@ section#howCanYouHelp
 		flex-wrap: wrap
 		justify-content: center
 		margin-bottom: 5%
-		margin-right: 5%
+		// margin-right: 5%
 		column-gap: 6%
 		row-gap: 4rem
 		// align-items: flex-start
 
 		& > div
-			// width: 47%
+			width: 47%
 			flex-grow: 1
-			// min-width: 250px
+			min-width: 250px
 
 		img
-			width: 50%
 			height: 300px
-			flex-grow: .5
+			flex-grow: 1
 			align-self: flex-end
 			object-fit: cover
 
@@ -1123,8 +1111,8 @@ section#howCanYouHelp
 
 	#faqContainer
 		width: 100%
-		height: unset
 		margin-top: 4%
+		height: unset !important
 
 		article
 			margin-bottom: 2rem
@@ -1135,11 +1123,10 @@ section#howCanYouHelp
 				flex-direction: row-reverse
 				justify-content: space-between
 				position: relative
-				margin-top: .25rem
-				padding-top: .25rem
+				margin-top: .5rem
+				padding-top: .75rem
 				align-items: center
 				transition: .25s ease-in-out all
-
 				&:hover 
 					opacity: .6
 					transition: .25s ease-in-out all
@@ -1156,14 +1143,14 @@ section#howCanYouHelp
 				background-size: 100% 100% 
 				transform: rotate(-90deg)
 				transform-origin: center center
-				width: 15px
-				height: 15px
+				width: 13px
+				height: 13px
 				filter: saturate(0)
 
 			.faqAnswer
 				overflow: hidden
 				width: 100%
-				height: 0px 
+				height: 0
 				position: relative
 
 				p	
@@ -1193,7 +1180,7 @@ section#howCanYouHelp
 	.errorTarget 
 	
 		& > svg
-			transform: scale(.26) translate(-28%, -15.5%) !important
+			// transform: scale(.26) translate(-28%, -15.5%) !important
 
 	section#howCanYouHelp
 		padding-bottom: 5%

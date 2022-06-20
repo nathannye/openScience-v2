@@ -67,6 +67,8 @@ for (let i = 0; i < faq.length; i++) {
     paused: true,
   });
 
+  let maxH = answerContainer.scrollHeight;
+
   dropdown.reversed(true);
 
   dropdown
@@ -78,16 +80,17 @@ for (let i = 0; i < faq.length; i++) {
         ease: "power3.inOut",
         filter: "saturate(1)",
       },
-      "start"
+     0
     )
     .to(
       answerContainer,
       {
-        height: 160,
-        ease: "power3.inOut",
-        duration: 0.5,
+        height: maxH + 20,
+        ease: "power4.inOut",
+        autoRound: false,
+        duration: 0.65,
       },
-      "start"
+      0
     )
     .to(
       question,
@@ -95,7 +98,7 @@ for (let i = 0; i < faq.length; i++) {
         color: colors.ylw,
         duration: 0.2,
       },
-      "start"
+      0
     )
     .to(
       line,
@@ -103,7 +106,7 @@ for (let i = 0; i < faq.length; i++) {
         background: colors.ylw,
         duration: 0.2,
       },
-      "start"
+      0
     );
 
   flexContainer.addEventListener("click", (event) => {
@@ -128,7 +131,7 @@ for (let i = 0; i < faq.length; i++) {
         autoAlpha: 0,
         duration: 0.35,
       },
-      "lineContent"
+      0.1
     )
     .from(
       arrow,
@@ -138,6 +141,6 @@ for (let i = 0; i < faq.length; i++) {
         duration: 0.7,
         ease: "power3.inOut",
       },
-      "lineContent"
+      0.1
     );
 }

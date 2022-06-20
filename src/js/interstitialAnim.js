@@ -32,7 +32,10 @@ function setupInterstitials() {
       stagger: 0.03,
     });
   });
+
+  return () => {
+    e.tl.kill();
+  };
 }
 
-ScrollTrigger.addEventListener("refresh", setupInterstitials);
 setupInterstitials();

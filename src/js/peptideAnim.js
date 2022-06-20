@@ -8,6 +8,7 @@ import CustomEase from "gsap/src/CustomEase";
 import colors from "./colors";
 import DrawSVGPlugin from "gsap/DrawSVGPlugin";
 import { handleAudioSwitch } from "./soundToggle";
+import { TetrahedronGeometry } from "three";
 
 gsap.registerPlugin(
   ScrollTrigger,
@@ -81,6 +82,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     peptideAnim.playSegments(frameSegments[0]);
 
     let dangerClickTargets = gsap.utils.toArray(".errorTarget");
+
     let chain = document.querySelector("#yellowChainBase > path");
     let dots = gsap.utils.toArray(
       ".aminoMarker:not(.isError) > path:nth-child(2)"
@@ -261,8 +263,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
         loop: true,
         quality: "medium",
         autoplay: true,
-        path: "https://assets5.lottiefiles.com/packages/lf20_wofk7irx.json",
+        path: "https://assets10.lottiefiles.com/packages/lf20_oafsmzxp.json",
       });
+
+      console.log(dangerMarkerAnim);
 
       target.addEventListener("click", (event) => {
         let e = dangerClickTargets.indexOf(target);
@@ -431,7 +435,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
   peptideAnimInTL
     .to(html, {
-      overflowY: "hidden",
+      // overflowY: "hidden",
     })
     .call(createPeptideDraggable)
     .from(
