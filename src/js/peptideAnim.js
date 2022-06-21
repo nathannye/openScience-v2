@@ -8,7 +8,6 @@ import CustomEase from "gsap/src/CustomEase";
 import colors from "./colors";
 import DrawSVGPlugin from "gsap/DrawSVGPlugin";
 import { handleAudioSwitch } from "./soundToggle";
-import { TetrahedronGeometry } from "three";
 
 gsap.registerPlugin(
   ScrollTrigger,
@@ -40,13 +39,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
   let harvardLink = secondText.querySelector("cite");
   let html = document.querySelector("html");
   let whatIsFolding = document.getElementById("whatIsFolding");
-
-  let firstTextAnim = gsap.timeline({
-    scrollTrigger: {
-      trigger: whatIsFolding,
-      start: "top top+=12%",
-    },
-  });
 
   firstHead.split = new SplitText(firstHead, {
     type: "words, lines",
@@ -102,6 +94,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     let dangerClearTL = gsap.timeline({
       paused: true,
+      onComplete: () => {
+        dangerClearTL.kill();
+      },
     });
 
     dangerClearTL
@@ -206,7 +201,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
         },
         "state"
       )
-
       .from(
         secondHead.split.words,
         {
@@ -257,7 +251,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
       );
 
     dangerClickTargets.forEach((target) => {
-      var dangerMarkerAnim = Lottie.loadAnimation({
+      target.dangerMarkerAnim = Lottie.loadAnimation({
         container: target,
         renderer: "svg",
         loop: true,
@@ -266,8 +260,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
         path: "https://assets10.lottiefiles.com/packages/lf20_oafsmzxp.json",
       });
 
-      console.log(dangerMarkerAnim);
-
       target.addEventListener("click", (event) => {
         let e = dangerClickTargets.indexOf(target);
         dangerClickClear += 1;
@@ -275,6 +267,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
           autoAlpha: 0,
           duration: 0.6,
           ease: "back.out(5)",
+          onComplete: () => {
+            target.dangerMarkerAnim.destroy();
+          },
         });
 
         gsap.to(errorGroups[e], {
@@ -309,24 +304,24 @@ document.addEventListener("DOMContentLoaded", (event) => {
     paused: true,
   });
 
-  let flickerTL = gsap.timeline({
-    paused: true,
-  });
+  // let flickerTL = gsap.timeline({
+  //   paused: true,
+  // });
 
-  flickerTL.yoyo(true);
-  flickerTL.repeat(-1);
+  // flickerTL.yoyo(true);
+  // flickerTL.repeat(-1);
 
-  flickerTL
-    .to(nglStage, {
-      filter: "blur(10px) saturate(1.3) brightness(.93)",
-      ease: "rough({ strength: 1, points: 12, template: none.in, taper: none, randomize: true, clamp: true })",
-      duration: 3,
-    })
-    .to(nglStage, {
-      filter: "blur(9px) saturate(1.2) brightness(.85)",
-      ease: "rough({ strength: 1, points: 12, template: none.in, taper: none, randomize: true, clamp: true })",
-      duration: 4.2,
-    });
+  // flickerTL
+  //   .to(nglStage, {
+  //     filter: "blur(10px) saturate(1.3) brightness(.93)",
+  //     ease: "rough({ strength: 1, points: 12, template: none.in, taper: none, randomize: true, clamp: true })",
+  //     duration: 3,
+  //   })
+  //   .to(nglStage, {
+  //     filter: "blur(9px) saturate(1.2) brightness(.85)",
+  //     ease: "rough({ strength: 1, points: 12, template: none.in, taper: none, randomize: true, clamp: true })",
+  //     duration: 4.2,
+  //   });
 
   let draggerTL = gsap.timeline({
     paused: true,
@@ -383,6 +378,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
           draggerTL.play();
           dangerTL.play();
           peptideAnim.playSegments(frameSegments[1]);
+          Draggable.kill();
           setTimeout(() => {
             gsap.to(nglStage, {
               filter:
@@ -415,8 +411,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
         start: "top top+=18%",
         end: "bottom top",
       },
+      onComplete: () => {
+        peptideTL.kill();
+      },
     });
-    peptideTL;
+    // peptideTL;
   }
 
   peptideAnim.addEventListener("DOMLoaded", (event) => {
@@ -431,13 +430,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
       trigger: whatIsFolding,
       start: "top top",
     },
+    onComplete: () => {
+      peptideAnimInTL.kill();
+    },
   });
 
   peptideAnimInTL
-    .to(html, {
-      // overflowY: "hidden",
-    })
-    .call(createPeptideDraggable)
+    .call(createPeptideDraggable, null, 0)
     .from(
       firstHead.split.words,
       {
@@ -498,8 +497,4 @@ document.addEventListener("DOMContentLoaded", (event) => {
       { yPercent: 0, duration: 0.57, stagger: 0.05, ease: "power3.inOut" },
       0.7
     );
-
-  // .call(function () {
-  //   firstTextAnim.play();
-  // })
 });

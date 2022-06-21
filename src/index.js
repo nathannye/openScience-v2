@@ -133,20 +133,25 @@ ScrollTrigger.addEventListener("refresh", function () {
 let h3 = gsap.utils.toArray("h3:not(h3#dragDirections)");
 
 h3.forEach((e) => {
-  e.split = new SplitText(e, {
-    type: "lines, words",
-    linesClass: "splitLine",
-  });
+  document.fonts.ready.then(() => {
+    e.split = new SplitText(e, {
+      type: "lines, words",
+      linesClass: "splitLine",
+    });
 
-  gsap.from(e.split.words, {
-    scrollTrigger: {
-      trigger: e,
-      start: "top bottom-=14%",
-    },
-    yPercent: 100,
-    duration: 0.65,
-    ease: "power3.inOut",
-    stagger: 0.03,
+    gsap.from(e.split.words, {
+      scrollTrigger: {
+        trigger: e,
+        start: "top bottom-=14%",
+      },
+      yPercent: 100,
+      duration: 0.65,
+      ease: "power3.inOut",
+      stagger: 0.03,
+      onComplete: () => {
+        e.split.revert();
+      },
+    });
   });
 });
 

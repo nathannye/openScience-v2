@@ -515,6 +515,27 @@
           </div>
         </section>
       </section>
+      <div id="citation" class="panel">
+        <h3>thank you to NGL</h3>
+        <cite>
+          <p>
+            AS Rose, AR Bradley, Y Valasatava, JM Duarte, A Prlić and PW Rose.
+            NGL viewer: web-based molecular graphics for large complexes.
+            Bioinformatics: bty419, 2018.
+            <a href="doi:10.1093/bioinformatics/bty419" target="_blank"
+              >doi:10.1093/bioinformatics/bty419</a
+            >
+          </p>
+        </cite>
+        <cite>
+          AS Rose and PW Hildebrand. NGL Viewer: a web application for molecular
+          visualization. Nucl Acids Res (1 July 2015) 43 (W1): W576-W579 first
+          published online April 29, 2015.
+          <a href="doi:10.1093/nar/gkv402" target="_blank"
+            >doi:10.1093/nar/gkv402</a
+          >
+        </cite>
+      </div>
     </main>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/ngl/2.0.0-dev.39/ngl.js"
@@ -525,18 +546,22 @@
     <script type="module" src="./src/js/nglScene.js"></script>
     <script type="module" src="./src/js/waveAnim.js"></script>
     <script type="module" src="./src/js/soundToggle.js"></script>
-    <script type="module" src="./src/js/barChart.js"></script>
-    <script type="module" src="./src/js/aminoDudes.js"></script>
+    <script type="module" src="./src/js/barChart.js" defer></script>
+    <!-- <script type="module" src="./src/js/aminoDudes.js"></script> -->
     <script type="module" src="./src/js/navMarkerAnim.js"></script>
-    <script type="module" src="./src/js/interstitialAnim.js"></script>
+    <script type="module" src="./src/js/interstitialAnim.js" async></script>
     <script src="./src/index.js" type="module"></script>
     <script type="module" src="./src/js/hamburgerAnim.js"></script>
-    <script type="module" src="./src/js/costNumbers.js"></script>
-    <script type="module" src="./src/js/peptideAnim.js"></script>
+    <script type="module" src="./src/js/costNumbers.js" defer></script>
+    <script type="module" src="./src/js/peptideAnim.js" defer></script>
     <script type="module" src="./src/js/introAnims.js"></script>
 
     <script type="module" src="./src/js/faqAnim.js"></script>
-    <script type="module" src="./src/js/supercomputerTableAnim.js"></script>
+    <script
+      type="module"
+      src="./src/js/supercomputerTableAnim.js"
+      defer
+    ></script>
     <!-- <script type="module" src="./src/js/loader.js"></script> -->
   </body>
 </html>

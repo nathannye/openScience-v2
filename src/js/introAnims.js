@@ -80,6 +80,7 @@ window.onload = () => {
   let titleTL = gsap.timeline({
     paused: true,
     onComplete: () => {
+      titleTL.kill();
       createIntroOutTL();
     },
   });

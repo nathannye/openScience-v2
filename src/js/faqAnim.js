@@ -63,32 +63,25 @@ for (let i = 0; i < faq.length; i++) {
 
   answerContainer.appendChild(answer);
 
-  let dropdown = gsap.timeline({
+  article.tl = gsap.timeline({
     paused: true,
+    onComplete: () => {
+      article.tl.kill();
+    },
   });
 
   let maxH = answerContainer.scrollHeight;
 
-  dropdown.reversed(true);
+  article.tl.reversed(true);
 
-  dropdown
-    .to(
-      arrow,
-      {
-        rotate: 0,
-        duration: 0.24,
-        ease: "power3.inOut",
-        filter: "saturate(1)",
-      },
-     0
-    )
+  article.tl
     .to(
       answerContainer,
       {
         height: maxH + 20,
-        ease: "power4.inOut",
+        ease: "none",
         autoRound: false,
-        duration: 0.65,
+        duration: 0.25,
       },
       0
     )
@@ -97,6 +90,7 @@ for (let i = 0; i < faq.length; i++) {
       {
         color: colors.ylw,
         duration: 0.2,
+        ease: "none",
       },
       0
     )
@@ -105,13 +99,20 @@ for (let i = 0; i < faq.length; i++) {
       {
         background: colors.ylw,
         duration: 0.2,
+        ease: "none",
       },
       0
+    )
+    .to(
+      arrow,
+      {
+        rotate: 0,
+        duration: 0.24,
+        ease: "power1.inOut",
+        filter: "saturate(1)",
+      },
+      0.2
     );
-
-  flexContainer.addEventListener("click", (event) => {
-    dropdown.reversed() ? dropdown.play() : dropdown.reverse();
-  });
 
   let tl = gsap.timeline({
     scrollTrigger: {
@@ -144,3 +145,24 @@ for (let i = 0; i < faq.length; i++) {
       0.1
     );
 }
+
+function setupActive() {
+  const allQuestions = document.querySelectorAll(".faqEntryContainer");
+
+  allQuestions.forEach((article) => {
+    article.addEventListener("click", () => {
+      if (article.tl.reversed()) {
+        allQuestions.forEach((article) => {
+          article.tl.reverse();
+        });
+
+        article.tl.play();
+      } else {
+        article.tl.reverse();
+      }
+      console.log(article.tl.reversed());
+    });
+  });
+}
+
+setupActive();

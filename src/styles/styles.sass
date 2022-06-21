@@ -90,6 +90,14 @@ h1, h2, h3, h4, h5, h6, p, ul, li, a
 	margin: 0
 	padding: 0
 	
+cite
+	font-size: clamp(1.6rem, calc(1.6rem + ((1vw - 0.36rem) * 1.4881)), 2rem)
+	@include fontTel
+	letter-spacing: 0.005em
+	text-rendering: optimizeLegibility
+	font-weight: 100
+	line-height: 1.52
+
 a:visited, a.externalLink:visited
 	color: var(--color-white)
 	opacity: .4 !important
@@ -361,7 +369,7 @@ main
 		position: relative
 
 section:not(section.interstitial)
-	height: 100vh
+	min-height: 100vh
 
 	&.lefty
 		justify-content: flex-start
@@ -627,7 +635,9 @@ section#soundAsk
 	position: relative
 	display: block
 	width: 100%
-	@include maxWidthXL
+	max-width: 1700px
+	padding-right: var(--gutter)
+	padding-left: var(--gutter)
 	margin: 0 auto 20rem auto
 
 .fullWidthPanel
@@ -940,7 +950,6 @@ section#chartOfUsers
 
 #supercomputerCompare
 	width: 100%
-	height: 100vh
 	padding-bottom: 1.25%
 	z-index: 3
 
@@ -1041,16 +1050,16 @@ section#helpingReduceCosts
 section#howCanYouHelp
 	display: flex !important
 	flex-direction: row
-	@include maxWidthL
+	max-width: 1200px
 	flex-wrap: wrap
 	margin-bottom: 0 !important
 	height: unset !important
 	margin-bottom: 17%
 
-	& > div, & > section
+	& > *
 		align-self: flex-start
-		width: 50%
 		flex-grow: 1
+		width: calc(50% - (var(--gutter) * 2))
 		min-width: 250px
 		max-width: 600px
 
@@ -1060,29 +1069,26 @@ section#howCanYouHelp
 		flex-wrap: wrap
 		justify-content: center
 		margin-bottom: 5%
-		// margin-right: 5%
-		column-gap: 6%
-		row-gap: 4rem
-		// align-items: flex-start
+
+		& > *
+			margin-bottom: calc(var(--gutter) * 2)
 
 		& > div
-			width: 47%
 			flex-grow: 1
-			min-width: 250px
+			min-width: 350px
 
 		img
 			height: 300px
 			flex-grow: 1
-			align-self: flex-end
+			// align-self: flex-end
 			object-fit: cover
 
 	section#lower
 		display: flex
 		justify-content: center
 		flex-wrap: wrap
-		width: 100%
 		height: unset
-		column-gap: 6%
+		
 
 		#helpingLeft
 			display: flex
@@ -1111,14 +1117,14 @@ section#howCanYouHelp
 
 	#faqContainer
 		width: 100%
-		margin-top: 4%
+		// margin-top: 4%
 		height: unset !important
 
-		article
+		article.faqEntryContainer
 			margin-bottom: 2rem
 			cursor: pointer
 
-			& > div
+			& > div:first-child
 				display: flex
 				flex-direction: row-reverse
 				justify-content: space-between
@@ -1127,6 +1133,7 @@ section#howCanYouHelp
 				padding-top: .75rem
 				align-items: center
 				transition: .25s ease-in-out all
+
 				&:hover 
 					opacity: .6
 					transition: .25s ease-in-out all
@@ -1143,8 +1150,8 @@ section#howCanYouHelp
 				background-size: 100% 100% 
 				transform: rotate(-90deg)
 				transform-origin: center center
-				width: 13px
-				height: 13px
+				width: 15px
+				height: 15px
 				filter: saturate(0)
 
 			.faqAnswer
@@ -1158,7 +1165,6 @@ section#howCanYouHelp
 					left: 0
 					top: 1rem
 					opacity: .75
-					// height: 100px
 
 .splitLine
 	overflow: hidden
@@ -1181,9 +1187,6 @@ section#howCanYouHelp
 	
 		& > svg
 			// transform: scale(.26) translate(-28%, -15.5%) !important
-
-	section#howCanYouHelp
-		padding-bottom: 5%
 
 	header
 		padding-top: calc(6.1% / 2)
@@ -1226,10 +1229,35 @@ section#howCanYouHelp
 		.headingContainer
 			flex-grow: 1
 
+	section#howCanYouHelp
+
+		#helpHeadingContainer
+			padding-right: calc(var(--gutter))
+
+		section#lower
+			padding-left: calc(var(--gutter))
+
+	section#citation
+
+		cite
+			color: white !important
+
 // Above 796px
 @media only screen and (min-width: 769px)
 	*
 		--gutter: 3rem
+
+	section#howCanYouHelp
+		padding-bottom: 5%
+
+		#helpHeadingContainer
+			padding-right: calc(var(--gutter))
+
+			img
+				align-self: flex-end
+
+		section#lower
+			padding-left: calc(var(--gutter))
 
 	table#supercomputerTable
 		border-spacing: 0
