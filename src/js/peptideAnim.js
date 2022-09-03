@@ -325,6 +325,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
   let draggerTL = gsap.timeline({
     paused: true,
+    onComplete: () => {
+      draggerTL.kill();
+    },
   });
 
   let knob = document.getElementById("peptideKnob");

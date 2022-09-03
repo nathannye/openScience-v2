@@ -160,7 +160,6 @@ soundIndi.addEventListener("click", () => {
   soundIndicatorToggle();
 });
 
-const interfaceSounds = () => {};
 // let whyDoesFoldingMatter = document.querySelector("#whyDoesFoldingMatter");
 
 // let audioAskTL = gsap.timeline({

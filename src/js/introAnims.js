@@ -85,162 +85,162 @@ window.onload = () => {
     },
   });
 
-  titleTL
-    .to(
-      introPanel,
-      {
-        autoAlpha: 1,
-        duration: 0.01,
-      },
-      "start"
-    )
-    .fromTo(
-      nglStage,
-      { filter: "saturate(0) blur(13px)", autoAlpha: 0 },
-      {
-        filter: "saturate(.68) blur(1px)",
-        duration: 3.5,
-        delay: 0.3,
-        autoAlpha: 1,
-      },
-      "start",
-      "stageIn"
-    )
-    .to(
-      openSource.split.chars,
-      {
-        yPercent: 0,
-        opacity: 1,
-        color: colors.white,
-        stagger: {
-          each: 0.035,
-          ease: "power2.inOut",
-          from: "start",
-        },
-        duration: 1.45,
-        ease: "power3.out",
-      },
-      0.2
-    )
-    .to(
-      openScience.split.chars,
-      {
-        yPercent: 0,
-        opacity: 1,
-        delay: 0.25,
-        color: colors.ylw,
-        stagger: {
-          each: 0.035,
-          ease: "power2.inOut",
-          from: "start",
-        },
-        duration: 1.7,
-        ease: "power3.out",
-      },
-      0.2
-    )
-    .call(
-      function () {
-        introPara.tl.play();
-      },
-      null,
-      "start"
-    )
-    .to(
-      navDots,
-      {
-        x: 0,
-        stagger: 0.14,
-        duration: 0.86,
-        autoAlpha: 1,
-        ease: "power2.inOut",
-      },
-      0.4
-    )
-    .call(
-      () => {
-        navDots[0].classList.add("activeNav");
-      },
-      null,
-      "start"
-    )
-    .call(
-      function () {
-        let scrollIndi = Lottie.loadAnimation(
-          {
-            container: indiContainer,
-            loop: false,
-            renderer: "svg",
-            quality: "low",
-            autoplay: true,
-            path: "https://assets10.lottiefiles.com/packages/lf20_n5nf19df.json",
-          },
-          null,
-          "start"
-        );
-        scrollIndi.setSpeed(1.15);
-      },
-      null,
-      0.9
-    )
-    .from(
-      hamburger,
-      {
-        scaleX: 0,
-        stagger: -0.1,
-        duration: 1.25,
-        ease: "power4.inOut",
-        transformOrigin: "left center",
-      },
-      0.8
-    )
-    .from(
-      scrollIndiSplit.chars,
-      {
-        xPercent: 100,
-        stagger: 0.05,
-        duration: 1.1,
-        ease: "power2.out",
-      },
-      0.9
-    )
-    .fromTo(
-      waveContainer,
-      {
-        scaleX: 0,
-        duration: 0.8,
-        ease: "power4.inOut",
-        transformOrigin: "left center",
-      },
-      { scaleX: 1, duration: 0.8, ease: "power4.inOut" },
-      1.2
-    )
-    .to(
-      wave,
-      {
-        amplitude: ampSet,
-        duration: 1.25,
-        ease: "none",
-      },
-      1.75
-    )
-    .to(
-      wave,
-      {
-        frequency: freqSet,
-        ease: "none",
-        duration: 0.25,
-      },
-      ">"
-    )
-    .to(
-      soundSwitchLabel,
-      {
-        opacity: 1,
-        duration: 0.7,
-      },
-      1.95
-    );
+  titleTL;
+  // .to(
+  //   introPanel,
+  //   {
+  //     autoAlpha: 1,
+  //     duration: 0.01,
+  //   },
+  //   "start"
+  // )
+  // .fromTo(
+  //   nglStage,
+  //   { filter: "saturate(0) blur(13px)", autoAlpha: 0 },
+  //   {
+  //     filter: "saturate(.68) blur(1px)",
+  //     duration: 3.5,
+  //     delay: 0.3,
+  //     autoAlpha: 1,
+  //   },
+  //   "start",
+  //   "stageIn"
+  // )
+  // .to(
+  //   openSource.split.chars,
+  //   {
+  //     yPercent: 0,
+  //     opacity: 1,
+  //     color: colors.white,
+  //     stagger: {
+  //       each: 0.035,
+  //       ease: "power2.inOut",
+  //       from: "start",
+  //     },
+  //     duration: 1.45,
+  //     ease: "power3.out",
+  //   },
+  //   0.2
+  // )
+  // .to(
+  //   openScience.split.chars,
+  //   {
+  //     yPercent: 0,
+  //     opacity: 1,
+  //     delay: 0.25,
+  //     color: colors.ylw,
+  //     stagger: {
+  //       each: 0.035,
+  //       ease: "power2.inOut",
+  //       from: "start",
+  //     },
+  //     duration: 1.7,
+  //     ease: "power3.out",
+  //   },
+  //   0.2
+  // )
+  // .call(
+  //   function () {
+  //     introPara.tl.play();
+  //   },
+  //   null,
+  //   "start"
+  // )
+  // .to(
+  //   navDots,
+  //   {
+  //     x: 0,
+  //     stagger: 0.14,
+  //     duration: 0.86,
+  //     autoAlpha: 1,
+  //     ease: "power2.inOut",
+  //   },
+  //   0.4
+  // )
+  // .call(
+  //   () => {
+  //     navDots[0].classList.add("activeNav");
+  //   },
+  //   null,
+  //   "start"
+  // )
+  // .call(
+  //   function () {
+  //     let scrollIndi = Lottie.loadAnimation(
+  //       {
+  //         container: indiContainer,
+  //         loop: false,
+  //         renderer: "svg",
+  //         quality: "low",
+  //         autoplay: true,
+  //         path: "https://assets10.lottiefiles.com/packages/lf20_n5nf19df.json",
+  //       },
+  //       null,
+  //       "start"
+  //     );
+  //     scrollIndi.setSpeed(1.15);
+  //   },
+  //   null,
+  //   0.9
+  // )
+  // .from(
+  //   hamburger,
+  //   {
+  //     scaleX: 0,
+  //     stagger: -0.1,
+  //     duration: 1.25,
+  //     ease: "power4.inOut",
+  //     transformOrigin: "left center",
+  //   },
+  //   0.8
+  // )
+  // .from(
+  //   scrollIndiSplit.chars,
+  //   {
+  //     xPercent: 100,
+  //     stagger: 0.05,
+  //     duration: 1.1,
+  //     ease: "power2.out",
+  //   },
+  //   0.9
+  // )
+  // .fromTo(
+  //   waveContainer,
+  //   {
+  //     scaleX: 0,
+  //     duration: 0.8,
+  //     ease: "power4.inOut",
+  //     transformOrigin: "left center",
+  //   },
+  //   { scaleX: 1, duration: 0.8, ease: "power4.inOut" },
+  //   1.2
+  // )
+  // .to(
+  //   wave,
+  //   {
+  //     amplitude: ampSet,
+  //     duration: 1.25,
+  //     ease: "none",
+  //   },
+  //   1.75
+  // )
+  // .to(
+  //   wave,
+  //   {
+  //     frequency: freqSet,
+  //     ease: "none",
+  //     duration: 0.25,
+  //   },
+  //   ">"
+  // )
+  // .to(
+  //   soundSwitchLabel,
+  //   {
+  //     opacity: 1,
+  //     duration: 0.7,
+  //   },
+  //   1.95
+  // );
 
   titleTL.play();
 

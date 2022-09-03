@@ -1,9 +1,38 @@
 import gsap from "gsap";
 import SplitText from "gsap/SplitText";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import colors from "./js/colors";
+import Stage from "./components/Stage.js";
+import Title from "./sections/Title.js";
+import SupercomputerTable from "./sections/SupercomputerTable.js";
 
-gsap.registerPlugin(ScrollTrigger, SplitText);
+class App {
+  constructor() {
+    this.registerPlugins();
+    this.createStage();
+    this.createSections();
+    this.playIntro();
+  }
+
+  registerPlugins() {
+    gsap.registerPlugin(ScrollTrigger, SplitText);
+  }
+
+  createStage() {
+    this.stage = new Stage();
+  }
+
+  createSections() {
+    this.title = new Title();
+    this.supercomputer = new SupercomputerTable();
+    console.log("created setctions");
+  }
+
+  playIntro() {
+    this.title.tl.play();
+  }
+}
+
+new App();
 
 let h4 = document.querySelector("#whatDoProteins h4");
 h4.split = new SplitText(h4, {

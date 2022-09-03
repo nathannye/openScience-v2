@@ -1,0 +1,59 @@
+$minWidth: 39rem
+$maxWidth: 192rem
+$totalColumns: 8
+
+@function createPreferredClamp($minFont, $maxFont, $maxWidth, $minWidth)
+	$slope: calc(($maxFont - $minFont) / ($maxWidth - $minWidth))
+	$intersect: calc((-1 * $minWidth * $slope) + $minFont)
+
+	$v: ($slope * 100)
+
+	@return calc($intersect + ($v * 1vw))
+
+@mixin flexCenter
+	display: flex
+	justify-content: center
+	align-items: center
+
+@mixin has3D
+	transform: perspective(300px)
+	transform-style: preserve-3d
+	backface-visibility: hidden
+	
+
+// Take col width, divide by columns, get %
+@function col($colWidth)
+	$w: percentage(calc($colWidth / $totalColumns))
+	@return $w
+
+@mixin createFontClamp($minFont, $maxFont)
+	font-size: clamp($minFont, createPreferredClamp($minFont, $maxFont, $maxWidth, $minWidth),$maxFont)
+
+@mixin createClamp($minVal, $maxVal, $property)
+	#{$property}: clamp($minVal, createPreferredClamp($minVal, $maxVal, $maxWidth, $minWidth),$maxVal)
+
+@function getClampVal($minVal, $maxVal)
+	@return clamp($minVal, createPreferredClamp($minVal, $maxVal, $maxWidth, $minWidth),$maxVal)
+
+@mixin fontIvyNormal
+	font-family: ivypresto-headline, serif
+	font-weight: 400
+
+@mixin fontIvyItalic
+	font-family: ivypresto-headline, serif 
+	font-weight: 200
+	font-style: italic
+		
+@mixin fontTel
+	font-family: telegraf
+	font-style: normal
+
+@mixin defaultTransition
+	transition: all .25s ease-in-out
+
+@mixin whipTransition
+	transition: cubic-bezier(.76,.03,.35,.99) .25s all
+
+@mixin has3D
+	transform: perspective(300px)
+	transform-style: preserve-3d

@@ -1,39 +1,26 @@
+@use './utils/forward' as *
+
+@use './base/fonts'
+@use './base/reset'
+
+@use './components/loader'
+@use './components/nav'
+
 $boundary: 87.8%
 
 @font-face
-	font-family: telegraf
+	font-family: $sans
 	src: url(../fonts/telegraf_200.ttf)
 	font-style: normal
 	font-weight: 200
 
 @font-face
-	font-family: telegraf
+	font-family: $sans
 	src: url(../fonts/telegraf_400.ttf)
 	font-style: normal
 	font-weight: 400
 
-@mixin fontIvyNormal
-	font-family: ivypresto-headline, serif
-	font-weight: 400
 
-@mixin fontIvyItalic
-	font-family: ivypresto-headline, serif 
-	font-weight: 200
-	font-style: italic
-	  
-@mixin fontTel
-	font-family: telegraf
-	font-style: normal
-
-@mixin defaultTransition
-	transition: all .25s ease-in-out
-
-@mixin whipTransition
-	transition: cubic-bezier(.76,.03,.35,.99) .25s all
-
-@mixin has3D
-	transform: perspective(300px)
-	transform-style: preserve-3d
 
 *
 	--color-blue: #001F4E
@@ -220,7 +207,7 @@ h5
 	h4
 		text-align: center
 
-p, ul, li, a, ol, 
+p, ul, li, a, ol
 	font-size: clamp(1.6rem, calc(1.6rem + ((1vw - 0.36rem) * 1.4881)), 2rem)
 	@include fontTel
 	letter-spacing: 0.005em
@@ -430,137 +417,40 @@ section#introPanel
 		height: 100%
 		object-fit: cover
 
-header
-	position: fixed
-	top: 0
-	align-items: center
-	z-index: 99999
-	justify-content: space-between
-	display: flex
-	width: 100%
-	padding-top: calc(var(--spacer) * 2.25)
-	padding-left: var(--spacer)
-	padding-right: var(--spacer)
-	
-	#hamburgerIcon
-		width: 6.5rem	
 
-		svg:nth-child(2)
-			display: none
 
-	div#soundIndicatorContainer
-		z-index: 300
-		display: flex
-		flex-direction: row-reverse
-		align-items: center
-		overflow: hidden
-		cursor: pointer
-		transition: var(--smoothTransition)
 
-		&:hover
-			opacity: .5
-			transition: var(--smoothTransition)
-
-		#soundLabelSwitch
-			height: clamp(1.3em, calc(1.3rem + (1.7 - 1.3) * ((100vw - 48em) / (120 - 48))), 1.7em)	
-			overflow: hidden
-			display: flex
-			opacity: 0
-			margin-left: 1.5rem
-
-			& > div
-				height: clamp(1.3em, calc(1.3rem + (1.7 - 1.3) * ((100vw - 48em) / (120 - 48))), 1.7em)	
-				margin-left: .75em
-
-		h5
-			margin: 0
-			line-height: 1
-
-		canvas#soundIndicator
-			transform: translateY(-.12rem)
-			width: 35px
-			height: 25px
-
-#loader
-	background: grey
-	z-index: 40
-	width: 100%
-	height: 100%
-	position: fixed
-	top: 0
-	display: none
-	left: 0
-
-#mobileMenu
-	width: 100%
-	height: 100%
-	backdrop-filter: blur(15px) saturate(2) brightness(1.2)
-	-webkit-backdrop-filter: blur(15px) saturate(.75) brightness(1.2)
-	background: rgba(0,0,0, .6)
-	z-index: 999
-	position: fixed
-	top: 0
-	display: none
-	padding-left: var(--gutter)
-	justify-content: flex-start
-	align-items: flex-end
-	left: 0
-
-	#mobileNav
-		padding-bottom: 40%
-		text-align: left
-
-	h1
-		font-size: clamp(1.6em, calc(1.6rem + (12 - 3.2) * ((100vw - 48em) / (120 - 48))), 12em)
-		letter-spacing: -0.03em
-		line-height: 2.5
-		color: var(--color-white)
-		@include fontIvyNormal
-		@include has3D
-		text-transform: capitalize !important
-
-#mobileMenuTransitionBar
-	width: $boundary
-	position: fixed
-	bottom: 4px
-	left: 0
-	right: 0
-	margin-right: auto
-	margin-left: auto
-	z-index: 200
-	background: white
-	height: 1px
 
 @keyframes grain
-  0%, 100%
-    transform: translate(0, 0)
+	0%, 100%
+		transform: translate(0, 0)
 
-  10%
-    transform: translate(-5%, -10%)
+	10%
+		transform: translate(-5%, -10%)
 
-  20%
-    transform: translate(-15%, 5%)
+	20%
+		transform: translate(-15%, 5%)
 
-  30%
-    transform: translate(7%, -25%)
+	30%
+		transform: translate(7%, -25%)
 
-  40%
-    transform: translate(-5%, 25%)
+	40%
+		transform: translate(-5%, 25%)
 
-  50%
-    transform: translate(-15%, 10%)
+	50%
+		transform: translate(-15%, 10%)
 
-  60%
-    transform: translate(15%, 0%)
+	60%
+		transform: translate(15%, 0%)
 
-  70%
-    transform: translate(0%, 15%)
+	70%
+		transform: translate(0%, 15%)
 
-  80%
-    transform: translate(3%, 35%)
+	80%
+		transform: translate(3%, 35%)
 
-  90%
-    transform: translate(-10%, 10%)
+	90%
+		transform: translate(-10%, 10%)
 
 #grain
 	width: 100vw
@@ -747,7 +637,7 @@ section#whatIsFolding
 				margin: auto
 
 				circle
-					stroke: var(--color-white);
+					stroke: var(--color-white)
 					z-index: 4
 					stroke-width: 6px
 					fill: transparent

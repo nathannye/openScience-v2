@@ -65,9 +65,6 @@ for (let i = 0; i < faq.length; i++) {
 
   article.tl = gsap.timeline({
     paused: true,
-    onComplete: () => {
-      article.tl.kill();
-    },
   });
 
   let maxH = answerContainer.scrollHeight;
@@ -118,6 +115,9 @@ for (let i = 0; i < faq.length; i++) {
     scrollTrigger: {
       trigger: faqContainer,
       start: `top bottom-=${6 * [i]}%`,
+    },
+    onComplete: () => {
+      tl.kill();
     },
   });
 

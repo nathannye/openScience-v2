@@ -7,7 +7,7 @@
     <title>Open Source, Open Science</title>
     <meta name="description" content="" />
     <link rel="icon" href="favicon.ico" />
-    <link rel="stylesheet" href="./src/styles/styles.css" />
+    <link rel="stylesheet" href="./src/styles/global.sass" />
     <link rel="preconnect" href="https://use.typekit.net/" />
     <link rel="stylesheet" href="https://use.typekit.net/jih6lvv.css" />
   </head>
@@ -537,26 +537,27 @@
         </cite>
       </div>
     </main>
+    <script src="/src/index.js" type="module"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/ngl/2.0.0-dev.39/ngl.js"
       integrity="sha512-L4e1Z9pbAAsBXDzbcitJzkcRIHq6PUF/6GSR5UbA38XiaQ3TAS3422wJ5DllYOlwkpKUXInFt1b+C06NDvtmTg=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <script type="module" src="./src/js/nglScene.js"></script>
-    <script type="module" src="./src/js/waveAnim.js"></script>
+    <!-- <script type="module" src="./src/js/nglScene.js" defer></script> -->
+    <!-- <script type="module" src="./src/js/waveAnim.js"></script> -->
     <script type="module" src="./src/js/soundToggle.js"></script>
-    <script type="module" src="./src/js/barChart.js" defer></script>
-    <!-- <script type="module" src="./src/js/aminoDudes.js"></script> -->
-    <script type="module" src="./src/js/navMarkerAnim.js"></script>
-    <script type="module" src="./src/js/interstitialAnim.js" async></script>
-    <script src="./src/index.js" type="module"></script>
     <script type="module" src="./src/js/hamburgerAnim.js"></script>
+    <script type="module" src="./src/js/aminoDudes.js" defer></script>
+    <script type="module" src="./src/js/navMarkerAnim.js"></script>
+    <script type="module" src="./src/js/interstitialAnim.js" defer></script>
+    <script type="module" src="./src/js/barChart.js" defer></script>
+
     <script type="module" src="./src/js/costNumbers.js" defer></script>
     <script type="module" src="./src/js/peptideAnim.js" defer></script>
     <script type="module" src="./src/js/introAnims.js"></script>
 
-    <script type="module" src="./src/js/faqAnim.js"></script>
+    <script type="module" src="./src/js/faqAnim.js" defer></script>
     <script
       type="module"
       src="./src/js/supercomputerTableAnim.js"
