@@ -27,6 +27,7 @@ class App {
     this.createPreloader();
     this.createInterstitials();
     this.createStage();
+    this.playIntro();
     this.refresh();
     // this.playTitle();
   }
@@ -74,6 +75,10 @@ class App {
     for (let section in this.sections) {
       this.section = this.sections[section];
     }
+  }
+
+  async playIntro() {
+    await this.preloader.animateOut();
   }
 
   createAudioController() {

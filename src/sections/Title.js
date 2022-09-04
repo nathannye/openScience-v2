@@ -35,7 +35,7 @@ export default class Title extends Component {
 
   create() {
     super.create();
-    this.createIntroAnim();
+    // this.createIntroAnim();
   }
 
   createIntroAnim() {
