@@ -4,31 +4,68 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import Stage from "./components/Stage.js";
 import Title from "./sections/Title.js";
 import SupercomputerTable from "./sections/SupercomputerTable.js";
+import Faq from "./sections/Faq.js";
+import WhyComputers from "./sections/WhyComputers.js";
+import Nav from "./components/Nav.js";
+import SoundToggle from "./components/SoundToggle.js";
+import Draggable from "gsap/Draggable";
+import CustomEase from "gsap/CustomEase";
+import InertiaPlugin from "gsap/InertiaPlugin";
+import DrawSVGPlugin from "gsap/DrawSVGPlugin";
 
 class App {
   constructor() {
     this.registerPlugins();
     this.createStage();
+    this.createNav();
+    this.createAudioController();
     this.createSections();
-    this.playIntro();
+    this.playTitle();
   }
 
   registerPlugins() {
-    gsap.registerPlugin(ScrollTrigger, SplitText);
+    gsap.registerPlugin(
+      ScrollTrigger,
+      SplitText,
+      Draggable,
+      CustomEase,
+      InertiaPlugin,
+      DrawSVGPlugin
+    );
   }
+
+  createPreloader() {}
+
+  createIntro() {}
 
   createStage() {
     this.stage = new Stage();
   }
 
-  createSections() {
-    this.title = new Title();
-    this.supercomputer = new SupercomputerTable();
-    console.log("created setctions");
+  createNav() {
+    this.nav = new Nav();
   }
 
-  playIntro() {
-    this.title.tl.play();
+  createSections() {
+    this.sections = {
+      title: new Title(),
+      supercomputer: new SupercomputerTable(),
+      faq: new Faq(),
+      why: new WhyComputers(),
+    };
+
+    for (let section in this.sections) {
+      this.section = this.sections[section];
+      this.section.create();
+    }
+  }
+
+  createAudioController() {
+    this.audio = new SoundToggle();
+  }
+
+  playTitle() {
+    // this.title.tl.play();
   }
 }
 

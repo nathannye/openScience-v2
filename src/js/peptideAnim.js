@@ -250,42 +250,42 @@ document.addEventListener("DOMContentLoaded", (event) => {
         "state"
       );
 
-    dangerClickTargets.forEach((target) => {
-      target.dangerMarkerAnim = Lottie.loadAnimation({
-        container: target,
-        renderer: "svg",
-        loop: true,
-        quality: "medium",
-        autoplay: true,
-        path: "https://assets10.lottiefiles.com/packages/lf20_oafsmzxp.json",
-      });
+    // dangerClickTargets.forEach((target) => {
+    //   target.dangerMarkerAnim = Lottie.loadAnimation({
+    //     container: target,
+    //     renderer: "svg",
+    //     loop: true,
+    //     quality: "medium",
+    //     autoplay: true,
+    //     path: "https://assets10.lottiefiles.com/packages/lf20_oafsmzxp.json",
+    //   });
 
-      target.addEventListener("click", (event) => {
-        let e = dangerClickTargets.indexOf(target);
-        dangerClickClear += 1;
-        gsap.to(target, {
-          autoAlpha: 0,
-          duration: 0.6,
-          ease: "back.out(5)",
-          onComplete: () => {
-            target.dangerMarkerAnim.destroy();
-          },
-        });
+    //   target.addEventListener("click", (event) => {
+    //     let e = dangerClickTargets.indexOf(target);
+    //     dangerClickClear += 1;
+    //     gsap.to(target, {
+    //       autoAlpha: 0,
+    //       duration: 0.6,
+    //       ease: "back.out(5)",
+    //       onComplete: () => {
+    //         target.dangerMarkerAnim.destroy();
+    //       },
+    //     });
 
-        gsap.to(errorGroups[e], {
-          stroke: colors.ylw,
-        });
-        gsap.to(redChains[e], {
-          stroke: colors.ylw,
-        });
+    //     gsap.to(errorGroups[e], {
+    //       stroke: colors.ylw,
+    //     });
+    //     gsap.to(redChains[e], {
+    //       stroke: colors.ylw,
+    //     });
 
-        if (dangerClickClear === 3) {
-          handleAudioSwitch();
-          peptideAnim.playSegments([130, 240]);
-          dangerClearTL.play();
-        }
-      });
-    });
+    //     if (dangerClickClear === 3) {
+    //       handleAudioSwitch();
+    //       peptideAnim.playSegments([130, 240]);
+    //       dangerClearTL.play();
+    //     }
+    //   });
+    // });
   });
 
   let dragDirections = document.getElementById("dragDirections");

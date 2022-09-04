@@ -12,48 +12,44 @@ export default class Title extends Component {
         navDots: ".navMarker",
         hamburger: "#hamburgerIcon > svg > g > g",
         scrollIndiText: "#scrollIndicator h4",
-        waveContainer: "#soundIndicator",
+        waveContainer: "#soundIndicatorContainer",
         indiContainer: "#scrollAnimContainer",
         html: "html",
         introPara: "#introPanel p",
         introPanel: "#introPanel",
         soundSwitchLabel: "#soundLabelSwitch",
         title: "#introHeadingContainer h1",
+        openSource: "#introHeadingContainer > h1",
+        openScience: "#introHeadingContainer > div > h1",
       },
     });
     this.tl = gsap.timeline({
       paused: true,
+      delay: 1.25,
       onComplete: () => {
-        // this.tl.kill();
+        this.tl.kill();
       },
     });
-    this.createIntroAnim();
   }
 
   create() {
-    gsap.registerPlugin(SplitText);
     super.create();
+    this.createIntroAnim();
   }
 
   createIntroAnim() {
-    // this.tl.onComplete = () => {
-    //   this.createIntroOutTL();
-    // };
-
     let scrollIndiSplit = new SplitText(this.elements.scrollIndiText, {
       type: "lines, chars",
       linesClass: "splitLine",
     });
-    let openSource = new SplitText(this.elements.title[0], {
+    let source = new SplitText(this.elements.openSource, {
       type: "chars",
     });
-    let openScience = new SplitText(this.elements.title[1], {
+    let science = new SplitText(this.elements.openScience, {
       type: "chars",
     });
 
-    let introtl = gsap.timeline();
-
-    introtl
+    this.tl
       .to(
         this.elements.introPanel,
         {
@@ -75,7 +71,7 @@ export default class Title extends Component {
         "stageIn"
       )
       .to(
-        openSource.chars,
+        source.chars,
         {
           yPercent: 0,
           opacity: 1,
@@ -91,7 +87,7 @@ export default class Title extends Component {
         0.2
       )
       .to(
-        openScience.chars,
+        science.chars,
         {
           yPercent: 0,
           opacity: 1,
@@ -209,8 +205,6 @@ export default class Title extends Component {
         },
         1.95
       );
-
-    this.tl.add(introtl);
   }
 
   createIntroOutAnim() {

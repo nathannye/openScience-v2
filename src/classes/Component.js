@@ -3,17 +3,18 @@ import gsap from "gsap";
 import { each } from "lodash";
 
 export default class Component extends EventEmitter {
-  constructor({ elements, element }) {
+  constructor({ elements, element, tl }) {
     super();
     this.selector = element;
     this.selectorChildren = {
       ...elements,
     };
-
+    this.tl = tl;
     this.create();
     this.addEventListeners();
   }
   create() {
+    this.tl = gsap.timeline();
     this.element = document.querySelector(this.selector);
     this.elements = {};
     each(this.selectorChildren, (e, i) => {
