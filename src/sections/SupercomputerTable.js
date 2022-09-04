@@ -25,7 +25,12 @@ export default class SupercomputerTable extends Component {
     supercomputers.forEach((computer) => {
       let tableRow = document.createElement("tr");
       let image = document.createElement("img");
-      image.src = `./src/img/supercomputers/${computer.img}.jpg`;
+
+      image.setAttribute(
+        "data-src",
+        `./src/img/supercomputers/${computer.img}.jpg`
+      );
+      // image.src = `./src/img/supercomputers/${computer.img}.jpg`;
       image.alt = `${computer.name} Supercomputer`;
 
       let dataName = document.createElement("td");

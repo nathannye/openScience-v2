@@ -1,31 +1,42 @@
 import Component from "../classes/Component";
+import gsap from "gsap";
 
 export default class Preloader extends Component {
   constructor() {
     super({
-      element: "",
+      element: "#loader",
       elements: {
-        images: "img",
+        images: "[data-src]",
+        percentage: ".loaderNumber",
       },
     });
     this.length = 0;
-    this.create();
   }
 
   create() {
     super.create();
-    this.createPreloader();
+    this.loadImages();
   }
 
   loadImages() {
-    this.elements.images.forEach((img, i) => {
-      img.onload = () => {
-        console.log("loaded image");
-      };
-      img.src = img.getAttribute = "data-src";
+    this.elements.images.forEach((img) => {
+      img.onload = () => this.onAssetLoaded(img);
+      img.src = img.getAttribute("data-src");
     });
-    // this.elements.img.getAttribute("data-src");
   }
 
-  createPreloader() {}
+  onAssetLoaded(img) {
+    this.length += 1;
+
+    var percentLoaded = this.length / this.elements.images.length;
+    this.elements.percentage.innerHTML = Math.round(percentLoaded * 100);
+
+    if (percentLoaded == 1) {
+      this.animateOut;
+    }
+  }
+
+  animateOut() {
+    const tl = gsap.timeline();
+  }
 }

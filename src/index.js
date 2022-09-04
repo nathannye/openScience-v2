@@ -16,6 +16,7 @@ import WhatIsFolding from "./sections/WhatIsFolding.js";
 import ReduceCosts from "./sections/ReduceCosts.js";
 import Graph from "./sections/Graph.js";
 import Interstitials from "./components/Interstitials.js";
+import Preloader from "./components/Preloader.js";
 
 class App {
   constructor() {
@@ -23,6 +24,7 @@ class App {
     this.createNav();
     this.createAudioController();
     this.createSections();
+    this.createPreloader();
     this.createInterstitials();
     this.createStage();
     this.refresh();
@@ -39,8 +41,9 @@ class App {
       DrawSVGPlugin
     );
   }
-
-  createPreloader() {}
+  createPreloader() {
+    this.preloader = new Preloader();
+  }
 
   createIntro() {}
 
@@ -74,7 +77,7 @@ class App {
   }
 
   createAudioController() {
-    this.audio = new SoundToggle();
+    // this.audio = new SoundToggle();
   }
 
   playTitle() {
