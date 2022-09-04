@@ -1,4 +1,37 @@
-const data = [
+export const faq = [
+  {
+    question: "Do I need a super fast computer?",
+    answer:
+      "Not at all! As long as your system meets the minimum requirements for a projects you're all set. Of course, the faster the computer, the more folding you can help with. But if you've only got an older PC or Mac, the help is still appreciated. (Bonus points for those of you with GPU's)",
+  },
+  {
+    question: "How often do I need to contribute?",
+    answer:
+      "There is no maximum or minimum time that you need to spend helping, we appreciate any level of contribution. If you can only fold on weekends when you aren't using your computer for work, that works for us!",
+  },
+  {
+    question: "Will anybody have access to my computer?",
+    answer:
+      "Nope! These programs send your computer a mathematical problem privately (over encrypted connections). When your computer has solved its piece, it is sent back. They don't sell or farm data of any kind. They just wait for your returned mathematic response, rinse, and repeat",
+  },
+  {
+    question: "Have these actually projects cured any diseases?",
+    answer:
+      "Short answer: Kinda, but their purpose is far more supportive. Long answer: The technology these programs use to fold proteins cannot directly cure Cancer or Alzheimer's. But what they can do is help scientists weed out protein areas that are not worth the time for them to investigate. They can move on and study potentially helpful proteins with more precise methods (like X-Ray Crystallography) instead of wasting these resources of non-useful proteins.",
+  },
+];
+
+export const colors = {
+  teal: "#13f1df",
+  ylw: "#FFE65C",
+  gry: "#EEEEEE",
+  blue: "#001f4e",
+  red: "#e32121",
+  dark: "#030b18",
+  white: "white",
+};
+
+export const chart = [
   {
     users: 20000,
     date: "4 Mar",
@@ -368,4 +401,66 @@ const data = [
     date: "3 Jun",
   },
 ];
-export default data;
+
+export const supercomputers = [
+  {
+    name: "Folding @ Home",
+    flops: 1100,
+    img: "folding",
+    country: "all",
+  },
+  {
+    name: "RIKU Fugaku",
+    flops: 415,
+    img: "fugaku",
+    country: "japan",
+  },
+  {
+    name: "IBM Summit",
+    flops: 148,
+    img: "summit",
+    country: "usa",
+  },
+  {
+    name: "IBM Sierra",
+    flops: 94,
+    img: "sierra",
+    country: "usa",
+  },
+  {
+    name: "Sunway TaihuLight",
+    flops: 93,
+    img: "sunway",
+    country: "china",
+  },
+  {
+    name: "Tianhe: 2A",
+    flops: 61,
+    img: "tianhe",
+    country: "china",
+  },
+  {
+    name: "Eni HPC5",
+    flops: 35,
+    img: "hpc5",
+    country: "italy",
+  },
+  {
+    name: "NVIDIA Selene",
+    flops: 27,
+    img: "selene",
+    country: "usa",
+  },
+  {
+    name: "Frontera",
+    flops: 23,
+    img: "frontera",
+    country: "usa",
+  },
+  {
+    name: "Cineca Marconi-100",
+    flops: 21,
+    country: "italy",
+    img: "marconi",
+  },
+];

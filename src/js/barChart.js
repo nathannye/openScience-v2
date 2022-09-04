@@ -1,8 +1,8 @@
-import data from "./data";
+import { chart, colors } from "../data";
 import * as d3 from "d3";
 import gsap from "gsap/all";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import colors from "./colors";
+
 import SplitText from "gsap/SplitText";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
@@ -22,7 +22,7 @@ const width = 900 - margin.left - margin.right;
 
 const x = d3
   .scaleBand()
-  .domain(d3.range(data.length))
+  .domain(d3.range(chart.length))
   .range([margin.left, width - margin.right])
   .padding(0.1);
 
@@ -35,7 +35,7 @@ svg
   .append("g")
   .attr("fill", colors.gry)
   .selectAll("rect")
-  .data(data.sort((a, b) => d3.ascending(a.users, b.users)))
+  .data(chart.sort((a, b) => d3.ascending(a.users, b.users)))
   .join("rect")
   .attr("x", (d, i) => x(i))
   // .attr("y", (d) => y(d.users))
@@ -52,13 +52,13 @@ svg
 // function xAxis(g) {
 //   g.attr("transform", `translate(0, ${height - margin.bottom})`)
 //     .attr("id", "xAxis")
-//     .call(d3.axisBottom(x).tickFormat((i) => data[i].date));
+//     .call(d3.axisBottom(x).tickFormat((i) => chart[i].date));
 // }
 
 // function yAxis(g) {
 //   g.attr("transform", `translate(${margin.left}, 0)`)
 //     .attr("id", "yAxis")
-//     .call(d3.axisLeft(y).ticks(null, data.format));
+//     .call(d3.axisLeft(y).ticks(null, chart.format));
 // }
 // svg.append("g").call(yAxis);
 // svg.append("g").call(xAxis);

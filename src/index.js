@@ -12,6 +12,9 @@ import Draggable from "gsap/Draggable";
 import CustomEase from "gsap/CustomEase";
 import InertiaPlugin from "gsap/InertiaPlugin";
 import DrawSVGPlugin from "gsap/DrawSVGPlugin";
+import WhatIsFolding from "./sections/WhatIsFolding.js";
+import ReduceCosts from "./sections/ReduceCosts.js";
+import Graph from "./sections/Graph.js";
 
 class App {
   constructor() {
@@ -20,7 +23,8 @@ class App {
     this.createNav();
     this.createAudioController();
     this.createSections();
-    this.playTitle();
+    this.refresh();
+    // this.playTitle();
   }
 
   registerPlugins() {
@@ -49,14 +53,17 @@ class App {
   createSections() {
     this.sections = {
       title: new Title(),
-      supercomputer: new SupercomputerTable(),
-      faq: new Faq(),
+
+      what: new WhatIsFolding(),
       why: new WhyComputers(),
+      graph: new Graph(),
+      supercomputer: new SupercomputerTable(),
+      cost: new ReduceCosts(),
+      faq: new Faq(),
     };
 
     for (let section in this.sections) {
       this.section = this.sections[section];
-      this.section.create();
     }
   }
 
@@ -66,6 +73,10 @@ class App {
 
   playTitle() {
     // this.title.tl.play();
+  }
+
+  refresh() {
+    ScrollTrigger.refresh();
   }
 }
 

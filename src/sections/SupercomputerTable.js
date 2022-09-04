@@ -1,6 +1,6 @@
 import gsap from "gsap";
 import Component from "../classes/Component";
-import supercomputers from "../js/supercomputersData";
+import { supercomputers } from "../data";
 import ScrollTrigger from "gsap/ScrollTrigger";
 
 export default class SupercomputerTable extends Component {
@@ -26,6 +26,7 @@ export default class SupercomputerTable extends Component {
       let tableRow = document.createElement("tr");
       let image = document.createElement("img");
       image.src = `./src/img/supercomputers/${computer.img}.jpg`;
+      image.alt = `${computer.name} Supercomputer`;
 
       let dataName = document.createElement("td");
       dataName.innerHTML = computer.name;

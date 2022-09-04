@@ -1,7 +1,6 @@
 import Component from "../classes/Component";
-import { faq } from "../data/faq";
 import gsap from "gsap";
-import colors from "../js/colors";
+import { colors, faq } from "../data";
 
 export default class Faq extends Component {
   constructor() {
