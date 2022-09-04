@@ -1,9 +1,12 @@
 import Component from "../classes/Component";
+import * as d3 from "d3";
+import { chart, colors } from "../data";
+import gsap from "gsap";
 
 export default class Graph extends Component {
   constructor() {
     super({
-      element: "",
+      element: "#chartOfUsers",
       elements: {},
     });
   }
@@ -11,6 +14,7 @@ export default class Graph extends Component {
   create() {
     super.create();
     this.createChart();
+    this.createChartAnimation();
   }
 
   createChart() {
@@ -70,5 +74,162 @@ export default class Graph extends Component {
     // svg.append("g").call(yAxis);
     // svg.append("g").call(xAxis);
     svg.node();
+  }
+
+  createChartAnimation() {
+    let bars = gsap.utils.toArray("rect.bar");
+
+    // let chart = document.querySelector("#barChartContainer");
+
+    // // Event Markers
+    let declarePandemic = bars[8];
+    let exascaleMark = bars[bars.length - 1];
+    declarePandemic.setAttribute("id", "pandemicDeclaredMark");
+    declarePandemic.setAttribute("class", "eventMarker");
+    exascaleMark.setAttribute("id", "exascaleMark");
+    exascaleMark.setAttribute("class", "eventMarker");
+
+    let tillPandemic = bars.slice(0, 8);
+    let pandemicTillExa = bars.slice(9, bars.length);
+    let chartCaptions = gsap.utils.toArray("#chartCaptionContainer > h2");
+    let introCaption = chartCaptions[0];
+    let pandemicCaption = chartCaptions[1];
+    let exaCaption = chartCaptions[2];
+    let chartSectionContainer = document.getElementById("chartOfUsers");
+    let barChartContainer = document.getElementById("barChartContainer");
+
+    // chartCaptions.forEach((caption) => {
+    //   caption.split = new SplitText(caption, {
+    //     type: "words, lines",
+    //     linesClass: "splitLine",
+    //   });
+
+    //   gsap.set(caption.split.words, {
+    //     yPercent: 100,
+    //   });
+
+    //   caption.tl = gsap.timeline({
+    //     paused: true,
+    //   });
+
+    //   caption.tl.to(
+    //     caption.split.words,
+    //     {
+    //       yPercent: 0,
+    //       duration: 0.65,
+    //       ease: "power3.inOut",
+    //       stagger: 0.02,
+    //     },
+    //     "splitIn"
+    //   );
+    // });
+
+    gsap.set(bars, {
+      opacity: 0,
+      fill: colors.teal,
+      scaleY: 0.35,
+      transformOrigin: "center bottom",
+    });
+
+    let graphtl = gsap.timeline({
+      scrollTrigger: {
+        pin: chartSectionContainer,
+        scrub: 0.35,
+        trigger: chartSectionContainer,
+        start: "bottom bottom",
+        end: "+=10000",
+      },
+    });
+
+    graphtl
+      // Call first caption
+      .from(chartCaptions[0], {
+        opacity: 0,
+        duration: 5,
+      })
+      // bars fill to pandemic bar
+      .to(
+        tillPandemic,
+        {
+          opacity: 1,
+          scaleY: 1,
+          fill: colors.gry,
+          stagger: {
+            each: 12,
+          },
+        },
+        "moveToPandemic"
+      )
+      // move over a bit
+      .to(
+        barChartContainer,
+        {
+          x: "-30vw",
+          ease: "power2.inOut",
+        },
+        "moveToPandemic"
+      )
+      // fill pandemic mark w/ yellow
+      .to(declarePandemic, {
+        opacity: 1,
+        scaleY: 1,
+        fill: colors.ylw,
+      })
+      // Next caption up, reverse the one before
+      .to(
+        chartCaptions[0],
+        {
+          opacity: 0,
+          duration: 5,
+        },
+        "swap1"
+      )
+      .from(
+        chartCaptions[1],
+        {
+          opacity: 0,
+          duration: 5,
+        },
+        "swap1"
+      )
+      .to(declarePandemic, {
+        duration: 1,
+      })
+      .to(
+        pandemicTillExa,
+        {
+          opacity: 1,
+          scaleY: 1,
+          duration: 1,
+          fill: colors.gry,
+          stagger: {
+            each: 0.2,
+          },
+        },
+        "moveTillExa"
+      )
+      .to(
+        barChartContainer,
+        {
+          x: "-100vw",
+        },
+        "moveTillExa"
+      )
+      .to(
+        chartCaptions[1],
+        {
+          opacity: 0,
+          duration: 5,
+        },
+        "swap1"
+      )
+      .from(
+        chartCaptions[2],
+        {
+          opacity: 0,
+          duration: 5,
+        },
+        "swap1"
+      );
   }
 }

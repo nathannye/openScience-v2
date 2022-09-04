@@ -15,14 +15,16 @@ import DrawSVGPlugin from "gsap/DrawSVGPlugin";
 import WhatIsFolding from "./sections/WhatIsFolding.js";
 import ReduceCosts from "./sections/ReduceCosts.js";
 import Graph from "./sections/Graph.js";
+import Interstitials from "./components/Interstitials.js";
 
 class App {
   constructor() {
     this.registerPlugins();
-    this.createStage();
     this.createNav();
     this.createAudioController();
     this.createSections();
+    this.createInterstitials();
+    this.createStage();
     this.refresh();
     // this.playTitle();
   }
@@ -48,6 +50,10 @@ class App {
 
   createNav() {
     this.nav = new Nav();
+  }
+
+  createInterstitials() {
+    this.interstitial = new Interstitials();
   }
 
   createSections() {

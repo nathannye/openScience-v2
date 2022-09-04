@@ -2,6 +2,7 @@ import Component from "../classes/Component";
 import gsap from "gsap";
 import SplitText from "gsap/SplitText";
 import Wave from "../animations/Wave";
+import { colors } from "../data";
 
 export default class Title extends Component {
   constructor() {
@@ -92,7 +93,7 @@ export default class Title extends Component {
           yPercent: 0,
           opacity: 1,
           delay: 0.25,
-          color: "yellow",
+          color: colors.ylw,
           stagger: {
             each: 0.035,
             ease: "power2.inOut",

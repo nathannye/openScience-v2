@@ -1,4 +1,6 @@
 import Component from "../classes/Component";
+import { colors } from "../data";
+import * as NGL from "ngl";
 
 export default class Stage extends Component {
   constructor() {
@@ -21,8 +23,8 @@ export default class Stage extends Component {
       clipFar: 32,
       lightIntensity: 1,
       ambientIntensity: 1.5,
-      // lightColor: colors.teal,
-      // ambientColor: colors.blue,
+      lightColor: colors.teal,
+      ambientColor: colors.blue,
     });
 
     // Handle window resizing

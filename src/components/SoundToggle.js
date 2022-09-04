@@ -8,5 +8,12 @@ export default class SoundToggle extends Component {
     });
   }
 
+  create() {
+    super.create();
+    this.createAudio();
+  }
+
+  createAudio() {}
+
   toggleSound() {}
 }
