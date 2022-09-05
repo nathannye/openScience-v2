@@ -145,7 +145,7 @@ export default class Faq extends Component {
         } else {
           article.tl.reverse();
         }
-        console.log(article.tl.reversed());
+
       });
     });
   }

@@ -160,7 +160,6 @@ function setupActive() {
       } else {
         article.tl.reverse();
       }
-      console.log(article.tl.reversed());
     });
   });
 }

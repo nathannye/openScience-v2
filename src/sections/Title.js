@@ -1,7 +1,9 @@
 import Component from "../classes/Component";
 import gsap from "gsap";
 import SplitText from "gsap/SplitText";
-import Wave from "../animations/Wave";
+import ScrollTrigger from "gsap/ScrollTrigger";
+// import Wave from "../animations/Wave";
+import Lottie from "lottie-web";
 import { colors } from "../data";
 
 export default class Title extends Component {
@@ -24,31 +26,71 @@ export default class Title extends Component {
         openScience: "#introHeadingContainer > div > h1",
       },
     });
-    this.tl = gsap.timeline({
-      paused: true,
-      delay: 1.25,
-      onComplete: () => {
-        this.tl.kill();
-      },
-    });
+    // this.tl = gsap.timeline({
+    //   paused: true,
+    //   onComplete: () => {
+    //     this.createIntroOutAnim();
+    //     console.log("intro done");
+    //   },
+    // });
   }
 
   create() {
     super.create();
-    // this.createIntroAnim();
+    this.tl = gsap.timeline({
+      paused: true,
+      onComplete: () => {
+        this.createIntroOutAnim();
+        console.log("intro done");
+      },
+    });
+    this.createIntroAnim();
   }
 
   createIntroAnim() {
-    let scrollIndiSplit = new SplitText(this.elements.scrollIndiText, {
-      type: "lines, chars",
-      linesClass: "splitLine",
+    this.elements.scrollIndiText.split = new SplitText(
+      this.elements.scrollIndiText,
+      {
+        type: "lines, chars",
+        linesClass: "splitLine",
+      }
+    );
+    this.elements.introPara.split = new SplitText(this.elements.introPara, {
+      type: "lines",
     });
-    let source = new SplitText(this.elements.openSource, {
+    this.elements.openSource.split = new SplitText(this.elements.openSource, {
       type: "chars",
     });
-    let science = new SplitText(this.elements.openScience, {
+    this.elements.openScience.split = new SplitText(this.elements.openScience, {
       type: "chars",
     });
+
+    gsap.set(this.elements.openSource.split.chars, {
+      opacity: 0,
+      yPercent: 30,
+      color: colors.teal,
+    });
+    gsap.set(this.elements.openScience.split.chars, {
+      opacity: 0,
+      yPercent: -30,
+      color: colors.teal,
+    });
+
+    let scrollIndi = Lottie.loadAnimation(
+      {
+        container: this.elements.indiContainer,
+        loop: false,
+        renderer: "svg",
+        quality: "low",
+        // autoplay: true,
+        path: "https://assets10.lottiefiles.com/packages/lf20_n5nf19df.json",
+      },
+      null,
+      "start"
+    );
+    scrollIndi.setSpeed(1.15);
+
+    this.tl.delay(10);
 
     this.tl
       .to(
@@ -72,7 +114,7 @@ export default class Title extends Component {
         "stageIn"
       )
       .to(
-        source.chars,
+        this.elements.openSource.split.chars,
         {
           yPercent: 0,
           opacity: 1,
@@ -88,7 +130,7 @@ export default class Title extends Component {
         0.2
       )
       .to(
-        science.chars,
+        this.elements.openScience.split.chars,
         {
           yPercent: 0,
           opacity: 1,
@@ -103,6 +145,20 @@ export default class Title extends Component {
           ease: "power3.out",
         },
         0.2
+      )
+      .from(
+        this.elements.introPara.split.lines,
+        {
+          autoAlpha: 0,
+          y: 12,
+          rotateY: -8,
+          delay: 0.34,
+          color: colors.teal,
+          ease: "power2.out",
+          stagger: 0.09,
+          duration: 1.1,
+        },
+        0.6
       )
       // .call(
       //   function () {
@@ -129,25 +185,13 @@ export default class Title extends Component {
         null,
         "start"
       )
-      // .call(
-      //   function () {
-      //     let scrollIndi = Lottie.loadAnimation(
-      //       {
-      //         container: indiContainer,
-      //         loop: false,
-      //         renderer: "svg",
-      //         quality: "low",
-      //         autoplay: true,
-      //         path: "https://assets10.lottiefiles.com/packages/lf20_n5nf19df.json",
-      //       },
-      //       null,
-      //       "start"
-      //     );
-      //     scrollIndi.setSpeed(1.15);
-      //   },
-      //   null,
-      //   0.9
-      // )
+      .call(
+        () => {
+          scrollIndi.play();
+        },
+        null,
+        0.9
+      )
       .from(
         this.elements.hamburger,
         {
@@ -160,7 +204,7 @@ export default class Title extends Component {
         0.8
       )
       .from(
-        scrollIndiSplit.chars,
+        this.elements.scrollIndiText.split.chars,
         {
           xPercent: 100,
           stagger: 0.05,
@@ -223,13 +267,11 @@ export default class Title extends Component {
 
     introOutTL
       .call(() => {
-        introPara.tl.kill;
-        introPara.tl.invalidate;
-        titleTL.invalidate;
-        titleTL.kill;
+        this.tl.invalidate;
+        this.tl.kill;
       })
       .to(
-        openSource.split.chars,
+        this.elements.openSource.split.chars,
         {
           z: -12,
           yPercent: -10,
@@ -246,7 +288,7 @@ export default class Title extends Component {
         "scrollingOut"
       )
       .to(
-        openScience.split.chars,
+        this.elements.openScience.split.chars,
         {
           z: -22,
           yPercent: 14,
@@ -263,7 +305,7 @@ export default class Title extends Component {
         "scrollingOut"
       )
       .to(
-        introPara.split.lines,
+        this.elements.introPara.split.lines,
         {
           z: -2,
           y: 9,
@@ -277,7 +319,7 @@ export default class Title extends Component {
         "scrollingOut+=50%"
       )
       .to(
-        indiContainer,
+        this.elements.indiContainer,
         {
           scaleY: 0,
           transformOrigin: "center bottom",
@@ -287,7 +329,7 @@ export default class Title extends Component {
         "indi"
       )
       .to(
-        scrollIndiSplit.chars,
+        this.elements.scrollIndiText.split.chars,
         {
           autoAlpha: 0,
           duration: 0.75,
@@ -298,7 +340,7 @@ export default class Title extends Component {
       );
     ScrollTrigger.refresh();
     // Only give scrolling back AFTER the outro timeline has been created, not after intro has fired
-    gsap.to(html, {
+    gsap.to("html", {
       overflowY: "auto",
     });
   }

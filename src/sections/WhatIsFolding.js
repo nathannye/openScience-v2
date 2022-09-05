@@ -311,8 +311,6 @@ export default class WhatIsFolding extends Component {
         path: "https://assets2.lottiefiles.com/packages/lf20_dwwvpyiy.json",
       });
 
-      console.log(peptideAnim);
-
       var frameSegments = [
         [0, 1],
         [1, 130],

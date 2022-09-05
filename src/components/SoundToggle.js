@@ -3,13 +3,9 @@ import { Howl, Howler } from "howler";
 import normalSound from "../audio/ambientSoundtrackLoop.mp3";
 import darkSound from "../audio/darkSoundtrackLoop.mp3";
 
-export default class SoundToggle extends Component {
+export default class SoundToggle {
   constructor() {
-    super({
-      element: "html",
-      elements: {},
-    });
-    sound = this.sound;
+    this.sound = {};
     this.sound.normal = new Howl({
       src: [normalSound],
       loop: true,
@@ -18,25 +14,36 @@ export default class SoundToggle extends Component {
       src: [normalSound],
       loop: true,
     });
+    // Default active track is normal one
+    this.sound.active = this.sound.normal;
+    this.sound.inactive = this.sound.dark;
+    this.duration = 1000;
   }
 
-  create() {
-    super.create();
-    // this.createAudio();
-    // this.sound = "no";
+  toggleSound(sound) {
+    console.log(sound);
+
+    if (sound) {
+      this.sound.active.play();
+      this.sound.active.fade(0, 1, this.duration);
+    } else if (!sound) {
+      this.sound.active.fade(1, 0, this.duration);
+      setTimeout(() => {
+        this.sound.active.pause();
+      }, this.duration);
+    }
   }
 
-  createAudio() {
-    console.log(this.sound);
-    const normalTrack = new Howl({
-      src: [normalSound],
-      loop: true,
-    });
-    const darkTrack = new Howl({
-      src: [darkSound],
-      loop: true,
-    });
-  }
+  changeActiveTrack(active) {
 
-  toggleSound() {}
+    if (this.sound.active === active) {
+      
+    } else if (!this.sound.active === active) {
+
+      if(this.sound)
+
+      this.sound.active = this.sound.dark
+    }
+
+  }
 }

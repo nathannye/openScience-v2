@@ -23,7 +23,7 @@
   <body>
     <header>
       <div id="soundIndicatorContainer">
-        <div id="soundLabelSwitch">
+        <div id="soundLabelSwitch" class="soundToggleClick">
           <h5>sound</h5>
           <div>
             <h5>off</h5>
@@ -149,7 +149,9 @@
       </section>
       <section class="panel interstitial" id="whatDoProteins">
         <div>
-          <h4>what do proteins have to do with computers?</h4>
+          <h4 class="soundOffClick">
+            what do proteins have to do with computers?
+          </h4>
         </div>
       </section>
       <section class="panel contentPanel" id="whatIsFolding">
@@ -545,6 +547,6 @@
       </div>
     </main>
     <script src="/src/index.js" type="module"></script>
-    <script type="module" src="./src/js/soundToggle.js"></script>
+    <!-- <script type="module" src="./src/js/soundToggle.js"></script> -->
   </body>
 </html>

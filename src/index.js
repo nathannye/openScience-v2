@@ -27,9 +27,9 @@ class App {
     this.createPreloader();
     this.createInterstitials();
     this.createStage();
+    this.addEventListeners();
     this.playIntro();
     this.refresh();
-    // this.playTitle();
   }
 
   registerPlugins() {
@@ -63,7 +63,6 @@ class App {
   createSections() {
     this.sections = {
       title: new Title(),
-
       what: new WhatIsFolding(),
       why: new WhyComputers(),
       graph: new Graph(),
@@ -79,14 +78,48 @@ class App {
 
   async playIntro() {
     await this.preloader.animateOut();
+    console.log("animated out");
+    this.sections.title.tl.play();
+    // setTimeout(() => {
+    //   this.playTitle();
+    // }, 3000);
   }
 
   createAudioController() {
-    // this.audio = new SoundToggle();
+    this.sound = new SoundToggle();
   }
 
-  playTitle() {
-    // this.title.tl.play();
+  // playTitle() {
+  //   this.sections.title.tl.play();
+  // }
+
+  addEventListeners() {
+    let soundOnTargets = gsap.utils.toArray(".soundOnClick");
+    let soundOffTargets = gsap.utils.toArray(".soundOffClick");
+    let soundToggleTargets = gsap.utils.toArray(".soundToggleClick");
+
+    var sound = false;
+
+    soundOnTargets.forEach((el) => {
+      el.onclick = () => {
+        this.sound.toggleSound(true);
+        sound = true;
+      };
+    });
+
+    soundToggleTargets.forEach((el) => {
+      el.onclick = () => {
+        this.sound.toggleSound(!sound);
+        sound = !sound;
+      };
+    });
+
+    soundOffTargets.forEach((el) => {
+      el.onclick = () => {
+        this.sound.toggleSound(false);
+        sound = false;
+      };
+    });
   }
 
   refresh() {
