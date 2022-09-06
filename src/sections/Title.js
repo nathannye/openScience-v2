@@ -124,7 +124,7 @@ export default class Title extends Component {
             ease: "power2.inOut",
             from: "start",
           },
-          duration: 1.45,
+          duration: 1.1,
           ease: "power3.out",
         },
         0.2
@@ -141,7 +141,7 @@ export default class Title extends Component {
             ease: "power2.inOut",
             from: "start",
           },
-          duration: 1.7,
+          duration: 1.1,
           ease: "power3.out",
         },
         0.2
@@ -158,7 +158,7 @@ export default class Title extends Component {
           stagger: 0.09,
           duration: 1.1,
         },
-        0.6
+        0.4
       )
       // .call(
       //   function () {

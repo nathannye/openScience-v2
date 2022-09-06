@@ -27,6 +27,13 @@ export default class WhatIsFolding extends Component {
         harvardLink: "#whatIsFolding cite",
       },
     });
+    this.peptide;
+    this.dangerClickClear = 0;
+    this.frames = [
+      [0, 1],
+      [1, 130],
+      [130, 240],
+    ];
   }
 
   // let flickerTL = gsap.timeline({
@@ -274,7 +281,7 @@ export default class WhatIsFolding extends Component {
 
       target.addEventListener("click", (event) => {
         let e = dangerClickTargets.indexOf(target);
-        dangerClickClear += 1;
+        this.dangerClickClear += 1;
         gsap.to(target, {
           autoAlpha: 0,
           duration: 0.6,
@@ -291,9 +298,9 @@ export default class WhatIsFolding extends Component {
           stroke: colors.ylw,
         });
 
-        if (dangerClickClear === 3) {
-          handleAudioSwitch();
-          peptideAnim.playSegments([130, 240]);
+        if (this.dangerClickClear === 3) {
+          // handleAudioSwitch();
+          this.peptide.playSegments(this.frames[2]);
           dangerClearTL.play();
         }
       });
@@ -301,31 +308,23 @@ export default class WhatIsFolding extends Component {
   }
 
   createPeptideAnimation() {
-    if (!peptideAnim) {
-      var peptideAnim = Lottie.loadAnimation({
-        container: this.elements.peptideLottieContainer,
-        renderer: "svg",
-        loop: false,
-        quality: "low",
-        autoplay: false,
-        path: "https://assets2.lottiefiles.com/packages/lf20_dwwvpyiy.json",
-      });
+    this.peptide = Lottie.loadAnimation({
+      container: this.elements.peptideLottieContainer,
+      renderer: "svg",
+      loop: false,
+      quality: "low",
+      autoplay: false,
+      path: "https://assets2.lottiefiles.com/packages/lf20_dwwvpyiy.json",
+    });
 
-      var frameSegments = [
-        [0, 1],
-        [1, 130],
-        [130, 240],
-      ];
-      peptideAnim.addEventListener("DOMLoaded", (event) => {
-        peptideAnim.playSegments(frameSegments[0]);
-        // this.createDangerMarkers();
-      });
-    }
+    this.peptide.addEventListener("DOMLoaded", (event) => {
+      this.peptide.playSegments(this.frames[0]);
+      // this.createDangerMarkers();
+    });
   }
 
   dragCompleteAnimation() {
     let draggerTL = gsap.timeline({
-      paused: true,
       onComplete: () => {
         draggerTL.kill();
       },
@@ -465,7 +464,7 @@ export default class WhatIsFolding extends Component {
         // handleAudioSwitch();
         this.dragCompleteAnimation();
         this.createDangerMarkers();
-        peptideAnim.playSegments(frameSegments[1]);
+        this.peptide.playSegments(this.frames[1]);
         drag.kill();
         setTimeout(() => {
           gsap.to(this.elements.nglStage, {

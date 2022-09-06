@@ -1,6 +1,7 @@
 import Component from "../classes/Component";
 import gsap from "gsap";
 import SplitText from "gsap/SplitText";
+import Lottie from "lottie-web";
 
 export default class Nav extends Component {
   constructor() {
@@ -9,6 +10,7 @@ export default class Nav extends Component {
       elements: {
         navEntries: "nav > div > a",
         navDots: ".navMarker",
+        html: "html",
         sections: "section.contentPanel",
         hamburgerMenu: "#mobileMenu",
         hamburgerContainer: "#hamburgerIcon",
@@ -19,20 +21,28 @@ export default class Nav extends Component {
 
   create() {
     super.create();
-    this.clearNavClasses();
+    // this.clearNavClasses();
     this.conditionalNav();
   }
 
   overflowControl() {
-    if (html.style.overflowY == "auto" || html.style.overflowY == "") {
-      gsap.to(html, {
-        overflowY: "hidden",
-      });
-    } else {
-      gsap.to(html, {
-        overflowY: "auto",
-      });
-    }
+    this.elements.html.style.overflowY == "auto" ||
+    this.elements.html.style.overflowY == ""
+      ? (this.elements.html.style.overflowY = "hidden")
+      : (this.elements.html.style.overflowY = "auto");
+
+    // if (
+    //   this.elements.html.style.overflowY == "auto" ||
+    //   this.elements.html.style.overflowY == ""
+    // ) {
+    //   gsap.to(this.elements.html, {
+    //     overflowY: "hidden",
+    //   });
+    // } else {
+    //   gsap.to(this.elements.html, {
+    //     overflowY: "auto",
+    //   });
+    // }
   }
 
   createNav() {
@@ -104,12 +114,12 @@ export default class Nav extends Component {
   conditionalNav() {
     let mm = gsap.matchMedia();
 
-    mm.add("min-width:768px", () => {
+    mm.add("(min-width:768px)", () => {
       this.createNav();
       this.createAnimations();
     });
 
-    mm.add("max-width: 768px", () => {
+    mm.add("(max-width: 768px)", () => {
       let mowTL = gsap.timeline({
         paused: true,
       });
@@ -119,7 +129,7 @@ export default class Nav extends Component {
         display: "flex",
       });
 
-      var hamburgerAnim = lottie.loadAnimation({
+      var hamburgerAnim = Lottie.loadAnimation({
         container: document.getElementById("hamburgerIcon"),
         renderer: "svg",
         loop: false,
@@ -131,7 +141,7 @@ export default class Nav extends Component {
 
       mowTL
         .to(
-          hamburgerMenu,
+          this.elements.hamburgerMenu,
           {
             autoAlpha: 1,
             duration: 0.35,
@@ -139,7 +149,7 @@ export default class Nav extends Component {
           0
         )
         .from(
-          hamburgerMenu.querySelectorAll("a"),
+          this.elements.hamburgerMenu.querySelectorAll("a"),
           {
             autoAlpha: 0,
             y: 20,
