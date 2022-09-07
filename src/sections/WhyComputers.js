@@ -120,21 +120,29 @@ export default class WhyComputers extends Component {
 
     this.elements.numbers.split.chars.forEach((c, index) => {
       if (index % 2 == 0) {
-        c.tween = gsap.from(c, {
-          yPercent: 20,
-          autoAlpha: 0,
-          duration: 10,
-          ease: "power2.out",
-          delay: index / 2,
-        });
+        c.tween = gsap.from(
+          c,
+          {
+            yPercent: 20,
+            autoAlpha: 0,
+            duration: 10,
+            ease: "power2.out",
+            delay: index / 10,
+          },
+          0
+        );
       } else {
-        c.tween = gsap.from(c, {
-          yPercent: -20,
-          autoAlpha: 0,
-          duration: 10,
-          ease: "power2.out",
-          delay: index / 2,
-        });
+        c.tween = gsap.from(
+          c,
+          {
+            yPercent: -20,
+            autoAlpha: 0,
+            duration: 10,
+            ease: "power2.out",
+            delay: index / 10,
+          },
+          0
+        );
       }
       this.needtl.add(c.tween);
     });

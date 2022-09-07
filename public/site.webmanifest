@@ -1,0 +1,27 @@
+{
+  "name": "Open Source, Open Science",
+  "short_name": "Open Science",
+  "icons": [
+    {
+      "src": "icons/favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/jpg"
+    },
+    {
+      "src": "icons/favicon-196x196.jpg",
+      "sizes": "196x196",
+      "type": "image/jpg",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icons/apple-touch-icon-180x180.jpg",
+      "sizes": "180x180",
+      "type": "image/jpg",
+      "purpose": "apple touch icon"
+    }
+  ],
+  "theme_color": "#030b18",
+  "background_color": "#030b18",
+  "display": "standalone",
+  "start_url": "/"
+}
