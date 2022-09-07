@@ -66,7 +66,6 @@ export default class WhyComputers extends Component {
   createContainerAnimation() {
     this.elements.numbers.split = new SplitText(this.elements.numbers, {
       type: "chars, lines",
-      linesClass: "splitLine",
     });
 
     this.elements.h2.split = new SplitText(this.elements.h2, {
@@ -111,16 +110,48 @@ export default class WhyComputers extends Component {
           duration: 0.9,
         },
         "go+=.65"
-      )
-      .from(
-        this.elements.numbers.split.chars,
-        {
-          yPercent: 100,
-          duration: this.needtl.duration,
-          stagger: 0.1,
-        },
-        "appendAmino"
       );
+    // .fromTo(
+    //   this.elements.numbers,
+    //   { xPercent: 20 },
+    //   { xPercent: -40, duration: 10 },
+    //   ">"
+    // );
+
+    this.elements.numbers.split.chars.forEach((c, index) => {
+      if (index % 2 == 0) {
+        c.tween = gsap.from(c, {
+          yPercent: 20,
+          autoAlpha: 0,
+          duration: 10,
+          ease: "power2.out",
+          delay: index / 2,
+        });
+      } else {
+        c.tween = gsap.from(c, {
+          yPercent: -20,
+          autoAlpha: 0,
+          duration: 10,
+          ease: "power2.out",
+          delay: index / 2,
+        });
+      }
+      this.needtl.add(c.tween);
+    });
+
+    // gsap.from(
+    //   this.elements.numbers,
+    //   {
+    //     scrollTrigger: {
+    //       trigger: this.element,
+    //       start: "top top+=8%",
+    //       end: "bottom top+=10%",
+    //       scrub: 1,
+    //     },
+    //     xPercent: 20,
+    //   },
+    //   ">"
+    // );
   }
 
   createAminos() {

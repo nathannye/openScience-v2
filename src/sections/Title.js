@@ -61,12 +61,12 @@ export default class Title extends Component {
 
     gsap.set(this.elements.openSource.split.chars, {
       opacity: 0,
-      yPercent: 30,
+      yPercent: 46,
       color: colors.teal,
     });
     gsap.set(this.elements.openScience.split.chars, {
       opacity: 0,
-      yPercent: -30,
+      yPercent: -46,
       color: colors.teal,
     });
 
@@ -94,7 +94,7 @@ export default class Title extends Component {
         { filter: "saturate(0) blur(13px)", autoAlpha: 0 },
         {
           filter: "saturate(.68) blur(1px)",
-          duration: 3.5,
+          duration: 2,
           delay: 0.3,
           autoAlpha: 1,
         },
@@ -108,8 +108,8 @@ export default class Title extends Component {
           opacity: 1,
           color: "white",
           stagger: {
-            each: 0.035,
-            ease: "power2.inOut",
+            each: 0.05,
+            // ease: "power2.inOut",
             from: "start",
           },
           duration: 1.1,
@@ -125,11 +125,11 @@ export default class Title extends Component {
           delay: 0.25,
           color: colors.ylw,
           stagger: {
-            each: 0.035,
-            ease: "power2.inOut",
+            each: 0.05,
+            // ease: "power2.inOut",
             from: "start",
           },
-          duration: 1.1,
+          duration: 0.85,
           ease: "power3.out",
         },
         0.2
@@ -138,13 +138,13 @@ export default class Title extends Component {
         this.elements.introPara.split.lines,
         {
           autoAlpha: 0,
-          y: 12,
+          yPercent: 12,
           rotateY: -8,
           delay: 0.34,
           color: colors.teal,
           ease: "power2.out",
           stagger: 0.09,
-          duration: 1.1,
+          duration: 0.85,
         },
         0.4
       )
