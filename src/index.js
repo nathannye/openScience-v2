@@ -4,6 +4,7 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import Stage from "./components/Stage.js";
 import Title from "./sections/Title.js";
 import SupercomputerTable from "./sections/SupercomputerTable.js";
+import Wave from "./animations/Wave.js";
 import Faq from "./sections/Faq.js";
 import WhyComputers from "./sections/WhyComputers.js";
 import Nav from "./components/Nav.js";
@@ -22,13 +23,11 @@ class App {
   constructor() {
     this.registerPlugins();
     this.createNav();
-    this.createAudioController();
     this.createSections();
     this.createPreloader();
     this.createInterstitials();
     this.createStage();
-    this.addEventListeners();
-    this.playIntro();
+    this.overflowControl();
     this.refresh();
   }
 
@@ -44,9 +43,8 @@ class App {
   }
   createPreloader() {
     this.preloader = new Preloader();
+    this.preloader.once("completed", this.playIntro.bind(this));
   }
-
-  createIntro() {}
 
   createStage() {
     this.stage = new Stage();
@@ -60,9 +58,32 @@ class App {
     this.interstitial = new Interstitials();
   }
 
+  overflowControl(state) {
+    state
+      ? (document.querySelector("html").style.overflowY = "auto")
+      : (document.querySelector("html").style.overflowY = "hidden");
+
+    // html.style.overflowY == "auto" || html.style.overflowY == ""
+    //   ? (html.style.overflowY = "hidden")
+    //   : (html.style.overflowY = "auto");
+
+    // if (
+    //   this.elements.html.style.overflowY == "auto" ||
+    //   this.elements.html.style.overflowY == ""
+    // ) {
+    //   gsap.to(this.elements.html, {
+    //     overflowY: "hidden",
+    //   });
+    // } else {
+    //   gsap.to(this.elements.html, {
+    //     overflowY: "auto",
+    //   });
+    // }
+  }
+
   createSections() {
     this.sections = {
-      title: new Title(),
+      title: new Title({ wave: this.wave }),
       what: new WhatIsFolding(),
       why: new WhyComputers(),
       graph: new Graph(),
@@ -76,50 +97,14 @@ class App {
     }
   }
 
-  async playIntro() {
-    await this.preloader.animateOut();
-    console.log("animated out");
-    this.sections.title.tl.play();
-    // setTimeout(() => {
-    //   this.playTitle();
-    // }, 3000);
-  }
-
-  createAudioController() {
-    this.sound = new SoundToggle();
-  }
-
-  // playTitle() {
-  //   this.sections.title.tl.play();
-  // }
-
-  addEventListeners() {
-    let soundOnTargets = gsap.utils.toArray(".soundOnClick");
-    let soundOffTargets = gsap.utils.toArray(".soundOffClick");
-    let soundToggleTargets = gsap.utils.toArray(".soundToggleClick");
-
-    var sound = false;
-
-    soundOnTargets.forEach((el) => {
-      el.onclick = () => {
-        this.sound.toggleSound(true);
-        sound = true;
-      };
-    });
-
-    soundToggleTargets.forEach((el) => {
-      el.onclick = () => {
-        this.sound.toggleSound(!sound);
-        sound = !sound;
-      };
-    });
-
-    soundOffTargets.forEach((el) => {
-      el.onclick = () => {
-        this.sound.toggleSound(false);
-        sound = false;
-      };
-    });
+  playIntro() {
+    setTimeout(() => {
+      this.sections.title.tl.play();
+      this.preloader.destroy();
+      setTimeout(() => {
+        this.overflowControl();
+      }, this.sections.title.tl.duration());
+    }, 900);
   }
 
   refresh() {
@@ -205,56 +190,7 @@ ScrollTrigger.addEventListener("refresh", function () {
 
 // const links = gsap.utils.toArray("cite > a, a.externalLink");
 
-// links.forEach((link) => {
-//   let e = document.createElement("div");
-//   let f = document.createElement("div");
-//   e.className = "underline";
-//   f.className = "underlineLeft";
-//   link.appendChild(e);
-//   link.appendChild(f);
-
-//   e.tl = gsap.timeline({
-//     paused: true,
-//   });
-
-//   e.tl
-//     .to(
-//       e,
-//       {
-//         xPercent: 100,
-//         duration: 0.4,
-//         ease: "power3.inOut",
-//       },
-//       "start"
-//     )
-//     .to(
-//       f,
-//       {
-//         xPercent: 100,
-//         duration: 0.4,
-//         ease: "power3.inOut",
-//       },
-//       "start+=.085"
-//     )
-//     .to(
-//       link,
-//       {
-//         color: colors.ylw,
-//         duration: 0.45,
-//       },
-//       "start"
-//     );
-
-//   link.addEventListener("mouseover", (event) => {
-//     e.tl.play();
-//   });
-
-//   link.addEventListener("mouseout", (event) => {
-//     e.tl.reverse();
-//   });
-// });
-
-let h3 = gsap.utils.toArray("h3:not(h3#dragDirections)");
+let h3 = gsap.utils.toArray("h3:not(h3#dragDirections, .soundAsk h3)");
 
 h3.forEach((e) => {
   document.fonts.ready.then(() => {

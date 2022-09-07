@@ -21,28 +21,7 @@ export default class Nav extends Component {
 
   create() {
     super.create();
-    // this.clearNavClasses();
     this.conditionalNav();
-  }
-
-  overflowControl() {
-    this.elements.html.style.overflowY == "auto" ||
-    this.elements.html.style.overflowY == ""
-      ? (this.elements.html.style.overflowY = "hidden")
-      : (this.elements.html.style.overflowY = "auto");
-
-    // if (
-    //   this.elements.html.style.overflowY == "auto" ||
-    //   this.elements.html.style.overflowY == ""
-    // ) {
-    //   gsap.to(this.elements.html, {
-    //     overflowY: "hidden",
-    //   });
-    // } else {
-    //   gsap.to(this.elements.html, {
-    //     overflowY: "auto",
-    //   });
-    // }
   }
 
   createNav() {
@@ -159,7 +138,6 @@ export default class Nav extends Component {
           },
           0.1
         )
-        .call(this.overflowControl(), null, 0);
 
       this.elements.hamburgerContainer.onclick = () => {
         hamburgerAnim.setDirection(direction);

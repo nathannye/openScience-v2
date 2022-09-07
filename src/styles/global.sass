@@ -171,7 +171,7 @@ td
 	margin-bottom: .5em
 
 	
-h4, th
+h4, th, button
 	@include fontTel
 	text-transform: uppercase
 	font-size: clamp(1.17em, calc(1.2rem + (1.9 - 1.17) * ((100vw - 48em) / (120 - 48))), 1.9em)
@@ -253,8 +253,8 @@ button
 	background: transparent
 	text-align: center
 	display: block
-	color: inherit
-	font-size: inherit
+	// color: inherit
+	// font-size: inherit
 	
 	@include defaultTransition
 
@@ -489,30 +489,30 @@ section#introPanel
 		transform: scale(2)
 		left: 0
 
-section#soundAsk
+.soundAsk
 	position: fixed
-	background: $dark
-	// @include has3D
+	visibility: hidden
+	opacity: 0
 	z-index: 25
-	top: 0
-	display: none
-	left: 0
-	filter: inherit
-	width: 100%
-	height: 100vh
-	perspective-origin: left
-	
-	#soundButtons
-		margin-top: 2rem
-		display: flex
-		justify-content: center
-		transform: translateZ(90px)
-		column-gap: 5em
+	left: 50%
+	top: 50%
+	transform: translate(-50%, -50%)
 
-	h2
-		filter: blur(0)
-		text-align: center
-		color: $teal
+	h3
+		@include has3D
+
+	#soundButtons
+		display: flex
+		margin-top: 2rem
+		justify-content: center
+		align-items: center
+
+		&> button:not(:last-child)
+			margin-right: 4rem
+
+		button 
+			opacity: 0
+			visibility: hidden
 
 .panel
 	z-index: 20
@@ -881,6 +881,7 @@ table#supercomputerTable
 section#helpingReduceCosts
 	display: flex
 	flex-wrap: wrap
+	justify-content: flex-start
 
 	.headingContainer
 		width: 50%
@@ -972,8 +973,6 @@ section#howCanYouHelp
 		justify-content: center
 		flex-wrap: wrap
 		height: unset
-		
-
 		#helpingLeft
 			display: flex
 			flex-grow: 1
@@ -1119,7 +1118,7 @@ section#howCanYouHelp
 			padding-right: calc(var(--gutter))
 
 		section#lower
-			padding-left: calc(var(--gutter))
+			padding-left: 0 
 
 	section#citation
 
@@ -1208,7 +1207,7 @@ section#howCanYouHelp
 	#costNumbersContainer
 
 		.crossOut
-			height: 1rem
+			height: .8rem
 
 	#barChartContainer
 		width: 400vw

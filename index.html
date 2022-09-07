@@ -17,7 +17,15 @@
   <div id="loader">
     <div class="loaderContent">
       <span class="loaderNumber">0%</span>
-      <span class="loaderLine"></span>
+      <div class="soundAsk">
+        <h3>This experience has sound. Would you like to turn it on?</h3>
+        <div>
+          <div id="soundButtons">
+            <button class="soundOnClick">yes</button>
+            <button class="soundOffClick">no thanks</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <body>
@@ -105,23 +113,6 @@
       </div>
     </nav>
     <main>
-      <section id="soundAsk">
-        <div>
-          <h2 class="fromFarAndAway">
-            This experience has sound. Would you like to turn it on?
-          </h2>
-          <div>
-            <div id="soundButtons">
-              <div id="yesSoundContainer">
-                <button><h4>yes</h4></button>
-              </div>
-              <div id="noSoundContainer">
-                <button><h4>no thanks</h4></button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
       <section class="panel lefty contentPanel" id="introPanel">
         <a id="introPanelRef" class="jumpTo"></a>
         <div class="dangerMarker">

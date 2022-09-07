@@ -38,7 +38,7 @@ export default class ReduceCosts extends Component {
         this.elements.fiveThouFlip,
         {
           yPercent: -75,
-          duration: 0.79,
+          duration: 1.4,
           autoAlpha: 1,
 
           ease: "power3.inOut",
@@ -53,7 +53,7 @@ export default class ReduceCosts extends Component {
         this.elements.fiveThouChars,
         {
           autoAlpha: 0,
-          stagger: 0.02,
+          stagger: 0.04,
         },
         "start"
       )
@@ -63,10 +63,10 @@ export default class ReduceCosts extends Component {
           yPercent: -75,
           autoAlpha: 1,
 
-          duration: 0.79,
+          duration: 1.4,
           ease: "power3.inOut",
           stagger: {
-            each: ".07",
+            each: 0.07,
             ease: "power3.inOut",
           },
         },
@@ -85,11 +85,11 @@ export default class ReduceCosts extends Component {
         {
           scaleX: 0,
           transformOrigin: "left center",
-          ease: "power4.inOut",
-          duration: 0.58,
-          stagger: 0.08,
+          ease: "power3.inOut",
+          duration: 0.48,
+          stagger: 0.12,
         },
-        ">+=.05",
+        ">+=.54",
         "crossOut"
       )
       .to(
@@ -104,7 +104,7 @@ export default class ReduceCosts extends Component {
           duration: 0.32,
           stagger: 0.01,
         },
-        "crossOut-=.34"
+        "crossOut-=.24"
       );
   }
 }

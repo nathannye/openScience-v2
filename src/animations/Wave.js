@@ -6,17 +6,16 @@ export default class Wave extends Component {
       element: "#soundIndicatorContainer",
       elements: {},
     });
-    this.wave = {
-      amplitude: 0,
-      wavelength: 0.33,
-      frequency: 0.26,
-      increment: 0.05,
-    };
-    this.create();
   }
 
   create() {
     super.create();
+    this.wave = {
+      amplitude: 0,
+      wavelength: 0.33,
+      frequency: 0.125,
+      increment: 0.05,
+    };
     this.createWave();
     this.animate();
   }
@@ -30,11 +29,11 @@ export default class Wave extends Component {
     this.ctx.strokeWidth = 30;
     this.ctx.strokeStyle = "#FFE65C";
     this.canvas.setAttribute("id", "soundIndicator");
-    this.element.appendChild(canvas);
+    this.element.appendChild(this.canvas);
   }
 
   animate() {
-    requestAnimationFrame(this.animate());
+    requestAnimationFrame(this.animate.bind(this));
 
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.beginPath();
@@ -43,7 +42,7 @@ export default class Wave extends Component {
     this.ctx.moveTo(0, this.canvas.height / 8);
 
     for (let i = 0; i < this.canvas.width * 4; i++) {
-      ctx.lineTo(
+      this.ctx.lineTo(
         i,
         this.canvas.height / 8 +
           Math.sin(i * this.wave.wavelength + this.wave.increment) *

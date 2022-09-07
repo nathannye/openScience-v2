@@ -2,7 +2,7 @@ import Component from "../classes/Component";
 import gsap from "gsap";
 import SplitText from "gsap/SplitText";
 import ScrollTrigger from "gsap/ScrollTrigger";
-// import Wave from "../animations/Wave";
+import Wave from "../animations/Wave";
 import Lottie from "lottie-web";
 import { colors } from "../data";
 
@@ -26,13 +26,6 @@ export default class Title extends Component {
         openScience: "#introHeadingContainer > div > h1",
       },
     });
-    // this.tl = gsap.timeline({
-    //   paused: true,
-    //   onComplete: () => {
-    //     this.createIntroOutAnim();
-    //     console.log("intro done");
-    //   },
-    // });
   }
 
   create() {
@@ -44,6 +37,7 @@ export default class Title extends Component {
         console.log("intro done");
       },
     });
+    // this.createWave();
     this.createIntroAnim();
   }
 
@@ -76,21 +70,15 @@ export default class Title extends Component {
       color: colors.teal,
     });
 
-    let scrollIndi = Lottie.loadAnimation(
-      {
-        container: this.elements.indiContainer,
-        loop: false,
-        renderer: "svg",
-        quality: "low",
-        // autoplay: true,
-        path: "https://assets10.lottiefiles.com/packages/lf20_n5nf19df.json",
-      },
-      null,
-      "start"
-    );
+    let scrollIndi = Lottie.loadAnimation({
+      container: this.elements.indiContainer,
+      loop: false,
+      renderer: "svg",
+      quality: "low",
+      autoplay: false,
+      path: "https://assets10.lottiefiles.com/packages/lf20_n5nf19df.json",
+    });
     scrollIndi.setSpeed(1.15);
-
-    this.tl.delay(10);
 
     this.tl
       .to(
@@ -160,13 +148,6 @@ export default class Title extends Component {
         },
         0.4
       )
-      // .call(
-      //   function () {
-      //     introPara.tl.play();
-      //   },
-      //   null,
-      //   "start"
-      // )
       .to(
         this.elements.navDots,
         {
@@ -208,6 +189,7 @@ export default class Title extends Component {
         {
           xPercent: 100,
           stagger: 0.05,
+          autoAlpha: 1,
           duration: 1.1,
           ease: "power2.out",
         },
@@ -223,24 +205,6 @@ export default class Title extends Component {
         },
         { scaleX: 1, duration: 0.8, ease: "power4.inOut" },
         1.2
-      )
-      .to(
-        this.wave,
-        {
-          amplitude: 0.5,
-          duration: 1.25,
-          ease: "none",
-        },
-        1.75
-      )
-      .to(
-        this.wave,
-        {
-          frequency: 0.1,
-          ease: "none",
-          duration: 0.25,
-        },
-        ">"
       )
       .to(
         this.elements.soundSwitchLabel,
