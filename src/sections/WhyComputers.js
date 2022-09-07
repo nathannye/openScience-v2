@@ -1,5 +1,7 @@
 import gsap from "gsap";
 import Component from "../classes/Component";
+import SplitText from "gsap/SplitText";
+import Lottie from "lottie-web";
 
 export default class WhyComputers extends Component {
   constructor() {
@@ -16,25 +18,66 @@ export default class WhyComputers extends Component {
         h2: "#whyDoWeNeed h2",
       },
     });
+  }
+
+  create() {
     super.create();
-    this.containertl = gsap.timeline({
+    this.needtl = gsap.timeline({
       scrollTrigger: {
         trigger: this.element,
-        start: "top top+=2%",
+        start: "top top",
+        pin: true,
+        end: "bottom top",
+        scrub: 0.9,
       },
     });
+    this.paths = ["#firstPath", "#secondPath", "#thirdPath", "#fourthPath"];
+
+    this.aminoProps = [
+      {
+        p: "#firstPath",
+        dur: 15,
+        start: 0.35,
+        end: 1,
+      },
+      {
+        p: "#secondPath",
+        dur: 25,
+        start: 0.9,
+        end: 0.2,
+      },
+      {
+        p: "#thirdPath",
+        dur: 19,
+        start: 1,
+        end: 0.1,
+      },
+      {
+        p: "#fourthPath",
+        dur: 24,
+        start: 0,
+        end: 0.4,
+      },
+    ];
+    this.createAminos();
+    this.createContainerAnimation();
   }
 
   createContainerAnimation() {
+    this.elements.numbers.split = new SplitText(this.elements.numbers, {
+      type: "chars, lines",
+      linesClass: "splitLine",
+    });
+
     this.elements.h2.split = new SplitText(this.elements.h2, {
       type: "words, lines",
       linesClass: "splitLine",
     });
-    this.elements.p.split = new SplitText(this.elements.para, {
+    this.elements.para.split = new SplitText(this.elements.para, {
       type: "lines",
     });
 
-    this.containertl
+    this.needtl
       .from(
         this.elements.h4,
         {
@@ -68,7 +111,45 @@ export default class WhyComputers extends Component {
           duration: 0.9,
         },
         "go+=.65"
+      )
+      .from(
+        this.elements.numbers.split.chars,
+        {
+          yPercent: 100,
+          duration: this.needtl.duration,
+          stagger: 0.1,
+        },
+        "appendAmino"
       );
+  }
+
+  createAminos() {
+    for (let i = 0; i < this.aminoProps.length; i++) {
+      let dude = Lottie.loadAnimation({
+        container: this.elements.aminoContainer.item(i),
+        path: "https://assets5.lottiefiles.com/packages/lf20_cpwcuygx.json",
+        autoplay: true,
+        quality: "low",
+        loop: true,
+      });
+
+      dude.setSpeed(1.3);
+
+      let anim = gsap.to(
+        this.elements.aminoContainer.item(i),
+        {
+          duration: this.aminoProps.dur,
+          motionPath: {
+            start: this.aminoProps.start,
+            end: this.aminoProps.end,
+            path: this.paths[i],
+            align: this.paths[i],
+          },
+        },
+        "main"
+      );
+      this.needtl.add(anim, "appendAmino" + i);
+    }
   }
 
   createBackerAnimation() {}

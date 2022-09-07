@@ -269,7 +269,7 @@ export default class WhatIsFolding extends Component {
         "state"
       );
 
-    dangerClickTargets.forEach((target) => {
+    dangerClickTargets.forEach((target, e) => {
       target.dangerMarkerAnim = Lottie.loadAnimation({
         container: target,
         renderer: "svg",
@@ -279,24 +279,43 @@ export default class WhatIsFolding extends Component {
         path: "https://assets10.lottiefiles.com/packages/lf20_oafsmzxp.json",
       });
 
+      target.tl = gsap.timeline({
+        paused: true,
+        onComplete: () => {
+          target.dangerMarkerAnim.destroy();
+          console.log(target.dangerMarkerAnim);
+        },
+      });
+
+      target.tl
+        .to(
+          target,
+          {
+            autoAlpha: 0,
+            duration: 0.6,
+            ease: "back.out(5)",
+          },
+          0
+        )
+        .to(
+          errorGroups[e],
+          {
+            stroke: colors.ylw,
+          },
+          0
+        )
+        .to(
+          redChains[e],
+          {
+            stroke: colors.ylw,
+          },
+          0
+        );
+
       target.addEventListener("click", (event) => {
         let e = dangerClickTargets.indexOf(target);
         this.dangerClickClear += 1;
-        gsap.to(target, {
-          autoAlpha: 0,
-          duration: 0.6,
-          ease: "back.out(5)",
-          onComplete: () => {
-            target.dangerMarkerAnim.destroy();
-          },
-        });
-
-        gsap.to(errorGroups[e], {
-          stroke: colors.ylw,
-        });
-        gsap.to(redChains[e], {
-          stroke: colors.ylw,
-        });
+        target.tl.play();
 
         if (this.dangerClickClear === 3) {
           // handleAudioSwitch();

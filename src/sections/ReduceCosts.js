@@ -1,6 +1,7 @@
 import Component from "../classes/Component";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import gsap from "gsap";
+import MotionPathPlugin from "gsap/MotionPathPlugin";
 
 export default class ReduceCosts extends Component {
   constructor() {

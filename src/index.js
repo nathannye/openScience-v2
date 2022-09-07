@@ -18,6 +18,7 @@ import ReduceCosts from "./sections/ReduceCosts.js";
 import Graph from "./sections/Graph.js";
 import Interstitials from "./components/Interstitials.js";
 import Preloader from "./components/Preloader.js";
+import MotionPathPlugin from "gsap/MotionPathPlugin";
 
 class App {
   constructor() {
@@ -38,7 +39,8 @@ class App {
       Draggable,
       CustomEase,
       InertiaPlugin,
-      DrawSVGPlugin
+      DrawSVGPlugin,
+      MotionPathPlugin
     );
   }
   createPreloader() {
