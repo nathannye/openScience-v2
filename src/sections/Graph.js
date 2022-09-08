@@ -10,8 +10,8 @@ export default class Graph extends Component {
       elements: {
         eventLargeCaption: "#chartCaptionContainer > h2",
         eventMarker: "article.eventEntry",
-        toPandemicChart: "#chartContainer #toPandemicChart",
-        toExascaleChart: "#chartContainer #toExascaleChart",
+        toPandemicChart: "#toPandemicChart",
+        toExascaleChart: "#toExascaleChart",
       },
     });
   }
