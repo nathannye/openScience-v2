@@ -8,7 +8,6 @@ import Wave from "./animations/Wave.js";
 import Faq from "./sections/Faq.js";
 import WhyComputers from "./sections/WhyComputers.js";
 import Nav from "./components/Nav.js";
-import SoundToggle from "./components/SoundToggle.js";
 import Draggable from "gsap/Draggable";
 import CustomEase from "gsap/CustomEase";
 import InertiaPlugin from "gsap/InertiaPlugin";
@@ -19,6 +18,7 @@ import Graph from "./sections/Graph.js";
 import Interstitials from "./components/Interstitials.js";
 import Preloader from "./components/Preloader.js";
 import MotionPathPlugin from "gsap/MotionPathPlugin";
+import ScrollSmoother from "gsap/ScrollSmoother";
 
 class App {
   constructor() {
@@ -29,6 +29,7 @@ class App {
     this.createInterstitials();
     this.createStage();
     this.overflowControl();
+    this.createSmoothScroll();
     this.refresh();
   }
 
@@ -40,12 +41,21 @@ class App {
       CustomEase,
       InertiaPlugin,
       DrawSVGPlugin,
-      MotionPathPlugin
+      MotionPathPlugin,
+      ScrollSmoother
     );
   }
   createPreloader() {
     this.preloader = new Preloader();
     this.preloader.once("completed", this.playIntro.bind(this));
+  }
+
+  createSmoothScroll() {
+    // this.smooth = ScrollSmoother.create({
+    //   wrapper: ".contentWrapper",
+    //   content: ".scrollWrapper",
+    //   smooth: 0.54,
+    // });
   }
 
   createStage() {

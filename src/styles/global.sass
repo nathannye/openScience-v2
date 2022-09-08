@@ -777,7 +777,7 @@ section#numberOfUsersPanel
 
 section#chartOfUsers
 	// width: 300vw
-	height: 100vh
+	// height: 100vh
 	top: 0 !important
 	margin: 0 0 15% 0 !important
 	max-width: initial !important
@@ -787,31 +787,26 @@ section#chartOfUsers
 	align-items: flex-end
 	position: relative
 
-	// #eventLabelContainer
-	// 	position: fixed
-	// 	top: 30%
-	// 	left: calc((100/92)*8)
+	#chartsContainer
+		display: flex
+		align-items: flex-end
+		justify-content: flex-start
+		width: 100%
+		padding-bottom: 10rem
+
+	#toPandemicChart
+		width: 6%
+
+	#toExascaleChart
+		width: 63%
 
 	.eventMarker
-		@include maxWidthXS
-		position: absolute
-		padding-right: 2.5rem
-		margin-bottom: 4rem
+		width: 15%
+		height: 100%
 		display: flex
-		justify-content: center
 		align-items: center
-
-		& > div
-			position: relative
-
-		.eventLine
-			width: 1.5px
-			height: 100%
-			top: 0
-			position: absolute
-			right: .25rem
-			background: $ylw
-
+		justify-content: center
+	
 	#chartCaptionContainer
 		position: absolute
 		top: 5%
@@ -823,30 +818,30 @@ section#chartOfUsers
 			grid-row: 1
 			grid-column: 1
 
-#barChartContainer
-	display: flex
-	height: 70vh
-	flex-direction: row-reverse
-	// flex-direction: column
+// #barChartContainer
+// 	display: flex
+// 	height: 70vh
+// 	flex-direction: row-reverse
+// 	// flex-direction: column
 
-	& > svg
-		overflow: visible
-		display: block
-		width: 100%
-		height: 100%
+// 	& > svg
+// 		overflow: visible
+// 		display: block
+// 		width: 100%
+// 		height: 100%
 		
-	.eventMarker
-		fill: $ylw !important
-		position: relative
+// 	.eventMarker
+// 		fill: $ylw !important
+// 		position: relative
 
-	.eventMarkerObject
-		background: red
-		height: 5rem
-		width: 5rem
-		display: block
-		position: absolute
-		top: 0
-		right: 0
+// 	.eventMarkerObject
+// 		background: red
+// 		height: 5rem
+// 		width: 5rem
+// 		display: block
+// 		position: absolute
+// 		top: 0
+// 		right: 0
 
 #supercomputerCompare
 	width: 100%

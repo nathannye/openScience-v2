@@ -9,52 +9,57 @@ export default class Graph extends Component {
       element: "#chartOfUsers",
       elements: {
         eventLargeCaption: "#chartCaptionContainer > h2",
-        eventMarker: "article.eventEntry",
+        eventMarker: ".eventMarker",
         toPandemicChart: "#toPandemicChart",
         toExascaleChart: "#toExascaleChart",
+        charts: "#chartsContainer",
       },
     });
   }
 
   create() {
     super.create();
-    console.log(this.elements);
     this.charts = [
       {
         data: chartToPandemic,
         container: this.elements.toPandemicChart,
+        width: chartToPandemic.length,
+        height: 55,
       },
       {
         data: chartToExascale,
         container: this.elements.toExascaleChart,
+        width: chartToExascale.length,
+        height: 325,
       },
     ];
+
     this.createCharts();
-    // this.createChartAnimation();
+    this.createChartAnimation();
   }
 
   createCharts() {
     this.charts.forEach((chart, index) => {
-      const heightValue = 325;
-      const widthValue = 900;
+      let heightValue = chart.width;
+      let widthValue = chart.height;
 
-      const svg = d3
+      let svg = d3
         .select(chart.container)
         .append("svg")
         .attr("viewBox", `0 0 ${widthValue} ${heightValue}`);
 
-      const margin = { top: 0, bottom: 0, left: 0, right: 0 };
+      let margin = { top: 0, bottom: 0, left: 0, right: 0 };
 
-      const height = 325 - margin.top - margin.bottom;
-      const width = 900 - margin.left - margin.right;
+      let height = heightValue - margin.top - margin.bottom;
+      let width = widthValue - margin.left - margin.right;
 
-      const x = d3
+      let x = d3
         .scaleBand()
         .domain(d3.range(chart.data.length))
         .range([margin.left, width - margin.right])
         .padding(0.1);
 
-      const y = d3
+      let y = d3
         .scaleLinear()
         .domain([0, 1200000])
         .range([height - margin.bottom, margin.top]);
@@ -77,8 +82,6 @@ export default class Graph extends Component {
         .attr("width", x.bandwidth())
         .attr("class", "bar");
 
-      console.log(chart.container);
-
       // chart.bars = chart.container.querySelectorAll("rect.bar");
 
       // function xAxis(g) {
@@ -98,150 +101,64 @@ export default class Graph extends Component {
     });
   }
 
-  // createCharts() {
-  //   const heightValue = 325;
-  //   const widthValue = 900;
-
-  //   const svg = d3
-  //     .select("#barChartContainer")
-  //     .append("svg")
-  //     .attr("viewBox", `0 0 ${widthValue} ${heightValue}`);
-
-  //   const margin = { top: 0, bottom: 0, left: 0, right: 0 };
-
-  //   const height = 325 - margin.top - margin.bottom;
-  //   const width = 900 - margin.left - margin.right;
-
-  //   const x = d3
-  //     .scaleBand()
-  //     .domain(d3.range(chart.length))
-  //     .range([margin.left, width - margin.right])
-  //     .padding(0.1);
-
-  //   const y = d3
-  //     .scaleLinear()
-  //     .domain([0, 1200000])
-  //     .range([height - margin.bottom, margin.top]);
-
-  //   svg
-  //     .append("g")
-  //     .attr("fill", colors.gry)
-  //     .selectAll("rect")
-  //     .data(chart.sort((a, b) => d3.ascending(a.users, b.users)))
-  //     .join("rect")
-  //     .attr("x", (d, i) => x(i))
-  //     // .attr("y", (d) => y(d.users))
-  //     .attr("y", function (d) {
-  //       return y(d.users);
-  //     })
-  //     // .attr("height", (d) => y(0) - y(d.users))
-  //     .attr("height", function (d) {
-  //       return height - y(d.users);
-  //     })
-  //     .attr("width", x.bandwidth())
-  //     .attr("class", "bar");
-
-  //   // function xAxis(g) {
-  //   //   g.attr("transform", `translate(0, ${height - margin.bottom})`)
-  //   //     .attr("id", "xAxis")
-  //   //     .call(d3.axisBottom(x).tickFormat((i) => chart[i].date));
-  //   // }
-
-  //   // function yAxis(g) {
-  //   //   g.attr("transform", `translate(${margin.left}, 0)`)
-  //   //     .attr("id", "yAxis")
-  //   //     .call(d3.axisLeft(y).ticks(null, chart.format));
-  //   // }
-  //   // svg.append("g").call(yAxis);
-  //   // svg.append("g").call(xAxis);
-  //   svg.node();
-  // }
-
   createChartAnimation() {
-    // let bars = gsap.utils.toArray("rect.bar");
+    let tillPandemic =
+      this.elements.toPandemicChart.querySelectorAll("rect.bar");
 
-    // let chart = document.querySelector("#barChartContainer");
+    let tillExascale =
+      this.elements.toExascaleChart.querySelectorAll("rect.bar");
 
-    // // Event Markers
-    // let declarePandemic = bars[8];
-    // let exascaleMark = bars[bars.length - 1];
-    // declarePandemic.setAttribute("id", "pandemicDeclaredMark");
-    // declarePandemic.setAttribute("class", "eventMarker");
-    // exascaleMark.setAttribute("id", "exascaleMark");
-    // exascaleMark.setAttribute("class", "eventMarker");
-
-    // let tillPandemic = bars.slice(0, 8);
-    // let pandemicTillExa = bars.slice(9, bars.length);
-    // let chartCaptions = gsap.utils.toArray("#chartCaptionContainer > h2");
-    // let introCaption = chartCaptions[0];
-    // let pandemicCaption = chartCaptions[1];
-    // let exaCaption = chartCaptions[2];
-    // let chartSectionContainer = document.getElementById("chartOfUsers");
-    // let barChartContainer = document.getElementById("barChartContainer");
-
-    gsap.set(this.charts[0].bars, {
+    let declarePandemic = tillPandemic[8];
+    gsap.set("rect.bar", {
       opacity: 0,
       fill: colors.teal,
       scaleY: 0.35,
       transformOrigin: "center bottom",
     });
-
     const tl = gsap.timeline({
       scrollTrigger: {
-        pin: chartSectionContainer,
+        pin: this.element,
         scrub: 0.35,
-        trigger: chartSectionContainer,
-        start: "bottom bottom",
-        end: "+=10000",
+        markers: true,
+        trigger: this.element,
+        start: "top top",
+        end: "+=2000",
       },
     });
-
     tl.to(
-      chartSectionContainer,
+      tillPandemic,
       {
-        xPercent: 100,
-        // duration: eveyrthing combined
+        opacity: 1,
+        scaleY: 1,
+        fill: colors.gry,
+        stagger: {
+          each: 2,
+        },
+        duration: 5,
       },
       0
     )
-      .to(
-        tillPandemic,
-        {
-          opacity: 1,
-          scaleY: 1,
-          fill: colors.gry,
-          stagger: {
-            each: 2,
-          },
-        },
-        0
-      )
       .to(
         declarePandemic,
         {
           opacity: 1,
           scaleY: 1,
+          duration: 5,
           fill: colors.ylw,
         },
         ">"
       )
-      .to(
-        chartCaptions[0],
+      .from(
+        this.elements.eventMarker.item(0),
         {
-          opacity: 1,
+          autoAlpha: 0,
           delay: 2,
         },
         ">+=1"
       )
+
       .to(
-        chartCaptions[0],
-        {
-          opacity: 0,
-        },
-        ">+=4"
-      )
-      .to(
-        pandemicTillExa,
+        tillExascale,
         {
           opacity: 1,
           scaleY: 1,
@@ -249,114 +166,24 @@ export default class Graph extends Component {
           stagger: {
             each: 1,
           },
+          duration: 5,
         },
         ">"
       )
       .to(
-        chartCaptions[1],
+        this.elements.charts,
         {
-          opacity: 1,
-          delay: 2,
+          xPercent: -80,
+          duration: 150,
         },
-        ">+=1"
+        "<+=15"
       )
-      .to(
-        chartCaptions[1],
+      .from(
+        this.elements.eventMarker.item(1),
         {
-          opacity: 0,
+          autoAlpha: 0,
         },
-        ">+=4"
+        "<45%"
       );
-
-    // graphtl
-    //   // Call first caption
-    //   .from(chartCaptions[0], {
-    //     opacity: 0,
-    //     duration: 5,
-    //   })
-    //   // bars fill to pandemic bar
-    //   .to(
-    //     tillPandemic,
-    //     {
-    //       opacity: 1,
-    //       scaleY: 1,
-    //       fill: colors.gry,
-    //       stagger: {
-    //         each: 12,
-    //       },
-    //     },
-    //     "moveToPandemic"
-    //   )
-    //   // move over a bit
-    //   .to(
-    //     barChartContainer,
-    //     {
-    //       x: "-30vw",
-    //       ease: "power2.inOut",
-    //     },
-    //     "moveToPandemic"
-    //   )
-    //   // fill pandemic mark w/ yellow
-    //   .to(declarePandemic, {
-    //     opacity: 1,
-    //     scaleY: 1,
-    //     fill: colors.ylw,
-    //   })
-    //   // Next caption up, reverse the one before
-    //   .to(
-    //     chartCaptions[0],
-    //     {
-    //       opacity: 0,
-    //       duration: 5,
-    //     },
-    //     "swap1"
-    //   )
-    //   .from(
-    //     chartCaptions[1],
-    //     {
-    //       opacity: 0,
-    //       duration: 5,
-    //     },
-    //     "swap1"
-    //   )
-    //   .to(declarePandemic, {
-    //     duration: 1,
-    //   })
-    //   .to(
-    //     pandemicTillExa,
-    //     {
-    //       opacity: 1,
-    //       scaleY: 1,
-    //       duration: 1,
-    //       fill: colors.gry,
-    //       stagger: {
-    //         each: 0.2,
-    //       },
-    //     },
-    //     "moveTillExa"
-    //   )
-    //   .to(
-    //     barChartContainer,
-    //     {
-    //       x: "-100vw",
-    //     },
-    //     "moveTillExa"
-    //   )
-    //   .to(
-    //     chartCaptions[1],
-    //     {
-    //       opacity: 0,
-    //       duration: 5,
-    //     },
-    //     "swap1"
-    //   )
-    //   .from(
-    //     chartCaptions[2],
-    //     {
-    //       opacity: 0,
-    //       duration: 5,
-    //     },
-    //     "swap1"
-    //   );
   }
 }
