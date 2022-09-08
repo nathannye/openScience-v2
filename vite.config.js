@@ -4,6 +4,7 @@ import { VitePWA } from "vite-plugin-pwa";
 export default defineConfig({
   plugins: [
     VitePWA({
+      injectRegister: "auto",
       includeAssets: [
         "/icons/apple-touch-icon.png, /icons/favicon.png, robots.txt, ",
       ],
