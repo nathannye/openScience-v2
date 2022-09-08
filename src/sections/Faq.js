@@ -147,6 +147,7 @@ export default class Faq extends Component {
   }
 
   createAnim() {
+    console.log(this.articles);
     this.articles.forEach((article) => {
       let target = article.container.querySelector(".faqEntryHeader");
       target.addEventListener("click", () => {

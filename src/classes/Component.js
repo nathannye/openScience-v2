@@ -1,8 +1,8 @@
-import EventEmitter from "events";
+// import EventEmitter from "node:events";
 import gsap from "gsap";
 import { each } from "lodash";
 
-export default class Component extends EventEmitter {
+export default class Component {
   constructor({ elements, element, tl }) {
     super();
     this.selector = element;
