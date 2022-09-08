@@ -31,39 +31,7 @@ export const colors = {
   white: "white",
 };
 
-export const chart = [
-  {
-    users: 20000,
-    date: "4 Mar",
-  },
-  {
-    users: 22000,
-    date: "5 Mar",
-  },
-  {
-    users: 24000,
-    date: "6 Mar",
-  },
-  {
-    users: 26000,
-    date: "7 Mar",
-  },
-  {
-    users: 30000,
-    date: "8 Mar",
-  },
-  {
-    users: 32000,
-    date: "9 Mar",
-  },
-  {
-    users: 33000,
-    date: "10 Mar",
-  },
-  {
-    users: 34000,
-    date: "11 Mar",
-  },
+export const chartToExascale = [
   {
     users: 37000,
     date: "12 Mar",
@@ -399,6 +367,41 @@ export const chart = [
   {
     users: 1200000,
     date: "3 Jun",
+  },
+];
+
+export const chartToPandemic = [
+  {
+    users: 20000,
+    date: "4 Mar",
+  },
+  {
+    users: 22000,
+    date: "5 Mar",
+  },
+  {
+    users: 24000,
+    date: "6 Mar",
+  },
+  {
+    users: 26000,
+    date: "7 Mar",
+  },
+  {
+    users: 30000,
+    date: "8 Mar",
+  },
+  {
+    users: 32000,
+    date: "9 Mar",
+  },
+  {
+    users: 33000,
+    date: "10 Mar",
+  },
+  {
+    users: 34000,
+    date: "11 Mar",
   },
 ];
 

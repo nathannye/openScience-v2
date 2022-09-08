@@ -26,21 +26,22 @@
     />
     <meta name="theme-color" content="#030b18" /> -->
   </head>
-  <div id="loader">
-    <div class="loaderContent">
-      <span class="loaderNumber">0%</span>
-      <div class="soundAsk">
-        <h3>This experience has sound. Would you like to turn it on?</h3>
-        <div>
-          <div id="soundButtons">
-            <button class="soundOnClick">yes</button>
-            <button class="soundOffClick">no thanks</button>
+  <body>
+    <div id="loader">
+      <div class="loaderContent">
+        <span class="loaderNumber">0%</span>
+        <div class="soundAsk">
+          <h3>This experience has sound. Would you like to turn it on?</h3>
+          <div>
+            <div id="soundButtons">
+              <button class="soundOnClick">yes</button>
+              <button class="soundOffClick">no thanks</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <body>
+
     <header>
       <div id="soundIndicatorContainer">
         <div id="soundLabelSwitch" class="soundToggleClick">
@@ -320,7 +321,8 @@
           <h2>
             As COVID-19 spread and worldwide isolation came into effect, people
             wanted to do their part to help fight the pandemic. Folding@Home, a
-            distributed computing project.
+            distributed computing project let anyone turn their computer into a
+            vaccine-finding machine.
           </h2>
           <h2>
             Less than two months after Folding @ Home announced participation in
@@ -332,9 +334,30 @@
             powerful than the worlds ten fastest supercomputers. Combined.
           </h2>
         </div>
-        <div id="eventLabelContainer"></div>
-        <div id="barChartContainer">
-          <article class="eventEntry" id="pandemicEvent">
+        <!-- <div id="eventLabelContainer"></div> -->
+        <div id="chartsContainer">
+          <div id="toPandemicChart" class="chart"></div>
+          <div id="pandemicEventMarker" class="eventMarker">
+            <div>
+              <h4>march 11, 2020</h4>
+              <p>The CDC declares COVID-19 a global pandemic</p>
+              <span class="eventLine"></span>
+            </div>
+          </div>
+          <div id="toExascaleChart" class="chart"></div>
+          >
+          <div id="exascaleEventMarker" class="eventMarker">
+            <div>
+              <h4>june 3, 2020</h4>
+              <p>
+                Folding@Home becomes the first body of computers to cross the
+                exascale barrier.
+              </p>
+              <span class="eventLine"></span>
+            </div>
+          </div>
+        </div>
+        <!-- <article class="eventEntry" id="pandemicEvent">
             <h4>march 11, 2020</h4>
             <p>The CDC declares COVID-19 a global pandemic</p>
             <span class="eventLine"></span>
@@ -347,7 +370,7 @@
             </p>
             <span class="eventLine"></span>
           </article>
-        </div>
+        </div> -->
       </section>
 
       <section class="panel contentPanel" id="supercomputerInfo">

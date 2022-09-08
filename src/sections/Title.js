@@ -36,7 +36,6 @@ export default class Title extends Component {
         this.createIntroOutAnim();
       },
     });
-    // this.createWave();
     this.createIntroAnim();
   }
 
