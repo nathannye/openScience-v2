@@ -10,32 +10,24 @@ export default class Faq extends Component {
         questions: ".faqEntryContainer",
       },
     });
-  }
-
-  create() {
     super.create();
-    this.articles = [];
     this.createFaqEntries();
-    this.createAnim();
   }
 
   createFaqEntries() {
-    const container = document.querySelector("#faqContainer");
     for (let i = 0; i < faq.length; i++) {
-      this.article = {};
-      this.article.container = document.createElement("article");
-      this.article.container.classList.add("faqEntryContainer");
+      let article = document.createElement("article");
+      article.classList.add("faqEntryContainer");
 
-      container.appendChild(this.article.container);
+      faqContainer.appendChild(article);
 
       let flexContainer = document.createElement("div");
-      flexContainer.classList.add("faqEntryHeader");
       let arrow = document.createElement("span");
       arrow.classList.add("faqArrow");
 
       flexContainer.appendChild(arrow);
 
-      this.article.container.appendChild(flexContainer);
+      article.appendChild(flexContainer);
 
       let line = document.createElement("div");
       line.classList.add("faqQuestionLine");
@@ -50,25 +42,22 @@ export default class Faq extends Component {
       let answerContainer = document.createElement("div");
       answerContainer.classList.add("faqAnswer");
 
-      this.article.container.appendChild(answerContainer);
+      article.appendChild(answerContainer);
 
       let answer = document.createElement("p");
       answer.innerHTML = faq[i].answer;
 
       answerContainer.appendChild(answer);
 
-      this.article.tl = gsap.timeline({
+      article.tl = gsap.timeline({
         paused: true,
       });
-      this.article.tl.reversed(true);
 
-      var maxH = answerContainer.scrollHeight;
+      let maxH = answerContainer.scrollHeight;
 
-      window.addEventListener("resize", () => {
-        maxH = answerContainer.scrollHeight;
-      });
+      article.tl.reversed(true);
 
-      this.article.tl
+      article.tl
         .to(
           answerContainer,
           {
@@ -105,12 +94,12 @@ export default class Faq extends Component {
             ease: "power1.inOut",
             filter: "saturate(1)",
           },
-          0
+          0.2
         );
 
       let tl = gsap.timeline({
         scrollTrigger: {
-          trigger: this.element,
+          trigger: faqContainer,
           start: `top bottom-=${6 * [i]}%`,
         },
         onComplete: () => {
@@ -141,18 +130,14 @@ export default class Faq extends Component {
           },
           0.1
         );
-
-      this.articles.push(this.article);
     }
   }
 
-  createAnim() {
-    console.log(this.articles);
-    this.articles.forEach((article) => {
-      let target = article.container.querySelector(".faqEntryHeader");
-      target.addEventListener("click", () => {
+  setupSelectionAnimation() {
+    this.elements.questions.forEach((article) => {
+      article.addEventListener("click", () => {
         if (article.tl.reversed()) {
-          this.articles.forEach((article) => {
+          this.elements.questions.forEach((article) => {
             article.tl.reverse();
           });
 
@@ -160,6 +145,7 @@ export default class Faq extends Component {
         } else {
           article.tl.reverse();
         }
+
       });
     });
   }

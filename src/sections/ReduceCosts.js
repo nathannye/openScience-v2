@@ -27,6 +27,7 @@ export default class ReduceCosts extends Component {
       scrollTrigger: {
         trigger: this.element,
         start: "top bottom-=44%",
+        markers: true,
       },
     });
     gsap.set([this.elements.twoThouFlip, this.elements.fiveThouFlip], {

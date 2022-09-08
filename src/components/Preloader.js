@@ -12,7 +12,6 @@ export default class Preloader extends Component {
         percentage: ".loaderNumber",
         askContainer: ".soundAsk",
         askText: ".soundAsk h3",
-        stage: "#viewport",
         soundButtons: "#soundButtons > button",
         soundOn: "#soundButtons > button.soundOnClick",
         soundOff: "#soundButtons > button.soundOffClick",
