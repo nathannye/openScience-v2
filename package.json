@@ -32,7 +32,8 @@
     "lodash": "^4.17.21",
     "parcel-bundler": "^1.12.5",
     "prettier": "^2.4.1",
-    "vite": "^2.8.6"
+    "vite": "^2.8.6",
+    "vite-plugin-pwa": "^0.12.7"
   },
   "scripts": {
     "build": "vite build",
