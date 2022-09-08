@@ -7,7 +7,7 @@ export default defineConfig({
       devOptions: {
         enabled: true,
       },
-      injectRegister: "auto",
+      injectRegister: "false",
       includeAssets: [
         "/icons/apple-touch-icon.png, /icons/favicon.png, robots.txt, ",
       ],
