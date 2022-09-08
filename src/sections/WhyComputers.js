@@ -111,12 +111,6 @@ export default class WhyComputers extends Component {
         },
         "go+=.65"
       );
-    // .fromTo(
-    //   this.elements.numbers,
-    //   { xPercent: 20 },
-    //   { xPercent: -40, duration: 10 },
-    //   ">"
-    // );
 
     this.elements.numbers.split.chars.forEach((c, index) => {
       if (index % 2 == 0) {
@@ -146,20 +140,6 @@ export default class WhyComputers extends Component {
       }
       this.needtl.add(c.tween);
     });
-
-    // gsap.from(
-    //   this.elements.numbers,
-    //   {
-    //     scrollTrigger: {
-    //       trigger: this.element,
-    //       start: "top top+=8%",
-    //       end: "bottom top+=10%",
-    //       scrub: 1,
-    //     },
-    //     xPercent: 20,
-    //   },
-    //   ">"
-    // );
   }
 
   createAminos() {
@@ -174,20 +154,23 @@ export default class WhyComputers extends Component {
 
       dude.setSpeed(1.3);
 
-      let anim = gsap.to(
-        this.elements.aminoContainer.item(i),
-        {
-          duration: this.aminoProps.dur,
-          motionPath: {
-            start: this.aminoProps.start,
-            end: this.aminoProps.end,
-            path: this.paths[i],
-            align: this.paths[i],
+      dude.addEventListener("DOMLoaded", (event) => {
+        let anim = gsap.to(
+          this.elements.aminoContainer.item(i),
+          {
+            duration: this.aminoProps[i].dur,
+            motionPath: {
+              start: this.aminoProps[i].start,
+              end: this.aminoProps[i].end,
+              path: this.paths[i],
+              align: this.paths[i],
+            },
           },
-        },
-        "main"
-      );
-      this.needtl.add(anim, "appendAmino" + i);
+          "main"
+        );
+        this.needtl.add(anim, "appendAmino" + i);
+        console.log(dude, anim);
+      });
     }
   }
 

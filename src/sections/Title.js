@@ -34,7 +34,6 @@ export default class Title extends Component {
       paused: true,
       onComplete: () => {
         this.createIntroOutAnim();
-        console.log("intro done");
       },
     });
     // this.createWave();

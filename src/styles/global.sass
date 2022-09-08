@@ -349,8 +349,10 @@ main
 	& > .pin-spacer
 		position: relative
 
-section:not(section.interstitial)
+section:not(section.interstitial, section#faqContainer)
 	min-height: 100vh
+
+section:not(section.interstitial)
 
 	&.lefty
 		justify-content: flex-start

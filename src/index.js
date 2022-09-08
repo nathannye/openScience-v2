@@ -106,7 +106,7 @@ class App {
       setTimeout(() => {
         this.overflowControl();
       }, this.sections.title.tl.duration());
-    }, 900);
+    }, 200);
   }
 
   refresh() {
