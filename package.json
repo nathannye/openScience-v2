@@ -1,7 +1,6 @@
 {
   "dependencies": {
     "aframe-glmol-component": "^1.0.1",
-    "babel-loader": "^8.2.3",
     "d3": "^7.1.1",
     "examples": "^0.1.0",
     "g": "^2.0.1",
@@ -13,24 +12,19 @@
     "lottie-web": "^5.8.1",
     "nav": "^0.0.2",
     "ngl": "^2.0.0-dev.40",
-    "pug": "^3.0.2",
     "regenerator-runtime": "^0.13.9",
-    "sass": "^1.54.8",
-    "three": "^0.134.0",
-    "vite-plugin-pug": "^0.3.1"
+    "sass": "^1.54.8"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
     "@parcel/babel-preset-env": "^2.0.0",
     "babel": "^6.23.0",
-    "dat.gui": "^0.7.9",
     "eslint": "^8.1.0",
     "eslint-config-gsap": "^3.0.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-recommended": "^4.1.0",
     "eslint-plugin-import": "^2.25.2",
     "lodash": "^4.17.21",
-    "parcel-bundler": "^1.12.5",
     "prettier": "^2.4.1",
     "vite": "^2.8.6"
   },
