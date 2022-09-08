@@ -38,19 +38,19 @@ export default class WhyComputers extends Component {
         p: "#firstPath",
         dur: 15,
         start: 0.35,
-        end: 1,
+        end: 1.5,
       },
       {
         p: "#secondPath",
         dur: 25,
         start: 0.9,
-        end: 0.2,
+        end: 2.2,
       },
       {
         p: "#thirdPath",
         dur: 19,
         start: 1,
-        end: 0.1,
+        end: 2.1,
       },
       {
         p: "#fourthPath",
@@ -85,7 +85,7 @@ export default class WhyComputers extends Component {
           duration: 1.2,
           ease: "power3.inOut",
         },
-        "go"
+        0
       )
       .from(
         this.elements.h2.split.words,
@@ -96,7 +96,7 @@ export default class WhyComputers extends Component {
           ease: "power4.inOut",
           stagger: 0.0142,
         },
-        "go+=.35"
+        0
       )
       .from(
         this.elements.para.split.lines,
@@ -109,7 +109,7 @@ export default class WhyComputers extends Component {
           stagger: 0.09,
           duration: 0.9,
         },
-        "go+=.65"
+        0
       );
 
     this.elements.numbers.split.chars.forEach((c, index) => {
@@ -123,7 +123,7 @@ export default class WhyComputers extends Component {
             ease: "power2.out",
             delay: index / 10,
           },
-          0
+          1
         );
       } else {
         c.tween = gsap.from(
@@ -135,7 +135,7 @@ export default class WhyComputers extends Component {
             ease: "power2.out",
             delay: index / 10,
           },
-          0
+          1
         );
       }
       this.needtl.add(c.tween);
@@ -155,21 +155,40 @@ export default class WhyComputers extends Component {
       dude.setSpeed(1.3);
 
       dude.addEventListener("DOMLoaded", (event) => {
-        let anim = gsap.to(
-          this.elements.aminoContainer.item(i),
-          {
-            duration: this.aminoProps[i].dur,
-            motionPath: {
-              start: this.aminoProps[i].start,
-              end: this.aminoProps[i].end,
-              path: this.paths[i],
-              align: this.paths[i],
+        let anim = gsap.timeline();
+        let d = this.elements.aminoContainer.item(i);
+        anim
+          .to(
+            d,
+            {
+              opacity: 1,
+              duration: 1,
             },
-          },
-          "main"
-        );
-        this.needtl.add(anim, "appendAmino" + i);
-        console.log(dude, anim);
+            "main"
+          )
+          .to(
+            d,
+            {
+              duration: this.aminoProps[i].dur * 2.25,
+              motionPath: {
+                start: this.aminoProps[i].start,
+                end: this.aminoProps[i].end,
+                path: this.paths[i],
+                align: this.paths[i],
+                autoRotate: true,
+              },
+            },
+            "main"
+          )
+          .to(
+            d,
+            {
+              opacity: 0,
+              duration: 6,
+            },
+            ">"
+          );
+        this.needtl.add(anim, 1);
       });
     }
   }

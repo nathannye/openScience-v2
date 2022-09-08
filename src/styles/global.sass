@@ -694,10 +694,12 @@ section#whyDoWeNeed
 	& > div
 
 		& > div
-			@include maxWidthM
+			@include maxWidthL
 			display: flex
-			column-gap: 1.5rem
 			flex-wrap: wrap
+
+			h2
+				margin-right: 0
 
 			& > h2, p
 				width: 48%
@@ -719,6 +721,7 @@ section#whyDoWeNeed
 		position: absolute
 		overflow: visible
 		opacity: 0
+		pointer-events: none
 		z-index: 30
 
 	#firstPathContainer
@@ -741,8 +744,10 @@ section#whyDoWeNeed
 
 	.aminoDudeContainer
 		position: absolute
-		top: 0
-		left: 0
+		// top: 0
+		// left: 0
+		opacity: 0
+		// border: red 2px solid
 
 		&:first-child
 			width: 12%
@@ -1071,6 +1076,16 @@ section#howCanYouHelp
 
 	section#whyDoWeNeed
 		padding-top: 12% !important
+
+		.whyDoWeNeedText
+
+		& > div > div 
+			width: 100%
+
+			h2
+				margin-right: 5rem
+
+			
 
 		h1#millionAcross
 			bottom: -5%

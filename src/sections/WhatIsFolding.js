@@ -283,7 +283,6 @@ export default class WhatIsFolding extends Component {
         paused: true,
         onComplete: () => {
           target.dangerMarkerAnim.destroy();
-          console.log(target.dangerMarkerAnim);
         },
       });
 
