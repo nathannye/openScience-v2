@@ -9,12 +9,10 @@ export default class Component extends EventEmitter {
     this.selectorChildren = {
       ...elements,
     };
-    this.tl = tl;
     this.create();
     this.addEventListeners();
   }
   create() {
-    this.tl = gsap.timeline();
     this.element = document.querySelector(this.selector);
     this.elements = {};
     each(this.selectorChildren, (e, i) => {

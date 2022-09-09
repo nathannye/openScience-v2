@@ -74,23 +74,6 @@ class App {
     state
       ? (document.querySelector("html").style.overflowY = "auto")
       : (document.querySelector("html").style.overflowY = "hidden");
-
-    // html.style.overflowY == "auto" || html.style.overflowY == ""
-    //   ? (html.style.overflowY = "hidden")
-    //   : (html.style.overflowY = "auto");
-
-    // if (
-    //   this.elements.html.style.overflowY == "auto" ||
-    //   this.elements.html.style.overflowY == ""
-    // ) {
-    //   gsap.to(this.elements.html, {
-    //     overflowY: "hidden",
-    //   });
-    // } else {
-    //   gsap.to(this.elements.html, {
-    //     overflowY: "auto",
-    //   });
-    // }
   }
 
   createSections() {
