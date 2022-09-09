@@ -6,13 +6,13 @@ export default {
       devOptions: {
         enabled: true,
       },
-      includeAssets: [
-        "icons/favicon.png",
-        "icons/apple-touch-icon.png",
-        "icons/pwa-192x192.png",
-        "icons/pwa-512x512.png",
-        "icons/mask-icon.svg",
-      ],
+      // includeAssets: [
+      //   "icons/favicon.png",
+      //   "icons/apple-touch-icon.png",
+      //   "icons/pwa-192x192.png",
+      //   "icons/pwa-512x512.png",
+      //   "icons/mask-icon.svg",
+      // ],
       manifest: {
         name: "Open Source, Open Science",
         short_name: "Open Science",
