@@ -17,8 +17,6 @@ export default class Stage extends Component {
   createStage() {
     const stage = new NGL.Stage("viewport");
 
-    console.log(stage);
-
     stage.setParameters({
       backgroundColor: "#030b18",
       fogFar: 35,

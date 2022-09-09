@@ -24,7 +24,6 @@ export default class SoundToggle {
   }
 
   toggleSound(sound) {
-    console.log(sound);
     if (sound) {
       this.sound.active.play();
       this.sound.active.fade(0, 1, this.duration);

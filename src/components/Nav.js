@@ -137,7 +137,9 @@ export default class Nav extends Component {
             stagger: 0.1,
           },
           0.1
-        )
+        );
+
+      mowTL.reversed(true);
 
       this.elements.hamburgerContainer.onclick = () => {
         hamburgerAnim.setDirection(direction);
