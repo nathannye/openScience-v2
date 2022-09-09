@@ -2,6 +2,7 @@ import Component from "../classes/Component";
 import * as d3 from "d3";
 import { chartToExascale, chartToPandemic, colors } from "../data";
 import gsap from "gsap";
+import SplitText from "gsap/SplitText";
 
 export default class Graph extends Component {
   constructor() {
@@ -13,6 +14,10 @@ export default class Graph extends Component {
         toPandemicChart: "#toPandemicChart",
         toExascaleChart: "#toExascaleChart",
         charts: "#chartsContainer",
+        pandemicHead: "#pandemicEventMarker h4",
+        exascaleHead: "#exascaleEventMarker h4",
+        userNumbersContainer: ".userNumbersContainer",
+        appendNumbers: ".userNumbersContainer > div",
       },
     });
   }
@@ -36,6 +41,7 @@ export default class Graph extends Component {
 
     this.createCharts();
     this.createChartAnimation();
+    this.createUserNumbers();
   }
 
   createCharts() {
@@ -81,32 +87,61 @@ export default class Graph extends Component {
         })
         .attr("width", x.bandwidth())
         .attr("class", "bar");
-
-      // chart.bars = chart.container.querySelectorAll("rect.bar");
-
-      // function xAxis(g) {
-      //   g.attr("transform", `translate(0, ${height - margin.bottom})`)
-      //     .attr("id", "xAxis")
-      //     .call(d3.axisBottom(x).tickFormat((i) => chart[i].date));
-      // }
-
-      // function yAxis(g) {
-      //   g.attr("transform", `translate(${margin.left}, 0)`)
-      //     .attr("id", "yAxis")
-      //     .call(d3.axisLeft(y).ticks(null, chart.format));
-      // }
-      // svg.append("g").call(yAxis);
-      // svg.append("g").call(xAxis);
       svg.node();
+    });
+  }
+
+  createUserNumbers() {
+    this.charts.reverse().forEach((chart) => {
+      chart.data.reverse().forEach((point, index) => {
+        let c = document.createElement("span");
+        c.innerHTML = Math.round(point.users);
+        this.elements.appendNumbers.appendChild(c);
+        if (index == 0) {
+          c.classList.add("ylw");
+        }
+      });
     });
   }
 
   createChartAnimation() {
     let tillPandemic =
       this.elements.toPandemicChart.querySelectorAll("rect.bar");
-
     let tillExascale =
       this.elements.toExascaleChart.querySelectorAll("rect.bar");
+
+    const pandemicSplit = {};
+    const exascaleSplit = {};
+
+    pandemicSplit.heading = new SplitText(
+      this.elements.eventMarker.item(0).querySelector("h2"),
+      {
+        type: "lines, words",
+        linesClass: "splitLine",
+      }
+    );
+
+    pandemicSplit.para = new SplitText(
+      this.elements.eventMarker.item(0).querySelector("p"),
+      {
+        type: "lines",
+      }
+    );
+
+    exascaleSplit.heading = new SplitText(
+      this.elements.eventMarker.item(1).querySelector("h2"),
+      {
+        type: "lines, words",
+        linesClass: "splitLine",
+      }
+    );
+
+    exascaleSplit.para = new SplitText(
+      this.elements.eventMarker.item(1).querySelector("p"),
+      {
+        type: "lines",
+      }
+    );
 
     let declarePandemic = tillPandemic[8];
     gsap.set("rect.bar", {
@@ -122,22 +157,30 @@ export default class Graph extends Component {
         markers: true,
         trigger: this.element,
         start: "top top",
-        end: "+=2000",
+        end: "+=4000",
       },
     });
     tl.to(
-      tillPandemic,
+      this.elements.appendNumbers,
       {
-        opacity: 1,
-        scaleY: 1,
-        fill: colors.gry,
-        stagger: {
-          each: 2,
-        },
-        duration: 5,
+        yPercent: -7.5,
+        duration: 62,
       },
       0
     )
+      .to(
+        tillPandemic,
+        {
+          opacity: 1,
+          scaleY: 1,
+          fill: colors.gry,
+          stagger: {
+            each: 2,
+          },
+          duration: 5,
+        },
+        0
+      )
       .to(
         declarePandemic,
         {
@@ -149,14 +192,37 @@ export default class Graph extends Component {
         ">"
       )
       .from(
-        this.elements.eventMarker.item(0),
+        pandemicSplit.heading.words,
         {
-          autoAlpha: 0,
-          delay: 2,
+          yPercent: 100,
+          duration: 7,
+          ease: "power3.inOut",
+          stagger: 1.25,
         },
         ">+=1"
       )
-
+      .from(
+        pandemicSplit.para.lines,
+        {
+          autoAlpha: 0,
+          yPercent: 12,
+          rotateY: -8,
+          color: colors.teal,
+          ease: "power2.out",
+          stagger: 3,
+          duration: 7,
+        },
+        "<"
+      )
+      .from(
+        this.elements.pandemicHead,
+        {
+          autoAlpha: 0,
+          duration: 6,
+          yPercent: 20,
+        },
+        "<"
+      )
       .to(
         tillExascale,
         {
@@ -167,8 +233,17 @@ export default class Graph extends Component {
             each: 1,
           },
           duration: 5,
+          delay: 20,
         },
         ">"
+      )
+      .to(
+        this.elements.appendNumbers,
+        {
+          yPercent: -100,
+          duration: 105,
+        },
+        "<"
       )
       .to(
         this.elements.charts,
@@ -178,12 +253,38 @@ export default class Graph extends Component {
         },
         "<+=15"
       )
+
       .from(
-        this.elements.eventMarker.item(1),
+        exascaleSplit.heading.words,
         {
-          autoAlpha: 0,
+          yPercent: 100,
+          duration: 7,
+          ease: "power3.inOut",
+          stagger: 1.25,
         },
         "<45%"
+      )
+      .from(
+        exascaleSplit.para.lines,
+        {
+          autoAlpha: 0,
+          yPercent: 12,
+          rotateY: -8,
+          color: colors.teal,
+          ease: "power2.out",
+          stagger: 3,
+          duration: 7,
+        },
+        "<"
+      )
+      .from(
+        this.elements.exascaleHead,
+        {
+          autoAlpha: 0,
+          yPercent: 20,
+          duration: 6,
+        },
+        "<"
       );
   }
 }
