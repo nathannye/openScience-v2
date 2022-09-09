@@ -26,7 +26,7 @@ $boundary: 87.8%
 
 *
 	--unit: 16.667%
-	--smoothTransition: all .27s cubic-bezier(.81,0,.37,1)
+	--smoothTransition: all .21s cubic-bezier(.81,0,.37,1)
 	--spacer: clamp(1.5rem, calc(1.5rem + ((1vw - 0.36rem) * 1.7857)), 3rem)
 	--gutter: 3.25rem
 	--widthOne: calc((--unit * 1) - var(--spacer))
@@ -281,7 +281,6 @@ nav
 		flex-direction: row-reverse
 		align-items: center
 		margin-top: 1.5rem
-		opacity: 0
 		
 		span
 			font-size: inherit
@@ -326,8 +325,7 @@ nav
 		writing-mode: vertical-lr
 		color: white
 		margin: 1rem 0 0 0
-		opacity: 0
-
+	
 		div
 			transform-style: unset !important
 
@@ -1033,11 +1031,11 @@ section#howCanYouHelp
 				margin-top: .5rem
 				padding-top: .75rem
 				align-items: center
-				transition: .25s ease-in-out all
+				transition: .18s ease-in-out all
 
 				&:hover 
 					opacity: .6
-					transition: .25s ease-in-out all
+					transition: .18s ease-in-out all
 			
 			.faqQuestionLine
 				position: absolute

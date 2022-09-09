@@ -184,11 +184,11 @@ export default class Title extends Component {
         {
           xPercent: 100,
           stagger: 0.05,
-          autoAlpha: 1,
+          autoAlpha: 0,
           duration: 1.1,
           ease: "power2.out",
         },
-        0.9
+        1.3
       )
       .fromTo(
         this.elements.waveContainer,

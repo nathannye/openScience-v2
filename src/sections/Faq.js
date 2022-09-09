@@ -73,9 +73,8 @@ export default class Faq extends Component {
           answerContainer,
           {
             height: maxH + 20,
-            ease: "none",
-            autoRound: false,
-            duration: 0.25,
+            ease: "power3.inOut",
+            duration: 0.55,
           },
           0
         )

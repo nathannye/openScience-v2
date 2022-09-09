@@ -151,9 +151,9 @@ function setupFarAndAway() {
       },
       yPercent: 100,
       autoAlpha: 0,
-      duration: 1,
+      duration: 0.82,
       ease: "power4.inOut",
-      stagger: 0.0142,
+      stagger: 0.0102,
     });
   });
 }
@@ -184,8 +184,8 @@ function setupParas() {
       y: 15,
       rotateY: -8,
       ease: "power2.out",
-      stagger: 0.09,
-      duration: 0.9,
+      stagger: 0.07,
+      duration: 0.74,
     });
   });
 }
