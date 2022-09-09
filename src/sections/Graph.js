@@ -150,140 +150,295 @@ export default class Graph extends Component {
       scaleY: 0.35,
       transformOrigin: "center bottom",
     });
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        pin: this.element,
-        scrub: 0.35,
-        trigger: this.element,
-        start: "top top",
-        end: "+=4000",
-      },
-    });
-    tl.to(
-      this.elements.appendNumbers,
-      {
-        yPercent: -7.5,
-        duration: 62,
-      },
-      0
-    )
-      .to(
-        tillPandemic,
+
+    let mm = gsap.matchMedia();
+
+    // Above 768 (desktop)
+    mm.add("(min-width:768px)", () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          pin: this.element,
+          scrub: 0.35,
+          trigger: this.element,
+          start: "top top",
+          end: "+=4000",
+        },
+      });
+
+      tl.to(
+        this.elements.appendNumbers,
         {
-          opacity: 1,
-          scaleY: 1,
-          fill: colors.gry,
-          stagger: {
-            each: 2,
-          },
-          duration: 5,
+          yPercent: -7.5,
+          duration: 62,
         },
         0
       )
-      .to(
-        declarePandemic,
-        {
-          opacity: 1,
-          scaleY: 1,
-          duration: 5,
-          fill: colors.ylw,
-        },
-        ">"
-      )
-      .from(
-        pandemicSplit.heading.words,
-        {
-          yPercent: 100,
-          duration: 7,
-          ease: "power3.inOut",
-          stagger: 1.25,
-        },
-        ">+=1"
-      )
-      .from(
-        pandemicSplit.para.lines,
-        {
-          autoAlpha: 0,
-          yPercent: 12,
-          rotateY: -8,
-          color: colors.teal,
-          ease: "power2.out",
-          stagger: 3,
-          duration: 7,
-        },
-        "<"
-      )
-      .from(
-        this.elements.pandemicHead,
-        {
-          autoAlpha: 0,
-          duration: 6,
-          yPercent: 20,
-        },
-        "<"
-      )
-      .to(
-        tillExascale,
-        {
-          opacity: 1,
-          scaleY: 1,
-          fill: colors.gry,
-          stagger: {
-            each: 1,
+        .to(
+          tillPandemic,
+          {
+            opacity: 1,
+            scaleY: 1,
+            fill: colors.gry,
+            stagger: {
+              each: 2,
+            },
+            duration: 5,
           },
-          duration: 5,
-          delay: 20,
+          0
+        )
+        .to(
+          declarePandemic,
+          {
+            opacity: 1,
+            scaleY: 1,
+            duration: 5,
+            fill: colors.ylw,
+          },
+          ">"
+        )
+        .from(
+          pandemicSplit.heading.words,
+          {
+            yPercent: 100,
+            duration: 7,
+            ease: "power3.inOut",
+            stagger: 1.25,
+          },
+          ">+=1"
+        )
+        .from(
+          pandemicSplit.para.lines,
+          {
+            autoAlpha: 0,
+            yPercent: 12,
+            rotateY: -8,
+            color: colors.teal,
+            ease: "power2.out",
+            stagger: 3,
+            duration: 7,
+          },
+          "<"
+        )
+        .from(
+          this.elements.pandemicHead,
+          {
+            autoAlpha: 0,
+            duration: 6,
+            yPercent: 20,
+          },
+          "<"
+        )
+        .to(
+          tillExascale,
+          {
+            opacity: 1,
+            scaleY: 1,
+            fill: colors.gry,
+            stagger: {
+              each: 1,
+            },
+            duration: 5,
+            delay: 20,
+          },
+          ">"
+        )
+        .to(
+          this.elements.appendNumbers,
+          {
+            yPercent: -99,
+            duration: 90,
+          },
+          "<+=2"
+        )
+        .to(
+          this.elements.charts,
+          {
+            xPercent: -80,
+            duration: 150,
+          },
+          "<+=15"
+        )
+
+        .from(
+          exascaleSplit.heading.words,
+          {
+            yPercent: 100,
+            duration: 7,
+            ease: "power3.inOut",
+            stagger: 1.25,
+          },
+          "<45%"
+        )
+        .from(
+          exascaleSplit.para.lines,
+          {
+            autoAlpha: 0,
+            yPercent: 12,
+            rotateY: -8,
+            color: colors.teal,
+            ease: "power2.out",
+            stagger: 3,
+            duration: 7,
+          },
+          "<"
+        )
+        .from(
+          this.elements.exascaleHead,
+          {
+            autoAlpha: 0,
+            yPercent: 20,
+            duration: 6,
+          },
+          "<"
+        );
+
+      return () => {
+        tl.kill();
+      };
+    });
+
+    // Below 768 (Mobile)
+    mm.add("(max-width:768px)", () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          pin: this.element,
+          scrub: 0.35,
+          trigger: this.element,
+          start: "top top",
+          end: "+=4000",
         },
-        ">"
-      )
-      .to(
+      });
+
+      tl.to(
         this.elements.appendNumbers,
         {
-          yPercent: -99,
-          duration: 130,
+          yPercent: -7.5,
+          duration: 62,
         },
-        "<+=5"
+        0
       )
-      .to(
-        this.elements.charts,
-        {
-          xPercent: -80,
-          duration: 150,
-        },
-        "<+=15"
-      )
+        .to(
+          tillPandemic,
+          {
+            opacity: 1,
+            scaleY: 1,
+            fill: colors.gry,
+            stagger: {
+              each: 2,
+            },
+            duration: 5,
+          },
+          0
+        )
+        .to(
+          declarePandemic,
+          {
+            opacity: 1,
+            scaleY: 1,
+            duration: 5,
+            fill: colors.ylw,
+          },
+          ">"
+        )
+        .from(
+          pandemicSplit.heading.words,
+          {
+            yPercent: 100,
+            duration: 7,
+            ease: "power3.inOut",
+            stagger: 1.25,
+          },
+          ">+=1"
+        )
+        .from(
+          pandemicSplit.para.lines,
+          {
+            autoAlpha: 0,
+            yPercent: 12,
+            rotateY: -8,
+            color: colors.teal,
+            ease: "power2.out",
+            stagger: 3,
+            duration: 7,
+          },
+          "<"
+        )
+        .from(
+          this.elements.pandemicHead,
+          {
+            autoAlpha: 0,
+            duration: 6,
+            yPercent: 20,
+          },
+          "<"
+        )
+        .to(
+          tillExascale,
+          {
+            opacity: 1,
+            scaleY: 1,
+            fill: colors.gry,
+            stagger: {
+              each: 1,
+            },
+            duration: 5,
+            delay: 20,
+          },
+          ">"
+        )
+        .to(
+          this.elements.appendNumbers,
+          {
+            yPercent: -99,
+            duration: 90,
+          },
+          "<+=2"
+        )
+        .to(
+          this.elements.charts,
+          {
+            xPercent: -80,
+            duration: 110,
+          },
+          "<"
+        )
 
-      .from(
-        exascaleSplit.heading.words,
-        {
-          yPercent: 100,
-          duration: 7,
-          ease: "power3.inOut",
-          stagger: 1.25,
-        },
-        "<45%"
-      )
-      .from(
-        exascaleSplit.para.lines,
-        {
-          autoAlpha: 0,
-          yPercent: 12,
-          rotateY: -8,
-          color: colors.teal,
-          ease: "power2.out",
-          stagger: 3,
-          duration: 7,
-        },
-        "<"
-      )
-      .from(
-        this.elements.exascaleHead,
-        {
-          autoAlpha: 0,
-          yPercent: 20,
-          duration: 6,
-        },
-        "<"
-      );
+        .from(
+          exascaleSplit.heading.words,
+          {
+            yPercent: 100,
+            duration: 7,
+            ease: "power3.inOut",
+            stagger: 1.25,
+          },
+          "<45%"
+        )
+        .from(
+          exascaleSplit.para.lines,
+          {
+            autoAlpha: 0,
+            yPercent: 12,
+            rotateY: -8,
+            color: colors.teal,
+            ease: "power2.out",
+            stagger: 3,
+            duration: 7,
+          },
+          "<"
+        )
+        .from(
+          this.elements.exascaleHead,
+          {
+            autoAlpha: 0,
+            yPercent: 20,
+            duration: 6,
+          },
+          "<"
+        );
+
+      return () => {
+        tl.kill();
+      };
+    });
   }
 }
