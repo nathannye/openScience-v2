@@ -1,19 +1,23 @@
 import Component from "../classes/Component";
 import { colors } from "../data";
-import * as NGL from "ngl/dist/ngl.js";
+import * as NGL from "ngl";
 
 export default class Stage extends Component {
   constructor() {
     super({
       element: "#viewport",
-      elements: {},
+      // elements: {},
     });
+  }
 
+  create() {
     this.createStage();
   }
 
   createStage() {
-    const stage = new NGL.Stage(this.element);
+    const stage = new NGL.Stage("viewport");
+
+    console.log(stage);
 
     stage.setParameters({
       backgroundColor: "#030b18",

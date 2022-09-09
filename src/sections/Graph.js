@@ -241,7 +241,7 @@ export default class Graph extends Component {
         this.elements.appendNumbers,
         {
           yPercent: -100,
-          duration: 105,
+          duration: 130,
         },
         "<"
       )
