@@ -13,6 +13,7 @@ export default class Preloader extends Component {
         askContainer: ".soundAsk",
         askText: ".soundAsk h3",
         stage: "#viewport",
+        soundAsk: ".soundAsk",
         soundButtons: "#soundButtons > button",
         soundOn: "#soundButtons > button.soundOnClick",
         soundOff: "#soundButtons > button.soundOffClick",
@@ -66,14 +67,6 @@ export default class Preloader extends Component {
         stagger: 0.052,
       },
       0
-    ).to(
-      this.element,
-      {
-        background:
-          "radial-gradient(40% 40% at 50% 50%, rgba(3, 11, 24, .3) 0%, rgba(3,11,24,1) 100%",
-        duration: 0.5,
-      },
-      0.2
     );
   }
 
@@ -163,15 +156,42 @@ export default class Preloader extends Component {
 
   animateOut() {
     const tl = gsap.timeline({
-      onComplete: () => {
-        this.emit("completed");
-      },
+      onComplete: () => {},
     });
 
-    tl.to(this.element, {
-      autoAlpha: 0,
-      duration: 0.5,
-    });
+    tl.to(
+      this.element,
+      {
+        backgroundImage:
+          "radial-gradient(circle, rgba(0,19,48,.01) 60%, rgba(3,11,24,1) 100%)",
+        duration: 2,
+        ease: "power3.in",
+      },
+      0
+    )
+      .to(
+        this.elements.soundAsk,
+        {
+          autoAlpha: 0,
+          duration: 0.5,
+        },
+        0
+      )
+      .call(
+        () => {
+          this.emit("completed");
+        },
+        null,
+        0.8
+      )
+      .to(
+        this.element,
+        {
+          autoAlpha: 0,
+          duration: 0.25,
+        },
+        2
+      );
   }
 
   destroy() {

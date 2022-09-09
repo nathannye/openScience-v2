@@ -112,7 +112,6 @@ class App {
   playIntro() {
     setTimeout(() => {
       this.sections.title.tl.play();
-      this.preloader.destroy();
       setTimeout(() => {
         this.overflowControl();
       }, this.sections.title.tl.duration());
