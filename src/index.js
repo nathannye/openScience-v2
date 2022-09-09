@@ -202,7 +202,9 @@ ScrollTrigger.addEventListener("refresh", function () {
 
 // const links = gsap.utils.toArray("cite > a, a.externalLink");
 
-let h3 = gsap.utils.toArray("h3:not(h3#dragDirections, .soundAsk h3)");
+let h3 = gsap.utils.toArray(
+  "h3:not(h3#dragDirections, .soundAsk h3, .userNumbers h3)"
+);
 
 h3.forEach((e) => {
   document.fonts.ready.then(() => {

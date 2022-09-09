@@ -813,29 +813,20 @@ section#chartOfUsers
 
 	.userNumbers
 		display: flex
-		align-items: baseline
+		align-items: flex-start
 		overflow: hidden
 		position: absolute
 		top: 20%
-		left: 0
+		left: 4rem
 
 		h3
 			margin-right: 3rem
+			margin-bottom: 0 !important
 
 	.userNumbersContainer
 		overflow: hidden
-		height: calc(6rem * 2) 
+		height: 4.5rem
 		position: relative
-
-		&:after
-			background: linear-gradient(0deg, rgba(3,11,24,.7) 0%, rgba(3,11,24,0) 50%, rgba(3,11,24,.7) 100%)
-			height: 100%
-			width: 100%
-			content: ''
-			display: block
-			position: absolute
-			left: 0
-			top: 0
 
 		& > div
 			display: flex

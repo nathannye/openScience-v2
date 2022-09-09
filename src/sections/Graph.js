@@ -154,7 +154,6 @@ export default class Graph extends Component {
       scrollTrigger: {
         pin: this.element,
         scrub: 0.35,
-        markers: true,
         trigger: this.element,
         start: "top top",
         end: "+=4000",
@@ -240,10 +239,10 @@ export default class Graph extends Component {
       .to(
         this.elements.appendNumbers,
         {
-          yPercent: -100,
+          yPercent: -99,
           duration: 130,
         },
-        "<"
+        "<+=5"
       )
       .to(
         this.elements.charts,
