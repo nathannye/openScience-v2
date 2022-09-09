@@ -14,7 +14,7 @@ export default class Title extends Component {
         ngl: "#viewport",
         navDots: ".navMarker",
         hamburger: "#hamburgerIcon > svg > g > g",
-        scrollIndiText: "#scrollIndicator h4",
+        scrollText: "#scrollIndicator h4",
         waveContainer: "#soundIndicatorContainer",
         indiContainer: "#scrollAnimContainer",
         html: "html",
@@ -40,13 +40,10 @@ export default class Title extends Component {
   }
 
   createIntroAnim() {
-    this.elements.scrollIndiText.split = new SplitText(
-      this.elements.scrollIndiText,
-      {
-        type: "lines, chars",
-        linesClass: "splitLine",
-      }
-    );
+    this.elements.scrollText.split = new SplitText(this.elements.scrollText, {
+      type: "lines, chars",
+      linesClass: "splitLine",
+    });
     this.elements.introPara.split = new SplitText(this.elements.introPara, {
       type: "lines",
     });
@@ -183,7 +180,7 @@ export default class Title extends Component {
         0.8
       )
       .from(
-        this.elements.scrollIndiText.split.chars,
+        this.elements.scrollText.split.chars,
         {
           xPercent: 100,
           stagger: 0.05,
@@ -291,7 +288,7 @@ export default class Title extends Component {
         "indi"
       )
       .to(
-        this.elements.scrollIndiText.split.chars,
+        this.elements.scrollText.split.chars,
         {
           autoAlpha: 0,
           duration: 0.75,

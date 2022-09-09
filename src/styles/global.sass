@@ -480,7 +480,7 @@ section#introPanel
 	z-index: 0
 	// display: none
 	// @include has3D
-	transform: translateZ(0) scale(2)
+	transform: translateZ(0)
 	left: 0
 
 	& > div > canvas
@@ -488,7 +488,7 @@ section#introPanel
 		width: 100% !important
 		position: fixed
 		top: 0
-		transform: scale(2)
+		transform: scale(2.3)
 		left: 0
 
 .soundAsk
@@ -816,10 +816,10 @@ section#chartOfUsers
 		display: flex
 		align-items: flex-start
 		overflow: hidden
+		flex-direction: column
 		position: absolute
 		top: 20%
-		left: 4rem
-
+		left: 2rem
 		h3
 			margin-right: 3rem
 			margin-bottom: 0 !important
@@ -1159,6 +1159,14 @@ section#howCanYouHelp
 
 	section#chartOfUsers
 		width: 200vw
+
+		#chartsContainer
+			padding-right: 0
+
+		.userNumbers
+			flex-direction: row
+			left: 4rem
+
 	*
 		--gutter: 3rem
 
@@ -1250,7 +1258,7 @@ section#howCanYouHelp
 
 	#viewport > div > canvas
 		top: 22%
-		transform: scale(2.2)
+		transform: scale(2.3)
 	
 	section#helpingReduceCosts
 		
