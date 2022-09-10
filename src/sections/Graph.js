@@ -411,7 +411,7 @@ export default class Graph extends Component {
             ease: "power3.inOut",
             stagger: 1.25,
           },
-          ">"
+          "<45%"
         )
         .from(
           exascaleSplit.para.lines,
