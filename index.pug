@@ -1,0 +1,342 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Open Source, Open Science
+  meta(name='description' content='')
+  link(rel='icon' href='favicon.ico')
+  link(rel='stylesheet' href='./src/styles/global.sass')
+  link(rel='preconnect' href='https://use.typekit.net/')
+  link(rel='stylesheet' href='https://use.typekit.net/jih6lvv.css')
+header
+  #soundIndicatorContainer
+    #soundLabelSwitch
+      h5 sound
+      div
+        h5 off
+        h5 on
+  #hamburgerIcon
+#loader
+  #loaderBacker
+#grain
+#viewport
+#supercomputerHoverContainer
+  // Images get placed here
+#mobileMenu
+  #mobileNav
+    a(href='#introPanelRef')
+      h1 Introduction
+    a(href='#whatIsFoldingRef')
+      h1 What is Protein Folding?
+    a(href='#whyDoWeNeedRef')
+      h1 Why Do We Need Computers?
+    a(href='#chartRef')
+      h1 Folding@Home during COVID-19
+    a(href='#supercomputerTableRef')
+      h1 How fast was Folding @ Home?
+    a(href='#helpingReduceCostsRef')
+      h1 Helping Reduce Costs
+    a(href='#howCanYouRef')
+      h1 Get Involved
+#scrollIndicator
+  div
+    #scrollAnimContainer
+  h4 scroll
+nav
+  div
+    a(href='#introPanelRef')
+      .navMarker
+      span Introduction
+    a(href='#whatIsFoldingRef')
+      .navMarker
+      span What is Protein Folding?
+    a(href='#whyDoWeNeedRef')
+      .navMarker
+      span Why Do We Need Computers?
+    a(href='#chartRef')
+      .navMarker
+      span Folding@Home during COVID-19
+    a(href='#supercomputerTableRef')
+      .navMarker
+      span How fast was Folding @ Home?
+    a(href='#helpingReduceCostsRef')
+      .navMarker
+      span Helping Reduce Costs
+    a(href='#howCanYouRef')
+      .navMarker
+      span Get Involved
+main
+  section#soundAsk
+    div
+      h2.fromFarAndAway
+        | This experience has sound. Would you like to turn it on?
+      div
+        #soundButtons
+          #yesSoundContainer
+            button
+              h4 yes
+          #noSoundContainer
+            button
+              h4 no thanks
+  section#introPanel.panel.lefty.contentPanel
+    a#introPanelRef.jumpTo
+    .dangerMarker
+      .middleCircle
+        .exclamation
+          div
+          div
+      .solidRing.dangerRing
+      .dashRing.dangerRing
+    #introHeadingContainer
+      h1 Open source
+      div
+        h1
+          em Open science
+        p
+          | Distributed computing has helped us understand how proteins fold
+          | and pave the way for patent-free drug discovery. Millions of home
+          | computers contribute to developing drugs to fight Cancer,
+          | COVID-19, and Alzheimer&apos;s every day.
+  section#whatDoProteins.panel.interstitial
+    div
+      h4 what do proteins have to do with computers?
+  section#whatIsFolding.panel.contentPanel
+    a#whatIsFoldingRef.jumpTo
+    #whatIsFoldingText
+      div
+        div
+          h4 what is protein folding?
+          h2
+            | Proteins are functional collections of molecules. To do their
+            | work, they assemble themselves into a specific shape, or &lsquo;fold&rsquo;.
+        p
+          | Proteins are tiny chains of amino acids that perform every
+          | function in the body. The problem being; we don&rsquo;t know why they
+          | fold in specific ways, making it nearly impossible to tell how a
+          | specific protein does its job.
+      div
+        h4 why does folding matter?
+        h2
+          | Terminal diseases, like Alzheimer&rsquo;s, Cancer, and Cystic Fibrosis
+          | are believed to be caused by protein misfolds.
+        p
+          | When we discover how, and why proteins fold into specific
+          | structures, we can understand what makes things go wrong. Helping
+          | us develop therapies for previously incurable diseases.
+        cite
+          a(href='https://sitn.hms.harvard.edu/flash/2010/issue65/' target='_blank') Courtesy: Harvard.edu
+    #peptideAnimationContainer
+      #peptideSliderContainer
+        #peptideSlider
+          #peptideKnob
+        svg#sliderCircle(version='1.1' viewbox='0 0 500 500' preserveaspectratio='xMinYMin meet')
+          circle(cx='50%' cy='50%' r='50%')
+        svg#sliderCircleBacker(version='1.1' viewbox='0 0 500 500' `='' preserveaspectratio='xMinYMin meet')
+          circle(cx='50%' cy='50%' r='50%')
+        h3#dragDirections Drag to fold protein
+      #peptideLottieContainer
+  section#whyDoWeNeed.panel.contentPanel.fullWidthPanel
+    a#whyDoWeNeedRef.jumpTo
+    .aminoDudeContainer
+    .aminoDudeContainer
+    .aminoDudeContainer
+    .aminoDudeContainer
+    svg#firstPathContainer.aminoPathGuide(width='979' height='1008' viewbox='0 0 979 1008' fill='none' xmlns='http://www.w3.org/2000/svg')
+      path#firstPath(d='M1058.41 17.5507C909.677 -9.22277 594.531 -17.9355 523.842 161.401C435.48 385.572 544.984 604.394 430.579 639.449C316.173 674.504 -10.5565 790.844 15.0803 984.848C35.5897 1140.05 15.2019 1206.32 2.44424 1220.05' stroke='red' stroke-width='15')
+    svg#secondPathContainer.aminoPathGuide(width='1440' height='449' viewbox='0 0 1440 449' fill='none' xmlns='http://www.w3.org/2000/svg')
+      path#secondPath(d='M-122.777 447.426C-104.8 343.208 -48.2028 135.445 34.3679 138.134C137.581 141.496 450.933 468.882 661.942 343.178C872.951 217.474 993 -61 1187.02 170.601C1246.52 241.629 1487.43 140.737 1528.64 1.39095' stroke='black' stroke-width='18')
+    svg#thirdPathContainer.aminoPathGuide(width='428' height='860' viewbox='0 0 428 860' fill='none' xmlns='http://www.w3.org/2000/svg')
+      path#thirdPath(d='M4.68635 -146.296C-14.0757 -58.1663 93.9229 66.4296 157.686 165.703C215.686 232.203 312.987 417.703 238.187 627.703C163.387 837.703 427.5 857.566 427.5 857.566' stroke='blue' stroke-width='12')
+    svg#fourthPathContainer.aminoPathGuide(width='691' height='1024' viewbox='0 0 691 1024' fill='none' xmlns='http://www.w3.org/2000/svg')
+      path#fourthPath(d='M688 1117.52C584.449 1132.72 368.942 1106.03 335.326 877.695C293.305 592.271 25.1726 601.928 16.1682 466.191C7.16374 330.453 362.839 365.863 335.326 121.751C307.812 -122.362 205.261 -79.4412 199.759 -95' stroke='#FF00F5' stroke-width='31')
+    div
+      h4 why do we need computers?
+      div
+        h2
+          | To accurately understand how a protein will fold, we must simulate
+          | the forces in the human body every millionth of a second.
+        p
+          | With such extreme time scales, each protein chain having more than
+          | 10
+          sup 30
+          |  different combinations. Supercomputers are needed
+          |               to even stand a chance at solving for the correct combination.
+    h1#millionAcross 1000000000
+  section.panel.interstitial
+    h4 Just how powerful do computers need to be?
+  section#chartOfUsers.panel.contentPanel
+    a#chartRef.jumpTo
+    #chartCaptionContainer
+      h2
+        | As COVID-19 spread and worldwide isolation came into effect, people
+        | wanted to do their part to help fight the pandemic. Folding@Home, a
+        | distributed computing project.
+      h2
+        | Less than two months after Folding @ Home announced participation in
+        | COVID-19 antiviral research, over 1,000,000 people were actively
+        | donating computing power.
+      h2
+        | With over 1,000,000 users in 2021, Folding @ Home became more
+        | powerful than the worlds ten fastest supercomputers. Combined.
+    #eventLabelContainer
+    #barChartContainer
+      article#pandemicEvent.eventEntry
+        h4 march 11, 2020
+        p The CDC declares COVID-19 a global pandemic
+        span.eventLine
+      article#exascaleEvent.eventEntry
+        h4 june 3, 2020
+        p
+          | Folding@Home becomes the first body of computers to cross the
+          | exascale barrier.
+        span.eventLine
+  section#supercomputerInfo.panel.contentPanel
+    a#supercomputerTableRef.jumpTo
+    #supercomputerCompare
+      table#supercomputerTable
+        tr
+          th Computer
+          th
+            | Ops/sec x 10
+            sup 15
+        // content is created here
+  section#helpingReduceCosts.panel.contentPanel
+    a#helpingReduceCostsRef.jumpTo
+    .headingContainer
+      h4 helping reduce costs
+      h2.headAnim
+        | The data generated by these computers is public information. Making
+        | research costs for other institutions less expensive.
+      div
+        p.paraAnim
+          | Distributed computing projects produce open source data. Anything
+          | it returns is free for all to use. With free, first-round data
+          | available, scientists can get into the complex work of developing
+          | drugs with much less upfront cost.
+        cite
+          a(href='https://www.nytimes.com/2021/12/20/health/alzheimers-aduhelm-price.html' target='_blank') courtesy: ny times
+    #costNumbersContainer
+      #twoThou
+        div
+          h1.dollarChar $
+          .numberFlipperContainer
+            div
+              h1 9
+              h1 0
+              h1 1
+              h1 2
+          h1.commaChar ,
+          .numberFlipperContainer
+            div
+              h1 8
+              h1 9
+              h1 0
+              h1 1
+          .numberFlipperContainer
+            div
+              h1 2
+              h1 3
+              h1 4
+              h1 5
+          .numberFlipperContainer
+            div
+              h1 3
+              h1 4
+              h1 5
+              h1 6
+          .crossOut
+        h3 Average cost of a chemistry journal
+      #fiveThou
+        div
+          h1.dollarChar $
+          .numberFlipperContainer
+            div
+              h1 2
+              h1 3
+              h1 4
+              h1 5
+          h1.commaChar ,
+          .numberFlipperContainer
+            div
+              h1 6
+              h1 7
+              h1 8
+              h1 9
+          .numberFlipperContainer
+            div
+              h1 2
+              h1 3
+              h1 4
+              h1 5
+          .numberFlipperContainer
+            div
+              h1 3
+              h1 2
+              h1 1
+              h1 0
+          .crossOut
+        h3 Average cost of a health sciences journal (2019)
+  section#howCanYouHelp.panel.contentPanel
+    a#howCanYouRef.jumpTo
+    #helpHeadingContainer
+      div
+        h4 get involved
+        h2.headAnim How can you help?
+        p.paraAnim
+          | Want to help contribute to live saving therapies? Learn more about
+          | the institutions below and download their free installer to get
+          | folding!
+      img(src='./src/img/manInChair.webp' alt='')
+      section#faqContainer
+        h4 faq
+        // FAQs placed here
+    section#lower
+      img(src='./src/img/pointingAtComputer.webp')
+      #helpingLeft
+      #foldingProjectsContainer
+        h4 projects
+        #rosetta
+          h3 Rosetta@Home
+          div
+            p.paraAnim
+              | Rosetta@Home is working to identify candidate protein areas
+              | for COVID-19 antiviral drugs. These antiviral drugs will be
+              | used to shorten the length of severe reactions to COVID-19.
+            a.externalLink(href='https://boinc.bakerlab.org/' target='_blank') about rosetta
+        div
+          h3 Folding@Home
+          div
+            p.paraAnim
+              | Folding@Home is also actively working to identify candidate
+              | protein areas for COVID-19 antiviral drugs. This is currently
+              | the largest distributed computing project.
+            a.externalLink(href='https://foldingathome.org/?lng=en' target='_blank') about folding
+  #citation.panel
+    h3 thank you to NGL
+    cite
+      p
+        | AS Rose, AR Bradley, Y Valasatava, JM Duarte, A Prli&cacute; and PW Rose.
+        | NGL viewer: web-based molecular graphics for large complexes.
+        | Bioinformatics: bty419, 2018.
+        a(href='doi:10.1093/bioinformatics/bty419' target='_blank') doi:10.1093/bioinformatics/bty419
+    cite
+      | AS Rose and PW Hildebrand. NGL Viewer: a web application for molecular
+      | visualization. Nucl Acids Res (1 July 2015) 43 (W1): W576-W579 first
+      | published online April 29, 2015.
+      a(href='doi:10.1093/nar/gkv402' target='_blank') doi:10.1093/nar/gkv402
+script(src='https://cdnjs.cloudflare.com/ajax/libs/ngl/2.0.0-dev.39/ngl.js' integrity='sha512-L4e1Z9pbAAsBXDzbcitJzkcRIHq6PUF/6GSR5UbA38XiaQ3TAS3422wJ5DllYOlwkpKUXInFt1b+C06NDvtmTg==' crossorigin='anonymous' referrerpolicy='no-referrer')
+//- script(type='module' src='./src/js/nglScene.js' defer='')
+//- script(type='module' src='./src/js/waveAnim.js')
+//- script(type='module' src='./src/js/soundToggle.js')
+//- script(type='module' src='./src/js/hamburgerAnim.js')
+//- script(type='module' src='./src/js/aminoDudes.js' defer='')
+//- script(type='module' src='./src/js/navMarkerAnim.js')
+//- script(type='module' src='./src/js/interstitialAnim.js' defer='')
+//- script(src='./src/index.js' type='module')
+//- script(type='module' src='./src/js/barChart.js' defer='')
+//- script(type='module' src='./src/js/costNumbers.js' defer='')
+//- script(type='module' src='./src/js/peptideAnim.js' defer='')
+//- script(type='module' src='./src/js/introAnims.js')
+//- script(type='module' src='./src/js/faqAnim.js' defer='')
+//- script(type='module' src='./src/js/supercomputerTableAnim.js' defer='')
