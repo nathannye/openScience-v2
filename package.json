@@ -14,8 +14,7 @@
     "nav": "^0.0.2",
     "ngl": "^2.0.0-dev.40",
     "regenerator-runtime": "^0.13.9",
-    "sass": "^1.54.8",
-    "three": "^0.118.0"
+    "sass": "^1.54.8"
   },
   "devDependencies": {
     "dat.gui": "^0.7.9",

@@ -6,7 +6,6 @@ export default class Stage extends Component {
   constructor() {
     super({
       element: "#viewport",
-      // elements: {},
     });
   }
 
