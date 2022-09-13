@@ -4,7 +4,6 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import Stage from "./components/Stage.js";
 import Title from "./sections/Title.js";
 import SupercomputerTable from "./sections/SupercomputerTable.js";
-import Wave from "./animations/Wave.js";
 import Faq from "./sections/Faq.js";
 import WhyComputers from "./sections/WhyComputers.js";
 import Nav from "./components/Nav.js";
@@ -25,9 +24,9 @@ class App {
     this.registerPlugins();
     this.createNav();
     this.createSections();
-    this.createPreloader();
     this.createInterstitials();
     this.createStage();
+    this.createPreloader();
     this.overflowControl();
     this.createSmoothScroll();
     this.refresh();
