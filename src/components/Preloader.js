@@ -31,6 +31,7 @@ export default class Preloader extends Component {
 
   loadImages() {
     this.elements.images.forEach((img) => {
+      console.log(img);
       img.onload = (_) => this.onAssetLoaded(img);
       img.src = img.getAttribute("data-src");
     });
@@ -38,7 +39,6 @@ export default class Preloader extends Component {
 
   onAssetLoaded(img) {
     this.length += 1;
-    console.log(img);
     var percentLoaded = this.length / this.elements.images.length;
     this.elements.percentage.innerHTML = Math.round(percentLoaded * 100) + "%";
 
