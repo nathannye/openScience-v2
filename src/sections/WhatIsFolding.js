@@ -64,20 +64,25 @@ export default class WhatIsFolding extends Component {
   }
 
   createSplits() {
-    this.elements.firstHead.split = new SplitText(this.elements.firstHead, {
-      type: "words, lines",
-      linesClass: "splitLine",
-    });
+    // this.elements.firstHead.split = new SplitText(this.elements.firstHead, {
+    //   type: "words, lines",
+    //   linesClass: "splitLine",
+    // });
+
+    // gsap.set(this.elements.firstHead.split.words, {
+    //   yPercent: 100,
+    // });
+
     this.elements.firstPara.split = new SplitText(this.elements.firstPara, {
       type: "lines",
     });
-    this.elements.secondHead.split = new SplitText(this.elements.secondHead, {
-      type: "words, lines",
-      linesClass: "splitLine",
-    });
-    this.elements.secondPara.split = new SplitText(this.elements.secondPara, {
-      type: "lines",
-    });
+    // this.elements.secondHead.split = new SplitText(this.elements.secondHead, {
+    //   type: "words, lines",
+    //   linesClass: "splitLine",
+    // });
+    // this.elements.secondPara.split = new SplitText(this.elements.secondPara, {
+    //   type: "lines",
+    // });
 
     this.elements.dragDirections.split = new SplitText(
       this.elements.dragDirections,
@@ -152,49 +157,6 @@ export default class WhatIsFolding extends Component {
         duration: 0.5,
       })
       .to(
-        this.elements.firstHead.split.words,
-        {
-          yPercent: 100,
-          duration: 1,
-          ease: "power4.inOut",
-          stagger: 0.0142,
-        },
-        "swap",
-        ">"
-      )
-      .to(
-        this.elements.firstPara.split.lines,
-        {
-          z: -2,
-          y: 9,
-          autoAlpha: 0,
-          color: colors.teal,
-          rotateY: 5,
-          ease: "power2.inOut",
-          duration: 0.7,
-          stagger: 0.14,
-        },
-        "swap"
-      )
-      .to(
-        this.elements.firstText.querySelector("h4"),
-        {
-          autoAlpha: 0,
-
-          duration: 0.5,
-        },
-        "swap"
-      )
-      .from(
-        this.elements.secondText.querySelector("h4"),
-        {
-          autoAlpha: 0,
-          duration: 0.5,
-          delay: 1,
-        },
-        "swap"
-      )
-      .to(
         chain,
         {
           stroke: colors.blue,
@@ -221,47 +183,14 @@ export default class WhatIsFolding extends Component {
         "state"
       )
       .from(
-        this.elements.secondHead.split.words,
-        {
-          yPercent: 100,
-          duration: 1,
-          ease: "power4.inOut",
-          stagger: 0.0142,
-          delay: 0.5,
-        },
-        "swap"
-      )
-      .from(
-        this.elements.secondPara.split.lines,
-        {
-          autoAlpha: 0,
-          y: 12,
-          rotateY: -8,
-          color: colors.teal,
-          stagger: 0.09,
-          duration: 1.5,
-          ease: "power2.inOut",
-          delay: 0.75,
-        },
-        "swap"
-      )
-      .from(
-        this.elements.harvardLink,
-        {
-          autoAlpha: 0,
-          duration: 0.45,
-        },
-        ">"
-      )
-      .from(
         dangerClickTargets,
         {
           autoAlpha: 0,
-          delay: 1.35,
-          duration: 0.6,
-          filter: "blur(2.5px)",
+          delay: 0.5,
+          duration: 0.4,
+          filter: "blur(6.5px)",
           stagger: {
-            each: 0.2,
+            each: 0.17,
             from: "end",
           },
         },
@@ -408,13 +337,10 @@ export default class WhatIsFolding extends Component {
 
     peptideAnimInTL
       .from(
-        this.elements.firstHead.split.words,
+        this.elements.firstText.querySelector("h4"),
         {
-          yPercent: 100,
           autoAlpha: 0,
-          duration: 1,
-          ease: "power4.inOut",
-          stagger: 0.0142,
+          duration: 0.3,
         },
         "start"
       )

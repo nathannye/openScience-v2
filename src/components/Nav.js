@@ -49,38 +49,16 @@ export default class Nav extends Component {
         paused: true,
       });
 
-      entry.label = entry.querySelector("span");
-      entry.label.split = new SplitText(entry.label, {
-        type: "words, lines",
-        linesClass: "splitLine",
-      });
+      entry.tl.to(
+        entry.querySelector(".navMarker"),
+        {
+          x: -7,
+          duration: 0.12,
+          ease: "power2.inOut",
+        },
+        0
+      );
 
-      gsap.set(entry.label.split.words, {
-        yPercent: 100,
-        autoAlpha: 0,
-      });
-
-      entry.tl
-        .to(
-          entry.querySelector(".navMarker"),
-          {
-            x: -7,
-            duration: 0.12,
-            ease: "power2.inOut",
-          },
-          0
-        )
-        .to(
-          entry.label.split.words,
-          {
-            yPercent: 0,
-            autoAlpha: 1,
-            ease: "power3.out",
-            duration: 0.39,
-            stagger: 0.02,
-          },
-          0.2
-        );
       entry.addEventListener("mouseover", (event) => {
         entry.tl.play();
       });
