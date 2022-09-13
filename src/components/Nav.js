@@ -43,37 +43,11 @@ export default class Nav extends Component {
     }
   }
 
-  createAnimations() {
-    this.elements.navEntries.forEach((entry) => {
-      entry.tl = gsap.timeline({
-        paused: true,
-      });
-
-      entry.tl.to(
-        entry.querySelector(".navMarker"),
-        {
-          x: -7,
-          duration: 0.12,
-          ease: "power2.inOut",
-        },
-        0
-      );
-
-      entry.addEventListener("mouseover", (event) => {
-        entry.tl.play();
-      });
-      entry.addEventListener("mouseout", (event) => {
-        entry.tl.reverse();
-      });
-    });
-  }
-
   conditionalNav() {
     let mm = gsap.matchMedia();
 
     mm.add("(min-width:768px)", () => {
       this.createNav();
-      this.createAnimations();
     });
 
     mm.add("(max-width: 768px)", () => {

@@ -282,7 +282,8 @@ nav
 		align-items: center
 		margin-top: 1.5rem
 		// opacity: 0
-		
+		cursor: default
+
 		span
 			font-size: inherit
 			font-family: inherit
@@ -708,6 +709,7 @@ section#whyDoWeNeed
 		position: absolute
 		bottom: 0
 		left: 5%
+		opacity: .3
 		color: $white
 		font-size: clamp(17em, calc(17rem + (86.8 - 17) * ((100vw - 48em) / (120 - 48))), 86.8em)
 		line-height: 1
@@ -1046,7 +1048,7 @@ section#howCanYouHelp
 				height: 0.75px
 
 			.faqArrow
-				background-image: url('../img/arrow.svg')
+				background-image: url('/img/arrow.svg')
 				background-size: 100% 100% 
 				transform: rotate(-90deg)
 				transform-origin: center center
@@ -1076,6 +1078,13 @@ section#howCanYouHelp
 	display: flex
 	justify-content: center
 	column-gap: 4rem
+
+#citation
+
+	.citationContent
+		display: grid
+		grid-template-columns: unset
+
 
 // Above 480px but beneath 769px
 @media only screen and (min-width: 480px)
@@ -1156,6 +1165,13 @@ section#howCanYouHelp
 // Above 796px
 @media only screen and (min-width: 769px)
 
+	#citation	
+
+		.citationContent
+			grid-template-columns: repeat(2,1fr)
+			column-gap: 4rem
+			max-width: 1200px
+
 	section#chartOfUsers
 		width: 200vw
 	*
@@ -1227,7 +1243,7 @@ section#howCanYouHelp
 				font-size: clamp(4.4rem, calc(4.4rem + ((1vw - 0.34rem) * 10.5455)), 16rem)
 
 	.computerName
-		cursor: pointer
+		// cursor: pointer
 
 	#supercomputerHoverContainer
 		display: block
