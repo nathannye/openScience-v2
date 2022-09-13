@@ -12,7 +12,7 @@
     "lo": "^0.41.0",
     "lottie-web": "^5.8.1",
     "nav": "^0.0.2",
-    "ngl": "^2.0.0-dev.40",
+    "ngl": "^0.10.4",
     "regenerator-runtime": "^0.13.9",
     "sass": "^1.54.8"
   },
@@ -22,7 +22,6 @@
     "eslint-config-gsap": "^3.0.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-recommended": "^4.1.0",
-    "eslint-plugin-import": "^2.25.2",
     "lodash": "^4.17.21",
     "prettier": "^2.4.1",
     "vite": "^3.1.0"
