@@ -28,7 +28,7 @@ export default class SupercomputerTable extends Component {
 
       image.setAttribute(
         "data-src",
-        `./src/img/supercomputers/${computer.img}.jpg`
+        `/img/supercomputers/${computer.img}.jpg`
       );
       // image.src = `./src/img/supercomputers/${computer.img}.jpg`;
       image.alt = `${computer.name} Supercomputer`;
