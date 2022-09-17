@@ -1,7 +1,6 @@
 import gsap from "gsap";
 import SplitText from "gsap/SplitText";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import Stage from "./components/Stage.js";
 import Title from "./sections/Title.js";
 import SupercomputerTable from "./sections/SupercomputerTable.js";
 import Faq from "./sections/Faq.js";
@@ -25,7 +24,6 @@ class App {
     this.createNav();
     this.createSections();
     this.createInterstitials();
-    this.createStage();
     this.createPreloader();
     this.overflowControl();
     this.createSmoothScroll();
@@ -55,10 +53,6 @@ class App {
     //   content: ".scrollWrapper",
     //   smooth: 0.54,
     // });
-  }
-
-  createStage() {
-    // this.stage = new Stage();
   }
 
   createNav() {
