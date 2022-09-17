@@ -1,4 +1,5 @@
 import Component from "../classes/Component";
+import * as NGL from "../ngl.js";
 import { colors } from "../data";
 export default class Stage extends Component {
   constructor() {
