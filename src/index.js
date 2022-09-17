@@ -58,7 +58,7 @@ class App {
   }
 
   createStage() {
-    this.stage = new Stage();
+    // this.stage = new Stage();
   }
 
   createNav() {
